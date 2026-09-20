@@ -311,6 +311,71 @@ is a deliberate next round, not excluded):
         which is fine per the scope above but wasn't bundled into this
         first RIB40-only round without the user picking it explicitly.
 
-## Milestones 5-12
+## Milestone 5 — One sample end-to-end (IN PROGRESS)
+
+- [x] **Critical infra finding (2026-09-20), applies to every future download,
+      not just this one:** running `nf-core/fetchngs` with its Nextflow
+      work dir and `--outdir` under `/mnt/d/PanTranscriptome/...` (the
+      Windows-mounted drive, reached from WSL2 via the 9p/DrvFs bridge)
+      produced a gzip-corrupt FASTQ (CRC/length errors on `gzip -t`,
+      confirmed independently of the MD5 check) on two separate attempts,
+      for the same run. Root cause: large sequential binary writes from a
+      Docker container, through WSL2, to a Windows-mounted drive are not
+      reliable. Fix: point `-work-dir` and fetchngs's `--outdir` at a
+      WSL2-native path (`~/aoed-scratch/...`) instead. Recorded in
+      `config/storage.yaml`'s `paths.nextflow_work_dir` comment so this
+      isn't rediscovered the hard way on sample #2.
+- [x] Also hit and fixed along the way (see `config/pipeline.yaml`
+      comments): Nextflow 26.x's new strict config parser rejects the
+      `check_max()` Groovy closure nearly every nf-core pipeline's
+      `base.config` still uses -- pin `NXF_VER=25.10.0` for nf-core pipeline
+      invocations. And: this machine's WSL2 has only ~8.7GB RAM (host has
+      ~19GB, no `.wslconfig` override) while `nf-core/fetchngs`'s default
+      `SRA_FASTQ_FTP` resource label requested 12GB -- cap with
+      `--max_memory 6.GB --max_cpus 4` (the exact mechanism `check_max()`
+      exists for; per spec section 30 "modest PC" guidance, cap requests
+      rather than grow WSL2's memory ceiling and starve the host).
+- [ ] Downloading `DRR786485` (BioProject PRJDB37768) via
+      `nf-core/fetchngs` with the native-filesystem fix applied -- in
+      progress.
+- [ ] Not yet done: `atlas process next`/`atlas fetch approved` (wiring
+      the CLI to actually invoke fetchngs/rnaseq with all the fixes above
+      baked in, rather than a hand-typed command per sample) and the
+      QC-based inclusion gate for accepting a sample's quantification into
+      the atlas -- see the AFED QC note below.
+
+## AFED's QC/inclusion criteria (for our own qc.yaml, not yet implemented)
+
+Read AFED's actual `star_quantification.R` (not just the README) to answer
+the user's question (2026-09-20) about what inclusion gate to use. AFED
+keeps a sample (`samples_to_keep` in that script) only if **all** of:
+
+- `total_counts >= 1e6` -- at least 1,000,000 total **gene-assigned**
+  counts (STAR `ReadsPerGene.out.tab` summed, tRNA genes excluded first),
+  not raw read count. This is a post-quantification gate, not a
+  pre-download filter.
+- not in `low_coding_samples` -- a list of samples flagged by Picard
+  `CollectRnaSeqMetrics` (exact threshold not visible in this script; it
+  reads a precomputed `output/picard/low_coding_samples.txt`) for a low
+  fraction of reads landing in coding regions -- catches poor library
+  prep / rRNA contamination / degraded RNA.
+- not in `q30_below_75` -- fastp-reported samples with **less than 75% of
+  bases at Q30+** quality.
+- still present in the current SRA metadata pull (`run %in% sra_df$run`).
+
+Separately (not a pass/fail gate, a correctness step): AFED classifies
+each sample's strandedness from its own count distribution
+(`frac_strand1 > 0.7` / `< 0.3` / else "unstranded") to pick the right
+STAR count column -- worth doing the equivalent for Salmon's own
+strandedness inference before trusting `--nf_core_rnaseq_strandedness auto`
+blindly.
+
+`nf-core/rnaseq` already runs fastp and can run Picard
+`CollectRnaSeqMetrics`-equivalent QC as part of its own MultiQC report, so
+these thresholds are directly adoptable into `config/qc.yaml` once
+Milestone 5 produces a real QC report to calibrate against -- not
+implemented yet.
+
+## Milestones 6-12
 
 - [ ] Not started (see PROJECT_MASTER_SPEC.md section 37 for full list).
