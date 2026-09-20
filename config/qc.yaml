@@ -1,0 +1,36 @@
+# QC thresholds and rules for the AOED pipeline.
+#
+# Per PROJECT_MASTER_SPEC.md section 10: these are configurable rules, not a
+# single hard-coded detection threshold. Values below are conservative
+# starting points and MUST be revisited after the MVP batch (section 10.1-10.4)
+# rather than trusted blindly.
+
+technical_read_qc:
+  min_read_count: 1000000
+  reject_below_min_read_count: false   # flag, do not silently exclude
+  max_adapter_content_pct: 20
+  min_mean_read_length_bp: 30
+  require_consistent_library_layout: true
+
+quantification_qc:
+  min_mapping_rate_pct: 50            # Salmon mapping/assignment rate; flag if below
+  min_genes_detected: 1000
+  min_library_size_reads: 500000
+  max_zero_fraction: 0.98
+
+biological_qc:
+  enable_after_n_samples: 8           # PCA/correlation only meaningful with enough samples
+  outlier_correlation_threshold: null # to be set empirically, do not hard-code yet
+
+replicate_qc:
+  min_pearson_r: null                 # do not assume a universal threshold (spec 10.4)
+  min_spearman_r: null
+  flag_only: true                     # never auto-delete on replicate disagreement
+
+detection_thresholds:
+  # Multiple thresholds retained in parallel for sensitivity analysis (spec 15).
+  tpm_thresholds:
+    - 0
+    - 0.1
+    - 1
+    - 5

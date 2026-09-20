@@ -1,0 +1,38 @@
+# Pinned execution strategy for AOED.
+#
+# Per PROJECT_MASTER_SPEC.md section 0/9/29: reuse established, pinned
+# community pipelines instead of a bespoke downloader/aligner. Versions below
+# were the latest published stable releases as of 2026-09-20 and must be
+# bumped deliberately (new pipeline_version, section 36) rather than silently
+# floating to "latest" on every run.
+
+pipeline_version: "0.1.0"
+
+nextflow:
+  min_version: "26.04.4"          # latest stable Nextflow release verified 2026-09-20
+  resume_enabled: true
+
+nf_core_fetchngs:
+  revision: "1.12.0"              # "Titanium Platypus", released 2024-02-29
+  repository: "https://github.com/nf-core/fetchngs"
+  purpose: "accession resolution, FASTQ acquisition, checksum validation"
+
+nf_core_rnaseq:
+  revision: "3.26.0"              # "Chromium Cuttlefish", released 2024-05-07
+  repository: "https://github.com/nf-core/rnaseq"
+  purpose: "technical QC, library validation, Salmon quantification"
+  aligner: "salmon"                # avoid retaining BAM by default; see spec section 9
+
+execution:
+  profile: null                    # e.g. docker / singularity / conda; decide in Milestone 0 audit
+  container_engine: null           # populated once WSL2+Docker vs. native is decided per section 29
+  max_parallel_samples: 1
+
+quantification:
+  primary_route: "salmon"
+  secondary_route_star: false      # only enabled explicitly for JBrowse/coverage needs (section 9)
+
+notes: >
+  Do not silently upgrade nf-core revisions. A resumed execution must use the
+  same pinned inputs, parameters, code revision, and reference (spec section 9),
+  or explicitly start a new versioned pipeline_version.

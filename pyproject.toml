@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aoryzae-atlas"
+version = "0.1.0"
+description = "AOED: Aspergillus oryzae Expression Database / Transcriptome Atlas"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Bruno" }]
+
+dependencies = [
+  "click>=8.1",
+  "pyyaml>=6.0",
+  "duckdb>=1.0",
+  "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+]
+discovery = [
+  "pysradb>=1.4",
+]
+
+[project.scripts]
+atlas = "aoryzae_atlas.cli.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

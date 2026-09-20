@@ -1,0 +1,24 @@
+# Storage Guardian configuration.
+# See PROJECT_MASTER_SPEC.md section 5. These limits assume a "modest personal
+# computer" per section 0 priorities; tune per machine but never remove the
+# safety margins without deliberate review.
+
+storage:
+  scratch_max_gb: 30
+  minimum_free_gb: 20
+  max_parallel_samples: 1
+
+cleanup:
+  delete_sra_after_fastq_validation: true
+  delete_fastq_after_quant_validation: true
+  delete_intermediates_after_success: true
+  keep_failed_sample_raw_temporarily: true
+  keep_quantification: true
+  keep_qc: true
+  keep_logs: true
+
+paths:
+  scratch_dir: "scratch"
+  nextflow_work_dir: "scratch/nextflow-work"
+  results_dir: "results"
+  database_path: "database/atlas.duckdb"

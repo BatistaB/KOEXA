@@ -1,0 +1,48 @@
+# Large/temporary data - never committed (see PROJECT_MASTER_SPEC.md section 4/7)
+/scratch/
+*.sra
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.bam
+*.bai
+*.cram
+
+# Reference files can be large; keep checksums/config in git, not the payloads
+/reference/genome/*
+/reference/annotation/*
+/reference/transcripts/*
+/reference/salmon_index/*
+!/reference/**/.gitkeep
+!/reference/README.md
+
+# Local database and generated matrices/results are regenerable from raw data
+# + pipeline; keep out of git, but keep the directory structure.
+/database/*.duckdb
+/matrices/**/*.parquet
+/matrices/**/*.tsv.gz
+/results/quant/*
+/results/qc/*
+/results/logs/*
+!/results/**/.gitkeep
+
+# Runtime/session state
+/runtime/status.json
+/runtime/control/*
+!/runtime/control/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

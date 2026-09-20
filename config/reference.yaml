@@ -1,0 +1,28 @@
+# Canonical reference definition for the AOED / Aspergillus oryzae Transcriptome Atlas.
+#
+# Per PROJECT_MASTER_SPEC.md section 3.1: do NOT invent accession numbers.
+# Every field below must be populated only from verified NCBI/EnsemblFungi/FungiDB
+# sources during Milestone 3 (Canonical RIB40 reference). Until then this file
+# stays mostly null and the pipeline must refuse to run large-scale quantification
+# against an unfrozen reference.
+
+organism: "Aspergillus oryzae"
+reference_strain: "RIB40"
+assembly_accession: null
+annotation_accession: null
+reference_version: null          # e.g. RIB40_v1 once frozen (see spec section 36)
+canonical_gene_id_system: "AO09"
+
+genome_fasta: null
+annotation_gtf_or_gff: null
+transcript_fasta: null
+index_version: null              # Salmon index version/build tag, once built
+
+checksums:
+  genome_fasta_sha256: null
+  annotation_sha256: null
+  transcript_fasta_sha256: null
+
+frozen: false                    # flips to true only after Milestone 3 sign-off
+frozen_at: null
+frozen_by: null
