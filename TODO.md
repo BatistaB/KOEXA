@@ -105,6 +105,21 @@ done, not scaffolded.
       same Aliases text on each row) -- corrected counts are in the
       Milestone 1 entry above. 4 new tests added for the variable-column
       parser and the namespace-filtering logic (45 total, all passing).
+- [x] Populated `metadata/gene_master.tsv` (12,090 rows, one per FungiDB v71
+      protein-coding gene): coordinates/strand from the GFF3
+      (`src/aoryzae_atlas/metadata/gff.py`, scoped to the `protein_coding_gene`
+      feature type only -- the file also carries mRNA/exon/CDS/UTR features
+      and non-coding genes/tRNA/rRNA below or outside that level), and
+      `description` from `gene_product_updates_b71.txt`'s `b71_product`
+      where available (563 genes), else the GFF's own `description`
+      attribute (URL-decoded). `gene_symbol`/`gene_name` are deliberately
+      left blank: the only symbol evidence is the UniProt workbook's
+      "Aliases" field, which lists multiple tokens per gene with no
+      reliable way to pick a primary one (that full set is already in
+      `gene_external_identifiers.tsv` as `gene_alias` rows, without picking
+      a winner) -- promoting one to `gene_master.tsv` here would be a guess.
+      New `atlas genes build-master` CLI command; 6 new tests (51 total,
+      all passing).
 - [ ] Not yet decided: whether `database/FungiDB_v71/` should move under
       `reference/` to match PROJECT_MASTER_SPEC.md section 7's layout
       (`database/` is specified to hold only `atlas.duckdb`). Left as-is

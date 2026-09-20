@@ -28,13 +28,19 @@ from ..identifiers.external_identifiers import (
 )
 from ..identifiers.reconcile import render_summary_report, run_reconciliation, write_mapping_tsv
 from ..logging_setup import get_logger
+from ..metadata.gene_master import build_gene_master_rows, write_gene_master_tsv
+from ..metadata.gene_product_updates import load_b71_products
+from ..metadata.gff import load_protein_coding_genes
 from ..paths import (
     DATABASE_FILE,
     FUNGIDB_GENE_ALIASES_FILE,
+    FUNGIDB_GENE_PRODUCT_UPDATES_FILE,
+    FUNGIDB_GFF_FILE,
     FUNGIDB_PROTEIN_FASTA_FILE,
     GENE_EXTERNAL_IDENTIFIERS_FILE,
     GENE_ID_MAPPING_FILE,
     GENE_ID_MAPPING_REPORT_FILE,
+    GENE_MASTER_FILE,
     PROJECT_ROOT,
     REQUIRED_CONFIG_FILES,
     REQUIRED_DIRS,
@@ -251,6 +257,56 @@ def identifiers_reconcile(
     click.echo(f"Full mapping table:        {GENE_ID_MAPPING_FILE}")
     click.echo(f"External identifiers:      {GENE_EXTERNAL_IDENTIFIERS_FILE} ({len(external_rows)} rows)")
     click.echo(f"Full report:               {GENE_ID_MAPPING_REPORT_FILE}")
+
+
+@cli.group()
+def genes() -> None:
+    """Gene master-table commands (Milestone 1, spec section 12)."""
+
+
+@genes.command("build-master")
+@click.option(
+    "--gff",
+    "gff_path",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=FUNGIDB_GFF_FILE,
+    show_default=True,
+    help="FungiDB RIB40 annotation GFF3 supplied as Milestone 1 input evidence.",
+)
+@click.option(
+    "--gene-product-updates",
+    "updates_path",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=FUNGIDB_GENE_PRODUCT_UPDATES_FILE,
+    show_default=True,
+    help="FungiDB gene_product_updates_b71.txt (overrides GFF descriptions where present).",
+)
+@click.option(
+    "--reference-version",
+    default="FungiDB_v71",
+    show_default=True,
+    help="Label for this evidence snapshot. Not a frozen reference (Milestone 3 freezes one).",
+)
+def genes_build_master(gff_path: Path, updates_path: Path, reference_version: str) -> None:
+    """Build metadata/gene_master.tsv from the FungiDB v71 GFF3 + product updates.
+
+    gene_symbol/gene_name are left blank (see metadata.gene_master module
+    docstring: the only symbol evidence is ambiguous multi-alias UniProt
+    data, already recorded without picking a winner in
+    gene_external_identifiers.tsv). Not the canonical/frozen reference
+    (Milestone 3's job).
+    """
+    genes_found = load_protein_coding_genes(gff_path)
+    b71_products = load_b71_products(updates_path)
+    rows = build_gene_master_rows(genes_found, b71_products, reference_version)
+    write_gene_master_tsv(rows, GENE_MASTER_FILE)
+    logger.info(
+        "Wrote %d gene_master.tsv rows to %s (reference_version=%s)",
+        len(rows),
+        GENE_MASTER_FILE,
+        reference_version,
+    )
+    click.echo(f"Wrote {len(rows)} gene_master.tsv rows to {GENE_MASTER_FILE}")
 
 
 # --- Stub command groups mirroring PROJECT_MASTER_SPEC.md section 25 -------
