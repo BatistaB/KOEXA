@@ -19,8 +19,14 @@ done, not scaffolded.
 - [x] `pyproject.toml`, `.gitignore`, `README.md`, `AGENTS.md`.
 - [x] Initial pytest tests for config loading and CLI commands.
 - [x] AFED audit (license, stack, structure) — see `docs/decisions/`.
-- [ ] Decide and record the container/execution strategy (Docker Desktop +
-      WSL2 vs. Conda) for Nextflow/nf-core on the user's machine.
+- [x] Decide and record the container/execution strategy for Nextflow/nf-core
+      on the user's machine: Docker Desktop (already installed) as the
+      container engine, Nextflow running inside a WSL2 Ubuntu distro. See
+      `docs/decisions/0003-execution-strategy.md`.
+- [ ] On the user's machine: confirm Docker Desktop uses the WSL2 backend
+      (Settings > General), install a general-purpose Ubuntu WSL2 distro if
+      missing (`wsl --install -d Ubuntu`), enable Docker Desktop's WSL
+      integration for it, and install Java + Nextflow inside it.
 - [ ] Set up a real Python environment on the user's Windows machine and
       confirm `run_atlas.ps1 doctor` passes there (this was only exercised
       in the Linux file-bridge environment so far).

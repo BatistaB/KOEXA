@@ -24,8 +24,16 @@ nf_core_rnaseq:
   aligner: "salmon"                # avoid retaining BAM by default; see spec section 9
 
 execution:
-  profile: null                    # e.g. docker / singularity / conda; decide in Milestone 0 audit
-  container_engine: null           # populated once WSL2+Docker vs. native is decided per section 29
+  # Decided 2026-09-20 (see docs/decisions/0003-execution-strategy.md): the
+  # user's Windows workstation already has a working Docker Desktop install.
+  # Nextflow itself still requires a POSIX/WSL environment (there is no
+  # native Windows execution path), so Nextflow runs inside a WSL2 Ubuntu
+  # distro, which calls out to the existing Docker Desktop engine (WSL2
+  # backend) for every process's Linux container. This avoids introducing a
+  # new virtualization stack beyond what Docker Desktop already set up.
+  profile: "docker"
+  container_engine: "docker_desktop_wsl2"
+  runs_inside: "wsl2_ubuntu"        # where the `nextflow`/`atlas` commands themselves execute
   max_parallel_samples: 1
 
 quantification:
