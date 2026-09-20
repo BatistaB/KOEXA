@@ -11,14 +11,29 @@ README is an orientation pointer only — when in doubt, the spec wins.
 
 ## Status
 
-**Milestone 0 (repository and runnable AOED shell)** — complete. The CLI
-shell (`atlas doctor` / `atlas init` / `atlas status`) is functional on the
-maintainer's Windows machine, and Nextflow/nf-core execution is available via
-Docker Desktop (WSL2 backend) with a WSL2 Ubuntu distro running Nextflow —
-see `docs/decisions/0003-execution-strategy.md`. There is still no expression
-data, no downloaded RNA-seq, and no frozen reference; every subcommand beyond
-`doctor`/`init`/`status`/`storage status` is an intentional stub that names
-the milestone that will implement it (see `atlas --help` and
+Milestones 0-3 are complete:
+
+- **Milestone 0** (repository and runnable AOED shell): CLI shell
+  (`atlas doctor` / `atlas init` / `atlas status`) functional on the
+  maintainer's Windows machine; Nextflow/nf-core execution available via
+  Docker Desktop (WSL2 backend) with a WSL2 Ubuntu distro running Nextflow
+  — see `docs/decisions/0003-execution-strategy.md`.
+- **Milestone 1** (AO09/UniProt reconciliation): `atlas identifiers
+  reconcile` and `atlas genes build-master` populate
+  `metadata/gene_id_mapping.tsv`, `gene_external_identifiers.tsv`, and
+  `gene_master.tsv` against the FungiDB v71 evidence set.
+- **Milestone 2** (public transcriptome discovery): `atlas discovery
+  report` queries NCBI SRA and writes `reports/discovery/`; 458
+  *A. oryzae* RNA-Seq runs found so far. Discovery only — no FASTQ/SRA data
+  downloaded, no sample approved for processing yet.
+- **Milestone 3** (canonical RIB40 reference): `atlas reference validate`
+  verified the evidence set against NCBI's Assembly database and
+  `config/reference.yaml` is now **frozen** (`reference_version:
+  RIB40_v1`, assembly `GCF_000184455.2`).
+
+There is still no downloaded RNA-seq data and no expression matrix. Every
+subcommand beyond what's listed above is an intentional stub that names the
+milestone that will implement it (see `atlas --help` and
 `src/aoryzae_atlas/cli/main.py`).
 
 See [`TODO.md`](TODO.md) for the live milestone checklist and

@@ -19,13 +19,13 @@ def test_load_reference_config_has_no_invented_accessions():
     assert ref["assembly_accession"] == "GCF_000184455.2"
     assert ref["annotation_accession"] is None
     assert ref["reference_version"] == "RIB40_v1"
-    # frozen must stay False until a human explicitly signs off, regardless
-    # of how complete the verified fields above are.
-    assert ref["frozen"] is False
+    # Frozen 2026-09-20 after explicit user sign-off (Milestone 3 complete).
+    assert ref["frozen"] is True
+    assert ref["frozen_by"]
 
 
-def test_is_reference_frozen_false_by_default():
-    assert config.is_reference_frozen() is False
+def test_is_reference_frozen_true_after_milestone_3_sign_off():
+    assert config.is_reference_frozen() is True
 
 
 def test_load_pipeline_config_pins_versions():

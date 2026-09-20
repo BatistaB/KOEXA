@@ -187,7 +187,7 @@ done, not scaffolded.
       - `atlas discovery export` is still a stub; unclear yet whether it
         needs to do anything beyond what `report` already writes.
 
-## Milestone 3 — Canonical RIB40 reference
+## Milestone 3 — Canonical RIB40 reference (COMPLETE)
 
 - [x] User supplied the RIB40 genome FASTA
       (`database/FungiDB_v71/FungiDB-71_AoryzaeRIB40_Genome.fasta`, 12
@@ -228,8 +228,10 @@ done, not scaffolded.
       layout. `reference.yaml`'s paths point at the actual current
       location rather than duplicating ~100MB of payload; revisit if a
       move is wanted later.
-- [ ] Awaiting user sign-off to actually set `frozen: true`/`frozen_at`/
-      `frozen_by` in `config/reference.yaml`.
+- [x] User sign-off received 2026-09-20; `config/reference.yaml` is now
+      **frozen** (`frozen_at: 2026-09-20T17:00:00Z`,
+      `frozen_by: Bruno Batista <bruno.batista.biotec@gmail.com>`).
+      **Milestone 3 is complete.**
 
 ## Milestones 4-12
 

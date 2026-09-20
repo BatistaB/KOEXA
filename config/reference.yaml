@@ -43,10 +43,6 @@ checksums:
 # Structural validation passed with zero problems (genome: 12 sequences /
 # 37,912,014 bp; GFF and protein FASTA gene sets match exactly at 12,090
 # genes; transcript-to-gene mapping's genes are a full subset of the GFF).
-# frozen stays false until a human explicitly signs off -- spec section 37
-# Milestone 3: "stop and report if AO09/reference assumptions remain
-# unclear." This is not unclear, but freezing is still a deliberate,
-# hard-to-reverse step this file does not take on its own.
-frozen: false                    # flips to true only after explicit sign-off
-frozen_at: null
-frozen_by: null
+frozen: true
+frozen_at: "2026-09-20T17:00:00Z"
+frozen_by: "Bruno Batista <bruno.batista.biotec@gmail.com>"
