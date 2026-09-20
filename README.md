@@ -11,11 +11,15 @@ README is an orientation pointer only — when in doubt, the spec wins.
 
 ## Status
 
-**Milestone 0 (repository and runnable AOED shell)** — in progress. There is
-no expression data, no downloaded RNA-seq, and no frozen reference yet. The
-CLI shell (`atlas doctor` / `atlas init` / `atlas status`) is functional;
-every other subcommand is an intentional stub that names the milestone that
-will implement it (see `atlas --help` and `src/aoryzae_atlas/cli/main.py`).
+**Milestone 0 (repository and runnable AOED shell)** — complete. The CLI
+shell (`atlas doctor` / `atlas init` / `atlas status`) is functional on the
+maintainer's Windows machine, and Nextflow/nf-core execution is available via
+Docker Desktop (WSL2 backend) with a WSL2 Ubuntu distro running Nextflow —
+see `docs/decisions/0003-execution-strategy.md`. There is still no expression
+data, no downloaded RNA-seq, and no frozen reference; every subcommand beyond
+`doctor`/`init`/`status`/`storage status` is an intentional stub that names
+the milestone that will implement it (see `atlas --help` and
+`src/aoryzae_atlas/cli/main.py`).
 
 See [`TODO.md`](TODO.md) for the live milestone checklist and
 [`docs/decisions/`](docs/decisions/) for recorded design decisions,

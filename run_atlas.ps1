@@ -32,22 +32,48 @@ $VenvDir  = Join-Path $RepoRoot ".venv"
 $VenvPython = Join-Path $VenvDir "Scripts\python.exe"
 $MarkerFile = Join-Path $VenvDir ".install-marker"
 
+function Get-ExtraArgs([string[]] $parts) {
+    # PowerShell's range operator counts down when start > end (e.g. `1..0`
+    # yields @(1,0), not an empty array), which corrupts single-word
+    # commands like "python3" if sliced with $parts[1..($parts.Length-1)].
+    if ($parts.Length -gt 1) { return $parts[1..($parts.Length - 1)] }
+    return @()
+}
+
 function Resolve-BasePython {
+    # Candidates are tried in order and must actually execute and report
+    # Python >= 3.10; a candidate merely being present on PATH is not enough
+    # (e.g. the Windows "py" launcher can be a non-functional stub that
+    # resolves via Get-Command but never runs, silently producing no venv).
     $candidates = @("py -3", "python3", "python")
     foreach ($c in $candidates) {
         $parts = $c -split " "
         $cmd = $parts[0]
         $exists = Get-Command $cmd -ErrorAction SilentlyContinue
-        if ($exists) { return $c }
+        if (-not $exists) { continue }
+        try {
+            $versionOutput = & $parts[0] @(Get-ExtraArgs $parts) -c "import sys; print('%d.%d' % sys.version_info[:2])" 2>$null
+        } catch {
+            $versionOutput = $null
+        }
+        if ($LASTEXITCODE -eq 0 -and $versionOutput) {
+            $verParts = $versionOutput.Trim() -split "\."
+            if ([int]$verParts[0] -eq 3 -and [int]$verParts[1] -ge 10) {
+                return $c
+            }
+        }
     }
-    throw "No Python 3 interpreter found on PATH. Install Python 3.10+ before running AOED."
+    throw "No working Python >= 3.10 interpreter found on PATH (candidates tried: $($candidates -join ', ')). Install Python 3.10+ before running AOED."
 }
 
 if (-not (Test-Path $VenvPython)) {
     Write-Host "AOED: creating virtual environment at $VenvDir ..."
     $base = Resolve-BasePython
     $baseParts = $base -split " "
-    & $baseParts[0] $baseParts[1..($baseParts.Length - 1)] -m venv $VenvDir
+    & $baseParts[0] @(Get-ExtraArgs $baseParts) -m venv $VenvDir
+    if (-not (Test-Path $VenvPython)) {
+        throw "Virtual environment creation failed: $VenvPython was not created. Base interpreter used: $base"
+    }
 }
 
 $PyprojectHash = (Get-FileHash (Join-Path $RepoRoot "pyproject.toml") -Algorithm SHA256).Hash

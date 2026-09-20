@@ -4,7 +4,7 @@ Tracks live progress against the milestones in `PROJECT_MASTER_SPEC.md`
 section 37. Keep this file honest: check an item only when it is actually
 done, not scaffolded.
 
-## Milestone 0 — Repository and runnable AOED shell
+## Milestone 0 — Repository and runnable AOED shell (COMPLETE)
 
 - [x] Create project directory structure (config/, metadata/, workflows/,
       reference/, scratch/, runtime/, results/, database/, matrices/,
@@ -23,13 +23,29 @@ done, not scaffolded.
       on the user's machine: Docker Desktop (already installed) as the
       container engine, Nextflow running inside a WSL2 Ubuntu distro. See
       `docs/decisions/0003-execution-strategy.md`.
-- [ ] On the user's machine: confirm Docker Desktop uses the WSL2 backend
-      (Settings > General), install a general-purpose Ubuntu WSL2 distro if
-      missing (`wsl --install -d Ubuntu`), enable Docker Desktop's WSL
-      integration for it, and install Java + Nextflow inside it.
-- [ ] Set up a real Python environment on the user's Windows machine and
-      confirm `run_atlas.ps1 doctor` passes there (this was only exercised
-      in the Linux file-bridge environment so far).
+- [x] Confirmed Docker Desktop uses the WSL2 backend (default engine;
+      `settings-store.json` has no `useWindowsContainers` override, and
+      `docker version` reports a Linux-engine server). Installed a
+      general-purpose Ubuntu WSL2 distro (`wsl --install -d Ubuntu`),
+      created a non-root default user (`bruno`, `sudo` group, default set
+      via `/etc/wsl.conf`), and installed OpenJDK 17 and Nextflow 26.04.6
+      (`/usr/local/bin/nextflow`) inside it.
+- [x] Docker Desktop WSL integration enabled for the "Ubuntu" distro by the
+      user (Settings > Resources > WSL integration > Apply & Restart).
+      Verified with `wsl -d Ubuntu -- docker version` (Linux engine reachable)
+      and `docker run --rm hello-world` (image pulled and ran successfully).
+- [x] Set up a real Python environment on the user's Windows machine and
+      confirmed `run_atlas.ps1 doctor` passes there. This also uncovered and
+      fixed two real bugs in `run_atlas.ps1`: (1) `Resolve-BasePython`
+      trusted `Get-Command` alone, so a broken/non-functional `py` launcher
+      stub on this machine (`C:\WINDOWS\system32\py`, a Python Manager
+      artifact, not a real console app) was silently accepted and the venv
+      creation step failed with no visible error; (2) PowerShell's `..`
+      range operator counts down when start > end (`1..0` yields `@(1,0)`,
+      not empty), which corrupted the argument list for single-word
+      interpreter commands like `python3`/`python`. Both are fixed with an
+      actual-execution check and a safe `Get-ExtraArgs` helper. Full pytest
+      suite (22 tests) passes.
 
 ## Milestone 1 — AO09 and UniProt reconciliation
 
