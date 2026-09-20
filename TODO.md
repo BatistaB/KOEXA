@@ -128,7 +128,38 @@ done, not scaffolded.
 
 ## Milestone 2 — Public transcriptome discovery report
 
-- [ ] Not started.
+- [x] Implemented `atlas discovery report` (`src/aoryzae_atlas/discovery/`):
+      queries NCBI SRA via `pysradb` (organism="Aspergillus oryzae",
+      strategy="RNA-Seq") — reproducing AFED's own discovery-search intent
+      (`get_sra_metadata.Rmd`'s `entrez_search(term='(Aspergillus
+      flavus[Organism] & transcriptomic[Source]) | ...')`) through the
+      pysradb/official-API route `docs/decisions/0002-afed-audit.md`
+      already decided on instead of AFED's rentrez script. Metadata only —
+      no FASTQ/SRA data downloaded, nothing approved for processing.
+      Real run (2026-09-20): 458 runs, 439 BioSamples, 58 BioProjects, 1
+      run excluded (blank organism field in NCBI's own metadata). Writes
+      `reports/discovery/{studies,samples,runs,exclusions}.tsv`,
+      `discovery_<date>.md`, and the raw pysradb response under
+      `raw_api_responses/` for provenance. 11 new tests (62 total, all
+      passing), all using synthetic fixtures (no test depends on live
+      network access).
+- [ ] Known gaps, deliberately deferred rather than guessed:
+      - `geo_accession`/`publication_doi`/`publication_title` are blank in
+        `studies.tsv`: pysradb's per-study `srp-to-gse`/`srp-to-pmid`
+        cross-reference lookups take ~2-14s *each*; running them for all 58
+        studies was deferred as a separate enrichment pass rather than
+        blocking this report for ~15+ minutes.
+      - No AO09/RIB40 reference-compatibility-risk assessment per study yet
+        (spec section 23) — needs a human to read the condition_clues/
+        strain text.
+      - No `RECOMMENDED_MVP` selection: every study/sample/run that passed
+        basic organism/strategy/source checks is `REQUIRES_REVIEW`, not
+        auto-approved. Spec section 23 asks for a manually curated, diverse
+        representative set (submerged/solid-state, carbon sources, stress,
+        growth phase, strain) — picking that set is the next actual
+        decision point, and it needs the user's input.
+      - `atlas discovery export` is still a stub; unclear yet whether it
+        needs to do anything beyond what `report` already writes.
 
 ## Milestone 3 — Canonical RIB40 reference
 

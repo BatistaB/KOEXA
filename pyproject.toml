@@ -17,14 +17,12 @@ dependencies = [
   "duckdb>=1.0",
   "pandas>=2.0",
   "openpyxl>=3.1",
+  "pysradb>=2.3",
 ]
 
 [project.optional-dependencies]
 dev = [
   "pytest>=8.0",
-]
-discovery = [
-  "pysradb>=1.4",
 ]
 
 [project.scripts]

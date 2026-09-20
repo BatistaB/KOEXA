@@ -74,6 +74,33 @@ genome-browser support in Milestone 8, per spec section 24/33.
 | Ad hoc R-object storage (no DB) | **Not** reused | Spec section 8 requires DuckDB-backed, queryable, provenance-tracked storage; AOED's scientific/business state also has to interoperate with Nextflow's own execution state (section 6), which a flat R-object store does not support. |
 | R + Shiny app layer | Tentatively reused for Milestone 7 | Spec section 33 explicitly says to "begin from the MIT-licensed AFED Shiny implementation or reproduce its behavior with a justified alternative." Given the rest of AOED is Python/DuckDB-based, the Milestone 7 implementer should confirm whether an R/Shiny app reading from DuckDB (via `duckdb`'s R client) or a Python-native app (e.g. Shiny for Python, Streamlit, Dash) better serves "extensibility" and "performance" (spec priorities 8-9) before committing. This ADR does not decide that; it is deferred to Milestone 7 and should get its own ADR then. |
 
+## Follow-up: AFED's discovery query strategy (2026-09-20, for Milestone 2)
+
+Before implementing `atlas discovery report`, read the actual source of
+`src/get_sra_metadata.Rmd` in the AFED repository (not just the README, per
+this ADR's original recommendation). It identifies *A. flavus* RNA-Seq
+experiments with a single `rentrez::entrez_search` call:
+
+```r
+entrez_search(db='sra',
+  term='(Aspergillus flavus[Organism] & transcriptomic[Source]) | ("A. flavus" & transcriptomic[Source]) | ("Aspergillus flavus" & transcriptomic[Source])',
+  retmax=10000)
+```
+
+i.e. organism + library-source=transcriptomic, with a couple of literal
+name-string variants. This ADR's original decision (rentrez not reused;
+`pysradb` + official APIs instead) stands, but the underlying *search
+intent* is directly reusable: `atlas discovery report` queries pysradb's
+SRA search with the equivalent structured filters
+(`--organism "Aspergillus oryzae" --strategy "RNA-Seq"`) rather than
+inventing a different discovery heuristic from scratch. It found 458 A.
+oryzae RNA-Seq runs across 58 BioProjects (2026-09-20) — a similar order of
+magnitude to AFED's ~900 runs for the sibling species. AFED's script also
+post-filters out mislabeled-organism rows (e.g. a stray "fumigatus" strain
+value) after the search; `atlas discovery report` does an equivalent check
+(`sample_scientific_name` must mention "oryzae"), which caught one run with
+a blank organism field in NCBI's own metadata.
+
 ## Open questions for Milestone 7 (not resolved by this audit)
 
 1. Shiny (R) vs. a Python-native dashboard framework, given AOED's backend

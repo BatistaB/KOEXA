@@ -14,12 +14,17 @@ from __future__ import annotations
 import hashlib
 import shutil
 import sys
+from datetime import date
 from pathlib import Path
 
 import click
 
 from .. import __version__
 from ..config import ConfigError, load_storage_config
+from ..discovery import sra_search
+from ..discovery.classify import build_discovery_tables
+from ..discovery.parse import load_discovered_runs
+from ..discovery.report import render_markdown_report, write_discovery_tsvs
 from ..doctor import doctor_report_text
 from ..identifiers.external_identifiers import (
     from_gene_aliases_file,
@@ -33,6 +38,8 @@ from ..metadata.gene_product_updates import load_b71_products
 from ..metadata.gff import load_protein_coding_genes
 from ..paths import (
     DATABASE_FILE,
+    DISCOVERY_DIR,
+    DISCOVERY_RAW_API_RESPONSES_DIR,
     FUNGIDB_GENE_ALIASES_FILE,
     FUNGIDB_GENE_PRODUCT_UPDATES_FILE,
     FUNGIDB_GFF_FILE,
@@ -338,8 +345,55 @@ def discovery() -> None:
 
 
 @discovery.command("report")
-def discovery_report() -> None:
-    _not_implemented("Milestone 2 (Public transcriptome discovery report)", "atlas discovery report")
+@click.option(
+    "--max-results",
+    default=5000,
+    show_default=True,
+    help="Upper bound passed to pysradb's search (metadata only; no FASTQ/SRA data is downloaded).",
+)
+def discovery_report(max_results: int) -> None:
+    """Discover A. oryzae RNA-Seq metadata on NCBI SRA and write the discovery report.
+
+    Metadata-only (PROJECT_MASTER_SPEC.md section 23: discovery and
+    download are separate phases). Writes reports/discovery/studies.tsv,
+    samples.tsv, runs.tsv, exclusions.tsv, discovery_<date>.md, and the raw
+    search result under reports/discovery/raw_api_responses/. Nothing is
+    marked RECOMMENDED_MVP automatically; see the report's "Next step".
+    """
+    DISCOVERY_RAW_API_RESPONSES_DIR.mkdir(parents=True, exist_ok=True)
+    discovery_date = date.today().isoformat()
+    raw_path = DISCOVERY_RAW_API_RESPONSES_DIR / f"sra_search_{discovery_date}.tsv"
+
+    click.echo(f"Querying NCBI SRA (organism={sra_search.ORGANISM!r}, strategy={sra_search.STRATEGY!r}) ...")
+    provenance = sra_search.run_search(raw_path, max_results=max_results)
+    logger.info(
+        "Discovery search: %s rows via %s %s -> %s",
+        provenance.n_rows_returned,
+        provenance.tool,
+        provenance.tool_version,
+        raw_path,
+    )
+
+    runs = load_discovered_runs(raw_path)
+    tables = build_discovery_tables(runs, discovery_date=discovery_date)
+    tsv_paths = write_discovery_tsvs(tables, DISCOVERY_DIR)
+    report_text = render_markdown_report(tables, provenance)
+    report_path = DISCOVERY_DIR / f"discovery_{discovery_date}.md"
+    report_path.write_text(report_text, encoding="utf-8")
+    logger.info(
+        "Discovery report: %d studies, %d samples, %d runs (%d excluded) -> %s",
+        len(tables.studies),
+        len(tables.samples),
+        len(tables.runs),
+        len(tables.exclusions),
+        report_path,
+    )
+
+    click.echo(report_text)
+    click.echo(f"Raw API response:   {raw_path}")
+    for name, path in tsv_paths.items():
+        click.echo(f"{name.capitalize():<18} {path}")
+    click.echo(f"Markdown report:    {report_path}")
 
 
 @discovery.command("export")
