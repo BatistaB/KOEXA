@@ -15,7 +15,7 @@ import hashlib
 import shutil
 import sys
 from dataclasses import replace
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 import click
@@ -23,6 +23,7 @@ import duckdb
 
 from .. import __version__
 from ..config import ConfigError, load_storage_config
+from ..database.approve import SampleExcludedError, SampleNotFoundError, approve_sample
 from ..database.ingest_discovery import load_datasets, load_samples
 from ..database.ingest_genes import load_gene_external_identifiers, load_genes
 from ..database.migrate import apply_migrations
@@ -43,6 +44,7 @@ from ..logging_setup import get_logger
 from ..metadata.gene_master import build_gene_master_rows, write_gene_master_tsv
 from ..metadata.gene_product_updates import load_b71_products
 from ..metadata.gff import load_protein_coding_genes
+from ..state import SampleState
 from ..paths import (
     DATABASE_FILE,
     DISCOVERY_DIR,
@@ -579,8 +581,39 @@ def sample() -> None:
 
 @sample.command("approve")
 @click.argument("srr")
-def sample_approve(srr: str) -> None:
-    _not_implemented("Milestone 4 (Database, state, and storage safety)", f"atlas sample approve {srr}")
+@click.option(
+    "--reason",
+    default="",
+    help="Why this sample is being approved (recorded in processing_events for audit).",
+)
+def sample_approve(srr: str, reason: str) -> None:
+    """Approve a discovered sample for downloading/processing.
+
+    The human sign-off gate between discovery and download/processing
+    (PROJECT_MASTER_SPEC.md section 23); does not download or process
+    anything itself. Requires the sample to already be loaded
+    (`atlas discovery report` then `atlas database load-discovery`).
+    """
+    if not DATABASE_FILE.is_file():
+        raise click.ClickException("No database found. Run 'atlas database migrate' first.")
+    conn = duckdb.connect(str(DATABASE_FILE))
+    try:
+        try:
+            result = approve_sample(conn, srr, reason=reason)
+        except SampleNotFoundError:
+            raise click.ClickException(
+                f"Sample {srr} not found. Run 'atlas discovery report' and 'atlas database load-discovery' first."
+            )
+        except SampleExcludedError:
+            raise click.ClickException(f"Sample {srr} is EXCLUDED and cannot be approved; see exclusions.tsv.")
+    finally:
+        conn.close()
+
+    if result.already_approved:
+        click.echo(f"Sample {srr} is already APPROVED.")
+        return
+    logger.info("Approved sample %s (was %s)%s", srr, result.previous_status, f": {reason}" if reason else "")
+    click.echo(f"Approved {srr} (was {result.previous_status}).")
 
 
 @sample.command("queue")

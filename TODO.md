@@ -261,6 +261,12 @@ done, not scaffolded.
       `atlas status` now reports real counts from the database instead of
       hardcoded zeros (`database/queries.py`).
       13 new tests (87 total, all passing).
+- [x] Implemented `atlas sample approve <SRR>` (`database/approve.py`): the
+      human sign-off gate between discovery and download/processing.
+      Refuses to approve an `EXCLUDED` sample, is idempotent for an
+      already-`APPROVED` one (no duplicate audit row), and logs a
+      `processing_events` row for every real approval. 4 new tests (91
+      total, all passing).
 - [ ] Not yet done: Nextflow task-state tracking, disk monitoring wired
       into the database, graceful pause/restart recovery, and safe-cleanup
       tests. Deliberately deferred to build alongside Milestone 5's actual
@@ -268,6 +274,42 @@ done, not scaffolded.
       is no real Nextflow run to track state for yet, and `state.py`'s
       `SampleState` enum (already built, Milestone 0) is the vocabulary
       that tracking will use once there is one.
+
+## Sample curation (spec section 23 "aim for diversity")
+
+Scope clarified by the user 2026-09-20: sample approval is **not**
+restricted to RIB40 -- the project deliberately wants cross-strain
+comparison as a first-class analysis axis (strain becomes a filterable
+atlas dimension later), not a single-strain compendium. See the
+`project-cross-strain-scope` memory. Curated from `reports/discovery/`
+(2026-09-20 snapshot) covering the spec's diversity axes on RIB40 data
+specifically for this first, simplest round (broader non-RIB40 diversity
+is a deliberate next round, not excluded):
+
+- [x] **Approved**: `DRR786485` (BioProject PRJDB37768, "RIB40_DPY_1d",
+      1 run, PAIRED, ~2.36 GB) -- simplest possible single RIB40 run,
+      picked specifically to validate Milestone 5 pipeline mechanics
+      before scaling up.
+- [ ] Proposed, not yet approved -- awaiting the user's go-ahead on which
+      (if any) to approve next:
+      - Submerged + solid-state + stress, with replicates, already
+        published (GEO GSE18851 / PMID 20392818): `PRJNA121091` (8 runs) --
+        also a natural Milestone 6 "one replicated condition" candidate.
+      - Carbon source (lactate vs glucose): `PRJDB42398` (15 runs / 5
+        biosamples).
+      - Growth phase/time course (1-5 days, MPY medium, 3 reps/timepoint):
+        `PRJDB17490` (15 runs).
+      - Chemical/lignocellulosic stress with replicates (vanillin,
+        levulinic acid, HMF, furfural, 24h, 3 reps each): `PRJNA1261861`
+        (83 runs total -- pick 1-2 treatment arms + control for a first
+        pass, not the whole study).
+      - Developmental stage (conidia / germinated conidia / hyphae):
+        `PRJDB4747` (3 runs, single-end, smallest files of the set).
+      - No clean RIB40 "secretion/production context" (e.g. industrial
+        koji/soy-sauce) candidate was found -- the koji/Daqu studies in
+        this snapshot use non-RIB40 strains (LBM 30007/30008, 3.042),
+        which is fine per the scope above but wasn't bundled into this
+        first RIB40-only round without the user picking it explicitly.
 
 ## Milestones 5-12
 
