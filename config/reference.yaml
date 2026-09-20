@@ -8,21 +8,45 @@
 
 organism: "Aspergillus oryzae"
 reference_strain: "RIB40"
-assembly_accession: null
+# Verified 2026-09-20 via NCBI Assembly (esearch/esummary + datasets API,
+# db=assembly, term="Aspergillus oryzae RIB40"[organism]): our genome
+# FASTA's total length (37,912,014 bp across 12 sequences) equals
+# GCF_000184455.2's nuclear total (37,882,812 bp) plus its 29,202 bp
+# mitochondrial genome, exactly. See database/FungiDB_v71/PROVENANCE.md
+# for the other 3 RIB40 assemblies checked and ruled out.
+assembly_accession: "GCF_000184455.2"
+# The FungiDB v71 annotation (GFF source=VEuPathDB) is FungiDB's own
+# curation of the original DOGAN/NITE gene models, not verbatim NCBI RefSeq
+# gene predictions for GCF_000184455.2 -- it has no separate NCBI-style
+# accession of its own. Its identity is the FungiDB release number instead
+# (captured in reference_version below), so this stays null rather than
+# inventing an accession that doesn't exist. See PROVENANCE.md.
 annotation_accession: null
-reference_version: null          # e.g. RIB40_v1 once frozen (see spec section 36)
+reference_version: "RIB40_v1"    # first freeze (see spec section 36)
 canonical_gene_id_system: "AO09"
 
-genome_fasta: null
-annotation_gtf_or_gff: null
-transcript_fasta: null
-index_version: null              # Salmon index version/build tag, once built
+# Paths are relative to the repository root. Kept in database/FungiDB_v71/
+# (not reference/genome|annotation|transcripts/) to avoid duplicating
+# ~100MB of payload files already tracked there by checksum; see TODO.md's
+# note on this open layout question.
+genome_fasta: "database/FungiDB_v71/FungiDB-71_AoryzaeRIB40_Genome.fasta"
+annotation_gtf_or_gff: "database/FungiDB_v71/FungiDB-71_AoryzaeRIB40.gff"
+transcript_fasta: "database/FungiDB_v71/FungiDB-71_AoryzaeRIB40_AnnotatedTranscripts.fasta"
+index_version: null              # Salmon index version/build tag, once built (Milestone 5, via nf-core/rnaseq)
 
+# From `atlas reference validate` (2026-09-20); see reports/reference_validation.txt.
 checksums:
-  genome_fasta_sha256: null
-  annotation_sha256: null
-  transcript_fasta_sha256: null
+  genome_fasta_sha256: "676332773ad0457a2a73a9df3c65c21a5e3d66219108db1eb3ff37e2d45403f9"
+  annotation_sha256: "52d4af40fd49966701d61edc26dc68adeeb4bcaf5ae290f2b70a1f4f252b3b04"
+  transcript_fasta_sha256: "12b6edacc7e7229658b7d7f2e44994494226cb13dbb4bc54aafc3db031b70d77"
 
-frozen: false                    # flips to true only after Milestone 3 sign-off
+# Structural validation passed with zero problems (genome: 12 sequences /
+# 37,912,014 bp; GFF and protein FASTA gene sets match exactly at 12,090
+# genes; transcript-to-gene mapping's genes are a full subset of the GFF).
+# frozen stays false until a human explicitly signs off -- spec section 37
+# Milestone 3: "stop and report if AO09/reference assumptions remain
+# unclear." This is not unclear, but freezing is still a deliberate,
+# hard-to-reverse step this file does not take on its own.
+frozen: false                    # flips to true only after explicit sign-off
 frozen_at: null
 frozen_by: null

@@ -44,18 +44,24 @@ from ..paths import (
     DISCOVERY_RAW_API_RESPONSES_DIR,
     FUNGIDB_GENE_ALIASES_FILE,
     FUNGIDB_GENE_PRODUCT_UPDATES_FILE,
+    FUNGIDB_GENOME_FASTA_FILE,
     FUNGIDB_GFF_FILE,
     FUNGIDB_PROTEIN_FASTA_FILE,
+    FUNGIDB_TRANSCRIPT_FASTA_FILE,
     GENE_EXTERNAL_IDENTIFIERS_FILE,
     GENE_ID_MAPPING_FILE,
     GENE_ID_MAPPING_REPORT_FILE,
     GENE_MASTER_FILE,
     PROJECT_ROOT,
+    REFERENCE_VALIDATION_REPORT_FILE,
     REQUIRED_CONFIG_FILES,
     REQUIRED_DIRS,
     SCRATCH_DIR,
+    TRANSCRIPT_TO_GENE_FILE,
     UNIPROT_WORKBOOK_FILE,
 )
+from ..reference.transcript_to_gene import load_transcript_to_gene, write_t2g_tsv
+from ..reference.validate import render_validation_report, validate_reference
 from ..runtime_status import init_runtime_status, load_runtime_status
 
 logger = get_logger("cli")
@@ -316,6 +322,82 @@ def genes_build_master(gff_path: Path, updates_path: Path, reference_version: st
         reference_version,
     )
     click.echo(f"Wrote {len(rows)} gene_master.tsv rows to {GENE_MASTER_FILE}")
+
+
+@cli.group()
+def reference() -> None:
+    """Canonical RIB40 reference commands (Milestone 3)."""
+
+
+@reference.command("validate")
+@click.option(
+    "--genome",
+    "genome_fasta_path",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=FUNGIDB_GENOME_FASTA_FILE,
+    show_default=True,
+    help="RIB40 genome FASTA supplied as Milestone 3 input evidence.",
+)
+@click.option(
+    "--gff",
+    "gff_path",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=FUNGIDB_GFF_FILE,
+    show_default=True,
+    help="FungiDB RIB40 annotation GFF3.",
+)
+@click.option(
+    "--protein-fasta",
+    "protein_fasta_path",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=FUNGIDB_PROTEIN_FASTA_FILE,
+    show_default=True,
+)
+@click.option(
+    "--transcript-fasta",
+    "transcript_fasta_path",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=FUNGIDB_TRANSCRIPT_FASTA_FILE,
+    show_default=True,
+)
+def reference_validate(
+    genome_fasta_path: Path,
+    gff_path: Path,
+    protein_fasta_path: Path,
+    transcript_fasta_path: Path,
+) -> None:
+    """Structurally validate the Milestone 3 reference evidence.
+
+    Cross-checks the genome/annotation/transcript files against each other
+    and against Milestone 1's protein FASTA gene set, computes checksums,
+    and writes the transcript-to-gene mapping. Does NOT flip
+    config/reference.yaml's `frozen` flag -- PROJECT_MASTER_SPEC.md section
+    37 says to "stop and report if AO09/reference assumptions remain
+    unclear", so freezing needs an explicit human sign-off after reviewing
+    this report, not an automatic step here. Does not build a Salmon index
+    either (Milestone 5, via nf-core/rnaseq).
+    """
+    report = validate_reference(genome_fasta_path, gff_path, protein_fasta_path, transcript_fasta_path)
+    report_text = render_validation_report(report)
+
+    t2g_pairs = load_transcript_to_gene(transcript_fasta_path)
+    TRANSCRIPT_TO_GENE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    write_t2g_tsv(t2g_pairs, TRANSCRIPT_TO_GENE_FILE)
+
+    REFERENCE_VALIDATION_REPORT_FILE.write_text(report_text, encoding="utf-8")
+    logger.info(
+        "Reference validation: %d genome sequences, %d GFF genes, %d problems -> %s",
+        report.genome_sequence_count,
+        report.gff_gene_count,
+        len(report.problems),
+        REFERENCE_VALIDATION_REPORT_FILE,
+    )
+
+    click.echo(report_text)
+    click.echo(f"Transcript-to-gene mapping: {TRANSCRIPT_TO_GENE_FILE}")
+    click.echo(f"Validation report:          {REFERENCE_VALIDATION_REPORT_FILE}")
+    if report.problems:
+        sys.exit(1)
 
 
 # --- Stub command groups mirroring PROJECT_MASTER_SPEC.md section 25 -------

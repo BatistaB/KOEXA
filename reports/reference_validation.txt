@@ -1,0 +1,16 @@
+AOED Milestone 3 -- canonical RIB40 reference structural validation
+
+Genome: 12 sequences, 37,912,014 bp total
+GFF protein-coding genes: 12090
+Protein FASTA genes: 12090
+GFF/protein FASTA gene sets match exactly: True
+Transcript FASTA records: 12090
+Transcript-to-gene pairs: 12090 (12090 distinct genes)
+All t2g genes present in GFF: True
+
+Checksums (SHA256):
+  genome_fasta_sha256: 676332773ad0457a2a73a9df3c65c21a5e3d66219108db1eb3ff37e2d45403f9
+  annotation_sha256: 52d4af40fd49966701d61edc26dc68adeeb4bcaf5ae290f2b70a1f4f252b3b04
+  transcript_fasta_sha256: 12b6edacc7e7229658b7d7f2e44994494226cb13dbb4bc54aafc3db031b70d77
+
+No problems found.

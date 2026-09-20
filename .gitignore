@@ -16,6 +16,9 @@
 /reference/salmon_index/*
 !/reference/**/.gitkeep
 !/reference/README.md
+# t2g.tsv is small (~380KB) and derived deterministically from the
+# transcript FASTA; worth tracking like the other metadata/*.tsv tables.
+!/reference/transcripts/t2g.tsv
 
 # FungiDB v71 evidence files (Milestone 1) are large; keep checksums and
 # provenance notes in git, not the payloads (same policy as /reference/).

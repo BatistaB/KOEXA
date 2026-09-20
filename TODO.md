@@ -189,8 +189,47 @@ done, not scaffolded.
 
 ## Milestone 3 — Canonical RIB40 reference
 
-- [ ] Not started. `config/reference.yaml` stays unfrozen until this
-      milestone is complete.
+- [x] User supplied the RIB40 genome FASTA
+      (`database/FungiDB_v71/FungiDB-71_AoryzaeRIB40_Genome.fasta`, 12
+      sequences: 8 chromosomes, 3 unplaced contigs, 1 mitochondrial genome,
+      37,912,014 bp total) alongside the annotation/transcript/protein
+      FASTAs already used in Milestone 1.
+- [x] Verified the assembly accession via NCBI's Assembly database
+      (`esearch`/`esummary` + `datasets` API, term="Aspergillus oryzae
+      RIB40"[organism], 2026-09-20): our file's total length equals
+      **GCF_000184455.2** (ASM18445v3, RefSeq category "reference genome",
+      NITE Japan)'s nuclear total (37,882,812 bp) plus its 29,202 bp
+      mitochondrial genome, exactly. 3 other RIB40 assemblies were checked
+      and ruled out (contig-level/different total length/older versions).
+      Full detail in `database/FungiDB_v71/PROVENANCE.md`.
+- [x] Implemented `atlas reference validate`
+      (`src/aoryzae_atlas/reference/`): cross-checks genome/GFF/protein/
+      transcript files against each other, computes checksums, and builds
+      `reference/transcripts/t2g.tsv` (transcript-to-gene mapping for
+      Salmon-output gene-level aggregation later). Real run: 0 problems --
+      GFF and protein FASTA gene sets match exactly at 12,090 genes, t2g
+      genes are a full subset of the GFF. Does **not** build a Salmon index
+      (deferred to Milestone 5 via nf-core/rnaseq's own pinned
+      reference-building subworkflow, per AGENTS.md's "reuse nf-core"
+      rule) and does **not** flip `frozen: true` on its own. 8 new tests
+      (76 total, all passing).
+- [x] Populated `config/reference.yaml` with the verified
+      `assembly_accession`, `reference_version: "RIB40_v1"`, file paths,
+      and checksums. `annotation_accession` stays null on purpose: the
+      FungiDB v71 annotation (GFF source=VEuPathDB) is FungiDB's own
+      curation, not verbatim NCBI RefSeq gene models, and has no separate
+      NCBI-style accession of its own. **`frozen` is still `false`** --
+      that flip needs the user's explicit sign-off (spec section 37:
+      "stop and report if AO09/reference assumptions remain unclear"),
+      not something this pass decides on its own.
+- [ ] Open layout question (same one noted under Milestone 1): the
+      reference files live in `database/FungiDB_v71/`, not
+      `reference/{genome,annotation,transcripts}/` per spec section 7's
+      layout. `reference.yaml`'s paths point at the actual current
+      location rather than duplicating ~100MB of payload; revisit if a
+      move is wanted later.
+- [ ] Awaiting user sign-off to actually set `frozen: true`/`frozen_at`/
+      `frozen_by` in `config/reference.yaml`.
 
 ## Milestones 4-12
 

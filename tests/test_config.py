@@ -11,10 +11,16 @@ def test_load_reference_config_has_no_invented_accessions():
     assert ref["organism"] == "Aspergillus oryzae"
     assert ref["reference_strain"] == "RIB40"
     assert ref["canonical_gene_id_system"] == "AO09"
-    # These must stay unpopulated until Milestone 3 verifies them.
-    assert ref["assembly_accession"] is None
+    # assembly_accession/reference_version were verified by Milestone 3
+    # (atlas reference validate; see database/FungiDB_v71/PROVENANCE.md for
+    # how GCF_000184455.2 was confirmed against NCBI's Assembly database).
+    # annotation_accession stays null: FungiDB's own curation has no
+    # separate NCBI-style accession, not an unresolved unknown.
+    assert ref["assembly_accession"] == "GCF_000184455.2"
     assert ref["annotation_accession"] is None
-    assert ref["reference_version"] is None
+    assert ref["reference_version"] == "RIB40_v1"
+    # frozen must stay False until a human explicitly signs off, regardless
+    # of how complete the verified fields above are.
     assert ref["frozen"] is False
 
 
