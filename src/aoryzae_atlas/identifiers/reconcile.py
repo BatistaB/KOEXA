@@ -12,10 +12,10 @@ tested without real workbook/FASTA files.
 from __future__ import annotations
 
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
-from .fungidb import load_protein_fasta_gene_ids
+from .fungidb import build_ao09_redirect_map, load_protein_fasta_gene_ids
 from .uniprot_workbook import UniProtGeneLink, UniProtRow, explode_uniprot_gene_links, load_uniprot_workbook
 
 # Every AO09 id originates from the RIB40 genome annotation by construction
@@ -40,6 +40,37 @@ class MappingRow:
     reference_version: str
 
 
+def apply_ao09_redirects(
+    links: list[UniProtGeneLink],
+    fungidb_gene_ids: set[str],
+    redirect_map: dict[str, str],
+) -> list[UniProtGeneLink]:
+    """Redirect a link's AO09 id through `redirect_map` when it is not a current gene.
+
+    A direct hit is always preferred: only links whose own id is absent
+    from `fungidb_gene_ids` are redirected, and only when the redirect
+    target itself is a confirmed current gene.
+    """
+    resolved: list[UniProtGeneLink] = []
+    for link in links:
+        if link.ao09_id in fungidb_gene_ids:
+            resolved.append(link)
+            continue
+        target = redirect_map.get(link.ao09_id)
+        if target is None or target not in fungidb_gene_ids:
+            resolved.append(link)
+            continue
+        resolved.append(
+            replace(
+                link,
+                ao09_id=target,
+                redirected_from=link.ao09_id,
+                evidence=f"{link.evidence}; redirected {link.ao09_id} -> {target} via FungiDB GeneAliases.txt",
+            )
+        )
+    return resolved
+
+
 def classify_links(
     links: list[UniProtGeneLink],
     fungidb_gene_ids: set[str],
@@ -57,7 +88,13 @@ def classify_links(
         n_genes = len(genes_per_entry[link.uniprot_entry])
         n_entries = len(entries_per_gene[link.ao09_id])
 
-        if not in_fungidb:
+        if link.redirected_from is not None:
+            # Resolved only via a GeneAliases.txt redirect, not the
+            # workbook's own direct reference to a current gene id -- always
+            # flagged distinctly, regardless of what cardinality would
+            # otherwise suggest.
+            mapping_type, confidence = "annotation_alias", "medium"
+        elif not in_fungidb:
             mapping_type, confidence = "unmapped", "low"
         elif n_genes == 1 and n_entries == 1:
             mapping_type, confidence = "exact", "high"
@@ -68,6 +105,11 @@ def classify_links(
         else:
             mapping_type, confidence = "ambiguous", "low"
 
+        mapping_method = (
+            "fungidb_gene_aliases_redirect"
+            if link.redirected_from is not None
+            else f"uniprot_workbook_{link.source_field.lower()}_field"
+        )
         rows.append(
             MappingRow(
                 source_id=link.uniprot_entry,
@@ -76,7 +118,7 @@ def classify_links(
                 canonical_AO09_id=link.ao09_id,
                 mapping_type=mapping_type,
                 mapping_confidence=confidence,
-                mapping_method=f"uniprot_workbook_{link.source_field.lower()}_field",
+                mapping_method=mapping_method,
                 evidence=link.evidence,
                 reference_version=reference_version,
             )
@@ -121,10 +163,24 @@ class ReconciliationResult:
     fungidb_gene_ids: set[str]
 
 
-def run_reconciliation(workbook_path: Path, protein_fasta_path: Path, reference_version: str) -> ReconciliationResult:
+def run_reconciliation(
+    workbook_path: Path,
+    protein_fasta_path: Path,
+    reference_version: str,
+    gene_aliases_path: Path | None = None,
+) -> ReconciliationResult:
+    """Reconcile the workbook against the FungiDB v71 gene set.
+
+    When `gene_aliases_path` is given, an AO09 id absent from the direct
+    gene set is also checked against GeneAliases.txt's redirect map (see
+    `fungidb.build_ao09_redirect_map`) before being declared "unmapped".
+    """
     uniprot_rows = load_uniprot_workbook(workbook_path)
     links = explode_uniprot_gene_links(uniprot_rows)
     fungidb_gene_ids = set(load_protein_fasta_gene_ids(protein_fasta_path))
+    if gene_aliases_path is not None:
+        redirect_map = build_ao09_redirect_map(gene_aliases_path, fungidb_gene_ids)
+        links = apply_ao09_redirects(links, fungidb_gene_ids, redirect_map)
     mapping_rows = classify_links(links, fungidb_gene_ids, reference_version)
     summary = summarize(mapping_rows, uniprot_rows, fungidb_gene_ids)
     return ReconciliationResult(

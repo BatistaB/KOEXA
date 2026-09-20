@@ -67,3 +67,11 @@ def test_render_markdown_report_includes_provenance_and_counts():
     assert "REQUIRES_REVIEW: 1" in report
     assert "No FASTQ" not in report  # sanity: don't assert text we didn't write
     assert "no FASTQ/SRA data has been" in report
+    assert "--enrich-crossrefs" in report  # not enriched: should point at the flag
+
+
+def test_render_markdown_report_reflects_crossref_enrichment():
+    tables = build_discovery_tables([_run()], discovery_date="2026-09-20")
+    report = render_markdown_report(tables, _provenance(), crossrefs_enriched=True)
+    assert "were resolved for all 1 studies" in report
+    assert "--enrich-crossrefs" not in report  # already enriched: don't tell the user to re-run it

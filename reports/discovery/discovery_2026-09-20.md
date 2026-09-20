@@ -1,6 +1,6 @@
 # AOED discovery report -- Aspergillus oryzae RNA-Seq (SRA)
 
-Query date (UTC): 2026-09-20T15:54:54+00:00
+Query date (UTC): 2026-09-20T16:08:46+00:00
 Source API: NCBI SRA, via pysradb python.exe -m pysradb 2.5.1
 Query: organism='Aspergillus oryzae', strategy='RNA-Seq', db='sra', max_results=5000
 Exact command: `D:\PanTranscriptome\.venv\Scripts\python.exe -m pysradb search -O Aspergillus oryzae -S RNA-Seq -m 5000 -d sra --detailed -o D:\PanTranscriptome\reports\discovery\raw_api_responses\sra_search_2026-09-20.tsv`

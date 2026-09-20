@@ -35,7 +35,11 @@ def write_discovery_tsvs(tables: DiscoveryTables, out_dir: Path) -> dict[str, Pa
     return paths
 
 
-def render_markdown_report(tables: DiscoveryTables, provenance: SearchProvenance) -> str:
+def render_markdown_report(
+    tables: DiscoveryTables,
+    provenance: SearchProvenance,
+    crossrefs_enriched: bool = False,
+) -> str:
     run_status_counts = Counter(r.status for r in tables.runs)
     sample_status_counts = Counter(s.status for s in tables.samples)
     layout_counts = Counter(r.library_layout for r in tables.runs)
@@ -73,16 +77,30 @@ def render_markdown_report(tables: DiscoveryTables, provenance: SearchProvenance
     for layout, count in sorted(layout_counts.items()):
         lines.append(f"- {layout or '(unresolved)'}: {count}")
 
+    if crossrefs_enriched:
+        n_geo = sum(1 for s in tables.studies if s.geo_accession)
+        n_pmid = sum(1 for s in tables.studies if "PMID:" in s.notes)
+        crossref_gap_line = (
+            f"- GEO/PMID cross-references were resolved for all {len(tables.studies)} studies: "
+            f"{n_geo} have a GEO accession, {n_pmid} have a PMID. `publication_doi`/`publication_title` "
+            "are still blank even where a PMID was found -- that needs a further PMID -> article-metadata "
+            "hop, not yet implemented."
+        )
+    else:
+        crossref_gap_line = (
+            "- `geo_accession`, `publication_doi`, `publication_title` in studies.tsv "
+            "are blank: pysradb's per-study GEO (`srp-to-gse`) and PubMed "
+            "(`srp-to-pmid`) cross-reference lookups take ~2-14s *each* and were not "
+            "run for all "
+            f"{len(tables.studies)} studies in this pass (would add many minutes). "
+            "Re-run with `--enrich-crossrefs` to fill these in."
+        )
+
     lines += [
         "",
         "## Known gaps in this pass (not resolved, not fabricated)",
         "",
-        "- `geo_accession`, `publication_doi`, `publication_title` in studies.tsv "
-        "are blank: pysradb's per-study GEO (`srp-to-gse`) and PubMed "
-        "(`srp-to-pmid`) cross-reference lookups take ~2-14s *each* and were not "
-        "run for all "
-        f"{len(tables.studies)} studies in this pass (would add many minutes). "
-        "A follow-up enrichment pass can fill these in.",
+        crossref_gap_line,
         "- AO09/RIB40 reference compatibility risk (spec section 23) is not yet "
         "assessed per study -- that requires the condition_clues/strain text "
         "to be read, which is a human curation step.",

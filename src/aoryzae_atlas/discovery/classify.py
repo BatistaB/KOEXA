@@ -71,6 +71,7 @@ class SampleRow:
 class StudyRow:
     dataset_id: str
     bioproject: str
+    study_accession: str
     geo_accession: str
     publication_doi: str
     publication_title: str
@@ -209,16 +210,17 @@ def build_discovery_tables(runs: list[DiscoveredRun], discovery_date: str) -> Di
             StudyRow(
                 dataset_id=study_key,
                 bioproject=first.bioproject,
-                geo_accession="",  # not resolved in this pass -- see TODO.md
-                publication_doi="",  # not resolved in this pass -- see TODO.md
-                publication_title="",  # not resolved in this pass -- see TODO.md
+                study_accession=first.study_accession,
+                geo_accession="",  # not resolved in this pass -- see atlas discovery enrich-crossrefs
+                publication_doi="",  # not resolved in this pass -- DOI needs a further PMID->article hop
+                publication_title="",  # not resolved in this pass -- DOI needs a further PMID->article hop
                 organism=first.sample_scientific_name,
                 strain=", ".join(strains),
                 study_description=first.study_title or first.study_abstract[:300],
                 source_repository="NCBI SRA",
                 discovery_date=discovery_date,
                 metadata_status="discovered",
-                notes=f"{len(biosamples)} biosample(s), {len(study_runs)} run(s) (study_accession={first.study_accession})",
+                notes=f"{len(biosamples)} biosample(s), {len(study_runs)} run(s)",
             )
         )
 

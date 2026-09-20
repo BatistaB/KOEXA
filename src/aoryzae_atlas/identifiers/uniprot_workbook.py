@@ -54,6 +54,7 @@ class UniProtGeneLink:
     ao09_id: str
     source_field: str  # "Genes" or "Aliases"
     evidence: str
+    redirected_from: str | None = None  # original AO09 id, if resolved via a GeneAliases.txt redirect
 
 
 def explode_uniprot_gene_links(rows: list[UniProtRow]) -> list[UniProtGeneLink]:

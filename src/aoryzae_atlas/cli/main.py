@@ -14,6 +14,7 @@ from __future__ import annotations
 import hashlib
 import shutil
 import sys
+from dataclasses import replace
 from datetime import date
 from pathlib import Path
 
@@ -23,6 +24,7 @@ from .. import __version__
 from ..config import ConfigError, load_storage_config
 from ..discovery import sra_search
 from ..discovery.classify import build_discovery_tables
+from ..discovery.crossref import apply_crossrefs_to_studies, fetch_study_crossrefs
 from ..discovery.parse import load_discovered_runs
 from ..discovery.report import render_markdown_report, write_discovery_tsvs
 from ..doctor import doctor_report_text
@@ -226,7 +228,7 @@ def identifiers_reconcile(
     report. Neither input file is treated as the canonical reference
     (PROJECT_MASTER_SPEC.md section 12); that is Milestone 3's job.
     """
-    result = run_reconciliation(workbook_path, protein_fasta_path, reference_version)
+    result = run_reconciliation(workbook_path, protein_fasta_path, reference_version, gene_aliases_path=gene_aliases_path)
 
     write_mapping_tsv(result.mapping_rows, GENE_ID_MAPPING_FILE)
     logger.info(
@@ -351,7 +353,14 @@ def discovery() -> None:
     show_default=True,
     help="Upper bound passed to pysradb's search (metadata only; no FASTQ/SRA data is downloaded).",
 )
-def discovery_report(max_results: int) -> None:
+@click.option(
+    "--enrich-crossrefs/--no-enrich-crossrefs",
+    default=False,
+    show_default=True,
+    help="Also resolve GEO/PMID cross-references per study (pysradb; can take a minute or more). "
+    "DOI/publication title still need a further PMID lookup and are never resolved here.",
+)
+def discovery_report(max_results: int, enrich_crossrefs: bool) -> None:
     """Discover A. oryzae RNA-Seq metadata on NCBI SRA and write the discovery report.
 
     Metadata-only (PROJECT_MASTER_SPEC.md section 23: discovery and
@@ -376,8 +385,18 @@ def discovery_report(max_results: int) -> None:
 
     runs = load_discovered_runs(raw_path)
     tables = build_discovery_tables(runs, discovery_date=discovery_date)
+
+    if enrich_crossrefs:
+        study_accessions = sorted({s.study_accession for s in tables.studies if s.study_accession})
+        click.echo(f"Resolving GEO/PMID cross-references for {len(study_accessions)} studies (this can take a while) ...")
+        crossrefs = fetch_study_crossrefs(study_accessions)
+        n_geo = sum(1 for c in crossrefs.values() if c.geo_accession)
+        n_pmid = sum(1 for c in crossrefs.values() if c.pmid)
+        logger.info("Cross-reference enrichment: %d/%d studies have a GEO hit, %d/%d have a PMID", n_geo, len(study_accessions), n_pmid, len(study_accessions))
+        tables = replace(tables, studies=apply_crossrefs_to_studies(tables.studies, crossrefs))
+
     tsv_paths = write_discovery_tsvs(tables, DISCOVERY_DIR)
-    report_text = render_markdown_report(tables, provenance)
+    report_text = render_markdown_report(tables, provenance, crossrefs_enriched=enrich_crossrefs)
     report_path = DISCOVERY_DIR / f"discovery_{discovery_date}.md"
     report_path.write_text(report_text, encoding="utf-8")
     logger.info(

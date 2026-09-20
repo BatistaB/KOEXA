@@ -120,6 +120,28 @@ done, not scaffolded.
       a winner) -- promoting one to `gene_master.tsv` here would be a guess.
       New `atlas genes build-master` CLI command; 6 new tests (51 total,
       all passing).
+- [x] Investigated the 562 "no UniProt coverage" genes and 572 "unmapped"
+      workbook ids using a lead noticed earlier: some `GeneAliases.txt` rows
+      list an *extra* AO09-pattern token among a current gene's aliases
+      (e.g. primary `AO090011000964` lists alias `AO090011000551`) --
+      evidence of a retired/renumbered id from an older annotation version.
+      Built `fungidb.build_ao09_redirect_map()` (only trusts a redirect
+      whose target is itself a confirmed current gene; verified
+      exhaustively that no old id maps to more than one current gene in
+      this release) and `reconcile.apply_ao09_redirects()`, wired into
+      `atlas identifiers reconcile` via the existing `--gene-aliases`
+      option. Result: **all 566** unmapped workbook ids resolve through
+      this redirect to a current gene (mapping_type `annotation_alias`,
+      confidence `medium`, the spec's own vocabulary for exactly this
+      case), and **274 of the 562** "no coverage" genes turn out to have
+      indirect UniProt evidence this way -- cutting genuinely
+      UniProt-uncovered genes from 562 to **288**, almost all still
+      concentrated in the `AO090701*` contig (worth a closer look, e.g.
+      whether that contig was added/renumbered wholesale in a later
+      release). `gene_id_mapping.tsv` (12,099 rows: 11,483 exact, 39
+      one-to-many, 11 many-to-one, 566 annotation_alias, 0 unmapped) and
+      `gene_external_identifiers.tsv` (36,810 rows) regenerated. 4 new
+      tests (70 total, all passing).
 - [ ] Not yet decided: whether `database/FungiDB_v71/` should move under
       `reference/` to match PROJECT_MASTER_SPEC.md section 7's layout
       (`database/` is specified to hold only `atlas.duckdb`). Left as-is
@@ -143,12 +165,16 @@ done, not scaffolded.
       `raw_api_responses/` for provenance. 11 new tests (62 total, all
       passing), all using synthetic fixtures (no test depends on live
       network access).
+- [x] Implemented the deferred GEO/PMID enrichment pass:
+      `discovery/crossref.py` + `atlas discovery report --enrich-crossrefs`,
+      batching all study accessions into one `pysradb` `srp-to-gse`/
+      `srp-to-pmid` call each (much cheaper than one call per study). Real
+      run (2026-09-20): 3/58 studies have a GEO accession, 3/58 have a
+      PMID (one study has both). `publication_doi`/`publication_title`
+      still left blank even when a PMID is found -- that needs a further
+      PMID -> article-metadata hop, not yet implemented. 3 new tests (65
+      total at that point).
 - [ ] Known gaps, deliberately deferred rather than guessed:
-      - `geo_accession`/`publication_doi`/`publication_title` are blank in
-        `studies.tsv`: pysradb's per-study `srp-to-gse`/`srp-to-pmid`
-        cross-reference lookups take ~2-14s *each*; running them for all 58
-        studies was deferred as a separate enrichment pass rather than
-        blocking this report for ~15+ minutes.
       - No AO09/RIB40 reference-compatibility-risk assessment per study yet
         (spec section 23) — needs a human to read the condition_clues/
         strain text.

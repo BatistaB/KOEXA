@@ -9,6 +9,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from .ao09 import find_ao09_ids
+
 _GENE_FIELD = re.compile(r"gene=(AO09\d{10})")
 
 
@@ -54,3 +56,29 @@ def load_gene_aliases(path: Path) -> list[tuple[str, list[str]]]:
             parts = line.split("\t")
             rows.append((parts[0], parts[1:]))
     return rows
+
+
+def build_ao09_redirect_map(gene_aliases_path: Path, fungidb_gene_ids: set[str]) -> dict[str, str]:
+    """Map a retired/renumbered AO09 id to the current gene it now aliases.
+
+    Some `GeneAliases.txt` rows list an *additional* AO09-pattern token
+    among a current gene's aliases (e.g. primary id AO090011000964 lists
+    alias AO090011000551) -- evidence that AO090011000551 was merged or
+    renumbered into AO090011000964 between annotation versions. Only
+    aliases attached to a `primary_id` that is itself a confirmed current
+    gene (in `fungidb_gene_ids`) are trusted; every old id observed this
+    way in the v71 release resolves to exactly one current gene (verified
+    2026-09-20 by exhaustive check), so this returns a 1:1 mapping rather
+    than a multi-target one -- if a future release ever produces more than
+    one target for the same old id, that id is dropped here rather than
+    guessed.
+    """
+    redirect_map: dict[str, set[str]] = {}
+    for primary_id, alias_tokens in load_gene_aliases(gene_aliases_path):
+        if primary_id not in fungidb_gene_ids:
+            continue
+        for token in alias_tokens:
+            for old_id in find_ao09_ids(token):
+                if old_id != primary_id:
+                    redirect_map.setdefault(old_id, set()).add(primary_id)
+    return {old_id: next(iter(targets)) for old_id, targets in redirect_map.items() if len(targets) == 1}
