@@ -19,9 +19,14 @@ from datetime import date
 from pathlib import Path
 
 import click
+import duckdb
 
 from .. import __version__
 from ..config import ConfigError, load_storage_config
+from ..database.ingest_discovery import load_datasets, load_samples
+from ..database.ingest_genes import load_gene_external_identifiers, load_genes
+from ..database.migrate import apply_migrations
+from ..database.queries import sample_status_counts
 from ..discovery import sra_search
 from ..discovery.classify import build_discovery_tables
 from ..discovery.crossref import apply_crossrefs_to_studies, fetch_study_crossrefs
@@ -137,16 +142,17 @@ def _fmt_gb(num_bytes: float) -> str:
 
 @cli.command()
 def status() -> None:
-    """Show the section-25 status block. Milestone 0: mostly zeros/N.A.
+    """Show the section-25 status block.
 
-    Sample-state counts and Nextflow session info become meaningful once the
-    database (Milestone 4) and pipeline orchestration (Milestone 5+) exist.
+    Sample-state counts come from the database once it exists (Milestone 4);
+    Nextflow session info becomes meaningful once pipeline orchestration
+    (Milestone 5+) exists.
     """
     rstatus = load_runtime_status()
     disk_total, disk_used, disk_free = shutil.disk_usage(PROJECT_ROOT)
     scratch_bytes = _scratch_usage_bytes()
 
-    db_present = DATABASE_FILE.is_file()
+    counts = sample_status_counts(DATABASE_FILE)
 
     try:
         storage_cfg = load_storage_config()
@@ -155,13 +161,13 @@ def status() -> None:
         scratch_max_gb = None
 
     lines = [
-        "Samples discovered:   0 (no database yet)" if not db_present else "Samples discovered:   see database",
-        "Approved:             0",
-        "Queued:               0",
-        "Processing:           0",
-        "Archived:             0",
-        "QC failed:            0",
-        "Excluded:             0",
+        f"Samples discovered:   {counts['discovered']}" if counts else "Samples discovered:   0 (no database yet)",
+        f"Approved:             {counts.get('approved', 0)}",
+        f"Queued:               {counts.get('queued', 0)}",
+        f"Processing:           {counts.get('processing', 0)}",
+        f"Archived:             {counts.get('archived', 0)}",
+        f"QC failed:            {counts.get('qc_failed', 0)}",
+        f"Excluded:             {counts.get('excluded', 0)}",
         "",
         f"Disk free:            {_fmt_gb(disk_free)}",
         f"Scratch usage:        {_fmt_gb(scratch_bytes)}"
@@ -398,6 +404,70 @@ def reference_validate(
     click.echo(f"Validation report:          {REFERENCE_VALIDATION_REPORT_FILE}")
     if report.problems:
         sys.exit(1)
+
+
+@cli.group()
+def database() -> None:
+    """DuckDB persistence commands (Milestone 4)."""
+
+
+@database.command("migrate")
+def database_migrate() -> None:
+    """Create/upgrade the atlas.duckdb schema. Safe to run repeatedly."""
+    applied = apply_migrations(DATABASE_FILE)
+    if applied:
+        logger.info("Applied %d migration(s): %s", len(applied), ", ".join(applied))
+        click.echo(f"Applied {len(applied)} migration(s): {', '.join(applied)}")
+    else:
+        click.echo("Database already up to date; no migrations applied.")
+    click.echo(f"Database: {DATABASE_FILE}")
+
+
+@database.command("load-genes")
+def database_load_genes() -> None:
+    """Load metadata/gene_master.tsv and gene_external_identifiers.tsv into DuckDB.
+
+    Fully derived, deterministic tables: each run truncates and reloads
+    (safe to re-run; nothing manually curated lives only in these two
+    database tables).
+    """
+    apply_migrations(DATABASE_FILE)
+    conn = duckdb.connect(str(DATABASE_FILE))
+    try:
+        n_genes = load_genes(conn, GENE_MASTER_FILE)
+        n_gxi = load_gene_external_identifiers(conn, GENE_EXTERNAL_IDENTIFIERS_FILE)
+    finally:
+        conn.close()
+    logger.info("Loaded %d genes and %d gene_external_identifiers rows into %s", n_genes, n_gxi, DATABASE_FILE)
+    click.echo(f"Loaded {n_genes} genes, {n_gxi} gene_external_identifiers rows into {DATABASE_FILE}")
+
+
+@database.command("load-discovery")
+def database_load_discovery() -> None:
+    """Load reports/discovery/{studies,samples,runs}.tsv into DuckDB.
+
+    The "STORE METADATA" step of the discover -> store -> review -> approve
+    -> queue -> process workflow (spec section 23). Upserts rather than
+    replaces: a sample's pipeline_status/qc_status/quant_status/
+    exclusion_reason are only set the first time that sample is seen, so a
+    later re-discovery run never resets progress a sample has since made.
+    """
+    studies_path = DISCOVERY_DIR / "studies.tsv"
+    samples_path = DISCOVERY_DIR / "samples.tsv"
+    runs_path = DISCOVERY_DIR / "runs.tsv"
+    for path in (studies_path, samples_path, runs_path):
+        if not path.is_file():
+            raise click.ClickException(f"Missing {path}. Run 'atlas discovery report' first.")
+
+    apply_migrations(DATABASE_FILE)
+    conn = duckdb.connect(str(DATABASE_FILE))
+    try:
+        n_datasets = load_datasets(conn, studies_path)
+        n_samples = load_samples(conn, runs_path, samples_path)
+    finally:
+        conn.close()
+    logger.info("Loaded %d datasets and %d samples into %s", n_datasets, n_samples, DATABASE_FILE)
+    click.echo(f"Loaded {n_datasets} datasets, {n_samples} samples into {DATABASE_FILE}")
 
 
 # --- Stub command groups mirroring PROJECT_MASTER_SPEC.md section 25 -------

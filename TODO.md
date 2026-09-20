@@ -233,6 +233,42 @@ done, not scaffolded.
       `frozen_by: Bruno Batista <bruno.batista.biotec@gmail.com>`).
       **Milestone 3 is complete.**
 
-## Milestones 4-12
+## Milestone 4 — Database, state, and storage safety
+
+- [x] Created the DuckDB schema (`src/aoryzae_atlas/database/migrations/
+      0001_initial_schema.sql`) for all 7 core tables from spec section 8
+      (datasets, samples, conditions, genes, gene_external_identifiers,
+      sample_qc, processing_events, gene_expression), plus a minimal
+      forward-only migration runner (`database/migrate.py`,
+      `atlas database migrate`) tracked in a `_schema_migrations` table.
+      `samples.sample_id` = run accession (SRR/DRR/ERR...), the finest
+      granularity nf-core/rnaseq actually processes.
+- [x] Implemented `atlas database load-genes` (loads `gene_master.tsv` +
+      `gene_external_identifiers.tsv`; both fully derived and deterministic,
+      so each run truncates and reloads) and `atlas database load-discovery`
+      (loads `reports/discovery/{studies,samples,runs}.tsv` into
+      `datasets`/`samples` -- the "STORE METADATA" step of spec section
+      23's discover -> store -> review -> approve -> queue -> process
+      workflow). `samples` rows are **upserted**, not replaced:
+      `pipeline_status`/`qc_status`/`quant_status`/`exclusion_reason` are
+      only set the first time a run is seen, so a later re-discovery pass
+      can never reset a sample that has since been approved/queued/
+      processed back to its initial discovery status -- verified with a
+      dedicated test that simulates this exact scenario.
+      Real run: 12,090 genes, 36,810 gene_external_identifiers rows,
+      58 datasets, 458 samples loaded (457 `METADATA_REVIEW`, 1
+      `EXCLUDED`, matching Milestone 2's discovery results exactly).
+      `atlas status` now reports real counts from the database instead of
+      hardcoded zeros (`database/queries.py`).
+      13 new tests (87 total, all passing).
+- [ ] Not yet done: Nextflow task-state tracking, disk monitoring wired
+      into the database, graceful pause/restart recovery, and safe-cleanup
+      tests. Deliberately deferred to build alongside Milestone 5's actual
+      pipeline orchestration rather than speculatively ahead of it -- there
+      is no real Nextflow run to track state for yet, and `state.py`'s
+      `SampleState` enum (already built, Milestone 0) is the vocabulary
+      that tracking will use once there is one.
+
+## Milestones 5-12
 
 - [ ] Not started (see PROJECT_MASTER_SPEC.md section 37 for full list).
