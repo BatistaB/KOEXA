@@ -117,6 +117,8 @@ def summarize(
 class ReconciliationResult:
     mapping_rows: list[MappingRow]
     summary: ReconciliationSummary
+    uniprot_rows: list[UniProtRow]
+    fungidb_gene_ids: set[str]
 
 
 def run_reconciliation(workbook_path: Path, protein_fasta_path: Path, reference_version: str) -> ReconciliationResult:
@@ -125,7 +127,12 @@ def run_reconciliation(workbook_path: Path, protein_fasta_path: Path, reference_
     fungidb_gene_ids = set(load_protein_fasta_gene_ids(protein_fasta_path))
     mapping_rows = classify_links(links, fungidb_gene_ids, reference_version)
     summary = summarize(mapping_rows, uniprot_rows, fungidb_gene_ids)
-    return ReconciliationResult(mapping_rows=mapping_rows, summary=summary)
+    return ReconciliationResult(
+        mapping_rows=mapping_rows,
+        summary=summary,
+        uniprot_rows=uniprot_rows,
+        fungidb_gene_ids=fungidb_gene_ids,
+    )
 
 
 _MAPPING_TSV_HEADER = [

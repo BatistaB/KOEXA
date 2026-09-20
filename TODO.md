@@ -80,11 +80,31 @@ done, not scaffolded.
       evidence snapshot, not a UniProt release), but needed before
       `gene_external_identifiers.tsv` rows can cite a real UniProt
       source_version.
-- [ ] Not yet done: populate `metadata/gene_external_identifiers.tsv` from
-      this reconciliation (UniProtKB_accession/UniProtKB_entry_name/
-      gene_alias namespaces from the workbook; a FungiDB namespace from
-      `GeneAliases.txt`'s AO09/AO07/AspGD triples) -- deferred as a separate
-      increment so the audit step above could be reviewed on its own first.
+- [x] Populated `metadata/gene_external_identifiers.tsv` (35,662 rows):
+      UniProtKB_accession/UniProtKB_entry_name (11,533 each, one pair per
+      non-unmapped `gene_id_mapping.tsv` row) and gene_alias (690 rows, from
+      non-AO09 tokens in the workbook's Aliases field) from the UniProt
+      workbook; FungiDB (11,906 rows, the "AO07"-prefixed alternate gene id)
+      from `GeneAliases.txt`. Rows whose AO09 id is "unmapped" (not present
+      in FungiDB v71) are excluded -- that raw claim stays in
+      `gene_id_mapping.tsv` only.
+      While building this, discovered `GeneAliases.txt` is **not** the fixed
+      3-column format a small initial sample suggested: the real file has
+      2-9 tab-separated columns per row (verified across all ~12k rows),
+      mixing tRNA-gene rows (non-AO09 primary id), "AO07"/"AO08"-prefixed
+      ids, "AOR_..." ids, occasional extra AO09 ids (apparently
+      merged/retired loci -- worth revisiting when investigating the 562
+      "missing" genes below), and a trailing AspGD "ASPL..." id. Only the
+      well-understood "AO07..." token is mapped to a namespace for now;
+      `fungidb.load_gene_aliases()` was generalized to variable-length rows
+      and the others are deliberately left unmapped rather than guessed
+      (raw alias list kept in each row's `evidence` field either way).
+      Also fixed a real bug found while spot-checking: `explode_uniprot_gene_links`
+      was over-counting links for UniProt entries that the workbook's own
+      upstream processing had pre-exploded into multiple rows (repeating the
+      same Aliases text on each row) -- corrected counts are in the
+      Milestone 1 entry above. 4 new tests added for the variable-column
+      parser and the namespace-filtering logic (45 total, all passing).
 - [ ] Not yet decided: whether `database/FungiDB_v71/` should move under
       `reference/` to match PROJECT_MASTER_SPEC.md section 7's layout
       (`database/` is specified to hold only `atlas.duckdb`). Left as-is

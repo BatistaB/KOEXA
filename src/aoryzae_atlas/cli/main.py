@@ -11,6 +11,7 @@ actually built.
 """
 from __future__ import annotations
 
+import hashlib
 import shutil
 import sys
 from pathlib import Path
@@ -20,11 +21,18 @@ import click
 from .. import __version__
 from ..config import ConfigError, load_storage_config
 from ..doctor import doctor_report_text
+from ..identifiers.external_identifiers import (
+    from_gene_aliases_file,
+    from_uniprot_mapping,
+    write_external_identifiers_tsv,
+)
 from ..identifiers.reconcile import render_summary_report, run_reconciliation, write_mapping_tsv
 from ..logging_setup import get_logger
 from ..paths import (
     DATABASE_FILE,
+    FUNGIDB_GENE_ALIASES_FILE,
     FUNGIDB_PROTEIN_FASTA_FILE,
+    GENE_EXTERNAL_IDENTIFIERS_FILE,
     GENE_ID_MAPPING_FILE,
     GENE_ID_MAPPING_REPORT_FILE,
     PROJECT_ROOT,
@@ -145,6 +153,14 @@ def status() -> None:
     click.echo("\n".join(lines))
 
 
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 @cli.group()
 def identifiers() -> None:
     """AO09/UniProt identifier reconciliation commands (Milestone 1)."""
@@ -168,18 +184,33 @@ def identifiers() -> None:
     help="FungiDB RIB40 annotated-protein FASTA supplied as Milestone 1 input evidence.",
 )
 @click.option(
+    "--gene-aliases",
+    "gene_aliases_path",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=FUNGIDB_GENE_ALIASES_FILE,
+    show_default=True,
+    help="FungiDB GeneAliases.txt (AO09/AO07/AspGD triples) for the FungiDB external-identifier namespace.",
+)
+@click.option(
     "--reference-version",
     default="FungiDB_v71",
     show_default=True,
     help="Label for this evidence snapshot. Not a frozen reference (Milestone 3 freezes one).",
 )
-def identifiers_reconcile(workbook_path: Path, protein_fasta_path: Path, reference_version: str) -> None:
+def identifiers_reconcile(
+    workbook_path: Path,
+    protein_fasta_path: Path,
+    gene_aliases_path: Path,
+    reference_version: str,
+) -> None:
     """Reconcile the UniProt workbook's AO09 ids against the FungiDB protein FASTA.
 
     Writes metadata/gene_id_mapping.tsv (the audit trail: one row per
     UniProt-entry/AO09-id link, classified exact/one_to_many/many_to_one/
-    ambiguous/unmapped) and a human-readable structural validation report.
-    Neither input file is treated as the canonical reference
+    ambiguous/unmapped), metadata/gene_external_identifiers.tsv (the curated
+    cross-reference table, scoped to AO09 ids confirmed present in the
+    FungiDB v71 gene set), and a human-readable structural validation
+    report. Neither input file is treated as the canonical reference
     (PROJECT_MASTER_SPEC.md section 12); that is Milestone 3's job.
     """
     result = run_reconciliation(workbook_path, protein_fasta_path, reference_version)
@@ -192,13 +223,34 @@ def identifiers_reconcile(workbook_path: Path, protein_fasta_path: Path, referen
         reference_version,
     )
 
+    external_rows = from_uniprot_mapping(
+        result.mapping_rows,
+        result.uniprot_rows,
+        source_file=workbook_path.name,
+        source_checksum=_sha256_file(workbook_path),
+    )
+    external_rows += from_gene_aliases_file(
+        gene_aliases_path,
+        result.fungidb_gene_ids,
+        reference_version,
+        source_file=gene_aliases_path.name,
+        source_checksum=_sha256_file(gene_aliases_path),
+    )
+    write_external_identifiers_tsv(external_rows, GENE_EXTERNAL_IDENTIFIERS_FILE)
+    logger.info(
+        "Wrote %d gene_external_identifiers.tsv rows to %s",
+        len(external_rows),
+        GENE_EXTERNAL_IDENTIFIERS_FILE,
+    )
+
     report_text = render_summary_report(result.summary, reference_version)
     GENE_ID_MAPPING_REPORT_FILE.write_text(report_text, encoding="utf-8")
     logger.info("Wrote reconciliation report to %s", GENE_ID_MAPPING_REPORT_FILE)
 
     click.echo(report_text)
-    click.echo(f"Full mapping table: {GENE_ID_MAPPING_FILE}")
-    click.echo(f"Full report:        {GENE_ID_MAPPING_REPORT_FILE}")
+    click.echo(f"Full mapping table:        {GENE_ID_MAPPING_FILE}")
+    click.echo(f"External identifiers:      {GENE_EXTERNAL_IDENTIFIERS_FILE} ({len(external_rows)} rows)")
+    click.echo(f"Full report:               {GENE_ID_MAPPING_REPORT_FILE}")
 
 
 # --- Stub command groups mirroring PROJECT_MASTER_SPEC.md section 25 -------
