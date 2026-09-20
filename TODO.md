@@ -49,11 +49,47 @@ done, not scaffolded.
 
 ## Milestone 1 — AO09 and UniProt reconciliation
 
-- [ ] Awaiting new source files: the previously supplied UniProt-derived
-      workbook and RIB40 protein FASTA were removed from the project folder
-      by the user. Milestone 1 is blocked until equivalent verified sources
-      are provided or re-acquired from an authoritative source (UniProt /
-      NCBI / FungiDB), with checksums.
+- [x] User supplied a full FungiDB release 71 evidence set for
+      *A. oryzae* RIB40 under `database/FungiDB_v71/` (GFF, annotated
+      CDS/protein/transcript FASTAs, GO associations, gene aliases, gene
+      product updates, and the UniProt-derived workbook
+      `Archive_9_PSIM_Aory.xlsx`). SHA256 checksums recorded in
+      `database/FungiDB_v71/CHECKSUMS.sha256`; provenance notes in
+      `database/FungiDB_v71/PROVENANCE.md`. Payload files are gitignored
+      (same policy as `/reference/`); only the checksums/provenance files
+      are tracked.
+- [x] Implemented and ran `atlas identifiers reconcile`
+      (`src/aoryzae_atlas/identifiers/`, 21 new tests) comparing the
+      workbook's AO09 gene references (scanned from both the UniProt
+      "Genes" and "Aliases" fields, since fused/tandem-ORF entries only
+      list the second locus in Aliases) against the 12,090 genes in the
+      FungiDB v71 RIB40 protein FASTA. Neither file is treated as the
+      canonical/frozen reference (that is Milestone 3). Results:
+      12,185 UniProt-entry/AO09 links from 12,078 distinct UniProt entries;
+      11,483 exact, 120 one-to-many, 10 many-to-one, 572 unmapped (AO09 ids
+      the workbook references that do not exist in FungiDB v71 -- likely
+      retired/renumbered ids); 18 duplicate UniProt entries in the workbook;
+      562 FungiDB v71 genes with no UniProt coverage at all (notably a long
+      contiguous run under the `AO090701*` contig). Full audit trail in
+      `metadata/gene_id_mapping.tsv`; full report in
+      `reports/gene_id_mapping_summary.txt`.
+- [ ] Open provenance question (see `database/FungiDB_v71/PROVENANCE.md`):
+      which exact UniProt query/reference-proteome/date the workbook was
+      built from. Not required to produce `gene_id_mapping.tsv` (its
+      `reference_version` column correctly records `FungiDB_v71`, the AO09
+      evidence snapshot, not a UniProt release), but needed before
+      `gene_external_identifiers.tsv` rows can cite a real UniProt
+      source_version.
+- [ ] Not yet done: populate `metadata/gene_external_identifiers.tsv` from
+      this reconciliation (UniProtKB_accession/UniProtKB_entry_name/
+      gene_alias namespaces from the workbook; a FungiDB namespace from
+      `GeneAliases.txt`'s AO09/AO07/AspGD triples) -- deferred as a separate
+      increment so the audit step above could be reviewed on its own first.
+- [ ] Not yet decided: whether `database/FungiDB_v71/` should move under
+      `reference/` to match PROJECT_MASTER_SPEC.md section 7's layout
+      (`database/` is specified to hold only `atlas.duckdb`). Left as-is
+      for now; easy to `git mv` later since payloads are gitignored either
+      way.
 
 ## Milestone 2 — Public transcriptome discovery report
 

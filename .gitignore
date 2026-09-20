@@ -17,6 +17,12 @@
 !/reference/**/.gitkeep
 !/reference/README.md
 
+# FungiDB v71 evidence files (Milestone 1) are large; keep checksums and
+# provenance notes in git, not the payloads (same policy as /reference/).
+/database/FungiDB_v71/*
+!/database/FungiDB_v71/CHECKSUMS.sha256
+!/database/FungiDB_v71/PROVENANCE.md
+
 # Local database and generated matrices/results are regenerable from raw data
 # + pipeline; keep out of git, but keep the directory structure.
 /database/*.duckdb

@@ -42,6 +42,16 @@ ANALYSIS_DIR = PROJECT_ROOT / "analysis"
 REPORTS_DIR = PROJECT_ROOT / "reports"
 APP_DIR = PROJECT_ROOT / "app"
 
+# Milestone 1 input evidence, as supplied by the user (see TODO.md). Not
+# part of REQUIRED_DIRS/REQUIRED_CONFIG_FILES: it is real biological data
+# the user placed on disk, not scaffolding `atlas init` should create.
+FUNGIDB_V71_DIR = DATABASE_DIR / "FungiDB_v71"
+UNIPROT_WORKBOOK_FILE = FUNGIDB_V71_DIR / "Archive_9_PSIM_Aory.xlsx"
+FUNGIDB_PROTEIN_FASTA_FILE = FUNGIDB_V71_DIR / "FungiDB-71_AoryzaeRIB40_AnnotatedProteins.fasta"
+
+GENE_ID_MAPPING_FILE = METADATA_DIR / "gene_id_mapping.tsv"
+GENE_ID_MAPPING_REPORT_FILE = REPORTS_DIR / "gene_id_mapping_summary.txt"
+
 REQUIRED_DIRS = [
     CONFIG_DIR, METADATA_DIR, WORKFLOWS_DIR, REFERENCE_DIR, SCRATCH_DIR,
     NEXTFLOW_WORK_DIR, RUNTIME_DIR, RESULTS_DIR, LOGS_DIR, DATABASE_DIR,

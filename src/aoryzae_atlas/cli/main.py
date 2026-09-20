@@ -1,11 +1,11 @@
 """AOED command-line interface.
 
-Implements the Milestone 0 CLI shell described in PROJECT_MASTER_SPEC.md
-section 25. Only `init`, `doctor`, and `status` (plus `storage status`) are
-functional in Milestone 0; every other subcommand exists so the intended CLI
-shape is discoverable, but raises a clear "not implemented yet" error naming
-the milestone that will implement it. This avoids pretending to download,
-process, or classify anything before those milestones' safety and
+Implements the CLI shell described in PROJECT_MASTER_SPEC.md section 25.
+`init`, `doctor`, `status`, `storage status`, and `identifiers reconcile`
+(Milestone 1) are functional; every other subcommand exists so the intended
+CLI shape is discoverable, but raises a clear "not implemented yet" error
+naming the milestone that will implement it. This avoids pretending to
+download, process, or classify anything before those milestones' safety and
 correctness requirements (data integrity, storage safety, provenance) are
 actually built.
 """
@@ -13,19 +13,25 @@ from __future__ import annotations
 
 import shutil
 import sys
+from pathlib import Path
 
 import click
 
 from .. import __version__
 from ..config import ConfigError, load_storage_config
 from ..doctor import doctor_report_text
+from ..identifiers.reconcile import render_summary_report, run_reconciliation, write_mapping_tsv
 from ..logging_setup import get_logger
 from ..paths import (
     DATABASE_FILE,
+    FUNGIDB_PROTEIN_FASTA_FILE,
+    GENE_ID_MAPPING_FILE,
+    GENE_ID_MAPPING_REPORT_FILE,
     PROJECT_ROOT,
     REQUIRED_CONFIG_FILES,
     REQUIRED_DIRS,
     SCRATCH_DIR,
+    UNIPROT_WORKBOOK_FILE,
 )
 from ..runtime_status import init_runtime_status, load_runtime_status
 
@@ -137,6 +143,62 @@ def status() -> None:
         f"AOED app:             not implemented yet (Milestone 7)",
     ]
     click.echo("\n".join(lines))
+
+
+@cli.group()
+def identifiers() -> None:
+    """AO09/UniProt identifier reconciliation commands (Milestone 1)."""
+
+
+@identifiers.command("reconcile")
+@click.option(
+    "--workbook",
+    "workbook_path",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=UNIPROT_WORKBOOK_FILE,
+    show_default=True,
+    help="UniProt-derived workbook (.xlsx) supplied as Milestone 1 input evidence.",
+)
+@click.option(
+    "--protein-fasta",
+    "protein_fasta_path",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=FUNGIDB_PROTEIN_FASTA_FILE,
+    show_default=True,
+    help="FungiDB RIB40 annotated-protein FASTA supplied as Milestone 1 input evidence.",
+)
+@click.option(
+    "--reference-version",
+    default="FungiDB_v71",
+    show_default=True,
+    help="Label for this evidence snapshot. Not a frozen reference (Milestone 3 freezes one).",
+)
+def identifiers_reconcile(workbook_path: Path, protein_fasta_path: Path, reference_version: str) -> None:
+    """Reconcile the UniProt workbook's AO09 ids against the FungiDB protein FASTA.
+
+    Writes metadata/gene_id_mapping.tsv (the audit trail: one row per
+    UniProt-entry/AO09-id link, classified exact/one_to_many/many_to_one/
+    ambiguous/unmapped) and a human-readable structural validation report.
+    Neither input file is treated as the canonical reference
+    (PROJECT_MASTER_SPEC.md section 12); that is Milestone 3's job.
+    """
+    result = run_reconciliation(workbook_path, protein_fasta_path, reference_version)
+
+    write_mapping_tsv(result.mapping_rows, GENE_ID_MAPPING_FILE)
+    logger.info(
+        "Wrote %d gene_id_mapping.tsv rows to %s (reference_version=%s)",
+        len(result.mapping_rows),
+        GENE_ID_MAPPING_FILE,
+        reference_version,
+    )
+
+    report_text = render_summary_report(result.summary, reference_version)
+    GENE_ID_MAPPING_REPORT_FILE.write_text(report_text, encoding="utf-8")
+    logger.info("Wrote reconciliation report to %s", GENE_ID_MAPPING_REPORT_FILE)
+
+    click.echo(report_text)
+    click.echo(f"Full mapping table: {GENE_ID_MAPPING_FILE}")
+    click.echo(f"Full report:        {GENE_ID_MAPPING_REPORT_FILE}")
 
 
 # --- Stub command groups mirroring PROJECT_MASTER_SPEC.md section 25 -------
