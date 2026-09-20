@@ -38,6 +38,24 @@ def test_explode_finds_extra_locus_only_in_aliases():
     }
 
 
+def test_explode_dedupes_across_pre_exploded_duplicate_rows():
+    # Real shape seen in the supplied workbook for entry "Q2TX49": the same
+    # entry appears on three rows, each with a different single AO09 id in
+    # Genes, but the SAME three-id Aliases string repeated on every row.
+    # Without grouping by entry first, this would double-count each link
+    # (once from its own Genes hit, again from every row's Aliases hit).
+    aliases_text = "AO090010000290 AO090010000292 AO090038000137"
+    rows = [
+        UniProtRow("Q2TX49", "Q2TX49_ASPOR", None, aliases_text, "AO090010000290", 1),
+        UniProtRow("Q2TX49", "Q2TX49_ASPOR", None, aliases_text, "AO090010000292", 2),
+        UniProtRow("Q2TX49", "Q2TX49_ASPOR", None, aliases_text, "AO090038000137", 3),
+    ]
+    links = explode_uniprot_gene_links(rows)
+    ao09_ids = [link.ao09_id for link in links]
+    assert sorted(ao09_ids) == ["AO090010000290", "AO090010000292", "AO090038000137"]
+    assert len(ao09_ids) == len(set(ao09_ids))  # no duplicate (entry, ao09_id) pairs
+
+
 def test_explode_no_ids_produces_no_links():
     row = UniProtRow(
         entry="X",

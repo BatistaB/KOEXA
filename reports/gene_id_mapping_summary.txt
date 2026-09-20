@@ -3,14 +3,14 @@ Reference version (evidence, not frozen): FungiDB_v71
 
 UniProt workbook rows:        12105
 Distinct UniProt entries:     12078
-UniProt-entry/AO09 links:     12185
+UniProt-entry/AO09 links:     12099
 FungiDB v71 RIB40 gene set:   12090
 
 Mapping type counts:
   exact        11483
   many_to_one  10
-  one_to_many  120
-  unmapped     572
+  one_to_many  40
+  unmapped     566
 
 Duplicate UniProt entries in workbook: 18
   A7BJS7
