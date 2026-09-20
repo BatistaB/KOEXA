@@ -10,6 +10,15 @@ pipeline_version: "0.1.0"
 
 nextflow:
   min_version: "26.04.4"          # latest stable Nextflow release verified 2026-09-20
+  # Nextflow 26.x made the new "strict" config parser the default, which
+  # rejects the `def check_max(obj, type) { ... }` Groovy closure pattern
+  # nearly every nf-core pipeline's base.config still uses (confirmed
+  # 2026-09-20 against nf-core/fetchngs 1.12.0: "Unexpected input: '('" /
+  # ConfigParseException). Until nf-core pipelines migrate to the new
+  # config DSL, invoke nf-core pipelines with this older, compatible
+  # Nextflow release pinned via the NXF_VER env var (Nextflow's launcher
+  # downloads it on demand; no separate install needed):
+  pinned_nf_core_run_version: "25.10.0"
   resume_enabled: true
 
 nf_core_fetchngs:

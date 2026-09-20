@@ -34,7 +34,15 @@
 /results/quant/*
 /results/qc/*
 /results/logs/*
+/results/fetchngs/*
 !/results/**/.gitkeep
+
+# Nextflow's own runtime artifacts when run in-place from the repo root
+# (scratch/nextflow-work is the actual work dir, but Nextflow still writes
+# these to the launch directory)
+.nextflow.log*
+.nextflow/
+/work/
 
 # Runtime/session state
 /runtime/status.json
