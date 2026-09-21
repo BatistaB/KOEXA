@@ -20,15 +20,19 @@ cleanup:
 paths:
   scratch_dir: "scratch"
   # NOT scratch/nextflow-work (a path under the Windows-mounted D: drive,
-  # reached from WSL2 via the 9p/DrvFs bridge). Confirmed 2026-09-20: a
-  # large FASTQ downloaded via nf-core/fetchngs through that bridge came
-  # out gzip-corrupt (CRC/length errors) on two separate attempts, while
-  # the same download succeeded once Nextflow's work dir and the pipeline
-  # --outdir were moved to a WSL2-native path. Large sequential binary
-  # writes from a Docker container, through WSL2, to a Windows-mounted
-  # drive are not reliable enough for raw sequencing data -- always run
-  # Nextflow with -work-dir (and --outdir, for fetchngs) pointed at a
-  # native Linux path such as ~/aoed-scratch/, never at /mnt/d/...
+  # reached from WSL2 via the 9p/DrvFs bridge). Root cause found 2026-09-20:
+  # downloads were failing gzip integrity (CRC/length errors, "Bus error",
+  # "Read-only file system") not because of the 9p bridge, but because the
+  # Windows C: drive had filled to 0 bytes free -- the WSL2 Ubuntu distro's
+  # ext4.vhdx lived on C: by default, so even "native" WSL2 paths were
+  # physically backed by a file on C:. Fixed by exporting/re-importing the
+  # Ubuntu distro to D:\WSL\Ubuntu (wsl --export / --unregister / --import),
+  # so the whole native Linux filesystem, including ~/aoed-scratch/, now
+  # physically lives on D:. Still keep -work-dir (and --outdir, for
+  # fetchngs) pointed at a native Linux path such as ~/aoed-scratch/, never
+  # at /mnt/d/... -- the 9p/DrvFs bridge is slow and untested for large
+  # sequential binary writes even though it wasn't the actual corruption
+  # cause here.
   nextflow_work_dir: "~/aoed-scratch/nextflow-work"  # WSL2-native path, not under the repo
   results_dir: "results"
   database_path: "database/atlas.duckdb"

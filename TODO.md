@@ -319,12 +319,28 @@ is a deliberate next round, not excluded):
       Windows-mounted drive, reached from WSL2 via the 9p/DrvFs bridge)
       produced a gzip-corrupt FASTQ (CRC/length errors on `gzip -t`,
       confirmed independently of the MD5 check) on two separate attempts,
-      for the same run. Root cause: large sequential binary writes from a
-      Docker container, through WSL2, to a Windows-mounted drive are not
-      reliable. Fix: point `-work-dir` and fetchngs's `--outdir` at a
-      WSL2-native path (`~/aoed-scratch/...`) instead. Recorded in
-      `config/storage.yaml`'s `paths.nextflow_work_dir` comment so this
-      isn't rediscovered the hard way on sample #2.
+      for the same run. Initially suspected the 9p/DrvFs bridge itself, so
+      moved `-work-dir`/`--outdir` to a WSL2-native path
+      (`~/aoed-scratch/...`) -- but the corruption recurred there too,
+      disproving that theory. **Actual root cause**: the Windows C: drive
+      had filled to 0 bytes free. The WSL2 Ubuntu distro's `ext4.vhdx` (and
+      Docker's build cache, and stray temp files) lived on C: by default,
+      so even "WSL2-native" paths under `~/` were physically backed by a
+      file on the full C: drive -- writes failed with `Bus error`,
+      `Read-only file system`, and `Input/output error`, which surfaced as
+      gzip corruption in the downloaded files. A parallel test confirmed it
+      wasn't network/Docker/sratools: the user downloaded the same run via
+      `prefetch` on Google Colab instantly, with no issue. Fix applied:
+      freed some C: space (Recycle Bin + Windows Temp), then migrated the
+      whole Ubuntu WSL2 distro from C: to `D:\WSL\Ubuntu` via
+      `wsl --export` / `--unregister` / `--import` (verified all data —
+      `~/aoed-scratch`, `.nextflow`, `.docker` — survived intact). WSL2's
+      root filesystem now reports 945GB available. `config/storage.yaml`'s
+      `paths.nextflow_work_dir` comment updated to reflect the real cause.
+      Docker Desktop was already installed on D: so wasn't part of the
+      problem. Claude Code's own app data intentionally left on C: (user's
+      call -- not worth the risk of relocating a live MSIX package's VM
+      bundle just for a few GB).
 - [x] Also hit and fixed along the way (see `config/pipeline.yaml`
       comments): Nextflow 26.x's new strict config parser rejects the
       `check_max()` Groovy closure nearly every nf-core pipeline's
