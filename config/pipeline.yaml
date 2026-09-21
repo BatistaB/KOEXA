@@ -38,9 +38,23 @@ nf_core_rnaseq:
   # default SRA_FASTQ_FTP resource label requested 12GB and failed
   # ("Process requirement exceeds available memory"). Per spec section 30
   # ("Performance guidelines for a modest PC"), cap requests to what is
-  # actually available via nf-core's own --max_memory/--max_cpus/--max_time
-  # params (the standard mechanism check_max() exists for) rather than
-  # raising WSL2's memory ceiling and starving the host.
+  # actually available rather than raising WSL2's memory ceiling and
+  # starving the host.
+  #
+  # Two different mechanisms are needed depending on the pipeline's age:
+  # - nf-core/fetchngs 1.12.0 still uses the classic `check_max()` Groovy
+  #   closure in its base.config, so `--max_memory`/`--max_cpus` work as-is.
+  # - nf-core/rnaseq 3.26.0 has dropped `check_max()` entirely (confirmed
+  #   2026-09-20: 0 uses in its base.config) in favour of Nextflow's native
+  #   `process.resourceLimits` directive, which it only sets inside its own
+  #   `test`/`test_gpu` profiles -- so on the `docker` profile,
+  #   `--max_memory`/`--max_cpus` are silently inert and its process labels
+  #   run with fixed, uncapped memory (e.g. `process_low` = 12.GB flat).
+  #   Fix: pass `config/nextflow_resource_limits.config` via `-c` for any
+  #   pipeline invocation going forward -- don't rely on
+  #   `--max_memory`/`--max_cpus` alone, since more nf-core pipelines will
+  #   migrate off `check_max()` the same way. See TODO.md's Milestone 5 note
+  #   for the exact failure this caused (FQ_LINT OOM-capped at 12GB).
   max_memory_for_nf_core_runs: "6.GB"
 
 execution:

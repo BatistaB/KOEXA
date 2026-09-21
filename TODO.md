@@ -351,9 +351,38 @@ is a deliberate next round, not excluded):
       `--max_memory 6.GB --max_cpus 4` (the exact mechanism `check_max()`
       exists for; per spec section 30 "modest PC" guidance, cap requests
       rather than grow WSL2's memory ceiling and starve the host).
-- [ ] Downloading `DRR786485` (BioProject PRJDB37768) via
-      `nf-core/fetchngs` with the native-filesystem fix applied -- in
-      progress.
+- [x] Downloaded `DRR786485` (BioProject PRJDB37768) via `nf-core/fetchngs`
+      1.12.0 after the C:-drive fix above -- both mates gzip-valid, exact
+      expected read count (20,970,212 reads x2), MD5-verified. Output at
+      `~/aoed-scratch/results/fetchngs/DRR786485/` (samplesheet + FASTQ).
+- [x] **Second infra finding (2026-09-20)**: `nf-core/rnaseq` 3.26.0's
+      `conf/base.config` has fully dropped `check_max()` (0 uses) in favour
+      of Nextflow's native `process.resourceLimits` directive -- but only
+      sets that directive inside its own `test`/`test_gpu` profiles, not
+      the general `docker` profile. So `--max_memory`/`--max_cpus` are
+      silently inert on this pipeline version (its process labels, e.g.
+      `process_low` = fixed 12.GB, have no params.max_memory gate left at
+      all) even though the exact same flags still work on `nf-core/fetchngs`
+      1.12.0 (which still calls `check_max()`). Symptom: `FQ_LINT`
+      (`process_low`, fixed 12GB) failed immediately with "Process
+      requirement exceeds available memory -- req: 12 GB; avail: 8.7 GB".
+      Fix: added `config/nextflow_resource_limits.config` (sets
+      `process.resourceLimits` to cpus:4/memory:6.GB/time:240.h) and pass it
+      with `-c` on any modern nf-core pipeline invocation on this machine,
+      alongside `-profile docker` -- don't rely on `--max_memory`/
+      `--max_cpus` alone going forward, since more pipelines will migrate
+      off `check_max()` the same way.
+- [x] Quantified `DRR786485` via `nf-core/rnaseq` 3.26.0 with
+      `--skip_alignment --pseudo_aligner salmon` (pure Salmon
+      pseudo-alignment, no BAM, per spec section 9) against the frozen
+      RIB40_v1 reference (`config/reference.yaml`) -- decoy-aware index
+      (genome fasta as decoy + FungiDB's own curated transcript FASTA, not
+      a GffRead-extracted one, to stay consistent with the AO09 gene ID
+      system). Output at `~/aoed-scratch/results/rnaseq/DRR786485/`:
+      transcript- and gene-level TPM/counts (`salmon.merged.*.tsv`),
+      SummarizedExperiment `.rds` files, and a MultiQC report. This closes
+      Milestone 5's core technical path (download -> QC -> quantification)
+      for one sample end-to-end.
 - [ ] Not yet done: `atlas process next`/`atlas fetch approved` (wiring
       the CLI to actually invoke fetchngs/rnaseq with all the fixes above
       baked in, rather than a hand-typed command per sample) and the
