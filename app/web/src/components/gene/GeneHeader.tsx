@@ -1,5 +1,5 @@
 import type { Gene } from "../../data/types";
-import { isSymbolicLabel, primaryGeneLabel } from "../../lib/geneDisplay";
+import { formatBp, geneLengthBp, isSymbolicLabel, primaryGeneLabel } from "../../lib/geneDisplay";
 import "./GeneHeader.css";
 
 export function GeneHeader({ gene }: { gene: Gene }) {
@@ -24,6 +24,7 @@ export function GeneHeader({ gene }: { gene: Gene }) {
         </span>
         <span className="gene-header__meta-sep">·</span>
         <span className="gene-header__tag">{gene.biotype}</span>
+        <span className="gene-header__tag">{formatBp(geneLengthBp(gene))}</span>
         {gene.uniprot_accession && (
           <>
             <span className="gene-header__meta-sep">·</span>

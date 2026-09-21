@@ -2,6 +2,7 @@ import type { Condition, Dataset, Gene, Sample, SampleQcMetrics } from "../../da
 import { StatusBadge } from "../common/StatusBadge";
 import { DatasetLink } from "../common/DatasetLink";
 import { formatCounts, formatPercent, formatReadCount, formatTpm } from "../../lib/format";
+import { formatBp, geneLengthBp } from "../../lib/geneDisplay";
 import "./RightPanel.css";
 
 export interface GeneSummary {
@@ -281,6 +282,10 @@ export function RightPanel({
           <span className="right-panel__row-value mono">
             {gene.chromosome.replace("_A_oryzae_RIB40", "")}:{gene.start.toLocaleString("en-US")}-{gene.end.toLocaleString("en-US")} ({gene.strand})
           </span>
+        </div>
+        <div className="right-panel__row">
+          <span className="right-panel__row-label">Length</span>
+          <span className="right-panel__row-value mono">{formatBp(geneLengthBp(gene))}</span>
         </div>
         <div className="right-panel__row">
           <span className="right-panel__row-label">Biotype</span>

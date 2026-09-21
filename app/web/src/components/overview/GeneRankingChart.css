@@ -79,6 +79,12 @@
   font-size: 10.5px;
 }
 
+.ranking-chart__rank-label {
+  fill: var(--text-muted);
+  font-size: 10.5px;
+  font-variant-numeric: tabular-nums;
+}
+
 .ranking-chart__axis-label {
   fill: var(--text-muted);
   font-size: 11px;

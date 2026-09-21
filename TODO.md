@@ -848,6 +848,45 @@ loading the real full genome to stress-test UX/UI at scale.
     app slowdown. Recording this so it isn't mistaken for a regression
     and re-investigated later -- always re-measure with the tab focused.
 
+**Round 5 (2026-09-21, same day):** per user feedback -- gene length, and
+a user-adjustable "how many genes" control for the ranking chart.
+- Gene length now shown wherever gene identity appears: a `Length` row in
+  the right panel's Identity section, and a `X,XXX bp` tag next to
+  `protein_coding` in the gene detail header
+  (`src/lib/geneDisplay.ts`'s `geneLengthBp`/`formatBp`, `end - start + 1`,
+  genomic coordinates are 1-based inclusive).
+- The ranking chart's gene count is now a user control (a "zoom" slider,
+  `src/components/overview/GeneRankingOverview.tsx`) with log-ish preset
+  steps -- 10 / 25 / 40 (previous fixed default) / 100 / 250 / 500 / 1000
+  / 2500 / 5000 / All (12,099) -- rather than a fixed top-40 cap.
+  Confirmed the user's own instinct that this needs two different
+  renderers, not one chart straining to cover both ends:
+  - **<=60 genes ("labeled")**: unchanged from before -- per-sample
+    stacked segments, rotated truncated gene labels, individual
+    hover/click/keyboard-nav per bar.
+  - **>60 genes ("dense")**: per-gene labels and per-sample segments both
+    stop being legible or cheap to render, so this switches to one
+    aggregated (per-study, not per-sample) `<path>` **per dataset color**
+    covering every bar -- 3 DOM path elements regardless of whether it's
+    100 genes or all 12,099 (confirmed: still ~190ms to switch to "All"
+    and re-render, 3 `<path>`s in the DOM either way). No per-gene x-axis
+    labels at this density (replaced with numeric rank ticks -- #1,
+    #3,026, ... -- since "Rank" is what the x-axis actually encodes once
+    individual identity can't be labeled); hover/click use a single
+    crosshair overlay that resolves the nearest gene by x-position
+    (dataviz skill's line/area hover pattern) instead of one hit-target
+    per gene, with arrow-key support for keyboard users. At full density
+    the stacked bars visually merge into a continuous silhouette -- this
+    is a legitimate rank-abundance/Whittaker-plot form (common in
+    ecology/genomics for exactly "value vs. rank" data), not a rendering
+    failure, and it's still genuinely informative: the dataset color
+    composition visibly shifts across the expression-rank spectrum.
+  - Deliberately kept the dataset legend visible at every zoom level
+    (the user's own message anticipated it might need to disappear at
+    "All") -- since dense mode still colors by (aggregated) dataset, the
+    legend stays meaningful throughout rather than becoming dead chrome;
+    called this out rather than silently overriding the suggestion.
+
 ## Milestones 6-12
 
 - [ ] Not started (see PROJECT_MASTER_SPEC.md section 37 for full list).
