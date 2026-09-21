@@ -19,20 +19,14 @@ cleanup:
 
 paths:
   scratch_dir: "scratch"
-  # NOT scratch/nextflow-work (a path under the Windows-mounted D: drive,
-  # reached from WSL2 via the 9p/DrvFs bridge). Root cause found 2026-09-20:
-  # downloads were failing gzip integrity (CRC/length errors, "Bus error",
-  # "Read-only file system") not because of the 9p bridge, but because the
-  # Windows C: drive had filled to 0 bytes free -- the WSL2 Ubuntu distro's
-  # ext4.vhdx lived on C: by default, so even "native" WSL2 paths were
-  # physically backed by a file on C:. Fixed by exporting/re-importing the
-  # Ubuntu distro to D:\WSL\Ubuntu (wsl --export / --unregister / --import),
-  # so the whole native Linux filesystem, including ~/aoed-scratch/, now
-  # physically lives on D:. Still keep -work-dir (and --outdir, for
-  # fetchngs) pointed at a native Linux path such as ~/aoed-scratch/, never
-  # at /mnt/d/... -- the 9p/DrvFs bridge is slow and untested for large
-  # sequential binary writes even though it wasn't the actual corruption
-  # cause here.
-  nextflow_work_dir: "~/aoed-scratch/nextflow-work"  # WSL2-native path, not under the repo
+  # Historical (2026-09-20, Milestone 5's first sample only): local Nextflow
+  # runs had to use a WSL2-native path here, never /mnt/d/..., because of a
+  # 9p/DrvFs-bridge-adjacent corruption bug that turned out to actually be
+  # the Windows C: drive filling to 0 bytes free (WSL2's ext4.vhdx lived on
+  # C: by default). As of 2026-09-21 (docs/decisions/0004) acquisition and
+  # quantification no longer run locally at all -- see
+  # workflows/colab_pantranscriptome.ipynb -- so this path is unused unless
+  # local Nextflow execution is deliberately revisited.
+  nextflow_work_dir: "~/aoed-scratch/nextflow-work"  # historical, not currently used
   results_dir: "results"
   database_path: "database/atlas.duckdb"

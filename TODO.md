@@ -313,6 +313,20 @@ is a deliberate next round, not excluded):
 
 ## Milestone 5 — One sample end-to-end (IN PROGRESS)
 
+- [x] **Undocumented decision, backfilled 2026-09-21**: `nf-core/fetchngs` is
+      always invoked here with `--download_method ftp`, not its default
+      `sratools` (prefetch + fasterq-dump). A `sratools` attempt for
+      DRR786485 was made at some point before this file's own visible
+      history (orphaned partial output survives at
+      `results/fetchngs_sratools_test/DRR786485/`, no metadata/fastq -- it
+      didn't get far), and the switch to `ftp` was never written down; by
+      the time this was noticed the original run's `.nextflow.log` had
+      already rotated away, so the exact failure reason is lost. Going
+      forward: keep using `--download_method ftp` (downloads the
+      already-converted FASTQ straight from ENA's FTP mirror via `wget`,
+      one fewer moving part than sratools' download-then-convert-locally
+      flow) unless a specific run needs `sratools` for a reason worth
+      writing down here when it comes up.
 - [x] **Critical infra finding (2026-09-20), applies to every future download,
       not just this one:** running `nf-core/fetchngs` with its Nextflow
       work dir and `--outdir` under `/mnt/d/PanTranscriptome/...` (the
@@ -383,11 +397,34 @@ is a deliberate next round, not excluded):
       SummarizedExperiment `.rds` files, and a MultiQC report. This closes
       Milestone 5's core technical path (download -> QC -> quantification)
       for one sample end-to-end.
-- [ ] Not yet done: `atlas process next`/`atlas fetch approved` (wiring
-      the CLI to actually invoke fetchngs/rnaseq with all the fixes above
-      baked in, rather than a hand-typed command per sample) and the
-      QC-based inclusion gate for accepting a sample's quantification into
-      the atlas -- see the AFED QC note below.
+- [x] **Architecture pivot (2026-09-21), see `docs/decisions/0004-colab-based-acquisition.md`**:
+      attempted a second batch (PRJDB4747: DRR059464/65/66) via a new
+      `workflows/process_samples.sh` batch driver (resumable, per-pipeline
+      Nextflow session-id tracking to fix a `-resume` cache-mismatch bug,
+      Aspera-with-ftp-fallback download). All of that plumbing is now
+      **removed** (`workflows/process_samples.sh`,
+      `workflows/mark_sample_status.py`, `config/nextflow_resource_limits.config`
+      deleted) because it solved the wrong problem: this machine's home
+      internet downloads from ENA's FTP mirror at ~2MB/min regardless of
+      Nextflow/Docker/WSL2 config (confirmed via a raw `wget` of the same
+      URL), while the identical download from a Google Colab notebook took
+      16-170s per file. Acquisition + QC + quantification now run in
+      `workflows/colab_pantranscriptome.ipynb` (direct `wget`/`fastqc`/
+      `fastp`/`salmon quant` calls, no Nextflow/Docker -- Colab has no
+      Docker support), with only finished per-sample results (never raw
+      FASTQ) synced back via Google Drive at
+      `MyDrive/PanTranscriptome/results/<accession>/`. Salmon stays the
+      quantifier (spec section 9), same decoy-aware RIB40_v1 index recipe.
+      `atlas sample approve` is still how a sample gets greenlit; the
+      approved accession is then added to the notebook's `ACCESSIONS` list
+      by hand.
+- [ ] Not yet done: ingesting a Colab-produced `results/<accession>/`
+      folder (quant.sf + gene_quant.tsv + FastQC/fastp reports) back into
+      `database/atlas.duckdb` (`pipeline_status`/`qc_status`/`quant_status`,
+      `sample_qc`, `gene_expression` tables) -- nothing currently does this;
+      it's the next real gap now that acquisition itself is unblocked. Also
+      not yet done: the QC-based inclusion gate for accepting a sample's
+      quantification into the atlas -- see the AFED QC note below.
 
 ## AFED's QC/inclusion criteria (for our own qc.yaml, not yet implemented)
 

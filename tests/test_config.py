@@ -28,11 +28,14 @@ def test_is_reference_frozen_true_after_milestone_3_sign_off():
     assert config.is_reference_frozen() is True
 
 
-def test_load_pipeline_config_pins_versions():
+def test_load_pipeline_config_pins_quantification_route():
+    # Acquisition/QC/quantification moved to workflows/colab_pantranscriptome.ipynb
+    # as of docs/decisions/0004-colab-based-acquisition.md; this config no longer
+    # pins a local Nextflow/nf-core execution stack, only the quantification tool.
     pipeline = config.load_pipeline_config()
-    assert pipeline["nf_core_fetchngs"]["revision"]
-    assert pipeline["nf_core_rnaseq"]["revision"]
-    assert pipeline["nextflow"]["min_version"]
+    assert pipeline["quantification"]["primary_route"] == "salmon"
+    assert pipeline["nf_core_fetchngs_historical"]["revision"]
+    assert pipeline["nf_core_rnaseq_historical"]["revision"]
 
 
 def test_load_storage_config_has_safety_margins():

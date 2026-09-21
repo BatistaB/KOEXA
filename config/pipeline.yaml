@@ -1,80 +1,47 @@
 # Pinned execution strategy for AOED.
 #
-# Per PROJECT_MASTER_SPEC.md section 0/9/29: reuse established, pinned
-# community pipelines instead of a bespoke downloader/aligner. Versions below
-# were the latest published stable releases as of 2026-09-20 and must be
-# bumped deliberately (new pipeline_version, section 36) rather than silently
+# Per PROJECT_MASTER_SPEC.md section 0/9/29: reuse established, pinned tools
+# instead of ad hoc scripting where practical. Versions below must be bumped
+# deliberately (new pipeline_version, section 36) rather than silently
 # floating to "latest" on every run.
 
-pipeline_version: "0.1.0"
+pipeline_version: "0.2.0"
 
-nextflow:
-  min_version: "26.04.4"          # latest stable Nextflow release verified 2026-09-20
-  # Nextflow 26.x made the new "strict" config parser the default, which
-  # rejects the `def check_max(obj, type) { ... }` Groovy closure pattern
-  # nearly every nf-core pipeline's base.config still uses (confirmed
-  # 2026-09-20 against nf-core/fetchngs 1.12.0: "Unexpected input: '('" /
-  # ConfigParseException). Until nf-core pipelines migrate to the new
-  # config DSL, invoke nf-core pipelines with this older, compatible
-  # Nextflow release pinned via the NXF_VER env var (Nextflow's launcher
-  # downloads it on demand; no separate install needed):
-  pinned_nf_core_run_version: "25.10.0"
-  resume_enabled: true
-
-nf_core_fetchngs:
+# Acquisition + QC + quantification moved off this machine entirely as of
+# 2026-09-21 -- see docs/decisions/0004-colab-based-acquisition.md. This
+# machine's home internet is too slow against ENA's FTP mirror (~2MB/min,
+# confirmed not a Nextflow/Docker/WSL2 issue) to make local downloads
+# practical; Google Colab's network is dramatically faster for the same
+# transfer. The actual pipeline definition now lives in
+# workflows/colab_pantranscriptome.ipynb, run manually in a Colab notebook,
+# with only the finished per-sample results (FastQC, quant.sf, gene-level
+# TSV -- never raw FASTQ) synced back via Google Drive for ingestion here.
+#
+# nf-core/fetchngs and nf-core/rnaseq (via Nextflow + Docker Desktop + WSL2,
+# see docs/decisions/0003-execution-strategy.md) are no longer in the
+# critical path for new samples. The Colab notebook calls the same
+# underlying tools directly instead (wget against ENA, fastqc, fastp,
+# salmon quant against the same decoy-aware RIB40_v1 index) rather than
+# reimplementing Nextflow/conda inside Colab's ephemeral runtime. This
+# section is kept for historical reference and in case local Nextflow
+# execution needs revisiting.
+nf_core_fetchngs_historical:
   revision: "1.12.0"              # "Titanium Platypus", released 2024-02-29
   repository: "https://github.com/nf-core/fetchngs"
-  purpose: "accession resolution, FASTQ acquisition, checksum validation"
+  used_for: "DRR786485 only (Milestone 5, 2026-09-20), before the Colab pivot"
 
-nf_core_rnaseq:
+nf_core_rnaseq_historical:
   revision: "3.26.0"              # "Chromium Cuttlefish", released 2024-05-07
   repository: "https://github.com/nf-core/rnaseq"
-  purpose: "technical QC, library validation, Salmon quantification"
-  aligner: "salmon"                # avoid retaining BAM by default; see spec section 9
-
-  # WSL2's default memory ceiling is min(50% of host RAM, ...) with no
-  # .wslconfig override; this machine has ~19GB host RAM but only ~8.7GB
-  # inside WSL2 (confirmed 2026-09-20 via `free -h`). nf-core/fetchngs's
-  # default SRA_FASTQ_FTP resource label requested 12GB and failed
-  # ("Process requirement exceeds available memory"). Per spec section 30
-  # ("Performance guidelines for a modest PC"), cap requests to what is
-  # actually available rather than raising WSL2's memory ceiling and
-  # starving the host.
-  #
-  # Two different mechanisms are needed depending on the pipeline's age:
-  # - nf-core/fetchngs 1.12.0 still uses the classic `check_max()` Groovy
-  #   closure in its base.config, so `--max_memory`/`--max_cpus` work as-is.
-  # - nf-core/rnaseq 3.26.0 has dropped `check_max()` entirely (confirmed
-  #   2026-09-20: 0 uses in its base.config) in favour of Nextflow's native
-  #   `process.resourceLimits` directive, which it only sets inside its own
-  #   `test`/`test_gpu` profiles -- so on the `docker` profile,
-  #   `--max_memory`/`--max_cpus` are silently inert and its process labels
-  #   run with fixed, uncapped memory (e.g. `process_low` = 12.GB flat).
-  #   Fix: pass `config/nextflow_resource_limits.config` via `-c` for any
-  #   pipeline invocation going forward -- don't rely on
-  #   `--max_memory`/`--max_cpus` alone, since more nf-core pipelines will
-  #   migrate off `check_max()` the same way. See TODO.md's Milestone 5 note
-  #   for the exact failure this caused (FQ_LINT OOM-capped at 12GB).
-  max_memory_for_nf_core_runs: "6.GB"
-
-execution:
-  # Decided 2026-09-20 (see docs/decisions/0003-execution-strategy.md): the
-  # user's Windows workstation already has a working Docker Desktop install.
-  # Nextflow itself still requires a POSIX/WSL environment (there is no
-  # native Windows execution path), so Nextflow runs inside a WSL2 Ubuntu
-  # distro, which calls out to the existing Docker Desktop engine (WSL2
-  # backend) for every process's Linux container. This avoids introducing a
-  # new virtualization stack beyond what Docker Desktop already set up.
-  profile: "docker"
-  container_engine: "docker_desktop_wsl2"
-  runs_inside: "wsl2_ubuntu"        # where the `nextflow`/`atlas` commands themselves execute
-  max_parallel_samples: 1
+  used_for: "DRR786485 only (Milestone 5, 2026-09-20), before the Colab pivot"
 
 quantification:
-  primary_route: "salmon"
+  primary_route: "salmon"          # unchanged by the Colab pivot -- see spec section 9
   secondary_route_star: false      # only enabled explicitly for JBrowse/coverage needs (section 9)
 
 notes: >
-  Do not silently upgrade nf-core revisions. A resumed execution must use the
-  same pinned inputs, parameters, code revision, and reference (spec section 9),
-  or explicitly start a new versioned pipeline_version.
+  Do not silently change the quantification tool (currently Salmon,
+  decoy-aware index) or reference without a deliberate, documented decision
+  (a new ADR under docs/decisions/ and a bumped pipeline_version) -- mixing
+  quantifiers across samples in the same atlas is a real methodological
+  problem, not just a config detail.

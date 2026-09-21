@@ -35,6 +35,11 @@
 /results/qc/*
 /results/logs/*
 /results/fetchngs/*
+# Colab-produced per-accession outputs (docs/decisions/0004): same
+# regenerable-results policy, just a different directory shape than the
+# quant/qc/logs split above.
+/results/[A-Z]RR*/
+/results/colab-drive/*
 !/results/**/.gitkeep
 
 # Nextflow's own runtime artifacts when run in-place from the repo root
