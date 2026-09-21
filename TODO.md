@@ -418,13 +418,32 @@ is a deliberate next round, not excluded):
       `atlas sample approve` is still how a sample gets greenlit; the
       approved accession is then added to the notebook's `ACCESSIONS` list
       by hand.
-- [ ] Not yet done: ingesting a Colab-produced `results/<accession>/`
-      folder (quant.sf + gene_quant.tsv + FastQC/fastp reports) back into
-      `database/atlas.duckdb` (`pipeline_status`/`qc_status`/`quant_status`,
-      `sample_qc`, `gene_expression` tables) -- nothing currently does this;
-      it's the next real gap now that acquisition itself is unblocked. Also
-      not yet done: the QC-based inclusion gate for accepting a sample's
-      quantification into the atlas -- see the AFED QC note below.
+- [x] Implemented `atlas process ingest <SRR>` / `atlas process ingest --all`
+      (`database/ingest_results.py`): reads a Colab-produced
+      `results/<accession>/` folder (`gene_quant.tsv`, `fastp.json`, `DONE`
+      marker) and loads it into `gene_expression`/`sample_qc`, moving
+      `pipeline_status` to `QUANTIFIED` and `reference_version`/
+      `pipeline_version` to the current frozen values. Re-running for the
+      same sample replaces its `gene_expression`/`sample_qc` rows rather
+      than duplicating them (same "truncate and reload" policy as
+      `load-genes`), so a corrected Colab re-run is safe to re-ingest.
+      `sample_qc` also records `salmon_total_gene_assigned_counts` --
+      AFED's own inclusion-gate numerator, see the QC note below -- even
+      though the gate itself isn't enforced yet. `qc_status`/`quant_status`
+      are left untouched (still genuinely unused everywhere in the
+      codebase, per Milestone 4's own note); only `pipeline_status` drives
+      `atlas status`. 9 new tests (100 total, all passing). Real run:
+      ingested the 11 already-Colab-processed samples (DRR059464/65/66 +
+      the 8 PRJNA121091 runs), correcting their `pipeline_status` from
+      stale `APPROVED`/`RETRY` values to `QUANTIFIED`.
+      `workflows/ingest_colab_drop.sh` (moves a Drive zip's accession
+      folders into `results/<accession>/`) remains a separate, earlier step
+      -- this command only reads what's already there.
+- [ ] Not yet done: the QC-based inclusion gate for accepting a sample's
+      quantification into the atlas -- see the AFED QC note below. Also not
+      yet done: `DRR786485` (Milestone 5's original local-Nextflow sample,
+      still `RETRY`) never got a Colab-shaped `results/DRR786485/` folder,
+      so `process ingest` can't pick it up as-is; low priority, one sample.
 
 ## AFED's QC/inclusion criteria (for our own qc.yaml, not yet implemented)
 
@@ -458,6 +477,378 @@ these thresholds are directly adoptable into `config/qc.yaml` once
 Milestone 5 produces a real QC report to calibrate against -- not
 implemented yet.
 
+## Feature idea: chromosome-wide TPM abundance map (not yet scheduled)
+
+User's idea (2026-09-21), for the eventual site/app: a window showing all
+8 nuclear chromosomes of RIB40, colored by transcript abundance (TPM) per
+genomic region, to visually spot high- and low-expression regions. Not an
+AFED feature (docs/decisions/0002-afed-audit.md's audited interface has no
+genome/ideogram view) -- an AOED-original addition. Closer in spirit to
+the JBrowse ambition already flagged for Milestone 8 (PROJECT_MASTER_SPEC.md
+section 37/40), but meaningfully lighter: it only needs gene-level Salmon
+TPM + gene coordinates already in the database, not STAR alignment/BAM/
+bigWig coverage tracks -- doesn't need to wait on
+`quantification.secondary_route_star` at all. Best scheduled as a
+Milestone 7-adjacent stretch feature once the basic interface exists to
+host it.
+
+**Data already available, no new pipeline work needed:**
+- `genes.chromosome/start/end/strand` already has real coordinates for
+  RIB40's 8 nuclear chromosomes. Checked 2026-09-21: `Chr1_A_oryzae_RIB40`
+  through `Chr8_A_oryzae_RIB40`, 908-2048 genes each (gene density varies
+  ~2.3x across chromosomes), plus 3 unplaced contigs and the mitochondrial
+  genome with only 1-16 genes each -- too sparse to render meaningfully in
+  an 8-chromosome karyotype; show those separately or omit rather than
+  distorting the main view.
+- `gene_expression.TPM` (long format, sample_id x canonical_gene_id) is
+  already populated by `atlas process ingest` for every ingested sample.
+
+**One real data gap:** chromosome *lengths* aren't in the database yet --
+`genes` only gives the last annotated gene's end position per chromosome,
+which understates true length (telomeric regions have no genes). The
+actual lengths are sitting unread in
+`database/FungiDB_v71/FungiDB-71_AoryzaeRIB40_Genome.fasta`'s sequence
+headers; extracting them once (a small table or reference file, same spirit
+as the existing Milestone 1/3 reference-loading tooling) is the only new
+data-prep step this feature needs.
+
+**Design decisions to make before implementing (deliberately left open,
+not decided here):**
+
+1. **Aggregation unit -- per-gene vs. fixed-size genomic windows.**
+   Per-gene (color each gene's own footprint by its own TPM) is simplest
+   and adds no invented parameter, but looks uneven/gappy given how much
+   gene density varies by chromosome. Fixed windows (e.g. 10-50kb bins,
+   the standard genome-browser-track convention) aggregate all genes
+   overlapping each bin and read more like "regions", matching what the
+   user described ("quantidade de transcrito por região"), at the cost of
+   a tunable bin-size parameter. Leaning toward fixed windows, with the
+   bin size configurable rather than hard-coded to one value -- same
+   multi-threshold philosophy `config/qc.yaml` already uses for TPM
+   detection thresholds, instead of silently picking one arbitrary size.
+2. **Which TPM value drives the color.** TPM is inherently per-sample, so
+   a single genome-wide map has to pick one of: a single selected sample;
+   a condition-level mean (this is exactly why the Milestone 6 `conditions`
+   curation, discussed the same day, matters beyond that milestone); or a
+   whole-atlas mean/median as a default "landscape" overview. Likely a
+   selector in the UI with whole-atlas mean as the default view -- a UI
+   decision, doesn't block building the underlying binned-TPM computation
+   now.
+3. **Color scale.** TPM is long-tailed (0 to the thousands); a linear
+   scale would make almost every region look identical. Use a log scale
+   (log10(TPM+1)) against a perceptually uniform colormap (e.g. viridis),
+   and give TPM~0 regions a visually distinct "not detected" treatment
+   instead of just the bottom of the gradient.
+4. **Layout.** A true karyotype layout (8 bars, each drawn proportional to
+   its real chromosome length) is more honest than 8 equal-width panels,
+   since chromosome extents differ by >2x (Chr1's genes span to ~6.5Mb,
+   Chr7's only to ~2.9Mb; real lengths from the FASTA will run a bit
+   longer). Needs the chromosome-length data gap above closed first.
+5. **Interaction.** Hovering/clicking a region should surface the actual
+   genes there, linking into the per-gene search Milestone 7 already
+   plans -- a color-only view with no drill-down loses the "which gene is
+   that" payoff that's the actual point of the feature.
+
+## Feature idea: GDV-style genome browser (not yet scheduled)
+
+User's idea (2026-09-21): a real genome browser in the site/app -- search
+by sequence/gene/location, browse tracks -- modeled on NCBI's Genome Data
+Viewer for our own reference assembly
+(https://www.ncbi.nlm.nih.gov/gdv/browser/genome/?id=GCF_000184455.2 --
+**GCF_000184455.2 is the exact assembly Milestone 3 already verified
+matches our RIB40 FASTA byte-for-byte on total length**, so GDV's view of
+"our" genome is a direct preview of the real thing), plus more than GDV
+itself offers. This is the same PROJECT_MASTER_SPEC.md section 37/40
+"JBrowse" ambition already flagged for Milestone 8 -- this entry is the
+concrete design pass for it, prompted by GDV as a reference point.
+
+**What I checked in GDV itself (2026-09-21) to ground this, not guesswork:**
+- Its ideogram sidebar lists `MT, 1, 2, 3, 4, 5, 6, 7, 8` plus "Unplaced/
+  unlocalized scaffolds: 3" -- exactly our own 8 chromosomes + 3 unplaced
+  contigs + 1 mitochondrial genome (Milestone 3), same numbers, confirming
+  again it's the same assembly.
+- Chr1 reports as `1-6,520,266` bp -- matches our `genes` table's Chr1 max
+  gene end (6,510,551) closely, real length is a little past the last
+  annotated gene as expected (see the chromosome-length gap in the TPM-map
+  idea above -- both features need the same missing chromosome-lengths
+  data).
+- Core UI: a "Location, gene or phenotype" search box; a clickable
+  ideogram chromosome selector; a scrollable/zoomable gene track ("Genes,
+  RefSeq propagation from INSDC submitter") with an exon-level view that
+  only activates once the visible region is narrow enough ("too many
+  genes in region" otherwise); a Tracks menu with **Configure Tracks**,
+  **Configure Track Hubs**, **NCBI Recommended Track Sets**, and **My NCBI
+  Track Collections** -- i.e. a real multi-track, user-extensible
+  architecture, not a fixed single view; a BLAST panel; a navigation
+  History panel.
+- Searching our own FungiDB canonical ID (`AO090001000001`) in GDV's
+  search box did **not** resolve to a location -- RefSeq's own annotation
+  of this assembly uses its own locus tags/gene symbols, not FungiDB's
+  AO09 identifiers. Concretely: **we cannot just proxy search to GDV/
+  RefSeq** -- our search has to run over our own `genes`/
+  `gene_external_identifiers` tables (the very cross-reference work
+  Milestone 1 already built) and only use RefSeq/GDV data for the
+  sequence/track rendering underneath.
+
+**Proposed technical backbone: JBrowse 2**, not a from-scratch canvas/D3
+browser -- consistent with the project's own stated preference (spec
+section 0/9/29) for reusing established, pinned tools over ad hoc
+scripting, and already the tool `config/pipeline.yaml`'s
+`secondary_route_star` flag was left in place for ("only enabled
+explicitly for JBrowse/coverage needs"). JBrowse 2 gives us for free what
+would otherwise be the hard part: a maintained, embeddable
+(`@jbrowse/react-linear-genome-view` or similar) pan/zoom track renderer,
+native GFF3/FASTA/BigWig/BAM support, and a real plugin system for custom
+track types -- which is exactly the hook the chromosome-TPM-abundance-map
+idea (above) needs. That idea shouldn't be built as a separate standalone
+viewer; it should be **one JBrowse track type** (a custom renderer reading
+binned TPM instead of coverage depth), so the two feature ideas from this
+same conversation converge into one browser instead of two.
+
+**Concrete data-prep steps this needs (all from files we already have,
+no new sequencing/pipeline work):**
+1. Index the existing genome FASTA (`database/FungiDB_v71/
+   FungiDB-71_AoryzaeRIB40_Genome.fasta`) for random access (`samtools
+   faidx` + a `.2bit` or bgzip+`.fai`, whichever JBrowse 2's reference
+   track wants).
+2. Sort + bgzip + tabix-index the existing GFF3 (`FUNGIDB_GFF_FILE`) into
+   a JBrowse-servable gene-model track -- this is the same annotation
+   Milestone 1/3 already parsed into `genes`/`gene_master.tsv`, so gene
+   names/IDs shown in the browser track and in the rest of the app stay
+   the same canonical IDs.
+3. Extract real chromosome lengths from the FASTA headers (same gap noted
+   in the TPM-map idea -- one extraction serves both features).
+4. Our own backend search endpoint over `genes` + `gene_external_identifiers`
+   (AO09 ID, gene symbol, alias, or `Chr:start-end` location), returning a
+   locus JBrowse can navigate to (`navToLocString`-equivalent) -- not GDV's
+   search, per the finding above.
+
+**Open questions, deliberately not decided here:**
+- **Multi-strain support.** Per the cross-strain scope decision above
+  ("Sample curation" section, 2026-09-20): AOED's sample scope already
+  spans strains beyond RIB40, but a genome browser needs an actual
+  reference sequence + annotation per strain shown -- GDV only ever shows
+  one fixed NCBI assembly. Whether/how to browse a non-RIB40 strain
+  (a different reference entirely, or read-mapping non-RIB40 samples
+  against the RIB40 track by homology) is unresolved and probably shouldn't
+  block a first RIB40-only version.
+- **BLAST-style sequence search.** GDV has one; meaningfully bigger lift
+  (a BLAST index + a query service) than the rest of this feature. Treat
+  as a stretch add-on, not part of a first version.
+- **How much exon/isoform detail to expose.** GDV gates exon-level
+  rendering behind a minimum zoom level for performance; our own gene
+  models (FungiDB v71 GFF) need the same check before assuming full detail
+  renders cheaply at whole-chromosome zoom.
+- **"More than GDV"**: the user explicitly wants to go beyond GDV's own
+  feature set but didn't specify what yet, beyond the TPM-track
+  convergence above -- revisit once there's a first working browser to
+  extend, rather than speculating further now.
+
+## Feature idea: gene expression classification, shown as a homepage pie chart (not yet scheduled)
+
+User's idea (2026-09-21): classify every gene from the global expression
+analysis into classes -- high expression, low expression,
+condition-specific expression, constitutive-low, and others -- and
+surface that classification as a pie chart on the site's home page. The
+user explicitly flagged that Tsallis entropy (discussed earlier as a
+project component) is the tool they had in mind for this, and was equally
+explicit that **nothing about the actual classification scheme is decided
+yet** -- this entry records the idea and where it plugs into the plan
+that already exists, not a new scheme invented here.
+
+**This isn't a new analytical idea -- it's already deeply specified.**
+`PROJECT_MASTER_SPEC.md` sections 16-21 (Milestones 9-11: gene statistics,
+Tsallis/Hill, clustering) already lay out exactly this, in real detail:
+
+- Section 16: per-gene Tsallis entropy `S_q` and Hill/effective-diversity
+  number `D_q` across samples or conditions, at multiple `q` values
+  (0.5/1/2/3/4 by default, arbitrary `q` must be supported) -- **and an
+  explicit warning that high entropy must never be auto-labeled
+  "housekeeping"**: a gene can be broadly distributed but very low
+  abundance, so classification must jointly weigh abundance, prevalence,
+  variability, diversity, *and* condition enrichment together, not
+  diversity alone.
+- Section 17: compute this at **both** sample level and condition level in
+  parallel (never only sample level) -- with 11 samples currently split
+  across 3 studies, a handful of heavily-sampled conditions could
+  otherwise dominate a gene's apparent "diversity" purely from sampling
+  imbalance, not biology.
+- Section 18: benchmark Tsallis/Hill against at least one classical
+  specificity metric (e.g. Tau) plus prevalence/robust-CV -- not trusted
+  alone.
+- Section 19: **classification must start from unsupervised clustering**
+  on a proper feature table (log1p(median TPM), prevalence, robust CV,
+  Tau, `D_0.5..D_4`, a dynamic-range measure), validated (silhouette,
+  BIC/stability-under-resampling, sensitivity to both the TPM detection
+  threshold and to `q`) -- explicitly **not** hand-picked thresholds as a
+  first approach.
+- Section 20: human-readable labels (`constitutive_high`,
+  `constitutive_medium`, `constitutive_low`, `variable`,
+  `condition_specific`, `inducible_high`, `rarely_expressed`,
+  `broad_low_expression`) are assigned only *after* clusters prove stable,
+  and are explicitly provisional. The computational `cluster_id` (e.g.
+  `GMM_04`) must always be stored alongside and never overwritten by the
+  label. A `housekeeping_candidate` flag is separate again, requiring
+  supporting functional evidence, not expression behavior alone.
+- Section 21: gene-to-condition summaries (`gene -> conditions with
+  highest/lowest expression`, `condition -> constitutive genes`,
+  `condition -> induced genes`) round this out.
+
+**What's genuinely new here vs. the existing spec:** the homepage pie
+chart itself -- a specific site/UX placement the spec doesn't dictate.
+Design implications worth noting now, before it's built:
+- A pie chart needs a small number of coarse, legible buckets -- the
+  section-20 label set (or a further-collapsed version of it) is the
+  right shape for this, not raw per-gene metrics.
+- It has to be **precomputed and cached**, not calculated live per page
+  view -- this is a whole-atlas, whole-gene-set clustering pass (12,090
+  genes x every ingested sample/condition), not a per-request query.
+  Fits naturally as a scheduled/triggered job that (re)writes a small
+  summary table (`gene_id -> cluster_id, biological_label`) for the
+  frontend to read, refreshed as new samples/conditions get ingested
+  rather than recomputed on every visit.
+- It lands on the same home view the Milestone 7 frontend spike below
+  already built (`app/web/` -- currently a "genes by total expression"
+  ranking as the default screen) -- this pie chart is a second homepage
+  chart alongside that one, not a replacement.
+
+**Why this shouldn't start yet:** clustering 12,090 genes across only 11
+ingested samples spanning 3 small studies would produce classes driven by
+sampling noise, not biology -- the spec's own sensitivity/stability checks
+(section 19) would likely fail outright at this sample size. Realistic
+trigger to revisit: once Milestone 6 (replicated-condition curation) and
+several more Colab batches land, giving enough samples/conditions for
+condition-level entropy (section 17) to mean something.
+
+## Milestone 7 spike: gene search + expression UI (2026-09-21, not a milestone completion)
+
+Started ahead of Milestone 7's formal gate (Milestones 1-6 aren't all
+validated yet), at the user's request, to do the UX/product design work
+for the AOED interface while it's fresh. Resolved ADR 0002's deferred
+"Shiny vs. Python-native" question: **React + TypeScript + Vite**, not
+AFED's Shiny code -- see `docs/decisions/0005-milestone7-frontend-stack.md`.
+`app/aoed_shiny/` (empty placeholder) removed; lives in `app/web/` now.
+
+Built: gene search (AO09/symbol/name/alias/UniProt), gene identity header,
+per-sample TPM plot (grouped by condition, colored by study, linear/log10
+toggle, QC-flagged samples marked by a dashed ring + icon+label badge, not
+color alone), sample metadata table (sortable, CSV export), and a context
+panel (gene-level summary stats, or per-sample metadata/QC on selection) --
+MVP target items 4 and 11 from `PROJECT_MASTER_SPEC.md` section 24.
+Not built yet: heatmap, PCA, the chromosome-TPM-map and genome-browser
+ideas above.
+
+Runs against `app/web/src/data/fixtures.ts` -- data shaped exactly like
+the real DuckDB tables but with invented accessions/hand-tuned TPM values,
+since the real atlas only has a handful of ingested samples so far. Needs
+a real API/DuckDB fetch layer before this is the actual Milestone 7
+deliverable, once Milestone 6 (multi-sample database) closes.
+
+Node.js (LTS, via winget) is now a project dependency for this frontend.
+
+**Round 2 (2026-09-21, same day):** per user feedback --
+- New home view: a "Genes por expressão total" ranking -- every gene,
+  summed TPM across samples, sorted descending, stacked bar per gene
+  (segments = individual samples, colored by study). This replaced the old
+  blank "search to begin" empty state as the app's default screen; clicking
+  a bar drills into that gene's detail view (same screen as before). Linear
+  scale only here deliberately -- a log scale on a *stacked* total would
+  misrepresent segment proportions, so the toggle was left off this chart
+  (kept on the per-gene chart, where each bar is an independent value).
+- The per-gene expression chart (previously a dot/strip plot) is now a bar
+  chart too, per request -- same grouping/color/interaction, QC-flagged
+  samples now marked with a small warning-triangle glyph above the bar
+  instead of a dashed ring (rings don't read on a bar mark).
+- Both charts default to **all strains and all conditions**; strain and
+  condition are now both optional top-bar filters that scope every chart,
+  not just strain as before -- nothing gates on them.
+- Added the LEBIMO lab logo (`app/web/src/assets/lebimo-logo.png`) to the
+  top bar; it's also now a "go home" button. Source PNG has an opaque white
+  background, so it'll show as a white box in dark mode -- fine for now,
+  worth swapping for a transparent version later.
+
+**Round 3 (2026-09-21, same day):** per user feedback --
+- Logo enlarged (28px -> 48px tall; top bar 52px -> 68px) -- it read as too
+  small to register as a real brand mark at the old size.
+- UI copy switched from Portuguese to English throughout (labels, chart
+  axis/legend text, tooltips, empty/loading states, aria-labels). Fixture
+  data (`condition_label` and related `Condition` fields, gene names/
+  descriptions) was already written in English, so no data changes needed --
+  this was a component-string-only pass.
+- New: every BioProject code shown anywhere in the app (chart legends,
+  the sample table's Study column, the right panel's sample-detail view)
+  is now a click target (`src/components/common/DatasetLink.tsx`) that
+  opens that study's full record in the right panel -- publication title,
+  DOI, organism/strain, design description, sample/condition counts, all
+  pulled straight from the existing `datasets` fixture table (no new data
+  needed). Deliberately did **not** turn the DOI into a live external link:
+  fixture DOIs are invented placeholders, and a fake DOI resolving to some
+  unrelated real paper would be actively misleading -- revisit once
+  Milestone 6 lands real publication metadata.
+
+**Round 4 (2026-09-21, same day):** per user feedback -- logo fix, and
+loading the real full genome to stress-test UX/UI at scale.
+- Logo fix, properly this time: the *real* bug in Round 3 wasn't size --
+  the source PNG had a huge transparent margin around the actual LEBIMO
+  mark (content bounding box only 1074x295 of the 1920x1080 canvas), so
+  `height: 48px` was scaling mostly empty space; the visible mark rendered
+  at ~13px regardless of the CSS height. Cropped the PNG to its alpha
+  bounding box (`app/web/src/assets/lebimo-logo.png`, +12px pad) so the
+  CSS height now controls the actual visible logo size.
+- Loaded the real 12,090-gene RIB40 catalog (`metadata/gene_master.tsv` +
+  `metadata/gene_external_identifiers.tsv`) into the app, merged with the
+  9 curated hero genes, to see how the UI holds up at real genome scale --
+  exactly what the user asked to test. New:
+  `app/web/scripts/export_gene_catalog.py` (stdlib csv/json, no pandas
+  dependency) joins the two TSVs per gene and writes
+  `app/web/public/data/genes.json` (~3MB, gitignored -- reproducible,
+  regenerate after pulling changes to those TSVs or on a fresh clone, see
+  `app/web/README.md`). Fetched at runtime (`src/data/realGenes.ts`), not
+  bundled, so the JS bundle stayed ~270KB. Genes outside the 9 curated
+  ones get deterministic synthetic filler TPM
+  (`src/lib/syntheticExpression.ts`, log-spread baseline + per-sample
+  noise + a detection-probability dropout so lowly-expressed genes aren't
+  "detected" in every sample) -- no biological story, purely for
+  rendering/interaction load, since real full-genome quantification
+  doesn't exist yet. `Gene` gained `uniprot_accession`/`fungidb_alt_id`/
+  `aliases` fields (folded the old separate `GeneExternalIdentifier[]`
+  array into the gene record itself -- simpler and smaller now that it's
+  12k+ rows instead of 9).
+- Real data exposed a real gap the 9-gene fixture had hidden: only ~5% of
+  genes have a curated short symbol (706 `gene_alias` rows out of 12,090);
+  the rest fall back to the UniProt protein-name field (97.6% coverage) or
+  the bare AO09 ID. Added `src/lib/geneDisplay.ts`
+  (`primaryGeneLabel`/`isSymbolicLabel`) so headers, search results, and
+  chart labels use that fallback chain and never italicize a non-symbol
+  label (italics is a nomenclature convention for real symbols, wrong for
+  an ID or a full protein-name sentence). ~21% of genes are literally
+  named "Uncharacterized protein" (real FungiDB/UniProt annotation state,
+  not a bug) -- expect repeated-looking labels on the ranking chart;
+  hover/click always disambiguates by ID.
+- UX problems the scale test actually surfaced, and what was done:
+  - Ranking chart: capped to the top 40 genes by total (of 12,099), with
+    a "Top 40 of N" label and a nudge to use search for anything else --
+    rendering or even just labeling all 12k as bars was never going to be
+    legible. Per-bar total-value text labels (fine at 9 genes) collided
+    into unreadable overlapping text at 40 -- removed them except on the
+    single highest bar, moved the total into the hover tooltip instead
+    (the dataviz skill's "label selectively" rule -- direct labels stop
+    working once flooded). Bottom-axis gene labels now rotate -50deg and
+    truncate to 16 chars (were horizontal and unbounded, fine for 9 short
+    symbols, illegible for 40 long UniProt names).
+  - Search stays fast at 12k genes (single-digit ms typical, ~120ms
+    measured worst case for a common substring like "kinase" including
+    React re-render) -- no debounce added, but worth revisiting if typing
+    ever feels laggy on a slower machine.
+  - Filter-driven ranking recompute is sub-millisecond even across all
+    12,099 genes (confirmed with the tab actually focused/visible --an
+    initial reading of 2+ real seconds, and later a 45s timeout, turned
+    out to be `requestAnimationFrame`-based test timing measured against
+    a backgrounded browser tab, which Chrome throttles/pauses; not a real
+    app slowdown. Recording this so it isn't mistaken for a regression
+    and re-investigated later -- always re-measure with the tab focused.
+
 ## Milestones 6-12
 
 - [ ] Not started (see PROJECT_MASTER_SPEC.md section 37 for full list).
+  Milestone 7's first slice has a head start -- see the spike above.

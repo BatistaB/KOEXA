@@ -1,0 +1,26 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.status-badge--good {
+  color: var(--status-good-text);
+  background: color-mix(in srgb, var(--status-good) 12%, transparent);
+}
+
+.status-badge--warning {
+  color: var(--status-warning-text);
+  background: color-mix(in srgb, var(--status-warning) 20%, transparent);
+}
+
+.status-badge--critical {
+  color: var(--status-critical-text);
+  background: color-mix(in srgb, var(--status-critical) 14%, transparent);
+}

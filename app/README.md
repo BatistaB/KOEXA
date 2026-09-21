@@ -1,6 +1,13 @@
 # app/
 
-Home of the AOED interactive application (Milestone 7), adapted from the
-MIT-licensed AFED Shiny interface. Empty until the acquisition, QC, and
-database layers (Milestones 1-6) are validated — see
-PROJECT_MASTER_SPEC.md section 24.
+Home of the AOED interactive application.
+
+`web/` — React + TypeScript + Vite frontend (Milestone 7). AFED's
+interface/UX patterns remain the design benchmark (see
+`docs/decisions/0002-afed-audit.md`), but the implementation is
+JS-native, not the MIT-licensed AFED Shiny code — see
+`docs/decisions/0005-milestone7-frontend-stack.md` for why, and
+`web/README.md` for how to run it. Started ahead of Milestone 7's formal
+gate as a UX spike against fixture data; Milestones 1-6 (acquisition, QC,
+database) still need to close before this reads from the real
+`database/atlas.duckdb`.

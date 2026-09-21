@@ -1,0 +1,25 @@
+.ranking-overview {
+  padding: var(--space-5) var(--space-6) var(--space-6);
+}
+
+.ranking-overview__title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.ranking-overview__subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+  max-width: 640px;
+  line-height: var(--line-normal);
+}
+
+.ranking-overview__empty {
+  padding: var(--space-7);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}

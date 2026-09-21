@@ -1,0 +1,78 @@
+.gene-header {
+  padding: var(--space-5) var(--space-6) var(--space-4);
+  border-bottom: 1px solid var(--border-hairline);
+  flex-shrink: 0;
+}
+
+.gene-header__top {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.gene-header__symbol {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.gene-header__symbol--plain {
+  font-style: normal;
+  font-size: var(--text-md);
+  max-width: 640px;
+  line-height: var(--line-tight);
+}
+
+.gene-header__name {
+  font-size: var(--text-md);
+  color: var(--text-secondary);
+}
+
+.gene-header__id {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.gene-header__meta {
+  margin-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.gene-header__meta-sep {
+  color: var(--border-default);
+}
+
+.gene-header__tag {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  border: 1px solid var(--border-hairline);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.gene-header__description {
+  margin-top: var(--space-3);
+  max-width: 760px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--line-normal);
+}
+
+.gene-header__aliases {
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.gene-header__aliases strong {
+  color: var(--text-secondary);
+  font-weight: 500;
+}

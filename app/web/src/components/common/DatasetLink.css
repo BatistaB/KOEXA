@@ -1,0 +1,19 @@
+.dataset-link {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 2px;
+  transition: text-decoration-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.dataset-link:hover {
+  color: var(--accent-strong);
+  text-decoration-color: currentColor;
+}

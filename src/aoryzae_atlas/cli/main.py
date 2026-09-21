@@ -22,10 +22,16 @@ import click
 import duckdb
 
 from .. import __version__
-from ..config import ConfigError, load_storage_config
+from ..config import ConfigError, load_pipeline_config, load_reference_config, load_storage_config
 from ..database.approve import SampleExcludedError, SampleNotFoundError, approve_sample
 from ..database.ingest_discovery import load_datasets, load_samples
 from ..database.ingest_genes import load_gene_external_identifiers, load_genes
+from ..database.ingest_results import (
+    ResultsIncompleteError,
+    ResultsNotFoundError,
+    find_ingestable_accessions,
+    ingest_sample_results,
+)
 from ..database.migrate import apply_migrations
 from ..database.queries import sample_status_counts
 from ..discovery import sra_search
@@ -63,6 +69,7 @@ from ..paths import (
     REFERENCE_VALIDATION_REPORT_FILE,
     REQUIRED_CONFIG_FILES,
     REQUIRED_DIRS,
+    RESULTS_DIR,
     SCRATCH_DIR,
     TRANSCRIPT_TO_GENE_FILE,
     UNIPROT_WORKBOOK_FILE,
@@ -642,6 +649,60 @@ def process_next() -> None:
 @click.option("--n", default=1, show_default=True, help="Batch size.")
 def process_batch(n: int) -> None:
     _not_implemented("Milestone 5 (One sample end-to-end)", f"atlas process batch --n {n}")
+
+
+@process.command("ingest")
+@click.argument("srr", required=False)
+@click.option("--all", "ingest_all", is_flag=True, help="Ingest every results/<accession>/ folder with a DONE marker.")
+def process_ingest(srr: str | None, ingest_all: bool) -> None:
+    """Ingest a Colab-produced results/<accession>/ folder into the database.
+
+    Reads gene_quant.tsv and fastp.json (docs/decisions/0004-colab-based-
+    acquisition.md), loads them into gene_expression/sample_qc, and moves
+    the sample's pipeline_status to QUANTIFIED. Safe to re-run: a sample's
+    prior gene_expression/sample_qc rows are replaced, not duplicated.
+    """
+    if bool(srr) == ingest_all:
+        raise click.ClickException("Pass exactly one of SRR or --all.")
+    if not DATABASE_FILE.is_file():
+        raise click.ClickException("No database found. Run 'atlas database migrate' first.")
+
+    try:
+        pipeline_version = str(load_pipeline_config().get("pipeline_version", ""))
+    except ConfigError:
+        pipeline_version = ""
+    try:
+        reference_version = str(load_reference_config().get("reference_version", ""))
+    except ConfigError:
+        reference_version = ""
+
+    accessions = find_ingestable_accessions(RESULTS_DIR) if ingest_all else [srr]
+    if ingest_all and not accessions:
+        click.echo(f"No results with a DONE marker found under {RESULTS_DIR}.")
+        return
+
+    conn = duckdb.connect(str(DATABASE_FILE))
+    try:
+        for accession in accessions:
+            try:
+                result = ingest_sample_results(
+                    conn, accession, RESULTS_DIR, pipeline_version=pipeline_version, reference_version=reference_version
+                )
+            except SampleNotFoundError:
+                click.echo(f"{accession}: SKIPPED -- not found in database (run 'atlas database load-discovery' first).")
+                continue
+            except ResultsNotFoundError:
+                click.echo(f"{accession}: SKIPPED -- no results/{accession}/ folder found.")
+                continue
+            except ResultsIncompleteError:
+                click.echo(f"{accession}: SKIPPED -- results/{accession}/ has no DONE marker or gene_quant.tsv (incomplete).")
+                continue
+            logger.info(
+                "Ingested %s (was %s): %d genes, %d qc metrics", accession, result.previous_status, result.n_genes, result.n_qc_metrics
+            )
+            click.echo(f"{accession}: ingested (was {result.previous_status}) -- {result.n_genes} genes, {result.n_qc_metrics} qc metrics.")
+    finally:
+        conn.close()
 
 
 @cli.command()
