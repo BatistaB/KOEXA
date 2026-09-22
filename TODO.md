@@ -887,7 +887,95 @@ a user-adjustable "how many genes" control for the ranking chart.
     legend stays meaningful throughout rather than becoming dead chrome;
     called this out rather than silently overriding the suggestion.
 
+**Round 6 (2026-09-22): the DB -> web "bridge" -- `atlas refresh`.** User
+had been growing the real database directly (new Colab-ingested samples,
+curated `metadata/conditions.tsv`/`samples.tsv`, and a notebook-driven
+gene-expression classification pass -- `notebooks/gene_expression_
+classification.ipynb` / `reports/gene_expression_classification.md`) with
+no path from any of that into the website, and asked for a single
+standardized command to run after every future data addition. This round
+turns four previously-stubbed CLI command groups into real, tested
+pipeline steps and adds a new one, chained by `atlas refresh`:
+
+    atlas database migrate/load-genes/load-discovery/load-conditions
+      -> atlas process ingest --all
+      -> atlas matrix build          (NEW: real, was a stub)
+      -> atlas stats genes           (NEW: real, was a stub)
+      -> atlas entropy genes         (NEW: real, was a stub)
+      -> atlas cluster genes         (NEW: real, was a stub)
+      -> atlas app export-web        (NEW command)
+
+- `src/aoryzae_atlas/clustering/classify.py` (new): a faithful, unit-tested
+  extraction of the notebook's Section 11/13/24 decisions (KMeans, k
+  selected by silhouette over k=2..10, the same cautious threshold-based
+  `biological_label` rule) into reusable code -- `atlas cluster genes` now
+  reproduces the notebook's exact pilot-run numbers (K_BASE=2,
+  constitutive_high/condition_specific/unlabeled counts matched exactly in
+  a same-day comparison run). Deliberately does NOT reproduce the
+  notebook's EXTENDED (Tsallis q-spectrum) model or its cluster-stability
+  diagnostics (subsampling/bootstrap/leave-one-study-out ARI, dendrograms,
+  pairplots) -- the notebook's own Part B conclusion was that the
+  q-spectrum adds no clustering value and *hurts* stability, so the
+  automated pipeline doesn't pay that cost on every run; stability
+  diagnostics stay a deliberate, occasional notebook exercise, not
+  something re-run on every sample addition. `atlas cluster genes` writes
+  its own short summary (`reports/gene_expression_behavior_summary.md`)
+  and leaves the notebook's deeper methodology writeup untouched.
+- `src/aoryzae_atlas/webexport/build.py` (new) + `atlas app export-web`:
+  reads DuckDB (only samples that are QUANTIFIED **and**
+  condition-curated -- `CURATED_QUANTIFIED_FILTER`, so a sample mid-review
+  never appears on the site) and the classification parquet, and writes
+  `app/web/public/data/{datasets,conditions,samples,sample_qc,expression,
+  classification}.json`, plus re-running `export_gene_catalog.py` for
+  `genes.json` -- one command regenerates every JSON the frontend fetches.
+  `qc_status` (pass/warning/fail) and `mapping_rate` are NOT pipeline-
+  reported fields yet (only raw fastp/Salmon metrics are in `sample_qc`),
+  so both are clearly-documented derived heuristics/proxies in
+  `webexport/build.py` -- revisit once real QC gating exists.
+- Frontend (`app/web/`): **dropped the fixture dataset entirely** --
+  `data/fixtures.ts` now holds only the `referenceVersion` constant (the
+  FungiDB annotation build, a different concept from a sample's own
+  `reference_version`/quant-index label -- see the file's docstring). The
+  9 hand-tuned "hero" genes from Rounds 1-5 were confirmed fictional
+  (AO09-*format*, not real RIB40 loci -- see the old fixtures.ts comment),
+  so keeping them mixed into a now-real-data app would have been actively
+  misleading. New `src/data/realAtlas.ts` (`loadRealAtlas()`) fetches the
+  six JSON files above at runtime, same pattern as `realGenes.ts`. `App.tsx`
+  now runs entirely on this real data: 12,090 real genes, and (at this
+  round's pilot scale) 41 real samples / 17 real conditions / 4 real
+  studies / ~495k real expression rows / ~12.1k classified genes -- verified
+  end-to-end in the browser (ranking chart, per-gene detail, sample table,
+  QC badges, dataset detail panel, dense-mode "All genes" zoom). Added a
+  lightweight "Expression behavior" block to the gene right panel
+  (category / Tau / confidence) so the new classification data is visible
+  now that it exists -- deliberately minimal, since the user said they'd
+  design the fuller homepage treatment themselves later.
+- `atlas refresh` skips (not fails) any step whose input isn't on disk yet
+  (e.g. no `reports/discovery/*.tsv` before a first `atlas discovery
+  report`), so it's always safe to run and always does as much as it
+  currently can. Every step re-reads current on-disk/DB state, so it's
+  safe to re-run repeatedly as more studies are added -- confirmed live
+  during this round: the database was being actively grown by the user's
+  own concurrent process while this was built (sample count changed
+  between two `atlas refresh` runs minutes apart, migrate briefly hit a
+  Windows file-lock from that concurrent writer), and a plain re-run
+  picked up the new state cleanly with no manual intervention.
+- Known follow-up, not done here: `expression.json` is ~19-20MB
+  uncompressed at 41 samples x 12,078 genes (long format, one row per
+  sample x gene) -- fine for local/dev use and consistent with
+  `genes.json`'s existing runtime-fetch pattern, but will need either
+  server-side gzip, a coarser aggregate-only payload for the ranking view,
+  or a real per-gene API before this scales to hundreds of samples.
+
 ## Milestones 6-12
 
 - [ ] Not started (see PROJECT_MASTER_SPEC.md section 37 for full list).
   Milestone 7's first slice has a head start -- see the spike above.
+  Milestones 9 (gene statistics), 10 (Tsallis/Hill), and 11 (clustering)
+  each have a real, tested, standardized CLI command now (`atlas stats
+  genes` / `atlas entropy genes` / `atlas cluster genes`, Round 6 above) --
+  still not marked complete: no formal validation against those
+  milestones' full acceptance criteria has been done, and Milestone 8
+  (broader study/condition coverage) hasn't run yet, which the notebook's
+  own report flags as a precondition for trusting the classification at
+  more than pilot scale.

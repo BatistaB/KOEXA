@@ -45,20 +45,32 @@ for zip in "${zips[@]}"; do
     fi
 
     moved=()
+    skipped=()
     failed=()
     for acc in "${accessions[@]}"; do
         src="$src_root/$acc"
         dest="$DEST_DIR/$acc"
+        # A re-uploaded results/ zip from Colab commonly repeats accessions
+        # already ingested here -- that's expected, not an error. Discard
+        # the duplicate copy from the zip and keep going; only a genuine
+        # move failure should block deleting the zip below.
         if [ -e "$dest" ]; then
-            echo "  AVISO: $dest ja existe -- pulando $acc (nao sobrescrevo automaticamente)."
-            failed+=("$acc")
+            echo "  ja existe em $dest -- descartando copia duplicada do zip."
+            rm -rf "$src"
+            skipped+=("$acc")
             continue
         fi
-        if mv "$src" "$dest" && [ -d "$dest" ]; then
+        mv "$src" "$dest" || true
+        # Check the actual filesystem end-state rather than trusting mv's
+        # exit code alone -- a prior run showed mv can print "Permission
+        # denied" for some file inside the tree yet still leave the caller
+        # thinking it succeeded, so verify dest is really there AND src is
+        # really gone before counting it as moved.
+        if [ -d "$dest" ] && [ ! -e "$src" ]; then
             echo "  movido: $acc"
             moved+=("$acc")
         else
-            echo "  ERRO ao mover $acc"
+            echo "  ERRO ao mover $acc (estado inesperado em origem/destino)"
             failed+=("$acc")
         fi
     done
@@ -67,9 +79,9 @@ for zip in "${zips[@]}"; do
 
     if [ ${#failed[@]} -eq 0 ]; then
         rm -f "$zip"
-        echo "  OK: ${#moved[@]} pastas movidas, zip removido."
+        echo "  OK: ${#moved[@]} pastas movidas, ${#skipped[@]} ja existiam (descartadas do zip), zip removido."
     else
         echo "  ATENCAO: ${#failed[@]} pasta(s) com problema (${failed[*]}) -- zip MANTIDO em $zip para nao perder nada."
-        echo "  ${#moved[@]} pasta(s) ja movida(s) com sucesso: ${moved[*]:-nenhuma}"
+        echo "  ${#moved[@]} pasta(s) movida(s), ${#skipped[@]} ja existiam: ${moved[*]:-nenhuma}"
     fi
 done

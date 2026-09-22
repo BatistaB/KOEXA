@@ -8,6 +8,8 @@ interface/UX patterns remain the design benchmark (see
 JS-native, not the MIT-licensed AFED Shiny code — see
 `docs/decisions/0005-milestone7-frontend-stack.md` for why, and
 `web/README.md` for how to run it. Started ahead of Milestone 7's formal
-gate as a UX spike against fixture data; Milestones 1-6 (acquisition, QC,
-database) still need to close before this reads from the real
-`database/atlas.duckdb`.
+gate as a UX spike; now reads real data exported from
+`database/atlas.duckdb` (`atlas app export-web`, part of the standardized
+`atlas refresh` pipeline — see the repo root CLI and `web/README.md`),
+though Milestones 1-6 (acquisition, QC, database) still aren't formally
+complete/validated.

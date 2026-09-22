@@ -31,6 +31,16 @@
 /database/*.duckdb
 /matrices/**/*.parquet
 /matrices/**/*.tsv.gz
+
+# Same policy for the classification/entropy pipeline outputs (`atlas
+# stats genes` / `atlas entropy genes` / `atlas cluster genes`, or the
+# gene_expression_classification notebook): tables regenerate
+# deterministically from the database, and the diagnostic plots regenerate
+# from a notebook re-run -- track the small text/tsv reports and the
+# notebook itself, not these binary/generated payloads.
+/analysis/**/*.parquet
+/analysis/**/*.tsv.gz
+/analysis/**/*.png
 /results/quant/*
 /results/qc/*
 /results/logs/*

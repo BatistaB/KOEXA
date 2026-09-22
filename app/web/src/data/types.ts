@@ -89,3 +89,33 @@ export interface SampleQcMetrics {
   genes_detected: number;
   salmon_total_gene_assigned_counts: number;
 }
+
+export type BiologicalLabel =
+  | "constitutive_high"
+  | "constitutive_medium"
+  | "condition_specific"
+  | "variable_broad"
+  | "rarely_expressed";
+
+export type ClassificationConfidence = "low" | "medium" | "high";
+
+/**
+ * Output of `atlas cluster genes` (src/aoryzae_atlas/clustering/classify.py):
+ * BASE-model expression-behavior classification, one row per gene. Not
+ * every gene has one -- genes with <2 detected conditions have an
+ * undefined Tau and are excluded from clustering, so biological_label/
+ * cluster_base are null for them (see classify.py's module docstring).
+ */
+export interface GeneClassification {
+  canonical_gene_id: string;
+  median_TPM: number;
+  n_detected_conditions: number;
+  n_conditions: number;
+  Tau_log1p: number | null;
+  Tau_raw: number | null;
+  prevalence_TPM_1: number | null;
+  robust_CV: number | null;
+  cluster_base: number | null;
+  biological_label: BiologicalLabel | null;
+  classification_confidence: ClassificationConfidence;
+}

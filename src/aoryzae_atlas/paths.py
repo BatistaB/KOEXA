@@ -62,8 +62,28 @@ GENE_ID_MAPPING_REPORT_FILE = REPORTS_DIR / "gene_id_mapping_summary.txt"
 GENE_EXTERNAL_IDENTIFIERS_FILE = METADATA_DIR / "gene_external_identifiers.tsv"
 GENE_MASTER_FILE = METADATA_DIR / "gene_master.tsv"
 
+CONDITIONS_FILE = METADATA_DIR / "conditions.tsv"
+SAMPLES_CURATION_FILE = METADATA_DIR / "samples.tsv"
+
 DISCOVERY_DIR = REPORTS_DIR / "discovery"
 DISCOVERY_RAW_API_RESPONSES_DIR = DISCOVERY_DIR / "raw_api_responses"
+
+# Milestone 9/10/11 matrix + classification artifacts (`atlas matrix build`,
+# `atlas stats genes`, `atlas entropy genes`, `atlas cluster genes`).
+GENE_BY_SAMPLE_TPM_FILE = MATRICES_DIR / "tpm" / "gene_by_sample_tpm.parquet"
+GENE_BY_CONDITION_TPM_FILE = MATRICES_DIR / "condition_aggregates" / "gene_by_condition_median_tpm.parquet"
+SAMPLE_CONDITION_MAP_FILE = MATRICES_DIR / "condition_aggregates" / "sample_condition_map.parquet"
+
+GENE_FEATURE_TABLE_FILE = ANALYSIS_DIR / "classification" / "gene_expression_behavior_established.parquet"
+ENTROPY_TABLE_FILE = ANALYSIS_DIR / "entropy" / "gene_tsallis_hill.parquet"
+CLASSIFICATION_FILE = ANALYSIS_DIR / "classification" / "gene_expression_behavior.parquet"
+CLASSIFICATION_TSV_FILE = ANALYSIS_DIR / "classification" / "gene_expression_behavior.tsv.gz"
+CLASSIFICATION_SUMMARY_FILE = REPORTS_DIR / "gene_expression_behavior_summary.md"
+
+# Milestone 7 web bridge (`atlas app export-web`): JSON snapshots fetched at
+# runtime by the React app (app/web/src/data/*). Gitignored -- regenerated,
+# never hand-edited (see app/web/.gitignore).
+WEB_DATA_DIR = APP_DIR / "web" / "public" / "data"
 
 REQUIRED_DIRS = [
     CONFIG_DIR, METADATA_DIR, WORKFLOWS_DIR, REFERENCE_DIR, SCRATCH_DIR,

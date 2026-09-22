@@ -7,25 +7,25 @@ import { GeneWorkspace } from "./components/gene/GeneWorkspace";
 import { GeneRankingOverview } from "./components/overview/GeneRankingOverview";
 import { Skeleton } from "./components/common/Skeleton";
 import type { ChartScale } from "./components/gene/ExpressionChart";
-import {
-  conditions,
-  datasets,
-  geneExpression,
-  genes as heroGenes,
-  referenceVersion,
-  sampleQcMetrics,
-  samples,
-} from "./data/fixtures";
+import { referenceVersion } from "./data/fixtures";
 import { loadRealGenes } from "./data/realGenes";
+import { loadRealAtlas, type RealAtlasData } from "./data/realAtlas";
 import { buildChartPoints, buildGeneRankings, datasetColorAssignment, median } from "./lib/points";
 import { shortConditionLabel } from "./lib/conditionLabel";
 
-const colorFor = datasetColorAssignment(datasets);
-const strains = Array.from(new Set(samples.map((s) => s.strain))).sort();
+const EMPTY_ATLAS: RealAtlasData = {
+  datasets: [],
+  conditions: [],
+  samples: [],
+  sampleQc: [],
+  expression: [],
+  classification: new Map(),
+};
 
 function App() {
   const searchRef = useRef<HTMLInputElement>(null);
-  const [allGenes, setAllGenes] = useState<Gene[]>(heroGenes);
+  const [allGenes, setAllGenes] = useState<Gene[]>([]);
+  const [atlas, setAtlas] = useState<RealAtlasData>(EMPTY_ATLAS);
   const [catalogLoading, setCatalogLoading] = useState(true);
   const [catalogError, setCatalogError] = useState<string | null>(null);
   const [selectedGeneId, setSelectedGeneId] = useState<string | null>(null);
@@ -37,16 +37,19 @@ function App() {
   const [selectedBioproject, setSelectedBioproject] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification } = atlas;
+
   useEffect(() => {
     let cancelled = false;
-    loadRealGenes()
-      .then((realGenes) => {
+    Promise.all([loadRealGenes(), loadRealAtlas()])
+      .then(([realGenes, realAtlas]) => {
         if (cancelled) return;
-        setAllGenes([...heroGenes, ...realGenes]);
+        setAllGenes(realGenes);
+        setAtlas(realAtlas);
       })
       .catch((err: unknown) => {
         if (cancelled) return;
-        setCatalogError(err instanceof Error ? err.message : "Failed to load gene catalog");
+        setCatalogError(err instanceof Error ? err.message : "Failed to load the atlas");
       })
       .finally(() => {
         if (!cancelled) setCatalogLoading(false);
@@ -79,6 +82,9 @@ function App() {
     [allGenes, selectedGeneId],
   );
 
+  const colorFor = useMemo(() => datasetColorAssignment(datasets), [datasets]);
+  const strains = useMemo(() => Array.from(new Set(samples.map((s) => s.strain))).sort(), [samples]);
+
   const goHome = () => {
     setSelectedGeneId(null);
     setSelectedSampleId(null);
@@ -107,7 +113,7 @@ function App() {
           (strainFilter === "all" || s.strain === strainFilter) &&
           (conditionFilter === "all" || s.condition_id === conditionFilter),
       ),
-    [strainFilter, conditionFilter],
+    [samples, strainFilter, conditionFilter],
   );
 
   const visibleDatasets = useMemo((): [string, string][] => {
@@ -119,11 +125,11 @@ function App() {
       }
     }
     return Array.from(seen.entries());
-  }, [filteredSamples]);
+  }, [filteredSamples, datasets]);
 
   const rankings = useMemo(
     () => buildGeneRankings(allGenes, samples, conditions, datasets, geneExpression, strainFilter, conditionFilter),
-    [allGenes, strainFilter, conditionFilter],
+    [allGenes, samples, conditions, datasets, geneExpression, strainFilter, conditionFilter],
   );
 
   const points = useMemo(() => {
@@ -137,7 +143,7 @@ function App() {
       strainFilter,
       conditionFilter,
     );
-  }, [selectedGene, strainFilter, conditionFilter]);
+  }, [selectedGene, samples, conditions, datasets, geneExpression, strainFilter, conditionFilter]);
 
   useEffect(() => {
     if (selectedSampleId && !points.some((p) => p.sample.sample_id === selectedSampleId)) {
@@ -155,8 +161,9 @@ function App() {
       datasetCount: new Set(points.map((p) => p.sample.bioproject)).size,
       detectionRate: filteredSamples.length ? detected.length / filteredSamples.length : 0,
       medianTpm: median(points.map((p) => p.tpm)),
+      classification: classification.get(selectedGene.canonical_gene_id) ?? null,
     };
-  }, [selectedGene, points, filteredSamples]);
+  }, [selectedGene, points, filteredSamples, classification]);
 
   const atlasSummary: AtlasSummary = useMemo(
     () => ({
@@ -172,7 +179,7 @@ function App() {
     if (!selectedSampleId) return null;
     const point = points.find((p) => p.sample.sample_id === selectedSampleId);
     if (!point) return null;
-    const qc = sampleQcMetrics.find((q) => q.sample_id === selectedSampleId);
+    const qc = sampleQc.find((q) => q.sample_id === selectedSampleId);
     return {
       sample: point.sample,
       condition: point.condition,
@@ -181,7 +188,7 @@ function App() {
       tpm: point.tpm,
       estimatedCounts: point.estimatedCounts,
     };
-  }, [selectedSampleId, points]);
+  }, [selectedSampleId, points, sampleQc]);
 
   const datasetDetail: DatasetDetail | null = useMemo(() => {
     if (!selectedBioproject) return null;
@@ -193,7 +200,7 @@ function App() {
       sampleCount: relatedSamples.length,
       conditionCount: new Set(relatedSamples.map((s) => s.condition_id)).size,
     };
-  }, [selectedBioproject]);
+  }, [selectedBioproject, datasets, samples]);
 
   const filterSummary = useMemo(() => {
     const bits: string[] = [];
@@ -205,7 +212,7 @@ function App() {
       bits.push("all conditions");
     }
     return `Filter: ${bits.join(" · ")}.`;
-  }, [strainFilter, conditionFilter]);
+  }, [strainFilter, conditionFilter, conditions]);
 
   return (
     <div className="app-shell">
@@ -255,7 +262,7 @@ function App() {
               onSelectGene={selectGene}
               onSelectDataset={selectDataset}
               filterSummary={
-                catalogError ? `${filterSummary} Full gene catalog failed to load — showing 9 illustrative genes only.` : filterSummary
+                catalogError ? `${filterSummary} Failed to load the atlas — ${catalogError}` : filterSummary
               }
             />
           )}

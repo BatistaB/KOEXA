@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import hashlib
 import shutil
+import subprocess
 import sys
 from dataclasses import replace
 from datetime import date, datetime, timezone
@@ -20,10 +21,13 @@ from pathlib import Path
 
 import click
 import duckdb
+import pandas as pd
 
 from .. import __version__
+from ..clustering.classify import classify_genes
 from ..config import ConfigError, load_pipeline_config, load_reference_config, load_storage_config
 from ..database.approve import SampleExcludedError, SampleNotFoundError, approve_sample
+from ..database.ingest_conditions import load_conditions, load_sample_condition_links
 from ..database.ingest_discovery import load_datasets, load_samples
 from ..database.ingest_genes import load_gene_external_identifiers, load_genes
 from ..database.ingest_results import (
@@ -40,6 +44,7 @@ from ..discovery.crossref import apply_crossrefs_to_studies, fetch_study_crossre
 from ..discovery.parse import load_discovered_runs
 from ..discovery.report import render_markdown_report, write_discovery_tsvs
 from ..doctor import doctor_report_text
+from ..entropy.tsallis import compute_entropy_feature_table
 from ..identifiers.external_identifiers import (
     from_gene_aliases_file,
     from_uniprot_mapping,
@@ -47,21 +52,39 @@ from ..identifiers.external_identifiers import (
 )
 from ..identifiers.reconcile import render_summary_report, run_reconciliation, write_mapping_tsv
 from ..logging_setup import get_logger
+from ..matrix.build import (
+    collapse_technical_replicates,
+    condition_level_stats,
+    fetch_gene_sample_tpm,
+    fetch_sample_condition_map,
+    pivot_gene_by_condition,
+    pivot_gene_by_sample,
+)
+from ..matrix.stats import compute_gene_feature_table
 from ..metadata.gene_master import build_gene_master_rows, write_gene_master_tsv
 from ..metadata.gene_product_updates import load_b71_products
 from ..metadata.gff import load_protein_coding_genes
 from ..state import SampleState
 from ..paths import (
+    APP_DIR,
+    CLASSIFICATION_FILE,
+    CLASSIFICATION_SUMMARY_FILE,
+    CLASSIFICATION_TSV_FILE,
+    CONDITIONS_FILE,
     DATABASE_FILE,
     DISCOVERY_DIR,
     DISCOVERY_RAW_API_RESPONSES_DIR,
+    ENTROPY_TABLE_FILE,
     FUNGIDB_GENE_ALIASES_FILE,
     FUNGIDB_GENE_PRODUCT_UPDATES_FILE,
     FUNGIDB_GENOME_FASTA_FILE,
     FUNGIDB_GFF_FILE,
     FUNGIDB_PROTEIN_FASTA_FILE,
     FUNGIDB_TRANSCRIPT_FASTA_FILE,
+    GENE_BY_CONDITION_TPM_FILE,
+    GENE_BY_SAMPLE_TPM_FILE,
     GENE_EXTERNAL_IDENTIFIERS_FILE,
+    GENE_FEATURE_TABLE_FILE,
     GENE_ID_MAPPING_FILE,
     GENE_ID_MAPPING_REPORT_FILE,
     GENE_MASTER_FILE,
@@ -70,13 +93,17 @@ from ..paths import (
     REQUIRED_CONFIG_FILES,
     REQUIRED_DIRS,
     RESULTS_DIR,
+    SAMPLE_CONDITION_MAP_FILE,
+    SAMPLES_CURATION_FILE,
     SCRATCH_DIR,
     TRANSCRIPT_TO_GENE_FILE,
     UNIPROT_WORKBOOK_FILE,
+    WEB_DATA_DIR,
 )
 from ..reference.transcript_to_gene import load_transcript_to_gene, write_t2g_tsv
 from ..reference.validate import render_validation_report, validate_reference
 from ..runtime_status import init_runtime_status, load_runtime_status
+from ..webexport.build import write_all as export_web_data
 
 logger = get_logger("cli")
 
@@ -479,6 +506,75 @@ def database_load_discovery() -> None:
     click.echo(f"Loaded {n_datasets} datasets, {n_samples} samples into {DATABASE_FILE}")
 
 
+@database.command("load-conditions")
+def database_load_conditions() -> None:
+    """Load metadata/conditions.tsv and link curated samples to their condition_id.
+
+    Milestone 6 (PROJECT_MASTER_SPEC.md section 37): "curate structured
+    condition metadata" + "confirm sample/run/technical-replicate
+    distinctions". Requires 'atlas database load-discovery' to have run
+    first (samples must already exist before they can be linked to a
+    condition).
+    """
+    for path in (CONDITIONS_FILE, SAMPLES_CURATION_FILE):
+        if not path.is_file():
+            raise click.ClickException(f"Missing {path}.")
+
+    apply_migrations(DATABASE_FILE)
+    conn = duckdb.connect(str(DATABASE_FILE))
+    try:
+        n_conditions = load_conditions(conn, CONDITIONS_FILE)
+        n_links = load_sample_condition_links(conn, SAMPLES_CURATION_FILE)
+    finally:
+        conn.close()
+    logger.info("Loaded %d conditions, linked %d samples in %s", n_conditions, n_links, DATABASE_FILE)
+    click.echo(f"Loaded {n_conditions} conditions, linked {n_links} samples in {DATABASE_FILE}")
+
+
+@cli.command()
+@click.pass_context
+def refresh(ctx: click.Context) -> None:
+    """Standardized one-command update: DB reload -> ingest -> matrix -> classify -> export-web.
+
+    Run this every time you add studies/samples to the atlas (new Colab
+    results, updated metadata/conditions.tsv or samples.tsv, a re-run
+    'atlas discovery report'). It chains, in order:
+
+        database migrate -> database load-genes -> database load-discovery
+        -> database load-conditions -> process ingest --all -> matrix build
+        -> stats genes -> entropy genes -> cluster genes -> app export-web
+
+    Every step is idempotent and safe to re-run. A step whose required
+    input doesn't exist yet (e.g. no reports/discovery/*.tsv before the
+    first 'atlas discovery report') is reported as SKIPPED, not treated as
+    a fatal error -- this command always does as much as it currently can
+    with whatever is on disk, rather than requiring every upstream step to
+    have been run first.
+    """
+    steps: list[tuple[str, click.Command, dict]] = [
+        ("database migrate", database_migrate, {}),
+        ("database load-genes", database_load_genes, {}),
+        ("database load-discovery", database_load_discovery, {}),
+        ("database load-conditions", database_load_conditions, {}),
+        ("process ingest --all", process_ingest, {"srr": None, "ingest_all": True}),
+        ("matrix build", matrix_build, {}),
+        ("stats genes", stats_genes, {}),
+        ("entropy genes", entropy_genes, {}),
+        ("cluster genes", cluster_genes, {}),
+        ("app export-web", app_export_web, {}),
+    ]
+    n_ok, n_skipped = 0, 0
+    for label, command, kwargs in steps:
+        click.echo(f"\n=== atlas {label} ===")
+        try:
+            ctx.invoke(command, **kwargs)
+            n_ok += 1
+        except click.ClickException as exc:
+            click.echo(f"SKIPPED: {exc.format_message()}")
+            n_skipped += 1
+    click.echo(f"\nrefresh complete: {n_ok} step(s) ran, {n_skipped} skipped.")
+
+
 # --- Stub command groups mirroring PROJECT_MASTER_SPEC.md section 25 -------
 
 @cli.group()
@@ -766,7 +862,46 @@ def matrix() -> None:
 
 @matrix.command("build")
 def matrix_build() -> None:
-    _not_implemented("Milestone 5/6 (sample-level and condition-level TPM matrices)", "atlas matrix build")
+    """Build gene x sample and gene x condition TPM matrices from DuckDB.
+
+    Sample-level TPM (gene_expression, untouched) -> collapse technical
+    replicates (mean) -> aggregate biological replicates per condition
+    (median) -- see matrix/build.py's module docstring. Writes three
+    parquet files under matrices/; every downstream command (stats/
+    entropy/cluster genes) reads the condition matrix from here rather
+    than re-querying DuckDB, so they all see the exact same snapshot.
+    """
+    if not DATABASE_FILE.is_file():
+        raise click.ClickException("No database found. Run 'atlas database migrate' first.")
+
+    conn = duckdb.connect(str(DATABASE_FILE), read_only=True)
+    try:
+        long_df = fetch_gene_sample_tpm(conn)
+        sample_map = fetch_sample_condition_map(conn)
+    finally:
+        conn.close()
+
+    if long_df.empty:
+        raise click.ClickException("No QUANTIFIED samples in the database yet; nothing to build.")
+
+    gene_by_sample = pivot_gene_by_sample(long_df)
+    replicate_df = collapse_technical_replicates(long_df, sample_map)
+    condition_stats = condition_level_stats(replicate_df)
+    gene_by_condition = pivot_gene_by_condition(condition_stats)
+
+    GENE_BY_SAMPLE_TPM_FILE.parent.mkdir(parents=True, exist_ok=True)
+    GENE_BY_CONDITION_TPM_FILE.parent.mkdir(parents=True, exist_ok=True)
+    gene_by_sample.to_parquet(GENE_BY_SAMPLE_TPM_FILE)
+    gene_by_condition.to_parquet(GENE_BY_CONDITION_TPM_FILE)
+    sample_map.to_parquet(SAMPLE_CONDITION_MAP_FILE)
+
+    logger.info(
+        "matrix build: %d genes x %d samples, %d genes x %d conditions",
+        *gene_by_sample.shape, *gene_by_condition.shape,
+    )
+    click.echo(f"Gene x sample matrix:    {gene_by_sample.shape[0]:,} genes x {gene_by_sample.shape[1]} samples -> {GENE_BY_SAMPLE_TPM_FILE}")
+    click.echo(f"Gene x condition matrix: {gene_by_condition.shape[0]:,} genes x {gene_by_condition.shape[1]} conditions -> {GENE_BY_CONDITION_TPM_FILE}")
+    click.echo(f"Sample/condition map:    {len(sample_map)} curated samples -> {SAMPLE_CONDITION_MAP_FILE}")
 
 
 @cli.group(name="app")
@@ -779,6 +914,48 @@ def app_serve() -> None:
     _not_implemented("Milestone 7 (AOED basic interface)", "atlas app serve")
 
 
+@app_group.command("export-web")
+def app_export_web() -> None:
+    """Export DuckDB + classification artifacts to app/web/public/data/*.json.
+
+    Only samples that are QUANTIFIED and condition-curated are exported
+    (see webexport.build.CURATED_QUANTIFIED_FILTER); the gene catalog
+    (genes.json) is refreshed too, via app/web/scripts/export_gene_catalog.py.
+    Safe to re-run: every file here is fully overwritten, never merged.
+    """
+    if not DATABASE_FILE.is_file():
+        raise click.ClickException("No database found. Run 'atlas database migrate' first.")
+
+    conn = duckdb.connect(str(DATABASE_FILE), read_only=True)
+    try:
+        summary = export_web_data(conn)
+    finally:
+        conn.close()
+
+    gene_catalog_script = APP_DIR / "web" / "scripts" / "export_gene_catalog.py"
+    if gene_catalog_script.is_file():
+        result = subprocess.run(
+            [sys.executable, str(gene_catalog_script)], cwd=PROJECT_ROOT, capture_output=True, text=True
+        )
+        if result.stdout:
+            click.echo(result.stdout.rstrip())
+        if result.returncode != 0:
+            click.echo(result.stderr, err=True)
+            raise click.ClickException("app/web/scripts/export_gene_catalog.py failed.")
+
+    logger.info("app export-web: %s", summary)
+    click.echo(f"Datasets:       {summary['n_datasets']} ({summary['datasets_bytes'] / 1024:.0f} KB)")
+    click.echo(f"Conditions:     {summary['n_conditions']} ({summary['conditions_bytes'] / 1024:.0f} KB)")
+    click.echo(f"Samples:        {summary['n_samples']} ({summary['samples_bytes'] / 1024:.0f} KB)")
+    click.echo(f"Sample QC:      {summary['n_sample_qc']} ({summary['sample_qc_bytes'] / 1024:.0f} KB)")
+    click.echo(f"Expression:     {summary['n_expression_rows']:,} rows ({summary['expression_bytes'] / 1024:.0f} KB)")
+    if summary["n_classification_rows"]:
+        click.echo(f"Classification: {summary['n_classification_rows']:,} genes ({summary['classification_bytes'] / 1024:.0f} KB)")
+    else:
+        click.echo("Classification: not exported (run 'atlas cluster genes' first)")
+    click.echo(f"-> {WEB_DATA_DIR}")
+
+
 @cli.group()
 def stats() -> None:
     """Gene-level statistics commands (Milestone 9)."""
@@ -786,17 +963,45 @@ def stats() -> None:
 
 @stats.command("genes")
 def stats_genes() -> None:
-    _not_implemented("Milestone 9 (Gene statistics)", "atlas stats genes")
+    """Compute the established per-gene feature table (abundance, prevalence,
+    variability, Tau, Gini) from the condition matrix. No cluster_id/
+    biological_label yet -- see 'atlas cluster genes' for that.
+    """
+    if not GENE_BY_CONDITION_TPM_FILE.is_file():
+        raise click.ClickException("No condition matrix found. Run 'atlas matrix build' first.")
+    gene_by_condition = pd.read_parquet(GENE_BY_CONDITION_TPM_FILE)
+    feature_table = compute_gene_feature_table(gene_by_condition)
+
+    GENE_FEATURE_TABLE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    feature_table.to_parquet(GENE_FEATURE_TABLE_FILE)
+
+    logger.info("stats genes: %d genes x %d feature columns -> %s", *feature_table.shape, GENE_FEATURE_TABLE_FILE)
+    click.echo(f"Wrote {feature_table.shape[0]:,} genes x {feature_table.shape[1]} feature columns -> {GENE_FEATURE_TABLE_FILE}")
 
 
 @cli.group()
 def entropy() -> None:
-    """Tsallis/Hill diversity commands (Milestone 10)."""
+    """Tsallis/Hill diversity commands (Milestone 10, secondary/exploratory)."""
 
 
 @entropy.command("genes")
 def entropy_genes() -> None:
-    _not_implemented("Milestone 10 (Tsallis/Hill)", "atlas entropy genes")
+    """Compute per-gene Tsallis/Hill entropy (D_q) across conditions.
+
+    Secondary/exploratory (see entropy/tsallis.py module docstring): kept
+    available and unit-tested, not used by the standard classification
+    pipeline's clustering step (see clustering/classify.py for why).
+    """
+    if not GENE_BY_CONDITION_TPM_FILE.is_file():
+        raise click.ClickException("No condition matrix found. Run 'atlas matrix build' first.")
+    gene_by_condition = pd.read_parquet(GENE_BY_CONDITION_TPM_FILE)
+    entropy_table = compute_entropy_feature_table(gene_by_condition)
+
+    ENTROPY_TABLE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    entropy_table.to_parquet(ENTROPY_TABLE_FILE)
+
+    logger.info("entropy genes: %d genes x %d columns -> %s", *entropy_table.shape, ENTROPY_TABLE_FILE)
+    click.echo(f"Wrote {entropy_table.shape[0]:,} genes x {entropy_table.shape[1]} entropy columns -> {ENTROPY_TABLE_FILE}")
 
 
 @cli.group()
@@ -806,7 +1011,57 @@ def cluster() -> None:
 
 @cluster.command("genes")
 def cluster_genes() -> None:
-    _not_implemented("Milestone 11 (Clustering and biological interpretation)", "atlas cluster genes")
+    """Classify genes into BASE-model clusters + biological_label.
+
+    Runs the standardized pipeline in clustering/classify.py (KMeans, k
+    selected by silhouette over k=2..10, the same cautious threshold-based
+    biological_label rule validated in
+    notebooks/gene_expression_classification.ipynb). Writes the final
+    gene_expression_behavior parquet/tsv.gz and a short markdown summary.
+    Does NOT recompute the EXTENDED (Tsallis q-spectrum) model or cluster-
+    stability diagnostics (subsampling/bootstrap/leave-one-study-out ARI) --
+    those stay notebook-only; see classify.py's module docstring for why.
+    """
+    if not GENE_BY_CONDITION_TPM_FILE.is_file():
+        raise click.ClickException("No condition matrix found. Run 'atlas matrix build' first.")
+    gene_by_condition = pd.read_parquet(GENE_BY_CONDITION_TPM_FILE)
+    result = classify_genes(gene_by_condition)
+
+    GENE_FEATURE_TABLE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    result.feature_table.to_parquet(GENE_FEATURE_TABLE_FILE)
+    ENTROPY_TABLE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    result.entropy_table.to_parquet(ENTROPY_TABLE_FILE)
+    CLASSIFICATION_FILE.parent.mkdir(parents=True, exist_ok=True)
+    result.final_table.to_parquet(CLASSIFICATION_FILE)
+    result.final_table.to_csv(CLASSIFICATION_TSV_FILE, sep="\t", compression="gzip")
+
+    counts = result.final_table["biological_label"].value_counts(dropna=False)
+    summary_lines = [
+        "# Gene expression behavior classification -- standardized pipeline summary",
+        "",
+        f"Generated by `atlas cluster genes`. K_BASE = {result.k_base} (silhouette-selected, k=2..10).",
+        "",
+        "## biological_label counts",
+        "",
+        counts.rename("n_genes").to_frame().to_markdown(),
+        "",
+        "This is the automated pipeline's output: BASE model only (abundance, "
+        "prevalence, variability, Tau), no EXTENDED q-spectrum model and no "
+        "cluster-stability diagnostics. For the full methodological writeup "
+        "(Tau distributions, cross-method agreement, subsampling/bootstrap/"
+        "leave-one-study-out stability), see "
+        "notebooks/gene_expression_classification.ipynb and "
+        "reports/gene_expression_classification.md.",
+    ]
+    CLASSIFICATION_SUMMARY_FILE.parent.mkdir(parents=True, exist_ok=True)
+    CLASSIFICATION_SUMMARY_FILE.write_text("\n".join(summary_lines), encoding="utf-8")
+
+    logger.info("cluster genes: K_BASE=%d, %s", result.k_base, dict(counts))
+    click.echo(f"K_BASE = {result.k_base}")
+    click.echo(counts.to_string())
+    click.echo(f"Wrote {CLASSIFICATION_FILE}")
+    click.echo(f"Wrote {CLASSIFICATION_TSV_FILE}")
+    click.echo(f"Wrote {CLASSIFICATION_SUMMARY_FILE}")
 
 
 @cli.group()

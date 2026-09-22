@@ -10,45 +10,48 @@ for the product scope this is working toward.
 
 First slice only. Home view is a gene-ranking overview (every gene, summed
 TPM across samples, stacked bar per gene colored by study, most to least
-expressed); clicking a bar — or searching by AO09 ID / symbol / name /
-alias / UniProt accession — opens a gene detail view (per-sample TPM bar
-chart, grouped by condition, colored by study). Strain and condition are
-both optional filters in the top bar that scope every chart. Built against
-`src/data/fixtures.ts` — data shaped exactly like
-the real DuckDB tables (`PROJECT_MASTER_SPEC.md` section 8) but with
-invented accessions and hand-tuned (not measured) TPM values, since the
-real atlas only has a handful of samples ingested so far (Milestone 5,
-in progress). Swap `src/data/fixtures.ts` for a real API/DuckDB-backed
-fetch layer once Milestone 6 closes — every component consumes the
-`Gene`/`Sample`/`Condition`/`Dataset`/`GeneExpressionRow` shapes from
-`src/data/types.ts`, not the fixture module directly, so that swap
-shouldn't require touching component code.
+expressed, with a zoom control for how many genes to show); clicking a bar
+— or searching by AO09 ID / symbol / name / alias / UniProt accession —
+opens a gene detail view (per-sample TPM bar chart, grouped by condition,
+colored by study). Strain and condition are both optional filters in the
+top bar that scope every chart.
 
-Gene catalog: 9 hand-curated "hero" genes with a real biological story
-(condition-dependent TPM) live in `src/data/fixtures.ts`, merged at
-startup with the real 12,090-gene RIB40 catalog fetched from
-`public/data/genes.json` (`src/data/realGenes.ts`) — for UX/UI
-stress-testing at full-genome scale ahead of Milestone 6. Genes outside
-the curated 9 get deterministic *synthetic* filler TPM
-(`src/lib/syntheticExpression.ts`, no biological story, just a plausible
-long-tailed distribution) since real full-genome quantification doesn't
-exist yet.
+Runs entirely on real data, fetched at runtime rather than bundled (every
+component consumes the `Gene`/`Sample`/`Condition`/`Dataset`/
+`GeneExpressionRow`/`GeneClassification` shapes from `src/data/types.ts`,
+not a data-loading module directly):
+
+- `public/data/genes.json` (`src/data/realGenes.ts`) — the full RIB40 gene
+  catalog, from `metadata/gene_master.tsv` +
+  `metadata/gene_external_identifiers.tsv`.
+- `public/data/{datasets,conditions,samples,sample_qc,expression,
+  classification}.json` (`src/data/realAtlas.ts`) — real DuckDB-backed
+  samples/conditions/studies/expression, and the Tau/cluster-based gene
+  classification, for only the samples that are pipeline-QUANTIFIED **and**
+  condition-curated.
+
+Both are gitignored and regenerated, never hand-edited — see "Running"
+below. There is no synthetic/fixture data path anymore; a gene or sample
+that hasn't been through the real pipeline simply doesn't appear.
 
 ## Running
 
 ```bash
 npm install
-python scripts/export_gene_catalog.py   # generates public/data/genes.json
-npm run dev
+cd .. && atlas refresh   # from the repo root: regenerates every public/data/*.json
+cd app/web && npm run dev
 ```
 
-`public/data/genes.json` is gitignored (~3MB, reproducible from
-`metadata/gene_master.tsv` + `metadata/gene_external_identifiers.tsv` at
-the repo root) — regenerate it after a fresh clone, or whenever those
-source TSVs change.
+`atlas refresh` (see `src/aoryzae_atlas/cli/main.py` at the repo root) is
+the standardized one-command pipeline: DB migrate/load → ingest → matrix
+build → gene statistics → entropy → clustering → `atlas app export-web`.
+Run it after adding studies/samples to the atlas, any time you want the
+site to reflect the latest data. Its last step alone
+(`atlas app export-web`) is enough if you just want to re-export
+already-computed matrices/classification without recomputing them.
 
-Or from the repo root, via the Claude Code browser preview config
-(`.claude/launch.json`, name `aoed-web`).
+Or preview from the repo root via the Claude Code browser preview config
+(`.claude/launch.json`, name `aoed-web`) — run `atlas refresh` first.
 
 ## Design notes
 

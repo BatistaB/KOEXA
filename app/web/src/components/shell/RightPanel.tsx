@@ -1,4 +1,4 @@
-import type { Condition, Dataset, Gene, Sample, SampleQcMetrics } from "../../data/types";
+import type { Condition, Dataset, Gene, GeneClassification, Sample, SampleQcMetrics } from "../../data/types";
 import { StatusBadge } from "../common/StatusBadge";
 import { DatasetLink } from "../common/DatasetLink";
 import { formatCounts, formatPercent, formatReadCount, formatTpm } from "../../lib/format";
@@ -12,7 +12,18 @@ export interface GeneSummary {
   datasetCount: number;
   detectionRate: number;
   medianTpm: number;
+  /** null while the atlas is loading, or if the gene wasn't classified
+   * (fewer than 2 detected conditions -- Tau is undefined there). */
+  classification: GeneClassification | null;
 }
+
+const BIOLOGICAL_LABEL_TEXT: Record<string, string> = {
+  constitutive_high: "Constitutive · high",
+  constitutive_medium: "Constitutive · medium",
+  condition_specific: "Condition-specific",
+  variable_broad: "Variable, broadly expressed",
+  rarely_expressed: "Rarely expressed",
+};
 
 export interface AtlasSummary {
   geneCount: number;
@@ -99,7 +110,9 @@ export function RightPanel({
 
         <div className="right-panel__section">
           <div className="right-panel__section-label">Publication</div>
-          <p className="right-panel__prose">{dataset.publication_title}</p>
+          <p className="right-panel__prose">
+            {dataset.publication_title || "No publication title recorded yet."}
+          </p>
           <div className="right-panel__row">
             <span className="right-panel__row-label">DOI</span>
             <span className="right-panel__row-value mono">{dataset.publication_doi ?? "Not yet published"}</span>
@@ -108,7 +121,7 @@ export function RightPanel({
 
         <div className="right-panel__section">
           <div className="right-panel__section-label">Design</div>
-          <p className="right-panel__prose">{dataset.study_description}</p>
+          <p className="right-panel__prose">{dataset.study_description || "No study description recorded yet."}</p>
           <div className="right-panel__row">
             <span className="right-panel__row-label">Organism</span>
             <span className="right-panel__row-value">{dataset.organism}</span>
@@ -119,9 +132,6 @@ export function RightPanel({
           </div>
         </div>
 
-        <p className="right-panel__empty">
-          Illustrative fixture data — will link to the real dataset record once Milestone 6 lands.
-        </p>
       </aside>
     );
   }
@@ -296,6 +306,30 @@ export function RightPanel({
           <span className="right-panel__row-value mono">{formatTpm(geneSummary.medianTpm)}</span>
         </div>
       </div>
+
+      {geneSummary.classification && (
+        <div className="right-panel__section">
+          <div className="right-panel__section-label">Expression behavior</div>
+          <div className="right-panel__row">
+            <span className="right-panel__row-label">Category</span>
+            <span className="right-panel__row-value">
+              {geneSummary.classification.biological_label
+                ? (BIOLOGICAL_LABEL_TEXT[geneSummary.classification.biological_label] ?? geneSummary.classification.biological_label)
+                : "Not classified (<2 conditions detected)"}
+            </span>
+          </div>
+          {geneSummary.classification.Tau_log1p !== null && (
+            <div className="right-panel__row">
+              <span className="right-panel__row-label">Tau (specificity)</span>
+              <span className="right-panel__row-value mono">{geneSummary.classification.Tau_log1p.toFixed(2)}</span>
+            </div>
+          )}
+          <div className="right-panel__row">
+            <span className="right-panel__row-label">Confidence</span>
+            <span className="right-panel__row-value">{geneSummary.classification.classification_confidence}</span>
+          </div>
+        </div>
+      )}
 
       <div className="right-panel__section">
         <div className="right-panel__section-label">Provenance</div>
