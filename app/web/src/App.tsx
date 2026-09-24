@@ -5,6 +5,8 @@ import { TopBar } from "./components/shell/TopBar";
 import { RightPanel, type AtlasSummary, type DatasetDetail, type GeneSummary } from "./components/shell/RightPanel";
 import { GeneWorkspace } from "./components/gene/GeneWorkspace";
 import { GeneRankingOverview } from "./components/overview/GeneRankingOverview";
+import { ClassificationPieChart } from "./components/overview/ClassificationPieChart";
+import { ChromosomeExpressionMap } from "./components/overview/ChromosomeExpressionMap";
 import { Skeleton } from "./components/common/Skeleton";
 import type { ChartScale } from "./components/gene/ExpressionChart";
 import { referenceVersion } from "./data/fixtures";
@@ -20,6 +22,7 @@ const EMPTY_ATLAS: RealAtlasData = {
   sampleQc: [],
   expression: [],
   classification: new Map(),
+  chromosomeExpression: null,
 };
 
 function App() {
@@ -37,7 +40,7 @@ function App() {
   const [selectedBioproject, setSelectedBioproject] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification } = atlas;
+  const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification, chromosomeExpression } = atlas;
 
   useEffect(() => {
     let cancelled = false;
@@ -255,16 +258,33 @@ function App() {
               <Skeleton height={340} />
             </div>
           ) : (
-            <GeneRankingOverview
-              rankings={rankings}
-              datasets={visibleDatasets}
-              datasetColor={(bioproject) => colorFor.get(bioproject) ?? "var(--series-1)"}
-              onSelectGene={selectGene}
-              onSelectDataset={selectDataset}
-              filterSummary={
-                catalogError ? `${filterSummary} Failed to load the atlas — ${catalogError}` : filterSummary
-              }
-            />
+            <>
+              <GeneRankingOverview
+                rankings={rankings}
+                datasets={visibleDatasets}
+                datasetColor={(bioproject) => colorFor.get(bioproject) ?? "var(--series-1)"}
+                onSelectGene={selectGene}
+                onSelectDataset={selectDataset}
+                filterSummary={
+                  catalogError ? `${filterSummary} Failed to load the atlas — ${catalogError}` : filterSummary
+                }
+              />
+              <ClassificationPieChart classification={classification} genes={allGenes} onSelectGene={selectGene} />
+              <ChromosomeExpressionMap
+                chromosomeExpression={chromosomeExpression}
+                genes={allGenes}
+                classification={classification}
+                samples={samples}
+                conditions={conditions}
+                datasets={datasets}
+                geneExpression={geneExpression}
+                strainFilter={strainFilter}
+                conditionFilter={conditionFilter}
+                datasetColor={(bioproject) => colorFor.get(bioproject) ?? "var(--series-1)"}
+                onSelectGene={selectGene}
+                onSelectDataset={selectDataset}
+              />
+            </>
           )}
         </main>
         <RightPanel

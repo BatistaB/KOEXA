@@ -953,6 +953,10 @@ def app_export_web() -> None:
         click.echo(f"Classification: {summary['n_classification_rows']:,} genes ({summary['classification_bytes'] / 1024:.0f} KB)")
     else:
         click.echo("Classification: not exported (run 'atlas cluster genes' first)")
+    if summary["n_chromosome_bins"]:
+        click.echo(f"Chromosome map: {summary['n_chromosome_bins']:,} bins ({summary['chromosome_expression_bytes'] / 1024:.0f} KB)")
+    else:
+        click.echo("Chromosome map: not exported (run 'atlas stats genes' first)")
     click.echo(f"-> {WEB_DATA_DIR}")
 
 

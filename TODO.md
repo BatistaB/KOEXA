@@ -477,7 +477,7 @@ these thresholds are directly adoptable into `config/qc.yaml` once
 Milestone 5 produces a real QC report to calibrate against -- not
 implemented yet.
 
-## Feature idea: chromosome-wide TPM abundance map (not yet scheduled)
+## Feature idea: chromosome-wide TPM abundance map (IMPLEMENTED 2026-09-24 -- see Round 7 below)
 
 User's idea (2026-09-21), for the eventual site/app: a window showing all
 8 nuclear chromosomes of RIB40, colored by transcript abundance (TPM) per
@@ -548,6 +548,53 @@ not decided here):**
    genes there, linking into the per-gene search Milestone 7 already
    plans -- a color-only view with no drill-down loses the "which gene is
    that" payoff that's the actual point of the feature.
+
+**What was actually built (2026-09-24), answering the 5 open decisions above:**
+
+1. **Fixed windows**, not per-gene -- 50kb default, a `bin_size_bp`
+   parameter on `genome.karyotype.bin_gene_expression`/
+   `webexport.build.export_chromosome_expression` (not yet a CLI flag;
+   trivial to expose one if a different bin size is ever wanted).
+2. **Whole-atlas median TPM**, no per-sample/per-condition selector: reuses
+   `gene_expression_behavior_established.parquet`'s `median_TPM` (median
+   across every curated condition -- the same "whole atlas" value the
+   classification pie chart's Tau is computed from), matching the user's
+   explicit "com todos os dados" framing. A selector (single sample /
+   single condition) is a real follow-up, not built here.
+3. **log10(mean TPM + 1)**, one hue (blue, the same sequential ramp
+   anchor as `--accent`/`--series-1`) light->dark -- `--seq-100..--seq-600`
+   in `tokens.css`. Bins with zero annotated genes get a visually distinct
+   muted fill (`--surface-sunken`), never the ramp's own lightest step --
+   "nothing measured here" and "measured near-zero" must not look the
+   same.
+4. **True karyotype layout**: all 8 chromosome tracks share one
+   pixels-per-bp scale, so Chr7 (2.9 Mb) visibly reads shorter than Chr1
+   (6.5 Mb). The "one real data gap" this section flagged (chromosome
+   lengths not in the database) turned out to already be closed --
+   `reference/genome_fasta.py`'s `load_genome_sequence_lengths` already
+   existed (Milestone 3 reference validation) and was reused as-is, no new
+   FASTA parsing written.
+5. **Hover + click-to-drill-down**, entirely client-side: the exported
+   JSON only carries per-bin aggregates (760 bins total, ~29KB), not a
+   gene list per bin -- hovering a bin filters the already-loaded full
+   gene catalog (`data/realGenes.ts`) by chromosome + midpoint inside the
+   bin's range and previews the top few by the classification table's
+   `median_TPM`. **Updated 2026-09-24** per user feedback: clicking a bin
+   no longer jumps straight to that one top gene -- it opens the exact
+   same ranked-bar-chart component the home page's main "genes by total
+   expression" view uses (`GeneRankingChart`, reused as-is via
+   `lib/points.ts`'s `buildGeneRankings`), scoped to just that window's
+   genes, with a "back to chromosome map" control. Still entirely
+   client-side, no new backend endpoint.
+
+New code: `src/aoryzae_atlas/genome/karyotype.py` (+ `tests/
+test_genome_karyotype.py`), `webexport.build.export_chromosome_expression`
+(writes `app/web/public/data/chromosome_expression.json`, part of `atlas
+app export-web` / `atlas refresh` -- no separate command), `app/web/src/
+components/overview/ChromosomeExpressionMap.tsx`. Still not built: a
+sample/condition selector, and the JBrowse-track convergence the GDV entry
+below describes -- this stays a standalone lightweight view for now, not
+merged into a genome browser.
 
 ## Feature idea: GDV-style genome browser (not yet scheduled)
 
@@ -644,7 +691,7 @@ no new sequencing/pipeline work):**
   convergence above -- revisit once there's a first working browser to
   extend, rather than speculating further now.
 
-## Feature idea: gene expression classification, shown as a homepage pie chart (not yet scheduled)
+## Feature idea: gene expression classification, shown as a homepage pie chart (IMPLEMENTED 2026-09-24 -- see Round 7 below)
 
 User's idea (2026-09-21): classify every gene from the global expression
 analysis into classes -- high expression, low expression,
@@ -719,6 +766,49 @@ sampling noise, not biology -- the spec's own sensitivity/stability checks
 trigger to revisit: once Milestone 6 (replicated-condition curation) and
 several more Colab batches land, giving enough samples/conditions for
 condition-level entropy (section 17) to mean something.
+
+**Built anyway, 2026-09-24, on explicit user instruction** ("por enquanto
+temos poucas classificações... mas lembre de por no TODO"): the user
+wants to see it now, at pilot scale, understanding it's provisional --
+not a reversal of the caution above, an explicit choice to accept it. What
+shipped:
+
+- A **donut**, not a plain pie -- same part-to-whole read, but the center
+  hole carries the total classified-gene count (a stat-tile-style hero
+  number), and it's what the dataviz skill's form guidance favors over a
+  bare pie once there's a natural headline number to show. Colors are the
+  existing fixed-order categorical slots (`--series-1..5`); the
+  `biological_label` set has 5 possible values (`constitutive_high/
+  _medium`, `variable_broad`, `condition_specific`, `rarely_expressed`)
+  mapped to slots 1-5 in that fixed order regardless of which are actually
+  populated in a given run -- at K_BASE=2 (current pilot scale) only 2
+  light up, more appear automatically as clustering resolves more groups
+  with no code change. Genes with no label (<2 detected conditions, Tau
+  undefined) get a 6th, deliberately **muted gray** slice ("Not enough
+  data yet") rather than a 6th vivid hue -- it isn't a biological category.
+- Explicit **preliminary/provisional framing in the UI itself**, not just
+  here: the chart's own subtitle says "Preliminary: based on the atlas's
+  current sample/condition coverage and will sharpen as more studies are
+  added" -- so a site visitor isn't misled into reading 2-cluster K_BASE
+  as a finished biological result.
+- Hover shows count + percentage; clicking a slice or legend row opens
+  that category's highest-median-TPM gene (same "give the drill-down a
+  concrete landing spot" pattern as the chromosome map below), entirely
+  client-side from data already loaded -- no new backend endpoint.
+- **Not built**: Tsallis/entropy is NOT what actually drives this
+  classification (the notebook's own Part B conclusion, Round 6, found
+  the q-spectrum adds no clustering value and hurts stability) -- the pie
+  reflects the BASE model (Tau + abundance/prevalence/variability) the
+  user originally flagged Tsallis for, just via the metric that actually
+  won out after real testing, not the one guessed at when this idea was
+  first written down. No click-to-filter-the-rest-of-the-page yet (e.g.
+  filtering the ranking chart to just `condition_specific` genes) -- a
+  real follow-up once there's a natural place to route that filter state.
+
+New code: `app/web/src/lib/classificationSummary.ts` (pure, slice/color/
+order logic), `app/web/src/components/overview/ClassificationPieChart.tsx`.
+No backend change -- reads the same `classification.json`
+`atlas cluster genes` already produces (Round 6).
 
 ## Milestone 7 spike: gene search + expression UI (2026-09-21, not a milestone completion)
 
@@ -966,6 +1056,89 @@ pipeline steps and adds a new one, chained by `atlas refresh`:
   `genes.json`'s existing runtime-fetch pattern, but will need either
   server-side gzip, a coarser aggregate-only payload for the ranking view,
   or a real per-gene API before this scales to hundreds of samples.
+
+**Round 7 (2026-09-24): two homepage charts from the classification/genome data.**
+User asked for both ideas already on file above -- the classification pie
+chart and the chromosome-wide TPM abundance map -- built now, explicitly
+accepting that the classification is still pilot-scale/provisional (user's
+own words). Both sections above now carry full "what was actually built"
+notes; this entry is the cross-cutting summary.
+
+- Both charts live directly below the gene-ranking overview on the home
+  page, in the order requested: ranking chart -> classification donut ->
+  chromosome map.
+- New backend: `src/aoryzae_atlas/genome/karyotype.py` (fixed-window
+  binning, tested) and `webexport.build.export_chromosome_expression`,
+  wired into the existing `atlas app export-web`/`atlas refresh` bridge
+  from Round 6 -- no new CLI command, no new manual step. The
+  classification pie chart needed **no backend work at all**: it's a pure
+  client-side aggregation of the `classification.json` Round 6 already
+  produces.
+- Followed the dataviz skill's procedure for both: form choice before
+  color (donut over a bare pie once there's a natural center number;
+  sequential one-hue ramp for the chromosome map's magnitude encoding, not
+  a rainbow), reused the project's already-validated categorical palette
+  for the donut rather than re-running the validator (no new categorical
+  palette was introduced), and added a new sequential ramp
+  (`--seq-100..--seq-600`, light and dark) to `tokens.css`, anchored on
+  the same blue as `--accent`/`--series-1` per the skill's reference
+  palette.
+- Both new sections degrade gracefully (a plain "not yet available, run
+  `atlas cluster genes`/`atlas stats genes`" message) if their backing
+  JSON is missing or `classification.json` was never generated -- same
+  "None if not computed yet" pattern `export_classification` already
+  established in Round 6, extended to `export_chromosome_expression`.
+- Verified end-to-end in the browser, light and dark: donut renders with
+  real counts (7,542 / 3,344 / 1,192 at this round's pilot scale),
+  chromosome map renders all 8 real chromosome tracks at true relative
+  length (760 bins, ~29KB), hover tooltips resolve real genes in real
+  bins, and clicking either chart's data points a lightweight regions/
+  categories -> a concrete gene drill-down, landing on the correct gene
+  detail view with the correct classification badge every time.
+- Environment note, unrelated to any code change: a stale
+  `%LOCALAPPDATA%\Temp\pytest-of-bruno` directory became unreadable
+  (`PermissionError`, even via PowerShell `Remove-Item`) partway through
+  this round, breaking any test using pytest's `tmp_path` fixture.
+  Worked around with `pytest --basetemp=<scratch dir>` rather than fighting
+  the ACL; if this recurs, it's an OS/antivirus-level lock on that specific
+  folder, not a code regression -- the same `--basetemp` workaround
+  should unblock it again.
+
+**Round 7 follow-up (2026-09-24, same day), per user feedback right after
+seeing it:**
+- Chromosome map switched from horizontal rows to **vertical columns**
+  (8 chromosomes side by side, true relative height, tallest = Chr1 at
+  480px) -- reads more like a conventional karyotype/ideogram. The
+  low->high + "no annotated genes" legend moved from above the diagram to
+  below it.
+- Clicking a 50kb region no longer opens a single gene. It now opens the
+  **same `GeneRankingChart` component the home page's main ranking chart
+  uses** (stacked-by-study bars, most to least expressed), scoped to only
+  that window's genes via `lib/points.ts`'s existing `buildGeneRankings` --
+  literally the same function and component, just called with a
+  chromosome-position-filtered gene list instead of the full catalog. A
+  "back to chromosome map" control returns to the karyotype view. Also
+  respects the top bar's current strain/condition filters, same as the
+  main chart.
+
+**Round 7 second follow-up (2026-09-24, same day):**
+- Default bin size **50kb -> 100kb**
+  (`genome.karyotype.DEFAULT_BIN_SIZE_BP`) -- user felt 100kb reads more
+  informative (fewer, more visually distinct bands). 760 bins -> 382 at
+  the current pilot scale (~15KB exported, down from ~29KB). Still a
+  parameter, not hard-coded logic -- one-line change, no new plumbing.
+- **The legend is now an expression-level filter.** Each of the 5
+  sequential-ramp swatches is a toggle button: clicking one dims every
+  bin outside that exact color bucket (opacity 0.12, not hidden -- the
+  karyotype shape stays visible for spatial context) across all 8
+  chromosomes at once; clicking the same swatch again, or the new "Show
+  all" link that appears next to the legend while filtered, clears it.
+  The "no annotated genes" swatch is a filter toggle the same way. Made
+  possible by pulling the bucket-index math out of `lib/sequentialColor.ts`
+  into an exported `sequentialColorIndex()` used by both the paint step
+  and the filter check, so the legend can never drift from what's
+  actually drawn (a swatch's meaning is a real, computable predicate, not
+  a description of one).
 
 ## Milestones 6-12
 

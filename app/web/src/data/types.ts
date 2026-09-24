@@ -119,3 +119,29 @@ export interface GeneClassification {
   biological_label: BiologicalLabel | null;
   classification_confidence: ClassificationConfidence;
 }
+
+/**
+ * One fixed-size genomic window's worth of expression, for the
+ * chromosome-wide expression map. `nGenes === 0` means an annotation gap
+ * (nothing measured there), distinct from `meanTpm === 0` (measured, not
+ * detected) -- see src/aoryzae_atlas/genome/karyotype.py.
+ */
+export interface ChromosomeBin {
+  start: number;
+  end: number;
+  nGenes: number;
+  nDetectedGenes: number;
+  meanTpm: number | null;
+  log10MeanTpm: number | null;
+}
+
+export interface ChromosomeTrack {
+  chromosome: string;
+  length: number;
+  bins: ChromosomeBin[];
+}
+
+export interface ChromosomeExpression {
+  binSizeBp: number;
+  chromosomes: ChromosomeTrack[];
+}

@@ -8,13 +8,17 @@ for the product scope this is working toward.
 
 ## Status
 
-First slice only. Home view is a gene-ranking overview (every gene, summed
-TPM across samples, stacked bar per gene colored by study, most to least
-expressed, with a zoom control for how many genes to show); clicking a bar
-— or searching by AO09 ID / symbol / name / alias / UniProt accession —
-opens a gene detail view (per-sample TPM bar chart, grouped by condition,
-colored by study). Strain and condition are both optional filters in the
-top bar that scope every chart.
+First slice only. Home view stacks three sections: a gene-ranking overview
+(every gene, summed TPM across samples, stacked bar per gene colored by
+study, most to least expressed, with a zoom control for how many genes to
+show); a gene expression classification donut (biological_label counts
+from `atlas cluster genes`, provisional at pilot scale); and a
+chromosome-wide expression map (all 8 RIB40 chromosomes at true relative
+length, binned mean TPM as a sequential heatmap). Clicking a bar, a donut
+slice, or a chromosome region — or searching by AO09 ID / symbol / name /
+alias / UniProt accession — opens a gene detail view (per-sample TPM bar
+chart, grouped by condition, colored by study). Strain and condition are
+both optional filters in the top bar that scope every chart.
 
 Runs entirely on real data, fetched at runtime rather than bundled (every
 component consumes the `Gene`/`Sample`/`Condition`/`Dataset`/
@@ -25,9 +29,10 @@ not a data-loading module directly):
   catalog, from `metadata/gene_master.tsv` +
   `metadata/gene_external_identifiers.tsv`.
 - `public/data/{datasets,conditions,samples,sample_qc,expression,
-  classification}.json` (`src/data/realAtlas.ts`) — real DuckDB-backed
-  samples/conditions/studies/expression, and the Tau/cluster-based gene
-  classification, for only the samples that are pipeline-QUANTIFIED **and**
+  classification,chromosome_expression}.json` (`src/data/realAtlas.ts`) —
+  real DuckDB-backed samples/conditions/studies/expression, the Tau/
+  cluster-based gene classification, and the binned whole-genome
+  expression map, for only the samples that are pipeline-QUANTIFIED **and**
   condition-curated.
 
 Both are gitignored and regenerated, never hand-edited — see "Running"

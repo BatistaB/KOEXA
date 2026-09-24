@@ -21,7 +21,9 @@ from typing import Any
 import duckdb
 import pandas as pd
 
-from ..paths import CLASSIFICATION_FILE, WEB_DATA_DIR
+from ..genome.karyotype import DEFAULT_BIN_SIZE_BP, NUCLEAR_CHROMOSOMES, bin_gene_expression, chromosome_lengths_by_name
+from ..paths import CLASSIFICATION_FILE, FUNGIDB_GENOME_FASTA_FILE, GENE_FEATURE_TABLE_FILE, WEB_DATA_DIR
+from ..reference.genome_fasta import load_genome_sequence_lengths
 
 __all__ = [
     "CURATED_QUANTIFIED_FILTER",
@@ -31,6 +33,7 @@ __all__ = [
     "export_sample_qc",
     "export_expression",
     "export_classification",
+    "export_chromosome_expression",
     "write_all",
 ]
 
@@ -259,6 +262,49 @@ def export_classification() -> dict[str, Any] | None:
     return {"columns": _CLASSIFICATION_COLUMNS, "rows": rows}
 
 
+_CHROMOSOME_BIN_COLUMNS = ["start", "end", "n_genes", "n_detected_genes", "mean_TPM", "log10_mean_TPM"]
+
+
+def export_chromosome_expression(conn: duckdb.DuckDBPyConnection, bin_size_bp: int = DEFAULT_BIN_SIZE_BP) -> dict[str, Any] | None:
+    """Whole-genome expression map: per-chromosome, fixed-size-window mean
+    TPM, for the karyotype-style heatmap (TODO.md "chromosome-wide TPM
+    abundance map"). None if `atlas stats genes`/`atlas cluster genes`
+    hasn't produced a feature table yet, or the genome FASTA evidence file
+    isn't on disk -- both are prerequisites, not optional.
+    """
+    if not GENE_FEATURE_TABLE_FILE.is_file() or not FUNGIDB_GENOME_FASTA_FILE.is_file():
+        return None
+
+    genes = conn.execute('SELECT canonical_gene_id, chromosome, start, "end" FROM genes').fetchdf()
+    feature_table = pd.read_parquet(GENE_FEATURE_TABLE_FILE)
+    median_tpm = feature_table["median_TPM"]
+    lengths = chromosome_lengths_by_name(load_genome_sequence_lengths(FUNGIDB_GENOME_FASTA_FILE))
+
+    bins_df = bin_gene_expression(genes, median_tpm, lengths, bin_size_bp=bin_size_bp)
+
+    chromosomes_payload: list[dict[str, Any]] = []
+    for chrom in NUCLEAR_CHROMOSOMES:
+        chrom_length = lengths.get(chrom)
+        if chrom_length is None:
+            continue
+        chrom_bins = bins_df[bins_df["chromosome"] == chrom].sort_values("bin_index")
+        bin_rows = []
+        for row in chrom_bins.itertuples(index=False):
+            bin_rows.append(
+                [
+                    int(row.bin_start),
+                    int(row.bin_end),
+                    int(row.n_genes),
+                    int(row.n_detected_genes),
+                    None if math.isnan(row.mean_TPM) else round(float(row.mean_TPM), 3),
+                    None if math.isnan(row.log10_mean_TPM) else round(float(row.log10_mean_TPM), 4),
+                ]
+            )
+        chromosomes_payload.append({"chromosome": chrom, "length": chrom_length, "bins": bin_rows})
+
+    return {"bin_size_bp": bin_size_bp, "bin_columns": _CHROMOSOME_BIN_COLUMNS, "chromosomes": chromosomes_payload}
+
+
 def write_all(conn: duckdb.DuckDBPyConnection, out_dir: Path = WEB_DATA_DIR) -> dict[str, Any]:
     """Write every JSON snapshot; returns a summary dict for CLI reporting."""
     summary: dict[str, Any] = {}
@@ -290,5 +336,13 @@ def write_all(conn: duckdb.DuckDBPyConnection, out_dir: Path = WEB_DATA_DIR) -> 
     else:
         summary["classification_bytes"] = 0
         summary["n_classification_rows"] = 0
+
+    chromosome_expression = export_chromosome_expression(conn)
+    if chromosome_expression is not None:
+        summary["chromosome_expression_bytes"] = _write_json(out_dir / "chromosome_expression.json", chromosome_expression)
+        summary["n_chromosome_bins"] = sum(len(c["bins"]) for c in chromosome_expression["chromosomes"])
+    else:
+        summary["chromosome_expression_bytes"] = 0
+        summary["n_chromosome_bins"] = 0
 
     return summary

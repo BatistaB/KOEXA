@@ -1,4 +1,5 @@
 import type {
+  ChromosomeExpression,
   Condition,
   Dataset,
   GeneClassification,
@@ -29,6 +30,7 @@ export interface RealAtlasData {
   sampleQc: SampleQcMetrics[];
   expression: GeneExpressionRow[];
   classification: Map<string, GeneClassification>;
+  chromosomeExpression: ChromosomeExpression | null;
 }
 
 interface ExpressionRow {
@@ -51,6 +53,34 @@ interface ClassificationRow {
     string | null,
     string,
   ][];
+}
+
+interface ChromosomeExpressionPayload {
+  bin_size_bp: number;
+  bin_columns: string[];
+  chromosomes: {
+    chromosome: string;
+    length: number;
+    bins: [number, number, number, number, number | null, number | null][];
+  }[];
+}
+
+function parseChromosomeExpression(payload: ChromosomeExpressionPayload): ChromosomeExpression {
+  return {
+    binSizeBp: payload.bin_size_bp,
+    chromosomes: payload.chromosomes.map((track) => ({
+      chromosome: track.chromosome,
+      length: track.length,
+      bins: track.bins.map(([start, end, nGenes, nDetectedGenes, meanTpm, log10MeanTpm]) => ({
+        start,
+        end,
+        nGenes,
+        nDetectedGenes,
+        meanTpm,
+        log10MeanTpm,
+      })),
+    })),
+  };
 }
 
 async function fetchJson<T>(path: string): Promise<T> {
@@ -104,14 +134,16 @@ function parseClassification(payload: ClassificationRow): Map<string, GeneClassi
 }
 
 export async function loadRealAtlas(): Promise<RealAtlasData> {
-  const [datasets, conditions, samples, sampleQc, expressionPayload, classificationPayload] = await Promise.all([
-    fetchJson<Dataset[]>("/data/datasets.json"),
-    fetchJson<Condition[]>("/data/conditions.json"),
-    fetchJson<Sample[]>("/data/samples.json"),
-    fetchJson<SampleQcMetrics[]>("/data/sample_qc.json"),
-    fetchJson<ExpressionRow>("/data/expression.json"),
-    fetchJson<ClassificationRow | null>("/data/classification.json").catch(() => null),
-  ]);
+  const [datasets, conditions, samples, sampleQc, expressionPayload, classificationPayload, chromosomeExpressionPayload] =
+    await Promise.all([
+      fetchJson<Dataset[]>("/data/datasets.json"),
+      fetchJson<Condition[]>("/data/conditions.json"),
+      fetchJson<Sample[]>("/data/samples.json"),
+      fetchJson<SampleQcMetrics[]>("/data/sample_qc.json"),
+      fetchJson<ExpressionRow>("/data/expression.json"),
+      fetchJson<ClassificationRow | null>("/data/classification.json").catch(() => null),
+      fetchJson<ChromosomeExpressionPayload | null>("/data/chromosome_expression.json").catch(() => null),
+    ]);
 
   return {
     datasets,
@@ -120,5 +152,6 @@ export async function loadRealAtlas(): Promise<RealAtlasData> {
     sampleQc,
     expression: parseExpression(expressionPayload),
     classification: classificationPayload ? parseClassification(classificationPayload) : new Map(),
+    chromosomeExpression: chromosomeExpressionPayload ? parseChromosomeExpression(chromosomeExpressionPayload) : null,
   };
 }

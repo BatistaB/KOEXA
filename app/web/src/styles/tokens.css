@@ -46,6 +46,17 @@
   --series-5: #e87ba4;
   --series-6: #4a3aa7;
 
+  /* Sequential (magnitude — the chromosome expression map). One hue
+     (blue, same anchor as --accent/--series-1), light->dark, from the
+     dataviz skill's reference palette. "No data" (an annotation gap, not
+     a measured zero) uses --surface-sunken, never the ramp's own lightest
+     step, so the two meanings never look the same. */
+  --seq-100: #cde2fb;
+  --seq-200: #9ec5f4;
+  --seq-350: #5598e7;
+  --seq-450: #2a78d6;
+  --seq-600: #184f95;
+
   /* Chart chrome */
   --chart-gridline: #e1e0d9;
   --chart-axis: #c3c2b7;
@@ -110,6 +121,16 @@
     --series-4: #c98500;
     --series-5: #d55181;
     --series-6: #9085e9;
+
+    /* Dark sequential ramp: anchored on the same dark accent steps used
+       elsewhere (--accent/--accent-strong), interpolated toward the dark
+       surface at the low end rather than reusing the light ramp's pale
+       steps, which would sit near-invisible on a dark surface. */
+    --seq-100: #16283f;
+    --seq-200: #1f3c60;
+    --seq-350: #2c5c95;
+    --seq-450: #3987e5;
+    --seq-600: #86b6ef;
 
     --chart-gridline: #2c2c2a;
     --chart-axis: #383835;
