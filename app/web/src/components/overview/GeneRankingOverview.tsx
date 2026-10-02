@@ -11,7 +11,7 @@ interface GeneRankingOverviewProps {
   rankings: GeneRanking[];
   datasets: [string, string][];
   datasetColor: (bioproject: string) => string;
-  onSelectGene: (gene: Gene) => void;
+  onSelectGene: (gene: Gene, bioproject?: string) => void;
   onSelectDataset: (bioproject: string) => void;
   filterSummary: string;
 }
@@ -63,11 +63,11 @@ export function GeneRankingOverview({
 
       <p className="ranking-overview__subtitle">
         {isAll ? "Every gene" : `Top ${shownCount.toLocaleString("en-US")} of ${rankings.length.toLocaleString("en-US")} genes`}
-        , from most to least expressed — summed TPM across samples, colored
+        , from most to least expressed — summed TPM across samples, stacked
         by study. {filterSummary}
         {isDense
-          ? " Individual labels are hidden at this density — hover or click a position to inspect the gene there."
-          : " Search above to jump to any other gene directly."}
+          ? " Individual labels are hidden at this density — hover a position to inspect the gene, or click a colored band to open that gene for just that study."
+          : " Click a study's segment to see that gene sample by sample for the study, or search above to jump to any other gene."}
       </p>
 
       {shown.length === 0 ? (

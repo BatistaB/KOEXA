@@ -18,6 +18,8 @@ interface GeneWorkspaceProps {
   onHoverSample: (id: string | null) => void;
   onSelectSample: (id: string) => void;
   onSelectDataset: (bioproject: string) => void;
+  studyScope: string | null;
+  onClearStudyScope: () => void;
   loading: boolean;
   onBack: () => void;
 }
@@ -33,6 +35,8 @@ export function GeneWorkspace({
   onHoverSample,
   onSelectSample,
   onSelectDataset,
+  studyScope,
+  onClearStudyScope,
   loading,
   onBack,
 }: GeneWorkspaceProps) {
@@ -42,6 +46,17 @@ export function GeneWorkspace({
         ← All genes
       </button>
       <GeneHeader gene={gene} />
+      {studyScope && (
+        <div className="gene-workspace__scope" role="status">
+          <span className="gene-workspace__scope-dot" style={{ background: datasetColor(studyScope) }} />
+          <span>
+            Showing sample-level expression for study <strong className="mono">{studyScope}</strong> only
+          </span>
+          <button type="button" className="gene-workspace__scope-clear" onClick={onClearStudyScope}>
+            Show all studies
+          </button>
+        </div>
+      )}
       {loading ? (
         <div className="gene-workspace__skeleton-chart">
           <Skeleton height={320} />

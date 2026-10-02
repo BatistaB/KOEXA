@@ -38,6 +38,8 @@ function App() {
   const [selectedSampleId, setSelectedSampleId] = useState<string | null>(null);
   const [hoveredSampleId, setHoveredSampleId] = useState<string | null>(null);
   const [selectedBioproject, setSelectedBioproject] = useState<string | null>(null);
+  // When set, the gene view shows only this study's samples (reached by clicking a study segment on the home ranking).
+  const [studyScope, setStudyScope] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification, chromosomeExpression } = atlas;
@@ -90,12 +92,15 @@ function App() {
 
   const goHome = () => {
     setSelectedGeneId(null);
+    setStudyScope(null);
     setSelectedSampleId(null);
     setSelectedBioproject(null);
   };
 
-  const selectGene = (gene: Gene) => {
+  const selectGene = (gene: Gene, bioproject?: string) => {
     setSelectedGeneId(gene.canonical_gene_id);
+    setStudyScope(bioproject ?? null);
+    setSelectedSampleId(null);
     setSelectedBioproject(null);
   };
 
@@ -131,28 +136,38 @@ function App() {
   }, [filteredSamples, datasets]);
 
   const rankings = useMemo(
-    () => buildGeneRankings(allGenes, samples, conditions, datasets, geneExpression, strainFilter, conditionFilter),
-    [allGenes, samples, conditions, datasets, geneExpression, strainFilter, conditionFilter],
+    () => buildGeneRankings(allGenes, samples, datasets, geneExpression, strainFilter, conditionFilter),
+    [allGenes, samples, datasets, geneExpression, strainFilter, conditionFilter],
+  );
+
+  const scopedSamples = useMemo(
+    () => (studyScope ? samples.filter((s) => s.bioproject === studyScope) : samples),
+    [samples, studyScope],
   );
 
   const points = useMemo(() => {
     if (!selectedGene) return [];
     return buildChartPoints(
       selectedGene,
-      samples,
+      scopedSamples,
       conditions,
       datasets,
       geneExpression,
       strainFilter,
       conditionFilter,
     );
-  }, [selectedGene, samples, conditions, datasets, geneExpression, strainFilter, conditionFilter]);
+  }, [selectedGene, scopedSamples, conditions, datasets, geneExpression, strainFilter, conditionFilter]);
 
   useEffect(() => {
     if (selectedSampleId && !points.some((p) => p.sample.sample_id === selectedSampleId)) {
       setSelectedSampleId(null);
     }
   }, [points, selectedSampleId]);
+
+  const scopedFilteredCount = useMemo(
+    () => (studyScope ? filteredSamples.filter((s) => s.bioproject === studyScope).length : filteredSamples.length),
+    [filteredSamples, studyScope],
+  );
 
   const geneSummary: GeneSummary | null = useMemo(() => {
     if (!selectedGene) return null;
@@ -162,11 +177,11 @@ function App() {
       sampleCount: points.length,
       conditionCount: new Set(points.map((p) => p.condition.condition_id)).size,
       datasetCount: new Set(points.map((p) => p.sample.bioproject)).size,
-      detectionRate: filteredSamples.length ? detected.length / filteredSamples.length : 0,
+      detectionRate: scopedFilteredCount ? detected.length / scopedFilteredCount : 0,
       medianTpm: median(points.map((p) => p.tpm)),
       classification: classification.get(selectedGene.canonical_gene_id) ?? null,
     };
-  }, [selectedGene, points, filteredSamples, classification]);
+  }, [selectedGene, points, scopedFilteredCount, classification]);
 
   const atlasSummary: AtlasSummary = useMemo(
     () => ({
@@ -249,6 +264,8 @@ function App() {
               onHoverSample={setHoveredSampleId}
               onSelectSample={selectSample}
               onSelectDataset={selectDataset}
+              studyScope={studyScope}
+              onClearStudyScope={() => setStudyScope(null)}
               loading={loading}
               onBack={goHome}
             />
@@ -275,7 +292,6 @@ function App() {
                 genes={allGenes}
                 classification={classification}
                 samples={samples}
-                conditions={conditions}
                 datasets={datasets}
                 geneExpression={geneExpression}
                 strainFilter={strainFilter}

@@ -2,7 +2,6 @@ import { useMemo, useRef, useState } from "react";
 import type {
   ChromosomeBin,
   ChromosomeExpression,
-  Condition,
   Dataset,
   Gene,
   GeneClassification,
@@ -19,7 +18,6 @@ interface ChromosomeExpressionMapProps {
   genes: Gene[];
   classification: Map<string, GeneClassification>;
   samples: Sample[];
-  conditions: Condition[];
   datasets: Dataset[];
   geneExpression: GeneExpressionRow[];
   strainFilter: string;
@@ -69,7 +67,6 @@ export function ChromosomeExpressionMap({
   genes,
   classification,
   samples,
-  conditions,
   datasets,
   geneExpression,
   strainFilter,
@@ -107,9 +104,9 @@ export function ChromosomeExpressionMap({
   const regionRankings = useMemo(
     () =>
       selectedBin
-        ? buildGeneRankings(regionGenes, samples, conditions, datasets, geneExpression, strainFilter, conditionFilter)
+        ? buildGeneRankings(regionGenes, samples, datasets, geneExpression, strainFilter, conditionFilter)
         : [],
-    [selectedBin, regionGenes, samples, conditions, datasets, geneExpression, strainFilter, conditionFilter],
+    [selectedBin, regionGenes, samples, datasets, geneExpression, strainFilter, conditionFilter],
   );
 
   const regionVisibleDatasets = useMemo((): [string, string][] => {

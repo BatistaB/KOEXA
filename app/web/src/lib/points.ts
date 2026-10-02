@@ -60,14 +60,13 @@ export function buildChartPoints(
 /**
  * Ranks every gene by summed TPM across the filtered sample set — "which
  * genes dominate total expression in this slice of the atlas," not a
- * per-sample comparison. Segments are ordered by dataset (matching the
- * shared legend order) so same-color contributions stay visually
- * contiguous within each stacked bar.
+ * per-sample comparison. Each bar is stacked by study (one segment per
+ * BioProject, TPM summed over that study's samples), ordered to match the
+ * shared legend; per-sample detail is the gene view's job, not this chart's.
  */
 export function buildGeneRankings(
   genes: Gene[],
   samples: Sample[],
-  conditions: Condition[],
   datasets: Dataset[],
   expression: GeneExpressionRow[],
   strainFilter: string,
@@ -79,27 +78,23 @@ export function buildGeneRankings(
     if (conditionFilter !== "all" && s.condition_id !== conditionFilter) return false;
     return true;
   });
-  const conditionById = new Map(conditions.map((c) => [c.condition_id, c]));
   const getExpression = makeExpressionGetter(expression);
 
   const rankings: GeneRanking[] = genes.map((gene) => {
-    const segments = [];
+    const byStudy = new Map<string, { tpm: number; sampleCount: number }>();
     let total = 0;
     for (const sample of eligibleSamples) {
       const { tpm } = getExpression(gene.canonical_gene_id, sample);
       if (tpm <= 0) continue;
       total += tpm;
-      segments.push({
-        sample,
-        condition: conditionById.get(sample.condition_id),
-        bioproject: sample.bioproject,
-        tpm,
-      });
+      const acc = byStudy.get(sample.bioproject) ?? { tpm: 0, sampleCount: 0 };
+      acc.tpm += tpm;
+      acc.sampleCount += 1;
+      byStudy.set(sample.bioproject, acc);
     }
-    segments.sort((a, b) => {
-      const orderDiff = (datasetOrder.get(a.bioproject) ?? 0) - (datasetOrder.get(b.bioproject) ?? 0);
-      return orderDiff !== 0 ? orderDiff : a.sample.sample_id.localeCompare(b.sample.sample_id);
-    });
+    const segments = Array.from(byStudy, ([bioproject, v]) => ({ bioproject, ...v })).sort(
+      (a, b) => (datasetOrder.get(a.bioproject) ?? 0) - (datasetOrder.get(b.bioproject) ?? 0),
+    );
     return { gene, total, segments };
   });
 

@@ -12,7 +12,9 @@ interface GeneRankingChartProps {
   rankings: GeneRanking[];
   datasets: [string, string][];
   datasetColor: (bioproject: string) => string;
-  onSelectGene: (gene: Gene) => void;
+  /** `bioproject` is set when a specific study segment was clicked, so the
+   * gene view can open scoped to that study's samples. */
+  onSelectGene: (gene: Gene, bioproject?: string) => void;
   onSelectDataset: (bioproject: string) => void;
 }
 
@@ -26,7 +28,7 @@ const SEGMENT_GAP = 1;
 /** Past this many bars, per-gene text labels and per-sample segments stop
  * being legible or renderable at reasonable cost — switch to an
  * aggregated "skyline" with crosshair hover instead of per-bar hit
- * targets. Exported so the overview can word its hint text accordingly. */
+ * targets. Bars are stacked by study in both modes. Exported so the overview can word its hint text accordingly. */
 export const DENSE_THRESHOLD = 60;
 
 interface LabeledHoverState {
@@ -64,8 +66,6 @@ export function GeneRankingChart({
   const bandWidth = INNER_W / Math.max(1, rankings.length);
   const barWidth = dense ? Math.max(bandWidth * 0.86, 0.35) : Math.min(44, bandWidth * 0.5);
 
-  const datasetOrder = useMemo(() => new Map(datasets.map(([bioproject], i) => [bioproject, i])), [datasets]);
-
   const showLabeledTooltip = (segment: RankingSegment, gene: Gene, total: number, target: Element) => {
     const containerRect = containerRef.current?.getBoundingClientRect();
     const targetRect = target.getBoundingClientRect();
@@ -94,16 +94,8 @@ export function GeneRankingChart({
     rankings.forEach((ranking, gi) => {
       const centerX = gi * bandWidth + bandWidth / 2;
       const barX = centerX - barWidth / 2;
-      const totals = new Map<string, number>();
-      for (const seg of ranking.segments) {
-        totals.set(seg.bioproject, (totals.get(seg.bioproject) ?? 0) + seg.tpm);
-      }
-      const ordered = Array.from(totals.keys()).sort(
-        (a, b) => (datasetOrder.get(a) ?? 0) - (datasetOrder.get(b) ?? 0),
-      );
       let cumulative = 0;
-      for (const bioproject of ordered) {
-        const tpm = totals.get(bioproject) ?? 0;
+      for (const { bioproject, tpm } of ranking.segments) {
         const before = cumulative;
         cumulative += tpm;
         const yTop = INNER_H - (cumulative / yMax) * INNER_H;
@@ -116,7 +108,7 @@ export function GeneRankingChart({
       }
     });
     return byDataset;
-  }, [dense, rankings, bandWidth, barWidth, yMax, datasetOrder]);
+  }, [dense, rankings, bandWidth, barWidth, yMax]);
 
   const resolveDenseIndex = (clientX: number): number => {
     const overlayRect = overlayRef.current?.getBoundingClientRect();
@@ -124,6 +116,21 @@ export function GeneRankingChart({
     const scaleX = overlayRect.width / INNER_W;
     const localSvgX = (clientX - overlayRect.left) / scaleX;
     return Math.min(rankings.length - 1, Math.max(0, Math.floor(localSvgX / bandWidth)));
+  };
+
+  /** Which study's stack segment sits at this vertical position of the
+   * clicked bar, or undefined if the click landed above the bar. */
+  const resolveStudyAtY = (ranking: GeneRanking, clientY: number): string | undefined => {
+    const overlayRect = overlayRef.current?.getBoundingClientRect();
+    if (!overlayRect || overlayRect.height === 0) return undefined;
+    const svgY = ((clientY - overlayRect.top) / overlayRect.height) * INNER_H;
+    const value = ((INNER_H - svgY) / INNER_H) * yMax;
+    let cumulative = 0;
+    for (const seg of ranking.segments) {
+      cumulative += seg.tpm;
+      if (value <= cumulative) return seg.bioproject;
+    }
+    return undefined;
   };
 
   const showDenseHoverAt = (index: number, clientX: number) => {
@@ -155,7 +162,7 @@ export function GeneRankingChart({
       <div className="ranking-chart__controls">
         {legend}
         <span className="ranking-chart__hint">
-          {dense ? "Hover to inspect a gene, click to open it" : "Click a bar to see the gene in detail"}
+          {dense ? "Hover to inspect a gene — click a colored band to see that study sample by sample" : "Click a study segment to see that gene sample by sample"}
         </span>
       </div>
 
@@ -165,7 +172,7 @@ export function GeneRankingChart({
           viewBox={`0 0 ${VB_W} ${VB_H}`}
           preserveAspectRatio="xMidYMid meet"
           role="img"
-          aria-label={`${rankings.length.toLocaleString("en-US")} genes ranked from most to least expressed, TPM summed per sample, colored by study`}
+          aria-label={`${rankings.length.toLocaleString("en-US")} genes ranked from most to least expressed, TPM summed per study`}
         >
           <g transform={`translate(${MARGIN.left},${MARGIN.top})`}>
             {ticks.map((t) => (
@@ -182,7 +189,7 @@ export function GeneRankingChart({
               transform={`translate(${-MARGIN.left + 16}, ${INNER_H / 2}) rotate(-90)`}
               textAnchor="middle"
             >
-              TPM total (sum across samples)
+              TPM total (sum across samples, stacked by study)
             </text>
 
             <line x1={0} x2={INNER_W} y1={INNER_H} y2={INNER_H} stroke="var(--chart-axis)" strokeWidth={1} />
@@ -222,7 +229,7 @@ export function GeneRankingChart({
                           : rectPath(barX, top, barWidth, height);
                         return (
                           <path
-                            key={segment.sample.sample_id}
+                            key={segment.bioproject}
                             className="ranking-chart__segment"
                             d={path}
                             fill={datasetColor(segment.bioproject)}
@@ -230,13 +237,17 @@ export function GeneRankingChart({
                             onMouseLeave={clearLabeledTooltip}
                             tabIndex={0}
                             role="button"
-                            aria-label={`${primaryGeneLabel(ranking.gene)}, sample ${segment.sample.sample_id}, ${formatTpm(segment.tpm)} TPM`}
+                            aria-label={`${primaryGeneLabel(ranking.gene)}, study ${segment.bioproject}, ${formatTpm(segment.tpm)} TPM summed over ${segment.sampleCount} samples — open sample by sample`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onSelectGene(ranking.gene, segment.bioproject);
+                            }}
                             onFocus={(e) => showLabeledTooltip(segment, ranking.gene, ranking.total, e.currentTarget)}
                             onBlur={clearLabeledTooltip}
                             onKeyDown={(e) => {
                               if (e.key === "Enter" || e.key === " ") {
                                 e.preventDefault();
-                                onSelectGene(ranking.gene);
+                                onSelectGene(ranking.gene, segment.bioproject);
                               }
                             }}
                           />
@@ -315,7 +326,7 @@ export function GeneRankingChart({
                   onClick={(e) => {
                     const idx = resolveDenseIndex(e.clientX);
                     const ranking = rankings[idx];
-                    if (ranking) onSelectGene(ranking.gene);
+                    if (ranking) onSelectGene(ranking.gene, resolveStudyAtY(ranking, e.clientY));
                   }}
                   onKeyDown={(e) => {
                     const current = denseHover?.index ?? 0;
@@ -345,11 +356,12 @@ export function GeneRankingChart({
           <div className="ranking-chart__tooltip" style={{ left: labeledHover.x, top: labeledHover.y - 10 }}>
             <div className="ranking-chart__tooltip-gene">{primaryGeneLabel(labeledHover.gene)}</div>
             <div className="ranking-chart__tooltip-value">{formatTpm(labeledHover.segment.tpm)} TPM</div>
-            <div className="ranking-chart__tooltip-row mono">{labeledHover.segment.sample.sample_id}</div>
-            <div className="ranking-chart__tooltip-row">{labeledHover.segment.bioproject}</div>
-            {labeledHover.segment.condition && (
-              <div className="ranking-chart__tooltip-row">{labeledHover.segment.condition.condition_label}</div>
-            )}
+            <div className="ranking-chart__tooltip-row mono">{labeledHover.segment.bioproject}</div>
+            <div className="ranking-chart__tooltip-row">
+              sum over {labeledHover.segment.sampleCount} sample{labeledHover.segment.sampleCount === 1 ? "" : "s"}
+              {labeledHover.total > 0 ? ` · ${Math.round((labeledHover.segment.tpm / labeledHover.total) * 100)}% of total` : ""}
+            </div>
+            <div className="ranking-chart__tooltip-row">click to see samples</div>
             <div className="ranking-chart__tooltip-total">gene total: {formatTpm(labeledHover.total)} TPM</div>
           </div>
         )}
@@ -360,6 +372,12 @@ export function GeneRankingChart({
             <div className="ranking-chart__tooltip-value">{formatTpm(denseHoverRanking.total)} TPM</div>
             <div className="ranking-chart__tooltip-row mono">{denseHoverRanking.gene.canonical_gene_id}</div>
             <div className="ranking-chart__tooltip-row">rank #{(denseHover.index + 1).toLocaleString("en-US")} of {rankings.length.toLocaleString("en-US")}</div>
+            {denseHoverRanking.segments.map((seg) => (
+              <div className="ranking-chart__tooltip-row" key={seg.bioproject}>
+                <span className="ranking-chart__legend-dot" style={{ background: datasetColor(seg.bioproject), display: "inline-block", marginRight: 6 }} />
+                {seg.bioproject}: {formatTpm(seg.tpm)} TPM
+              </div>
+            ))}
           </div>
         )}
       </div>

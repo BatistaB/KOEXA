@@ -3,9 +3,14 @@ import type { ChartPoint } from "./chartTypes";
 import { logTicks, niceLinearTicks } from "../../lib/chartScale";
 import { shortConditionLabel } from "../../lib/conditionLabel";
 import { formatTpm } from "../../lib/format";
+import { truncateLabel } from "../../lib/geneDisplay";
 import { roundedTopBarPath } from "../../lib/barPath";
 import { DatasetLink } from "../common/DatasetLink";
 import "./ExpressionChart.css";
+
+/** Max characters of a condition label drawn on the x axis; the full text
+ * stays available as a hover tooltip and in the sample table. */
+const X_TICK_MAX_CHARS = 40;
 
 export type ChartScale = "linear" | "log";
 
@@ -199,7 +204,15 @@ export function ExpressionChart({
                     textAnchor="end"
                     transform={`rotate(-28, ${centerX}, ${INNER_H + 14})`}
                   >
-                    {group.condition ? shortConditionLabel(group.condition) : group.conditionId}
+                    {(() => {
+                      const full = group.condition ? shortConditionLabel(group.condition) : group.conditionId;
+                      return (
+                        <>
+                          <title>{full}</title>
+                          {truncateLabel(full, X_TICK_MAX_CHARS)}
+                        </>
+                      );
+                    })()}
                   </text>
 
                   {group.points.map((point, idx) => {
