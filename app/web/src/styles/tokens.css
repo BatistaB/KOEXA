@@ -46,6 +46,19 @@
   --series-5: #e87ba4;
   --series-6: #4a3aa7;
 
+  /* Expression classes (pan-transcriptomic rank). The three constitutive
+     tiers are ONE hue (blue), ordinal light->dark = low->high level; the
+     rest are single, fixed categorical slots (violet, amber, grays).
+     Identity is never carried by color alone: every chart pairs these
+     with a text label. Ordinal steps validated with the dataviz skill. */
+  --class-constitutive-high: #104281;
+  --class-constitutive-core: #2a78d6;
+  --class-constitutive-low: #86b6ef;
+  --class-broad-variable: #4a3aa7;
+  --class-context-specific: #eda100;
+  --class-rare-silent: #52514e;
+  --class-intermediate: #a9a79f;
+
   /* Sequential (magnitude — the chromosome expression map). One hue
      (blue, same anchor as --accent/--series-1), light->dark, from the
      dataviz skill's reference palette. "No data" (an annotation gap, not
@@ -121,6 +134,17 @@
     --series-4: #c98500;
     --series-5: #d55181;
     --series-6: #9085e9;
+
+    /* Dark class palette: same hues restepped for the dark surface; for the
+       ordinal blue tiers "high" is the lightest step (nothing darker than
+       step ~550 so the lowest tier stays visible on the surface). */
+    --class-constitutive-high: #86b6ef;
+    --class-constitutive-core: #3987e5;
+    --class-constitutive-low: #1c5cab;
+    --class-broad-variable: #9085e9;
+    --class-context-specific: #c98500;
+    --class-rare-silent: #898781;
+    --class-intermediate: #5f5e58;
 
     /* Dark sequential ramp: anchored on the same dark accent steps used
        elsewhere (--accent/--accent-strong), interpolated toward the dark

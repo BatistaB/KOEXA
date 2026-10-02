@@ -75,6 +75,11 @@ from ..paths import (
     DISCOVERY_DIR,
     DISCOVERY_RAW_API_RESPONSES_DIR,
     ENTROPY_TABLE_FILE,
+    EXPRESSION_RANK_FILE,
+    EXPRESSION_RANK_SUMMARY_FILE,
+    EXPRESSION_RANK_THRESHOLDS_FILE,
+    EXPRESSION_RANK_TSV_FILE,
+    GENE_BY_BIOSAMPLE_TPM_FILE,
     FUNGIDB_GENE_ALIASES_FILE,
     FUNGIDB_GENE_PRODUCT_UPDATES_FILE,
     FUNGIDB_GENOME_FASTA_FILE,
@@ -103,6 +108,7 @@ from ..paths import (
 from ..reference.transcript_to_gene import load_transcript_to_gene, write_t2g_tsv
 from ..reference.validate import render_validation_report, validate_reference
 from ..runtime_status import init_runtime_status, load_runtime_status
+from ..rank.pipeline import NoQuantifiedSamplesError, build_expression_rank, write_rank_outputs
 from ..webexport.build import write_all as export_web_data
 
 logger = get_logger("cli")
@@ -542,7 +548,8 @@ def refresh(ctx: click.Context) -> None:
 
         database migrate -> database load-genes -> database load-discovery
         -> database load-conditions -> process ingest --all -> matrix build
-        -> stats genes -> entropy genes -> cluster genes -> app export-web
+        -> stats genes -> entropy genes -> cluster genes -> rank genes
+        -> app export-web
 
     Every step is idempotent and safe to re-run. A step whose required
     input doesn't exist yet (e.g. no reports/discovery/*.tsv before the
@@ -561,6 +568,7 @@ def refresh(ctx: click.Context) -> None:
         ("stats genes", stats_genes, {}),
         ("entropy genes", entropy_genes, {}),
         ("cluster genes", cluster_genes, {}),
+        ("rank genes", rank_genes, {"no_robustness": False}),
         ("app export-web", app_export_web, {}),
     ]
     n_ok, n_skipped = 0, 0
@@ -953,6 +961,10 @@ def app_export_web() -> None:
         click.echo(f"Classification: {summary['n_classification_rows']:,} genes ({summary['classification_bytes'] / 1024:.0f} KB)")
     else:
         click.echo("Classification: not exported (run 'atlas cluster genes' first)")
+    if summary.get("n_expression_rank_rows"):
+        click.echo(f"Expression rank: {summary['n_expression_rank_rows']:,} genes ({summary['expression_rank_bytes'] / 1024:.0f} KB)")
+    else:
+        click.echo("Expression rank: not exported (run 'atlas rank genes' first)")
     if summary["n_chromosome_bins"]:
         click.echo(f"Chromosome map: {summary['n_chromosome_bins']:,} bins ({summary['chromosome_expression_bytes'] / 1024:.0f} KB)")
     else:
@@ -1066,6 +1078,56 @@ def cluster_genes() -> None:
     click.echo(f"Wrote {CLASSIFICATION_FILE}")
     click.echo(f"Wrote {CLASSIFICATION_TSV_FILE}")
     click.echo(f"Wrote {CLASSIFICATION_SUMMARY_FILE}")
+
+
+@cli.group()
+def rank() -> None:
+    """Pan-transcriptomic expression rank: global gene behavior across ALL samples."""
+
+
+@rank.command("genes")
+@click.option("--no-robustness", is_flag=True, help="Skip the leave-one-study/strain-out robustness runs (faster).")
+def rank_genes(no_robustness: bool) -> None:
+    """Classify every gene by its global expression behavior across all independent samples.
+
+    Unit of analysis = biosample (runs of one biosample are averaged); no per-study differential
+    expression and no condition curation needed. Writes the per-gene table (parquet + tsv.gz),
+    the quantile-derived thresholds, a scope/robustness summary (read by the web export) and the
+    genes x biosamples TPM matrix. Re-run (or just run 'atlas refresh') whenever samples are added:
+    every threshold is re-derived from the current atlas.
+
+    The logic lives in aoryzae_atlas/rank/pipeline.py -- the notebook
+    notebooks/gene_expression_classification.ipynb checks itself against that same function.
+    """
+    if not DATABASE_FILE.is_file():
+        raise click.ClickException("No database found. Run 'atlas database migrate' first.")
+    conn = duckdb.connect(str(DATABASE_FILE), read_only=True)
+    try:
+        result = build_expression_rank(conn, with_robustness=not no_robustness)
+    except NoQuantifiedSamplesError as exc:
+        raise click.ClickException(str(exc)) from exc
+    finally:
+        conn.close()
+
+    write_rank_outputs(
+        result,
+        parquet_path=EXPRESSION_RANK_FILE,
+        tsv_gz_path=EXPRESSION_RANK_TSV_FILE,
+        thresholds_path=EXPRESSION_RANK_THRESHOLDS_FILE,
+        summary_path=EXPRESSION_RANK_SUMMARY_FILE,
+        biosample_matrix_path=GENE_BY_BIOSAMPLE_TPM_FILE,
+    )
+    scope = result.scope
+    logger.info("rank genes: %d genes, %d samples, %s", scope["n_genes"], scope["n_samples"], scope["class_counts"])
+    click.echo(
+        f"{scope['n_genes']:,} genes over {scope['n_samples']} independent samples "
+        f"({scope['n_runs']} runs, {scope['n_studies']} studies, {scope['n_strains']} strains)"
+    )
+    for name, count in scope["class_counts"].items():
+        click.echo(f"  {name:<20} {count:>6,}  ({count / scope['n_genes']:.1%})")
+    if scope["median_robustness_agreement"] is not None:
+        click.echo(f"median class agreement under leave-one-study/strain-out: {scope['median_robustness_agreement']:.0%}")
+    click.echo(f"Wrote {EXPRESSION_RANK_FILE}")
 
 
 @cli.group()

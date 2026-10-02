@@ -34,6 +34,15 @@ not a data-loading module directly):
   cluster-based gene classification, and the binned whole-genome
   expression map, for only the samples that are pipeline-QUANTIFIED **and**
   condition-curated.
+- `public/data/expression_rank.json` (`src/data/realAtlas.ts`) — the
+  pan-transcriptomic expression rank (`atlas rank genes`): each gene's
+  class, level/stability/specificity/prevalence scores, the six rank
+  orderings and quality flags, plus a `summary` (atlas scope, thresholds,
+  robustness). It drives the homepage "Global expression behavior" section
+  (`components/overview/ExpressionRankSection.tsx`) and the gene panel; when
+  the file is absent the homepage falls back to the older condition-level
+  donut. Classes are re-derived from the whole atlas on every
+  `atlas refresh`, so nothing here is hard-coded to a sample count.
 
 Both are gitignored and regenerated, never hand-edited — see "Running"
 below. There is no synthetic/fixture data path anymore; a gene or sample

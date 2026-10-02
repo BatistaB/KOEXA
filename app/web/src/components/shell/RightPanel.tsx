@@ -1,4 +1,5 @@
-import type { Condition, Dataset, Gene, GeneClassification, Sample, SampleQcMetrics } from "../../data/types";
+import type { Condition, Dataset, ExpressionRankRow, Gene, GeneClassification, Sample, SampleQcMetrics } from "../../data/types";
+import { classColor, CLASS_DESCRIPTION, FLAG_TEXT, flagList } from "../../lib/expressionRank";
 import { StatusBadge } from "../common/StatusBadge";
 import { DatasetLink } from "../common/DatasetLink";
 import { formatCounts, formatPercent, formatReadCount, formatTpm } from "../../lib/format";
@@ -15,6 +16,9 @@ export interface GeneSummary {
   /** null while the atlas is loading, or if the gene wasn't classified
    * (fewer than 2 detected conditions -- Tau is undefined there). */
   classification: GeneClassification | null;
+  /** Pan-transcriptomic expression rank for this gene (null until `atlas rank genes` has been exported). */
+  rank: ExpressionRankRow | null;
+  rankTotal: number;
 }
 
 const BIOLOGICAL_LABEL_TEXT: Record<string, string> = {
@@ -307,9 +311,59 @@ export function RightPanel({
         </div>
       </div>
 
+      {geneSummary.rank && (
+        <div className="right-panel__section">
+          <div className="right-panel__section-label">Global expression behavior</div>
+          <div className="right-panel__row">
+            <span className="right-panel__row-label">Class</span>
+            <span className="right-panel__row-value" title={CLASS_DESCRIPTION[geneSummary.rank.expression_class]}>
+              <span className="right-panel__class-dot" style={{ background: classColor(geneSummary.rank.expression_class) }} aria-hidden="true" />
+              {geneSummary.rank.expression_class}
+            </span>
+          </div>
+          <div className="right-panel__scores">
+            {(
+              [
+                ["Level", geneSummary.rank.level_score],
+                ["Stability", geneSummary.rank.stability_score],
+                ["Specificity", geneSummary.rank.specificity_score],
+                ["Prevalence", geneSummary.rank.prevalence_score],
+              ] as [string, number][]
+            ).map(([label, value]) => (
+              <div className="right-panel__score" key={label}>
+                <span className="right-panel__score-label">{label}</span>
+                <span className="right-panel__score-track" aria-hidden="true">
+                  <span style={{ width: `${value * 100}%` }} />
+                </span>
+                <span className="right-panel__score-value mono" aria-label={`${label} percentile ${Math.round(value * 100)}`}>
+                  {Math.round(value * 100)}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="right-panel__row">
+            <span className="right-panel__row-label">Constitutive rank</span>
+            <span className="right-panel__row-value mono">
+              #{geneSummary.rank.global_rank.toLocaleString("en-US")}
+              {geneSummary.rankTotal > 0 && ` of ${geneSummary.rankTotal.toLocaleString("en-US")}`}
+            </span>
+          </div>
+          {flagList(geneSummary.rank).length > 0 && (
+            <ul className="right-panel__flags">
+              {flagList(geneSummary.rank).map((flag) => (
+                <li key={flag}>⚑ {FLAG_TEXT[flag] ?? flag}</li>
+              ))}
+            </ul>
+          )}
+          <p className="right-panel__note">Scores are percentiles across all genes over all independent samples (100 = highest).</p>
+        </div>
+      )}
+
       {geneSummary.classification && (
         <div className="right-panel__section">
-          <div className="right-panel__section-label">Expression behavior</div>
+          <div className="right-panel__section-label">
+            {geneSummary.rank ? "Condition-level clustering (preliminary)" : "Expression behavior"}
+          </div>
           <div className="right-panel__row">
             <span className="right-panel__row-label">Category</span>
             <span className="right-panel__row-value">

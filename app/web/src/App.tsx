@@ -6,6 +6,7 @@ import { RightPanel, type AtlasSummary, type DatasetDetail, type GeneSummary } f
 import { GeneWorkspace } from "./components/gene/GeneWorkspace";
 import { GeneRankingOverview } from "./components/overview/GeneRankingOverview";
 import { ClassificationPieChart } from "./components/overview/ClassificationPieChart";
+import { ExpressionRankSection } from "./components/overview/ExpressionRankSection";
 import { ChromosomeExpressionMap } from "./components/overview/ChromosomeExpressionMap";
 import { Skeleton } from "./components/common/Skeleton";
 import type { ChartScale } from "./components/gene/ExpressionChart";
@@ -22,6 +23,7 @@ const EMPTY_ATLAS: RealAtlasData = {
   sampleQc: [],
   expression: [],
   classification: new Map(),
+  expressionRank: null,
   chromosomeExpression: null,
 };
 
@@ -42,7 +44,7 @@ function App() {
   const [studyScope, setStudyScope] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification, chromosomeExpression } = atlas;
+  const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification, expressionRank, chromosomeExpression } = atlas;
 
   useEffect(() => {
     let cancelled = false;
@@ -180,8 +182,10 @@ function App() {
       detectionRate: scopedFilteredCount ? detected.length / scopedFilteredCount : 0,
       medianTpm: median(points.map((p) => p.tpm)),
       classification: classification.get(selectedGene.canonical_gene_id) ?? null,
+      rank: expressionRank?.byGene.get(selectedGene.canonical_gene_id) ?? null,
+      rankTotal: expressionRank?.rows.length ?? 0,
     };
-  }, [selectedGene, points, scopedFilteredCount, classification]);
+  }, [selectedGene, points, scopedFilteredCount, classification, expressionRank]);
 
   const atlasSummary: AtlasSummary = useMemo(
     () => ({
@@ -286,7 +290,19 @@ function App() {
                   catalogError ? `${filterSummary} Failed to load the atlas — ${catalogError}` : filterSummary
                 }
               />
-              <ClassificationPieChart classification={classification} genes={allGenes} onSelectGene={selectGene} />
+              {expressionRank ? (
+                <ExpressionRankSection
+                  expressionRank={expressionRank}
+                  genes={allGenes}
+                  chromosomeOrder={
+                    chromosomeExpression?.chromosomes.map((c) => c.chromosome) ??
+                    [...new Set(allGenes.map((g) => g.chromosome).filter((c) => c.startsWith("Chr")))].sort()
+                  }
+                  onSelectGene={selectGene}
+                />
+              ) : (
+                <ClassificationPieChart classification={classification} genes={allGenes} onSelectGene={selectGene} />
+              )}
               <ChromosomeExpressionMap
                 chromosomeExpression={chromosomeExpression}
                 genes={allGenes}

@@ -1,0 +1,123 @@
+{
+  "pipeline_version": "1",
+  "generated_at": "2026-10-02T14:25:58+00:00",
+  "n_genes": 12078,
+  "n_runs": 161,
+  "n_samples": 151,
+  "n_studies": 6,
+  "n_strains": 4,
+  "samples_per_study": {
+    "PRJDB37930": 85,
+    "PRJNA1261861": 35,
+    "PRJDB17490": 15,
+    "PRJNA121091": 8,
+    "PRJDB42398": 5,
+    "PRJDB4747": 3
+  },
+  "samples_per_strain": {
+    "RIB40": 66,
+    "AG-GAG": 40,
+    "NS4": 30,
+    "AG-GAG-AOXA": 15
+  },
+  "class_order": [
+    "Constitutive High",
+    "Constitutive Core",
+    "Constitutive Low",
+    "Broad Variable",
+    "Context-Specific",
+    "Rare/Silent",
+    "Intermediate"
+  ],
+  "class_counts": {
+    "Constitutive High": 1363,
+    "Constitutive Core": 3573,
+    "Constitutive Low": 90,
+    "Broad Variable": 1642,
+    "Context-Specific": 1955,
+    "Rare/Silent": 1708,
+    "Intermediate": 1747
+  },
+  "flag_rates": {
+    "possible_study_effect": 0.0553899652260308,
+    "possible_strain_effect": 0.04040404040404041,
+    "low_sample_support": 0.004884914720980295,
+    "borderline_class": 0.059778108958436826
+  },
+  "thresholds": {
+    "n_expressed_genes": 9810,
+    "level_low": 1.2672639330848332,
+    "level_high": 5.840228402237005,
+    "floor_level": 3.9615498476436137,
+    "floor_tpm": 14.579206485614474,
+    "n_burst_capable_genes": 9417,
+    "tau_specific": 0.63815402751106,
+    "peak_specific": 0.5407218110276217,
+    "prevalence_broad": 0.9933774834437086,
+    "n_eligible_genes": 8415
+  },
+  "params": {
+    "detect_tpm": 0.1,
+    "level_quantiles": [
+      0.2,
+      0.8
+    ],
+    "burst_quantile": 0.5,
+    "prevalence_quantile": 0.25,
+    "specific_quantile": 0.75,
+    "tail_quantile": 0.8
+  },
+  "robustness": [
+    {
+      "perturbation": "leave out study PRJDB17490",
+      "n_samples_used": 136,
+      "class_agreement": 0.9177844013909587
+    },
+    {
+      "perturbation": "leave out study PRJDB37930",
+      "n_samples_used": 66,
+      "class_agreement": 0.726113594966054
+    },
+    {
+      "perturbation": "leave out study PRJDB42398",
+      "n_samples_used": 146,
+      "class_agreement": 0.950488491472098
+    },
+    {
+      "perturbation": "leave out study PRJDB4747",
+      "n_samples_used": 148,
+      "class_agreement": 0.9354197714853453
+    },
+    {
+      "perturbation": "leave out study PRJNA121091",
+      "n_samples_used": 143,
+      "class_agreement": 0.9222553402881272
+    },
+    {
+      "perturbation": "leave out study PRJNA1261861",
+      "n_samples_used": 116,
+      "class_agreement": 0.8794502401059778
+    },
+    {
+      "perturbation": "leave out strain AG-GAG",
+      "n_samples_used": 111,
+      "class_agreement": 0.8602417618811061
+    },
+    {
+      "perturbation": "leave out strain AG-GAG-AOXA",
+      "n_samples_used": 136,
+      "class_agreement": 0.9478390461997019
+    },
+    {
+      "perturbation": "leave out strain NS4",
+      "n_samples_used": 121,
+      "class_agreement": 0.9022189104156317
+    },
+    {
+      "perturbation": "leave out strain RIB40",
+      "n_samples_used": 85,
+      "class_agreement": 0.5977810895843683
+    }
+  ],
+  "median_robustness_agreement": 0.9100016559032953
+}

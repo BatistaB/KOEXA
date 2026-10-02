@@ -22,7 +22,14 @@ import duckdb
 import pandas as pd
 
 from ..genome.karyotype import DEFAULT_BIN_SIZE_BP, NUCLEAR_CHROMOSOMES, bin_gene_expression, chromosome_lengths_by_name
-from ..paths import CLASSIFICATION_FILE, FUNGIDB_GENOME_FASTA_FILE, GENE_FEATURE_TABLE_FILE, WEB_DATA_DIR
+from ..paths import (
+    CLASSIFICATION_FILE,
+    EXPRESSION_RANK_FILE,
+    EXPRESSION_RANK_SUMMARY_FILE,
+    FUNGIDB_GENOME_FASTA_FILE,
+    GENE_FEATURE_TABLE_FILE,
+    WEB_DATA_DIR,
+)
 from ..reference.genome_fasta import load_genome_sequence_lengths
 
 __all__ = [
@@ -33,6 +40,7 @@ __all__ = [
     "export_sample_qc",
     "export_expression",
     "export_classification",
+    "export_expression_rank",
     "export_chromosome_expression",
     "write_all",
 ]
@@ -262,6 +270,59 @@ def export_classification() -> dict[str, Any] | None:
     return {"columns": _CLASSIFICATION_COLUMNS, "rows": rows}
 
 
+_EXPRESSION_RANK_COLUMNS = [
+    "gene_id",
+    "expression_class",
+    "expression_level_score",
+    "expression_stability_score",
+    "expression_specificity_score",
+    "expression_prevalence_score",
+    "global_expression_rank",
+    "rank_most_expressed",
+    "rank_most_stable",
+    "rank_most_variable",
+    "rank_most_specific",
+    "rank_rarest",
+    "median_TPM",
+    "prevalence_TPM_1",
+    "MAD_logTPM",
+    "Tau",
+    "quality_flags",
+]
+_RANK_FLOAT_DECIMALS = {
+    "expression_level_score": 4, "expression_stability_score": 4, "expression_specificity_score": 4,
+    "expression_prevalence_score": 4, "median_TPM": 3, "prevalence_TPM_1": 4, "MAD_logTPM": 4, "Tau": 4,
+}
+_RANK_INT_COLS = {"global_expression_rank", "rank_most_expressed", "rank_most_stable", "rank_most_variable", "rank_most_specific", "rank_rarest"}
+
+
+def export_expression_rank() -> dict[str, Any] | None:
+    """Pan-transcriptomic expression rank for the homepage (None if `atlas rank genes` has never run).
+
+    `rows` follow `columns`; `summary` is the scope/thresholds/robustness record written next to the
+    parquet, so the page can say exactly which atlas the classes were derived from.
+    """
+    if not EXPRESSION_RANK_FILE.is_file():
+        return None
+    table = pd.read_parquet(EXPRESSION_RANK_FILE)[_EXPRESSION_RANK_COLUMNS]
+    rows: list[list[Any]] = []
+    for record in table.to_dict(orient="records"):
+        row: list[Any] = []
+        for col in _EXPRESSION_RANK_COLUMNS:
+            value = record[col]
+            if isinstance(value, float) and math.isnan(value):
+                row.append(None)
+            elif col in _RANK_FLOAT_DECIMALS:
+                row.append(round(float(value), _RANK_FLOAT_DECIMALS[col]))
+            elif col in _RANK_INT_COLS:
+                row.append(int(value))
+            else:
+                row.append(value)
+        rows.append(row)
+    summary = json.loads(EXPRESSION_RANK_SUMMARY_FILE.read_text(encoding="utf-8")) if EXPRESSION_RANK_SUMMARY_FILE.is_file() else None
+    return {"columns": _EXPRESSION_RANK_COLUMNS, "rows": rows, "summary": summary}
+
+
 _CHROMOSOME_BIN_COLUMNS = ["start", "end", "n_genes", "n_detected_genes", "mean_TPM", "log10_mean_TPM"]
 
 
@@ -336,6 +397,14 @@ def write_all(conn: duckdb.DuckDBPyConnection, out_dir: Path = WEB_DATA_DIR) -> 
     else:
         summary["classification_bytes"] = 0
         summary["n_classification_rows"] = 0
+
+    expression_rank = export_expression_rank()
+    if expression_rank is not None:
+        summary["expression_rank_bytes"] = _write_json(out_dir / "expression_rank.json", expression_rank)
+        summary["n_expression_rank_rows"] = len(expression_rank["rows"])
+    else:
+        summary["expression_rank_bytes"] = 0
+        summary["n_expression_rank_rows"] = 0
 
     chromosome_expression = export_chromosome_expression(conn)
     if chromosome_expression is not None:

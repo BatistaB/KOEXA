@@ -145,3 +145,64 @@ export interface ChromosomeExpression {
   binSizeBp: number;
   chromosomes: ChromosomeTrack[];
 }
+
+/**
+ * Pan-transcriptomic expression rank (`atlas rank genes`, src/aoryzae_atlas/
+ * rank/): every gene's *global* behavior across all independent biological
+ * samples. Unlike GeneClassification (per-condition clustering), the
+ * classes are rule-based with thresholds derived from the atlas's own
+ * distributions, so they are re-derived on every `atlas refresh`.
+ */
+export type ExpressionClass =
+  | "Constitutive High"
+  | "Constitutive Core"
+  | "Constitutive Low"
+  | "Broad Variable"
+  | "Context-Specific"
+  | "Rare/Silent"
+  | "Intermediate";
+
+export interface ExpressionRankRow {
+  canonical_gene_id: string;
+  expression_class: ExpressionClass;
+  /** Percentile-rank scores in (0, 1]; kept as separate axes, never blended. */
+  level_score: number;
+  stability_score: number;
+  specificity_score: number;
+  prevalence_score: number;
+  /** 1 = best; each is an independent ordering of all genes. */
+  global_rank: number;
+  rank_most_expressed: number;
+  rank_most_stable: number;
+  rank_most_variable: number;
+  rank_most_specific: number;
+  rank_rarest: number;
+  median_TPM: number;
+  prevalence_TPM_1: number;
+  MAD_logTPM: number;
+  Tau: number | null;
+  /** Semicolon-separated quality flags ('' when none): possible_study_effect, possible_strain_effect, low_sample_support, borderline_class. */
+  quality_flags: string;
+}
+
+export interface ExpressionRankSummary {
+  generated_at: string;
+  n_genes: number;
+  n_runs: number;
+  n_samples: number;
+  n_studies: number;
+  n_strains: number;
+  samples_per_study: Record<string, number>;
+  samples_per_strain: Record<string, number>;
+  class_order: ExpressionClass[];
+  class_counts: Record<string, number>;
+  flag_rates: Record<string, number>;
+  robustness: { perturbation: string; n_samples_used: number; class_agreement: number }[];
+  median_robustness_agreement: number | null;
+}
+
+export interface ExpressionRank {
+  summary: ExpressionRankSummary | null;
+  rows: ExpressionRankRow[];
+  byGene: Map<string, ExpressionRankRow>;
+}

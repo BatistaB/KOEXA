@@ -53,6 +53,7 @@ FUNGIDB_GFF_FILE = FUNGIDB_V71_DIR / "FungiDB-71_AoryzaeRIB40.gff"
 FUNGIDB_GENE_PRODUCT_UPDATES_FILE = FUNGIDB_V71_DIR / "FungiDB-71_AoryzaeRIB40_gene_product_updates_b71.txt"
 FUNGIDB_GENOME_FASTA_FILE = FUNGIDB_V71_DIR / "FungiDB-71_AoryzaeRIB40_Genome.fasta"
 FUNGIDB_TRANSCRIPT_FASTA_FILE = FUNGIDB_V71_DIR / "FungiDB-71_AoryzaeRIB40_AnnotatedTranscripts.fasta"
+FUNGIDB_GO_GAF_FILE = FUNGIDB_V71_DIR / "FungiDB-71_AoryzaeRIB40_GO.gaf"
 
 REFERENCE_VALIDATION_REPORT_FILE = REPORTS_DIR / "reference_validation.txt"
 TRANSCRIPT_TO_GENE_FILE = REFERENCE_DIR / "transcripts" / "t2g.tsv"
@@ -79,6 +80,16 @@ ENTROPY_TABLE_FILE = ANALYSIS_DIR / "entropy" / "gene_tsallis_hill.parquet"
 CLASSIFICATION_FILE = ANALYSIS_DIR / "classification" / "gene_expression_behavior.parquet"
 CLASSIFICATION_TSV_FILE = ANALYSIS_DIR / "classification" / "gene_expression_behavior.tsv.gz"
 CLASSIFICATION_SUMMARY_FILE = REPORTS_DIR / "gene_expression_behavior_summary.md"
+
+# Pan-transcriptomic expression rank (notebooks/gene_expression_classification.ipynb):
+# one value per independent biosample, global distribution per gene, no per-study
+# re-analysis. Separate files from the condition-level pipeline above on purpose.
+GENE_BY_BIOSAMPLE_TPM_FILE = MATRICES_DIR / "tpm" / "gene_by_biosample_TPM.parquet"
+EXPRESSION_RANK_FILE = ANALYSIS_DIR / "classification" / "gene_expression_rank.parquet"
+EXPRESSION_RANK_TSV_FILE = ANALYSIS_DIR / "classification" / "gene_expression_rank.tsv.gz"
+EXPRESSION_RANK_THRESHOLDS_FILE = ANALYSIS_DIR / "classification" / "gene_expression_rank_thresholds.tsv"
+EXPRESSION_RANK_SUMMARY_FILE = ANALYSIS_DIR / "classification" / "gene_expression_rank_summary.json"
+EXPRESSION_RANK_REPORT_FILE = REPORTS_DIR / "gene_expression_classification.md"
 
 # Milestone 7 web bridge (`atlas app export-web`): JSON snapshots fetched at
 # runtime by the React app (app/web/src/data/*). Gitignored -- regenerated,

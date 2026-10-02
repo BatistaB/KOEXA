@@ -24,6 +24,8 @@ __all__ = [
     "pivot_gene_by_sample",
     "fetch_sample_condition_map",
     "collapse_technical_replicates",
+    "fetch_biosample_units",
+    "collapse_to_biosamples",
     "condition_level_stats",
     "pivot_gene_by_condition",
 ]
@@ -70,6 +72,39 @@ def collapse_technical_replicates(long_df: pd.DataFrame, sample_condition_map: p
         .mean()
     )
     return grouped
+
+
+def fetch_biosample_units(conn: duckdb.DuckDBPyConnection) -> pd.DataFrame:
+    """One row per QUANTIFIED run: sample_id, unit_id, bioproject, strain, biosample.
+
+    `unit_id` is the independent biological sample (bioproject + biosample
+    accession). Runs sharing a biosample are re-sequencing of the same
+    material and must not count as independent evidence. A run with no
+    biosample accession falls back to being its own unit (never merged by
+    guesswork).
+    """
+    return conn.execute(
+        """
+        SELECT sample_id,
+               bioproject || '|' || COALESCE(NULLIF(biosample, ''), sample_id) AS unit_id,
+               bioproject,
+               NULLIF(strain, '') AS strain,
+               biosample
+        FROM samples
+        WHERE pipeline_status = 'QUANTIFIED'
+        """
+    ).fetchdf()
+
+
+def collapse_to_biosamples(long_df: pd.DataFrame, units: pd.DataFrame) -> pd.DataFrame:
+    """(genes x biosample-units) TPM matrix: mean TPM across the runs of each unit.
+
+    Mean (not sum) so a re-sequenced biosample keeps its own TPM scale; the
+    sample-level `gene_expression` table is never modified.
+    """
+    merged = long_df.merge(units[["sample_id", "unit_id"]], on="sample_id", how="inner")
+    wide = merged.pivot_table(index="canonical_gene_id", columns="unit_id", values="TPM", aggfunc="mean")
+    return wide.sort_index().sort_index(axis=1)
 
 
 def condition_level_stats(replicate_df: pd.DataFrame) -> pd.DataFrame:

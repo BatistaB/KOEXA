@@ -2,6 +2,9 @@ import type {
   ChromosomeExpression,
   Condition,
   Dataset,
+  ExpressionRank,
+  ExpressionRankRow,
+  ExpressionRankSummary,
   GeneClassification,
   GeneExpressionRow,
   Sample,
@@ -30,6 +33,8 @@ export interface RealAtlasData {
   sampleQc: SampleQcMetrics[];
   expression: GeneExpressionRow[];
   classification: Map<string, GeneClassification>;
+  /** null until `atlas rank genes` has run and the web export has been refreshed. */
+  expressionRank: ExpressionRank | null;
   chromosomeExpression: ChromosomeExpression | null;
 }
 
@@ -55,6 +60,15 @@ interface ClassificationRow {
   ][];
 }
 
+interface ExpressionRankPayload {
+  columns: string[];
+  rows: [
+    string, string, number, number, number, number, number, number, number, number, number, number,
+    number, number, number, number | null, string,
+  ][];
+  summary: ExpressionRankSummary | null;
+}
+
 interface ChromosomeExpressionPayload {
   bin_size_bp: number;
   bin_columns: string[];
@@ -63,6 +77,29 @@ interface ChromosomeExpressionPayload {
     length: number;
     bins: [number, number, number, number, number | null, number | null][];
   }[];
+}
+
+function parseExpressionRank(payload: ExpressionRankPayload): ExpressionRank {
+  const rows: ExpressionRankRow[] = payload.rows.map((r) => ({
+    canonical_gene_id: r[0],
+    expression_class: r[1] as ExpressionRankRow["expression_class"],
+    level_score: r[2],
+    stability_score: r[3],
+    specificity_score: r[4],
+    prevalence_score: r[5],
+    global_rank: r[6],
+    rank_most_expressed: r[7],
+    rank_most_stable: r[8],
+    rank_most_variable: r[9],
+    rank_most_specific: r[10],
+    rank_rarest: r[11],
+    median_TPM: r[12],
+    prevalence_TPM_1: r[13],
+    MAD_logTPM: r[14],
+    Tau: r[15],
+    quality_flags: r[16],
+  }));
+  return { summary: payload.summary, rows, byGene: new Map(rows.map((row) => [row.canonical_gene_id, row])) };
 }
 
 function parseChromosomeExpression(payload: ChromosomeExpressionPayload): ChromosomeExpression {
@@ -134,7 +171,7 @@ function parseClassification(payload: ClassificationRow): Map<string, GeneClassi
 }
 
 export async function loadRealAtlas(): Promise<RealAtlasData> {
-  const [datasets, conditions, samples, sampleQc, expressionPayload, classificationPayload, chromosomeExpressionPayload] =
+  const [datasets, conditions, samples, sampleQc, expressionPayload, classificationPayload, chromosomeExpressionPayload, expressionRankPayload] =
     await Promise.all([
       fetchJson<Dataset[]>("/data/datasets.json"),
       fetchJson<Condition[]>("/data/conditions.json"),
@@ -143,6 +180,7 @@ export async function loadRealAtlas(): Promise<RealAtlasData> {
       fetchJson<ExpressionRow>("/data/expression.json"),
       fetchJson<ClassificationRow | null>("/data/classification.json").catch(() => null),
       fetchJson<ChromosomeExpressionPayload | null>("/data/chromosome_expression.json").catch(() => null),
+      fetchJson<ExpressionRankPayload | null>("/data/expression_rank.json").catch(() => null),
     ]);
 
   return {
@@ -152,6 +190,7 @@ export async function loadRealAtlas(): Promise<RealAtlasData> {
     sampleQc,
     expression: parseExpression(expressionPayload),
     classification: classificationPayload ? parseClassification(classificationPayload) : new Map(),
+    expressionRank: expressionRankPayload ? parseExpressionRank(expressionRankPayload) : null,
     chromosomeExpression: chromosomeExpressionPayload ? parseChromosomeExpression(chromosomeExpressionPayload) : null,
   };
 }
