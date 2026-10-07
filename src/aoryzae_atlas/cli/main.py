@@ -30,7 +30,13 @@ from ..annotation.schema import load_all_annotations, validate_annotation
 from ..annotation.vocabulary import load_vocabulary
 from ..clustering.classify import classify_genes
 from ..config import ConfigError, load_pipeline_config, load_reference_config, load_storage_config
-from ..database.approve import SampleExcludedError, SampleNotFoundError, approve_sample
+from ..database.approve import (
+    SampleExcludedError,
+    SampleNotApprovedError,
+    SampleNotFoundError,
+    approve_sample,
+    unapprove_sample,
+)
 from ..database.ingest_conditions import load_conditions, load_sample_condition_links
 from ..database.ingest_discovery import load_datasets, load_samples
 from ..database.ingest_genes import load_gene_external_identifiers, load_genes
@@ -859,6 +865,31 @@ def sample_approve(srr: str, reason: str) -> None:
         return
     logger.info("Approved sample %s (was %s)%s", srr, result.previous_status, f": {reason}" if reason else "")
     click.echo(f"Approved {srr} (was {result.previous_status}).")
+
+
+@sample.command("unapprove")
+@click.argument("srr")
+@click.option(
+    "--reason",
+    required=True,
+    help="Why the approval is being withdrawn (recorded in processing_events for audit).",
+)
+def sample_unapprove(srr: str, reason: str) -> None:
+    """Return an APPROVED sample to METADATA_REVIEW (e.g. its raw data is not downloadable)."""
+    if not DATABASE_FILE.is_file():
+        raise click.ClickException("No database found. Run 'atlas database migrate' first.")
+    conn = duckdb.connect(str(DATABASE_FILE))
+    try:
+        try:
+            unapprove_sample(conn, srr, reason=reason)
+        except SampleNotFoundError:
+            raise click.ClickException(f"Sample {srr} not found.")
+        except SampleNotApprovedError as exc:
+            raise click.ClickException(f"Cannot unapprove: {exc}.")
+    finally:
+        conn.close()
+    logger.info("Unapproved sample %s: %s", srr, reason)
+    click.echo(f"Unapproved {srr} (now METADATA_REVIEW).")
 
 
 @sample.command("queue")

@@ -51,3 +51,33 @@ def approve_sample(conn: duckdb.DuckDBPyConnection, sample_id: str, reason: str 
         [next_event_id, sample_id, reason, now],
     )
     return ApprovalResult(sample_id=sample_id, previous_status=current_status, already_approved=False)
+
+
+class SampleNotApprovedError(Exception):
+    """Raised when trying to unapprove a sample that is not currently APPROVED."""
+
+
+def unapprove_sample(conn: duckdb.DuckDBPyConnection, sample_id: str, reason: str = "") -> str:
+    """Return an APPROVED sample to METADATA_REVIEW (e.g. its raw data turned out not to be downloadable).
+
+    Only APPROVED samples can be reverted: anything further along has produced work that a status flip
+    would silently disown. Logs an 'unapproved' processing_events row. Returns the sample_id.
+    """
+    row = conn.execute("SELECT pipeline_status FROM samples WHERE sample_id = ?", [sample_id]).fetchone()
+    if row is None:
+        raise SampleNotFoundError(sample_id)
+    if row[0] != SampleState.APPROVED.value:
+        raise SampleNotApprovedError(f"{sample_id} is {row[0]}, not APPROVED")
+
+    now = datetime.now(timezone.utc)
+    conn.execute(
+        "UPDATE samples SET pipeline_status = ?, updated_at = ? WHERE sample_id = ?",
+        [SampleState.METADATA_REVIEW.value, now, sample_id],
+    )
+    next_event_id = conn.execute("SELECT COALESCE(MAX(event_id), 0) + 1 FROM processing_events").fetchone()[0]
+    conn.execute(
+        "INSERT INTO processing_events (event_id, sample_id, event_type, event_detail, created_at) "
+        "VALUES (?, ?, 'unapproved', ?, ?)",
+        [next_event_id, sample_id, reason, now],
+    )
+    return sample_id

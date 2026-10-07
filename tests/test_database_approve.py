@@ -4,7 +4,13 @@ from __future__ import annotations
 import duckdb
 import pytest
 
-from aoryzae_atlas.database.approve import SampleExcludedError, SampleNotFoundError, approve_sample
+from aoryzae_atlas.database.approve import (
+    SampleExcludedError,
+    SampleNotApprovedError,
+    SampleNotFoundError,
+    approve_sample,
+    unapprove_sample,
+)
 from aoryzae_atlas.database.migrate import apply_migrations
 
 
@@ -59,3 +65,24 @@ def test_approve_sample_is_idempotent_for_already_approved(conn):
     # No duplicate processing_events row for a no-op approval.
     n_events = conn.execute("SELECT COUNT(*) FROM processing_events WHERE sample_id = 'SRR3'").fetchone()[0]
     assert n_events == 0
+
+
+def test_unapprove_sample_returns_to_review_and_logs_event(conn):
+    unapprove_sample(conn, "SRR3", reason="raw data not downloadable from ENA")
+    status = conn.execute("SELECT pipeline_status FROM samples WHERE sample_id = 'SRR3'").fetchone()[0]
+    assert status == "METADATA_REVIEW"
+    event = conn.execute(
+        "SELECT event_type, event_detail FROM processing_events WHERE sample_id = 'SRR3'"
+    ).fetchone()
+    assert event == ("unapproved", "raw data not downloadable from ENA")
+
+
+def test_unapprove_sample_refuses_non_approved_sample(conn):
+    with pytest.raises(SampleNotApprovedError):
+        unapprove_sample(conn, "SRR1")
+    assert conn.execute("SELECT COUNT(*) FROM processing_events").fetchone()[0] == 0
+
+
+def test_unapprove_sample_raises_for_unknown_sample(conn):
+    with pytest.raises(SampleNotFoundError):
+        unapprove_sample(conn, "SRR_DOES_NOT_EXIST")
