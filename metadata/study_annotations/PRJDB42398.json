@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJDB42398",
+  "related_identifiers": {
+    "bioproject": "PRJDB42398",
+    "sra_study": "DRP019390",
+    "geo_series": null
+  },
+  "paper": {
+    "status": "found",
+    "title": "Enhancing Lactate Assimilation in Aspergillus oryzae by Small Amounts of Metabolic Co-Substrates and Low pH",
+    "authors": "Kikuta H, Muto M, Tanaka N, Tanaka T, Mano J",
+    "year": 2026,
+    "journal": "Journal of Fungi",
+    "doi": "10.3390/jof12090679",
+    "pmid": "42783975",
+    "pmcid": "PMC13608414",
+    "url": "https://doi.org/10.3390/jof12090679",
+    "access": "full_text",
+    "association_evidence": "Methods: 'The RNA-seq data generated in this study were deposited in the DDBJ Sequence Read Archive (DRA) under BioProject accession number PRJDB42398.'",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Understand why A. oryzae assimilates lactate poorly and find conditions that improve it, to valorise lactate-rich food by-products.",
+    "experimental_design": "RIB40 was grown at 30 °C in modified Czapek-Dox minimal medium with glucose (48 h), lactate as sole carbon source (96 h) or lactate plus 0.1% glucose (days 1, 3 and 5; the paper analyses day 3); 3 replicates each.",
+    "main_finding": "On lactate alone growth and uptake were minimal and expression pointed to limited carbon flux into the TCA cycle; small amounts of sugars, specific amino acids or α-ketoglutarate, plus low pH, made lactate assimilation efficient."
+  },
+  "tag_sets": {
+    "modified_cd": [
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      },
+      {
+        "tag": "czapek_dox_medium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "modified CD medium"
+      },
+      {
+        "tag": "defined_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "ammonium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "4.7 g/L ammonium sulfate"
+      },
+      {
+        "tag": "ph_5_8",
+        "source": "paper_methods",
+        "confidence": "medium",
+        "note": "final pH of the media unless otherwise specified"
+      },
+      {
+        "tag": "submerged",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "shake_flask",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "lactate_plus_glucose": [
+      {
+        "tag": "lactate",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "0.5% lactate"
+      },
+      {
+        "tag": "glucose",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "0.1% glucose co-substrate"
+      },
+      {
+        "tag": "mixed_carbon_source",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "non_fermentable_carbon",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJDB42398_glucose0.5pct_CD_day2": {
+      "sets": [
+        "modified_cd"
+      ],
+      "tags": [
+        {
+          "tag": "glucose",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "0.5% glucose, sole carbon source"
+        },
+        {
+          "tag": "48h",
+          "source": "paper_methods",
+          "confidence": "high"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "medium",
+          "note": "glucose condition is the reference the lactate conditions are compared with"
+        },
+        {
+          "tag": "exponential_phase",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "sampled during active glucose utilisation"
+        }
+      ]
+    },
+    "PRJDB42398_lactate0.5_day4": {
+      "sets": [
+        "modified_cd"
+      ],
+      "tags": [
+        {
+          "tag": "lactate",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "0.5% lactate, sole carbon source"
+        },
+        {
+          "tag": "non_fermentable_carbon",
+          "source": "paper_methods",
+          "confidence": "high"
+        },
+        {
+          "tag": "96h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB42398_lactate0.5_glucose0.1_day1": {
+      "sets": [
+        "modified_cd",
+        "lactate_plus_glucose"
+      ],
+      "tags": [
+        {
+          "tag": "24h",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB42398_lactate0.5_glucose0.1_day3": {
+      "sets": [
+        "modified_cd",
+        "lactate_plus_glucose"
+      ],
+      "tags": [
+        {
+          "tag": "72h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB42398_lactate0.5_glucose0.1_day5": {
+      "sets": [
+        "modified_cd",
+        "lactate_plus_glucose"
+      ],
+      "tags": [
+        {
+          "tag": "120h",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The paper's RNA-seq Methods describe only Glu 48 h, Lac 96 h and Lac + 1 g/L Glu 72 h; the day-1 and day-5 Lac + Glu libraries are in the BioProject but not discussed in the paper."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-03",
+    "needs_pdf": false
+  }
+}

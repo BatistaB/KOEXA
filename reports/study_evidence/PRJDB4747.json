@@ -1,0 +1,129 @@
+{
+  "bioproject": "PRJDB4747",
+  "collected_at": "2026-10-03T14:34:19+00:00",
+  "accessions_searched": [
+    "PRJDB4747",
+    "DRP003084"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "27185182",
+      "pmcid": "PMC4869263",
+      "doi": "10.1186/s12864-016-2689-z",
+      "title": "Comparative transcriptome analysis revealing dormant conidia and germination associated genes in Aspergillus species: an essential role for AtfA in conidial dormancy.",
+      "authors": "Hagiwara D, Takahashi H, Kusuya Y, Kawamoto S, Kamei K, Gonoi T.",
+      "year": 2016,
+      "journal": "BMC genomics",
+      "url": "https://doi.org/10.1186/s12864-016-2689-z",
+      "open_access": true,
+      "abstract": "BackgroundFungal conidia are usually dormant unless the extracellular conditions are right for germination. Despite the importance of dormancy, little is known about the molecular mechanism underlying entry to, maintenance of, and exit from dormancy. To gain comprehensive and inter-species insights, transcriptome analyses were conducted across Aspergillus fumigatus, Aspergillus niger, and Aspergillus oryzae.ResultsWe found transcripts of 687, 694, and 812 genes were enriched in the resting conidia compared with hyphae in A. fumigatus, A. niger, and A. oryzae, respectively (conidia-associated genes). Similarly, transcripts of 766, 1,241, and 749 genes were increased in the 1 h-cultured conidia compared with the resting conidia (germination-associated genes). Among the three Aspergillus species, we identified orthologous 6,172 genes, 91 and 391 of which are common conidia- and germination-associated genes, respectively. A variety of stress-related genes, including the catalase genes, were found in the common conidia-associated gene set, and ribosome-related genes were significantly enriched among the germination-associated genes. Among the germination-associated genes, we found that calA-family genes encoding a thaumatin-like protein were extraordinary expressed in early germination stage in all Aspergillus species tested here. In A. fumigatus 63 % of the common conidia-associated genes were expressed in a bZIP-type transcriptional regulator AtfA-dependent manner, indicating that AtfA plays a pivotal role in the maintenance of resting conidial physiology. Unexpectedly, the precocious expression of the germination-associated calA and an abnormal metabolic activity were detected in the resting conidia of the atfA mutant, suggesting that AtfA was involved in the retention of conidial dormancy.ConclusionsA comparison among transcriptomes of hyphae, resting conidia, and 1 h-grown conidia in the three Aspergillus species revealed likely common factors involved in conidial dormancy. AtfA positively regulates conidial stress-related genes and negatively mediates the gene expressions related to germination, suggesting a major role for AtfA in Aspergillus conidial dormancy.",
+      "found_by": [
+        "europepmc_fulltext:PRJDB4747"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJDB4747",
+          "text": "library was approximately 290 bp. Sequencing was performed in a single-end 60-base pair mode on a Hiseq system (Illumina). The RNA-sequencing read data was deposited to the DDBJ Sequence Read Archive under accession No. PRJDB4747.Expression analysisIllumina data sets were trimmed using fastq-mcf in ea-utils (v1.1.2-484) [37], where seque",
+          "deposition_statement": true
+        },
+        {
+          "accession": "PRJDB4747",
+          "text": "C for 4 h and then photographed.Ethics approvalNot applicable.Consent for publicationNot applicable.Availability of data and materialThe datasets, supporting the conclusions of this article, is available in a BioProject PRJDB4747 deposited to DDBJ. All fungal strains are available from National BioResource Project of Mycology Research Ce",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJDB4747",
+    "bioproject": "PRJDB4747",
+    "study_accession": "DRP003084",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "RIB40",
+    "study_description": "Comparative transcriptomes between hyphae, conidial, and  germinating conidia in Aspergillus fungi",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "3 biosample(s), 3 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMD00051090",
+      "sample_title": "A. oryzae_1h-germinated conidia",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; sample_name=A. oryzae_1h-germinated conidia; tissue_type=conidia"
+    },
+    {
+      "biosample": "SAMD00051089",
+      "sample_title": "A. oryzae_conidia",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; sample_name=A. oryzae_conidia; tissue_type=conidia"
+    },
+    {
+      "biosample": "SAMD00051088",
+      "sample_title": "A. oryzae_hyphae",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; sample_name=A. oryzae_hyphae; tissue_type=hypha"
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "DRR059466",
+      "biosample": "SAMD00051090",
+      "condition_id": "PRJDB4747_conidia_1h_germinated",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR059465",
+      "biosample": "SAMD00051089",
+      "condition_id": "PRJDB4747_conidia_ungerminated",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR059464",
+      "biosample": "SAMD00051088",
+      "condition_id": "PRJDB4747_hyphae",
+      "strain": "RIB40"
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJDB4747_hyphae",
+      "condition_label": "RIB40 | vegetative hyphae",
+      "strain": "RIB40",
+      "developmental_stage": "hyphae (vegetative mycelium)",
+      "recombinant_background": "wild_type",
+      "original_description": "A. oryzae_hyphae; comparative dormancy transcriptome study across Aspergillus spp.",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJDB4747 (DRA study DRP003084): study_study_abstract 'We attempted to address the issue of dormancy mechanisms in Aspergillus conidia by performing a comparative transcriptome analysis within the genus... obtained from hyphae, conidia, and 1 h-grown conidia of A. fumigatus, A. niger, and A. oryzae.'; sample_attributes tissue_type."
+    },
+    {
+      "condition_id": "PRJDB4747_conidia_ungerminated",
+      "condition_label": "RIB40 | dormant (ungerminated) conidia",
+      "strain": "RIB40",
+      "developmental_stage": "conidia (dormant, ungerminated)",
+      "recombinant_background": "wild_type",
+      "original_description": "A. oryzae_conidia; comparative dormancy transcriptome study across Aspergillus spp.",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJDB4747 (DRA study DRP003084): study_study_abstract 'We attempted to address the issue of dormancy mechanisms in Aspergillus conidia by performing a comparative transcriptome analysis within the genus... obtained from hyphae, conidia, and 1 h-grown conidia of A. fumigatus, A. niger, and A. oryzae.'; sample_attributes tissue_type."
+    },
+    {
+      "condition_id": "PRJDB4747_conidia_1h_germinated",
+      "condition_label": "RIB40 | conidia, 1h germination",
+      "strain": "RIB40",
+      "time_value": "1",
+      "time_unit": "hour",
+      "developmental_stage": "conidia (1 h germinating)",
+      "recombinant_background": "wild_type",
+      "original_description": "A. oryzae_1h-germinated conidia; comparative dormancy transcriptome study across Aspergillus spp.",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJDB4747 (DRA study DRP003084): study_study_abstract 'We attempted to address the issue of dormancy mechanisms in Aspergillus conidia by performing a comparative transcriptome analysis within the genus... obtained from hyphae, conidia, and 1 h-grown conidia of A. fumigatus, A. niger, and A. oryzae.'; sample_attributes tissue_type."
+    }
+  ]
+}

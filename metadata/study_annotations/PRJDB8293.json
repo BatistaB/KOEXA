@@ -1,0 +1,375 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJDB8293",
+  "related_identifiers": {
+    "bioproject": "PRJDB8293",
+    "sra_study": "DRP005148",
+    "geo_series": null
+  },
+  "paper": {
+    "status": "found",
+    "title": "Improvement of Free Fatty Acid Secretory Productivity in Aspergillus oryzae by Comprehensive Analysis on Time-Series Gene Expression",
+    "authors": "Wong PS, Tamano K, Aburatani S",
+    "year": 2021,
+    "journal": "Frontiers in Microbiology",
+    "doi": "10.3389/fmicb.2021.605095",
+    "pmid": "33897630",
+    "pmcid": "PMC8062725",
+    "url": "https://doi.org/10.3389/fmicb.2021.605095",
+    "access": "full_text",
+    "association_evidence": "Methods: 'The expression data are publicly available ... (accession number: PRJDB8293)'. A 2024 Nature Communications paper (PMID 38485948) also cites PRJDB8293 but only re-uses it.",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Find genes whose modification would raise free fatty acid (FFA) secretion by an acyl-CoA synthetase (faaA) disruptant grown with Triton X-100.",
+    "experimental_design": "Wild-type RIB40 and the ΔfaaA strain were grown in Czapek-Dox liquid medium with 1% Triton X-100 at 30 °C and sampled at 48, 72, 96, 120, 144 and 168 h (3 replicates).",
+    "main_finding": "Inorganic-ion transport and metabolism were key early in FFA production; of 16 candidate genes overexpressed in ΔfaaA, those acting closest to FFA biosynthesis more than doubled FFA secretory productivity."
+  },
+  "tag_sets": {
+    "ffa_secretion": [
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "czapek_dox_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "defined_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "glucose",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "10% glucose in CD liquid medium"
+      },
+      {
+        "tag": "nitrate",
+        "source": "inferred_from_methods",
+        "confidence": "medium",
+        "note": "standard Czapek-Dox nitrogen source; composition not restated in the paper"
+      },
+      {
+        "tag": "triton_x100",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "1% (w/v)"
+      },
+      {
+        "tag": "surfactant",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "submerged",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "shake_flask",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJDB8293_WT_48h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "wild_type",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "high",
+          "note": "reference strain for the faaA comparison"
+        },
+        {
+          "tag": "48h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB8293_WT_72h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "wild_type",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "high",
+          "note": "reference strain for the faaA comparison"
+        },
+        {
+          "tag": "72h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB8293_WT_96h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "wild_type",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "high",
+          "note": "reference strain for the faaA comparison"
+        },
+        {
+          "tag": "96h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB8293_WT_120h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "wild_type",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "high",
+          "note": "reference strain for the faaA comparison"
+        },
+        {
+          "tag": "120h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB8293_WT_144h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "wild_type",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "high",
+          "note": "reference strain for the faaA comparison"
+        },
+        {
+          "tag": "144h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB8293_WT_168h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "wild_type",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "high",
+          "note": "reference strain for the faaA comparison"
+        },
+        {
+          "tag": "168h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB8293_faaA_48h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "knockout",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_faaA",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "acyl-CoA synthetase gene disruption"
+        },
+        {
+          "tag": "48h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB8293_faaA_72h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "knockout",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_faaA",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "acyl-CoA synthetase gene disruption"
+        },
+        {
+          "tag": "72h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB8293_faaA_96h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "knockout",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_faaA",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "acyl-CoA synthetase gene disruption"
+        },
+        {
+          "tag": "96h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB8293_faaA_120h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "knockout",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_faaA",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "acyl-CoA synthetase gene disruption"
+        },
+        {
+          "tag": "120h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB8293_faaA_144h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "knockout",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_faaA",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "acyl-CoA synthetase gene disruption"
+        },
+        {
+          "tag": "144h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB8293_faaA_168h": {
+      "sets": [
+        "ffa_secretion"
+      ],
+      "tags": [
+        {
+          "tag": "knockout",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_faaA",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "acyl-CoA synthetase gene disruption"
+        },
+        {
+          "tag": "168h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [],
+  "curation": {
+    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-03",
+    "needs_pdf": false
+  }
+}

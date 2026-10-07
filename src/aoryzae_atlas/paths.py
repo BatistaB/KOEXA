@@ -66,6 +66,13 @@ GENE_MASTER_FILE = METADATA_DIR / "gene_master.tsv"
 CONDITIONS_FILE = METADATA_DIR / "conditions.tsv"
 SAMPLES_CURATION_FILE = METADATA_DIR / "samples.tsv"
 
+# Study enrichment (`atlas annotate ...`): curated paper/summary/tags per
+# study, the shared tag vocabulary, and the auto-collected evidence they
+# are written from.
+STUDY_ANNOTATIONS_DIR = METADATA_DIR / "study_annotations"
+SAMPLE_TAG_VOCABULARY_FILE = METADATA_DIR / "sample_tag_vocabulary.tsv"
+STUDY_EVIDENCE_DIR = REPORTS_DIR / "study_evidence"
+
 DISCOVERY_DIR = REPORTS_DIR / "discovery"
 DISCOVERY_RAW_API_RESPONSES_DIR = DISCOVERY_DIR / "raw_api_responses"
 

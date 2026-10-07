@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA1261861",
+  "related_identifiers": {
+    "bioproject": "PRJNA1261861",
+    "sra_study": "SRP584613",
+    "geo_series": "GSE296876"
+  },
+  "paper": {
+    "status": "found",
+    "title": "Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams",
+    "authors": "Korpioja ME, Sveholm E, Dilokpimol A, Paasela T, Kovalchuk A",
+    "year": 2025,
+    "journal": "Biotechnology for Biofuels and Bioproducts",
+    "doi": "10.1186/s13068-025-02688-5",
+    "pmid": "40781683",
+    "pmcid": "PMC12335040",
+    "url": "https://doi.org/10.1186/s13068-025-02688-5",
+    "access": "full_text",
+    "association_evidence": "NCBI elink BioProject->PubMed; the paper's data-availability statement gives GEO series GSE296876.",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Learn how A. oryzae tolerates inhibitors released by lignocellulose pretreatment, to engineer strains that grow on lignocellulosic side streams.",
+    "experimental_design": "Pre-grown RIB40 mycelium was moved to Czapek-Dox fructose medium (28 °C) with or without an inhibitor at its IC50 and sampled 0, 1, 3, 5 and 24 h later; the atlas holds the control and furfural (2.3 mM) series.",
+    "main_finding": "Most inhibitors caused ROS-linked stress with an early shutdown of cell-cycle, ribosome and ER protein-folding pathways, and strong induction of NAD(P)H-dependent oxidoreductases and ABC/MFS efflux transporters; aldehydes (especially HMF) caused the strongest response."
+  },
+  "tag_sets": {
+    "cz_fructose": [
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      },
+      {
+        "tag": "czapek_dox_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "defined_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "fructose",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "20 g/L D-fructose"
+      },
+      {
+        "tag": "nitrate",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "3 g/L NaNO3"
+      },
+      {
+        "tag": "ph_6",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "28C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "submerged",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "shake_flask",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "furfural": [
+      {
+        "tag": "treated",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "furfural",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "2.3 mM (IC50)"
+      },
+      {
+        "tag": "chemical_stress",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "lignocellulosic_inhibitor",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA1261861_control_0h": {
+      "sets": [
+        "cz_fructose"
+      ],
+      "tags": [
+        {
+          "tag": "control",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "0h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "time-matched to the inhibitor cultures"
+        }
+      ]
+    },
+    "PRJNA1261861_furfural_0h": {
+      "sets": [
+        "cz_fructose",
+        "furfural"
+      ],
+      "tags": [
+        {
+          "tag": "0h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_control_1h": {
+      "sets": [
+        "cz_fructose"
+      ],
+      "tags": [
+        {
+          "tag": "control",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "1h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "time-matched to the inhibitor cultures"
+        }
+      ]
+    },
+    "PRJNA1261861_furfural_1h": {
+      "sets": [
+        "cz_fructose",
+        "furfural"
+      ],
+      "tags": [
+        {
+          "tag": "1h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_control_3h": {
+      "sets": [
+        "cz_fructose"
+      ],
+      "tags": [
+        {
+          "tag": "control",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "3h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "time-matched to the inhibitor cultures"
+        }
+      ]
+    },
+    "PRJNA1261861_furfural_3h": {
+      "sets": [
+        "cz_fructose",
+        "furfural"
+      ],
+      "tags": [
+        {
+          "tag": "3h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_control_5h": {
+      "sets": [
+        "cz_fructose"
+      ],
+      "tags": [
+        {
+          "tag": "control",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "5h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "time-matched to the inhibitor cultures"
+        }
+      ]
+    },
+    "PRJNA1261861_furfural_5h": {
+      "sets": [
+        "cz_fructose",
+        "furfural"
+      ],
+      "tags": [
+        {
+          "tag": "5h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_control_24h": {
+      "sets": [
+        "cz_fructose"
+      ],
+      "tags": [
+        {
+          "tag": "control",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "24h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "time-matched to the inhibitor cultures"
+        }
+      ]
+    },
+    "PRJNA1261861_furfural_24h": {
+      "sets": [
+        "cz_fructose",
+        "furfural"
+      ],
+      "tags": [
+        {
+          "tag": "24h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The BioProject has 83 runs covering furfural, HMF, levulinic acid, ferulic acid and vanillin; only the control and furfural series are curated in the atlas so far."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-03",
+    "needs_pdf": false
+  }
+}

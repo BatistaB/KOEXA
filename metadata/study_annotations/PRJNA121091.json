@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA121091",
+  "related_identifiers": {
+    "bioproject": "PRJNA121091",
+    "sra_study": "SRP001894",
+    "geo_series": "GSE18851"
+  },
+  "paper": {
+    "status": "found",
+    "title": "Survey of the transcriptome of Aspergillus oryzae via massively parallel mRNA sequencing",
+    "authors": "Wang B, Guo G, Wang C, Lin Y, Wang X, Zhao M, Guo Y, He M, Zhang Y, Pan L",
+    "year": 2010,
+    "journal": "Nucleic Acids Research",
+    "doi": "10.1093/nar/gkq256",
+    "pmid": "20392818",
+    "pmcid": "PMC2926611",
+    "url": "https://doi.org/10.1093/nar/gkq256",
+    "access": "full_text",
+    "association_evidence": "NCBI elink BioProject->PubMed, and Methods: 'The raw Illumina sequencing data are deposited in GEO ... with accession number GSE18851'.",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Produce a first genome-wide RNA-seq view of the A. oryzae transcriptome (novel transcripts, UTRs, alternative splicing) and compare surface (solid) with liquid culture.",
+    "experimental_design": "RIB40 was grown to mid-log phase (40 h, 30 °C) on CD agar-cellophane or in CD liquid medium, then exposed to 20 mM DTT (ER stress) or not, for 3 h or 2 h respectively; 2 replicates per condition.",
+    "main_finding": "The transcriptome was far more complex than annotated (many novel transcripts, UTRs, upstream ORFs and alternative splicing), and genes/pathways possibly behind the higher protein production of solid versus liquid culture were identified."
+  },
+  "tag_sets": {
+    "cd_mid_log": [
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      },
+      {
+        "tag": "czapek_dox_medium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "modified CD medium"
+      },
+      {
+        "tag": "defined_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "glucose",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "2% glucose"
+      },
+      {
+        "tag": "nitrate",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "0.3% NaNO3"
+      },
+      {
+        "tag": "ph_5_5",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "exponential_phase",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "grown to mid-log phase (40 h) before treatment"
+      }
+    ],
+    "liquid": [
+      {
+        "tag": "submerged",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "shake_flask",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "2h_post_treatment",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "solid": [
+      {
+        "tag": "surface_culture",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "CD agar over cellophane, then mycelia moved onto CD-soaked filter paper; the paper calls this 'solid-state culture'"
+      },
+      {
+        "tag": "3h_post_treatment",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "dtt": [
+      {
+        "tag": "treated",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "dithiothreitol",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "20 mM DTT"
+      },
+      {
+        "tag": "er_stress",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA121091_liquid_control": {
+      "sets": [
+        "cd_mid_log",
+        "liquid"
+      ],
+      "tags": [
+        {
+          "tag": "control",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "equivalent volume of water added instead of DTT"
+        }
+      ]
+    },
+    "PRJNA121091_liquid_ER_stress": {
+      "sets": [
+        "cd_mid_log",
+        "liquid",
+        "dtt"
+      ]
+    },
+    "PRJNA121091_solid_control": {
+      "sets": [
+        "cd_mid_log",
+        "solid"
+      ],
+      "tags": [
+        {
+          "tag": "control",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA121091_solid_ER_stress": {
+      "sets": [
+        "cd_mid_log",
+        "solid",
+        "dtt"
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The ER-stress inducer, unresolved in metadata/conditions.tsv, is DTT (20 mM) per the paper's Methods."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-03",
+    "needs_pdf": false
+  }
+}

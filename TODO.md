@@ -1170,6 +1170,25 @@ samples" brief (no per-study DE, no condition reconstruction, Tsallis dropped fr
   is the next methodological refinement. Class retention is lowest when the RIB40/engineered-strain divide is
   split. Re-run the notebook unchanged as studies are added.
 
+## Study enrichment: paper, summary, sample tags (2026-10-03)
+
+See `docs/decisions/0007-study-annotations-and-sample-tags.md`.
+
+- [x] `src/aoryzae_atlas/annotation/` (vocabulary, schema/validation, evidence collector, DB ingest),
+  migration `0002_study_annotations.sql`, CLI `atlas annotate collect|status|validate|suggest` and
+  `atlas database load-annotations`; both run inside `atlas refresh` (collect only for studies with no
+  evidence file; network failure = skipped step). `tests/test_annotation.py` (15 tests; 194 pass overall).
+- [x] Shared vocabulary `metadata/sample_tag_vocabulary.tsv` (52 tags + parametric families) and curated
+  annotations for all 8 studies in `metadata/study_annotations/` -- every study has its originating paper,
+  confirmed by NCBI elink or the paper's own deposition statement. Evidence in `reports/study_evidence/`.
+- [x] Study side panel: paper title, objective / design / main finding, paper + PubMed links, per-run tag
+  chips (toggle to show only tags that differ within the study).
+- [x] Curation protocol for new studies: `.claude/skills/annotate-study/SKILL.md`.
+- [ ] Apply to `metadata/conditions.tsv` what the papers resolved (PRJDB37930 ctrl/hypo = DO 10% vs <=1%,
+  B3h = baseline, AOXA = aoxA deletion; PRJNA121091 ER stress = 20 mM DTT; PRJNA1261861 medium =
+  Czapek-Dox + 2% fructose, 28 C) -- needs the user's OK, curated file.
+- [ ] Optional: unattended LLM curation step (Claude API) on top of the evidence files + validator.
+
 ## Milestones 6-12
 
 - [ ] Not started (see PROJECT_MASTER_SPEC.md section 37 for full list).

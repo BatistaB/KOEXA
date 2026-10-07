@@ -1,0 +1,125 @@
+.study-annotation__title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: var(--line-normal);
+  margin-bottom: var(--space-3);
+}
+
+.study-annotation__field + .study-annotation__field {
+  margin-top: var(--space-1);
+}
+
+.study-annotation__field-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.study-annotation__byline {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  line-height: var(--line-normal);
+  margin-bottom: var(--space-2);
+}
+
+.study-annotation__link {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--accent);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  padding: 2px 0;
+}
+
+.study-annotation__link:hover {
+  text-decoration: underline;
+}
+
+.study-annotation__link--secondary {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.study-annotation__samples-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.study-annotation__toggle {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: var(--text-xs);
+  color: var(--accent);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.study-annotation__toggle:hover {
+  text-decoration: underline;
+}
+
+.study-annotation__shared {
+  padding: var(--space-2) 0 var(--space-3);
+  border-bottom: 1px dashed var(--border-hairline);
+  margin-bottom: var(--space-2);
+}
+
+.study-annotation__runs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.study-annotation__run-id {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.study-annotation__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.study-annotation__none {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Tag chips: tint = category family, text keeps contrast in both themes. */
+.tag-chip {
+  --chip-hue: var(--text-muted);
+  display: inline-block;
+  font-size: 11px;
+  line-height: 1.5;
+  padding: 0 6px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--chip-hue) 55%, var(--text-primary));
+  background: color-mix(in srgb, var(--chip-hue) 13%, transparent);
+  border: 1px solid color-mix(in srgb, var(--chip-hue) 22%, transparent);
+}
+
+.tag-chip--role { --chip-hue: var(--accent); }
+.tag-chip--genotype { --chip-hue: var(--series-6); }
+.tag-chip--biology { --chip-hue: var(--series-3); }
+.tag-chip--culture { --chip-hue: var(--series-4); }
+.tag-chip--perturbation { --chip-hue: var(--series-2); }
+
+.tag-chip--neutral {
+  color: var(--text-secondary);
+  background: var(--surface-sunken);
+  border-color: var(--border-hairline);
+}

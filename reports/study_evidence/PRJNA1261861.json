@@ -1,0 +1,883 @@
+{
+  "bioproject": "PRJNA1261861",
+  "collected_at": "2026-10-03T14:34:50+00:00",
+  "accessions_searched": [
+    "PRJNA1261861",
+    "SRP584613"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "40781683",
+      "pmcid": "PMC12335040",
+      "doi": "10.1186/s13068-025-02688-5",
+      "title": "Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams.",
+      "authors": "Korpioja ME, Sveholm E, Dilokpimol A, Paasela T, Kovalchuk A.",
+      "year": 2025,
+      "journal": "Biotechnology for biofuels and bioproducts",
+      "url": "https://doi.org/10.1186/s13068-025-02688-5",
+      "open_access": true,
+      "abstract": "BackgroundIndustrial lignocellulosic side streams are considered an attractive carbon source for the cultivation of biotechnologically important fungi, although the presence of toxic pretreatment by-products is a major challenge yet to be overcome. Aspergillus oryzae is a filamentous fungus with a large secretion capacity, high tolerance for toxins, and a wide substrate range, making it a promising candidate for side stream utilization. In the present study, the cellular mechanisms of tolerance against furfural, 5-hydroxymethylfurfural (HMF), levulinic acid, ferulic acid, and vanillin were studied at the transcriptome level.ResultsA. oryzae RIB40 was grown in the presence of different inhibitors commonly found in lignocellulosic side streams, and RNA sequencing was utilized to investigate the transcriptomic changes in response to the inhibitors. Analysis of the transcriptomic response in all conditions indicates that a large fraction of differentially expressed genes responded to the inhibitor-induced formation of reactive oxygen species (ROS). Apart from levulinic acid, all inhibitors showed strong initial suppression of metabolic pathways related to cell cycle, ribosome functions, protein folding, and sorting in the endoplasmic reticulum. Genes associated with cellular detoxification, namely, NAD(P)H-dependent oxidoreductases and efflux transporters, such as the ATP-Binding Cassette (ABC) transporters and major facilitator superfamily (MFS) transporters, showed strong upregulation upon exposure to the inhibitors.ConclusionsThe results obtained provide important insights into the stress response of A. oryzae to the xenobiotic compounds and their cellular detoxification. Aldehydic inhibitors, especially HMF, caused a strong and severe stress response in A. oryzae RIB40. Additionally, we identified several highly upregulated uncharacterized genes upon exposure to the inhibitors. These genes serve as promising targets for strain engineering to build robust industrial strains capable of utilizing lignocellulosic side streams as feedstock.",
+      "found_by": [
+        "ncbi_elink_bioproject_pubmed"
+      ],
+      "accession_snippets": [],
+      "deposition_statement": false
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJNA1261861",
+    "bioproject": "PRJNA1261861",
+    "study_accession": "SRP584613",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "RIB40",
+    "study_description": "Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "83 biosample(s), 83 run(s); PMID:40781683 (DOI/title not resolved -- needs a further lookup)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN48439913",
+      "sample_title": "RIB40, Vanillin treated, 24h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439914",
+      "sample_title": "RIB40, Vanillin treated, 24h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439915",
+      "sample_title": "RIB40, Vanillin treated, 24h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439916",
+      "sample_title": "RIB40, Levulinic acid treated, 24h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Levulinic acid (LA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=24.5 mM"
+    },
+    {
+      "biosample": "SAMN48439917",
+      "sample_title": "RIB40, Levulinic acid treated, 24h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Levulinic acid (LA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=24.5 mM"
+    },
+    {
+      "biosample": "SAMN48439918",
+      "sample_title": "RIB40, Levulinic acid treated, 24h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Levulinic acid (LA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=24.5 mM"
+    },
+    {
+      "biosample": "SAMN48439919",
+      "sample_title": "RIB40, HMF treated, 24h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439920",
+      "sample_title": "RIB40, HMF treated, 24h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439921",
+      "sample_title": "RIB40, HMF treated, 24h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439922",
+      "sample_title": "RIB40, Furfural treated, 24h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439923",
+      "sample_title": "RIB40, Furfural treated, 24h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439924",
+      "sample_title": "RIB40, Furfural treated, 24h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439925",
+      "sample_title": "RIB40, Ferulic acid treated, 24h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Ferulic acid (FA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=6.5 mM"
+    },
+    {
+      "biosample": "SAMN48439926",
+      "sample_title": "RIB40, Ferulic acid treated, 24h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Ferulic acid (FA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=6.5 mM"
+    },
+    {
+      "biosample": "SAMN48439927",
+      "sample_title": "RIB40, Ferulic acid treated, 24h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Ferulic acid (FA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=24h; concentration=6.5 mM"
+    },
+    {
+      "biosample": "SAMN48439928",
+      "sample_title": "RIB40, Control, 24h, rep4",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=24h"
+    },
+    {
+      "biosample": "SAMN48439929",
+      "sample_title": "RIB40, Control, 24h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=24h"
+    },
+    {
+      "biosample": "SAMN48439930",
+      "sample_title": "RIB40, Control, 24h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=24h"
+    },
+    {
+      "biosample": "SAMN48439931",
+      "sample_title": "RIB40, Control, 24h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=24h"
+    },
+    {
+      "biosample": "SAMN48439932",
+      "sample_title": "RIB40, Vanillin treated, 5h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=5h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439933",
+      "sample_title": "RIB40, Vanillin treated, 5h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=5h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439934",
+      "sample_title": "RIB40, Vanillin treated, 5h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=5h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439935",
+      "sample_title": "RIB40, HMF treated, 5h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=5h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439936",
+      "sample_title": "RIB40, HMF treated, 5h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=5h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439937",
+      "sample_title": "RIB40, HMF treated, 5h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=5h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439938",
+      "sample_title": "RIB40, Furfural treated, 5h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=5h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439939",
+      "sample_title": "RIB40, Furfural treated, 5h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=5h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439940",
+      "sample_title": "RIB40, Furfural treated, 5h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=5h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439941",
+      "sample_title": "RIB40, Control, 5h, rep4",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=5h"
+    },
+    {
+      "biosample": "SAMN48439942",
+      "sample_title": "RIB40, Control, 5h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=5h"
+    },
+    {
+      "biosample": "SAMN48439943",
+      "sample_title": "RIB40, Control, 5h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=5h"
+    },
+    {
+      "biosample": "SAMN48439944",
+      "sample_title": "RIB40, Control, 5h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=5h"
+    },
+    {
+      "biosample": "SAMN48439945",
+      "sample_title": "RIB40, Vanillin treated, 3h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=3h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439946",
+      "sample_title": "RIB40, Vanillin treated, 3h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=3h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439947",
+      "sample_title": "RIB40, Vanillin treated, 3h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=3h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439948",
+      "sample_title": "RIB40, HMF treated, 3h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=3h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439949",
+      "sample_title": "RIB40, HMF treated, 3h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=3h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439950",
+      "sample_title": "RIB40, HMF treated, 3h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=3h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439951",
+      "sample_title": "RIB40, Furfural treated, 3h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=3h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439952",
+      "sample_title": "RIB40, Furfural treated, 3h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=3h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439953",
+      "sample_title": "RIB40, Furfural treated, 3h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=3h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439954",
+      "sample_title": "RIB40, Control, 3h, rep4",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=3h"
+    },
+    {
+      "biosample": "SAMN48439955",
+      "sample_title": "RIB40, Control, 3h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=3h"
+    },
+    {
+      "biosample": "SAMN48439956",
+      "sample_title": "RIB40, Control, 3h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=3h"
+    },
+    {
+      "biosample": "SAMN48439957",
+      "sample_title": "RIB40, Control, 3h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=3h"
+    },
+    {
+      "biosample": "SAMN48439958",
+      "sample_title": "RIB40, Vanillin treated, 1h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439959",
+      "sample_title": "RIB40, Vanillin treated, 1h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439960",
+      "sample_title": "RIB40, Vanillin treated, 1h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439961",
+      "sample_title": "RIB40, Levulinic acid treated, 1h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Levulinic acid (LA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=24.5 mM"
+    },
+    {
+      "biosample": "SAMN48439962",
+      "sample_title": "RIB40, Levulinic acid treated, 1h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Levulinic acid (LA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=24.5 mM"
+    },
+    {
+      "biosample": "SAMN48439963",
+      "sample_title": "RIB40, Levulinic acid treated, 1h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Levulinic acid (LA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=24.5 mM"
+    },
+    {
+      "biosample": "SAMN48439964",
+      "sample_title": "RIB40, HMF treated, 1h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439965",
+      "sample_title": "RIB40, HMF treated, 1h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439966",
+      "sample_title": "RIB40, HMF treated, 1h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439967",
+      "sample_title": "RIB40, Furfural treated, 1h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439968",
+      "sample_title": "RIB40, Furfural treated, 1h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439969",
+      "sample_title": "RIB40, Furfural treated, 1h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439970",
+      "sample_title": "RIB40, Ferulic acid treated, 1h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Ferulic acid (FA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=6.5 mM"
+    },
+    {
+      "biosample": "SAMN48439971",
+      "sample_title": "RIB40, Ferulic acid treated, 1h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Ferulic acid (FA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=6.5 mM"
+    },
+    {
+      "biosample": "SAMN48439972",
+      "sample_title": "RIB40, Ferulic acid treated, 1h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Ferulic acid (FA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=1h; concentration=6.5 mM"
+    },
+    {
+      "biosample": "SAMN48439973",
+      "sample_title": "RIB40, Control, 1h, rep4",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=1h"
+    },
+    {
+      "biosample": "SAMN48439974",
+      "sample_title": "RIB40, Control, 1h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=1h"
+    },
+    {
+      "biosample": "SAMN48439975",
+      "sample_title": "RIB40, Control, 1h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=1h"
+    },
+    {
+      "biosample": "SAMN48439976",
+      "sample_title": "RIB40, Control, 1h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=1h"
+    },
+    {
+      "biosample": "SAMN48439977",
+      "sample_title": "RIB40, Vanillin treated, 0h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439978",
+      "sample_title": "RIB40, Vanillin treated, 0h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439979",
+      "sample_title": "RIB40, Vanillin treated, 0h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Vanillin (Van); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=2.6 mM"
+    },
+    {
+      "biosample": "SAMN48439980",
+      "sample_title": "RIB40, Levulinic acid treated, 0h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Levulinic acid (LA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=24.5 mM"
+    },
+    {
+      "biosample": "SAMN48439981",
+      "sample_title": "RIB40, Levulinic acid treated, 0h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Levulinic acid (LA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=24.5 mM"
+    },
+    {
+      "biosample": "SAMN48439982",
+      "sample_title": "RIB40, Levulinic acid treated, 0h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Levulinic acid (LA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=24.5 mM"
+    },
+    {
+      "biosample": "SAMN48439983",
+      "sample_title": "RIB40, HMF treated, 0h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439984",
+      "sample_title": "RIB40, HMF treated, 0h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439985",
+      "sample_title": "RIB40, HMF treated, 0h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Hydroxymethylfurfural (HMF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=13.5 mM"
+    },
+    {
+      "biosample": "SAMN48439986",
+      "sample_title": "RIB40, Furfural treated, 0h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439987",
+      "sample_title": "RIB40, Furfural treated, 0h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439988",
+      "sample_title": "RIB40, Furfural treated, 0h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Furfural (FF); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=2.3 mM"
+    },
+    {
+      "biosample": "SAMN48439989",
+      "sample_title": "RIB40, Ferulic acid treated, 0h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Ferulic acid (FA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=6.5 mM"
+    },
+    {
+      "biosample": "SAMN48439990",
+      "sample_title": "RIB40, Ferulic acid treated, 0h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Ferulic acid (FA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=6.5 mM"
+    },
+    {
+      "biosample": "SAMN48439991",
+      "sample_title": "RIB40, Ferulic acid treated, 0h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; treatment=Ferulic acid (FA); source_name=mycelia; geo_loc_name=missing; tissue=mycelia; time=0h; concentration=6.5 mM"
+    },
+    {
+      "biosample": "SAMN48439992",
+      "sample_title": "RIB40, Control, 0h, rep4",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=0h"
+    },
+    {
+      "biosample": "SAMN48439993",
+      "sample_title": "RIB40, Control, 0h, rep3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=0h"
+    },
+    {
+      "biosample": "SAMN48439994",
+      "sample_title": "RIB40, Control, 0h, rep2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=0h"
+    },
+    {
+      "biosample": "SAMN48439995",
+      "sample_title": "RIB40, Control, 0h, rep1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=WT; source_name=mycelia; collection_date=missing; geo_loc_name=missing; tissue=mycelia; time=0h"
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "SRR33529233",
+      "biosample": "SAMN48439928",
+      "condition_id": "PRJNA1261861_control_24h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529258",
+      "biosample": "SAMN48439953",
+      "condition_id": "PRJNA1261861_furfural_3h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529279",
+      "biosample": "SAMN48439974",
+      "condition_id": "PRJNA1261861_control_1h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529293",
+      "biosample": "SAMN48439988",
+      "condition_id": "PRJNA1261861_furfural_0h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529248",
+      "biosample": "SAMN48439943",
+      "condition_id": "PRJNA1261861_control_5h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529298",
+      "biosample": "SAMN48439993",
+      "condition_id": "PRJNA1261861_control_0h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529227",
+      "biosample": "SAMN48439922",
+      "condition_id": "PRJNA1261861_furfural_24h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529261",
+      "biosample": "SAMN48439956",
+      "condition_id": "PRJNA1261861_control_3h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529262",
+      "biosample": "SAMN48439957",
+      "condition_id": "PRJNA1261861_control_3h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529273",
+      "biosample": "SAMN48439968",
+      "condition_id": "PRJNA1261861_furfural_1h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529297",
+      "biosample": "SAMN48439992",
+      "condition_id": "PRJNA1261861_control_0h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529235",
+      "biosample": "SAMN48439930",
+      "condition_id": "PRJNA1261861_control_24h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529257",
+      "biosample": "SAMN48439952",
+      "condition_id": "PRJNA1261861_furfural_3h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529259",
+      "biosample": "SAMN48439954",
+      "condition_id": "PRJNA1261861_control_3h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529274",
+      "biosample": "SAMN48439969",
+      "condition_id": "PRJNA1261861_furfural_1h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529234",
+      "biosample": "SAMN48439929",
+      "condition_id": "PRJNA1261861_control_24h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529236",
+      "biosample": "SAMN48439931",
+      "condition_id": "PRJNA1261861_control_24h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529244",
+      "biosample": "SAMN48439939",
+      "condition_id": "PRJNA1261861_furfural_5h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529245",
+      "biosample": "SAMN48439940",
+      "condition_id": "PRJNA1261861_furfural_5h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529246",
+      "biosample": "SAMN48439941",
+      "condition_id": "PRJNA1261861_control_5h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529247",
+      "biosample": "SAMN48439942",
+      "condition_id": "PRJNA1261861_control_5h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529292",
+      "biosample": "SAMN48439987",
+      "condition_id": "PRJNA1261861_furfural_0h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529243",
+      "biosample": "SAMN48439938",
+      "condition_id": "PRJNA1261861_furfural_5h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529256",
+      "biosample": "SAMN48439951",
+      "condition_id": "PRJNA1261861_furfural_3h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529260",
+      "biosample": "SAMN48439955",
+      "condition_id": "PRJNA1261861_control_3h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529280",
+      "biosample": "SAMN48439975",
+      "condition_id": "PRJNA1261861_control_1h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529281",
+      "biosample": "SAMN48439976",
+      "condition_id": "PRJNA1261861_control_1h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529299",
+      "biosample": "SAMN48439994",
+      "condition_id": "PRJNA1261861_control_0h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529228",
+      "biosample": "SAMN48439923",
+      "condition_id": "PRJNA1261861_furfural_24h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529229",
+      "biosample": "SAMN48439924",
+      "condition_id": "PRJNA1261861_furfural_24h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529249",
+      "biosample": "SAMN48439944",
+      "condition_id": "PRJNA1261861_control_5h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529272",
+      "biosample": "SAMN48439967",
+      "condition_id": "PRJNA1261861_furfural_1h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529278",
+      "biosample": "SAMN48439973",
+      "condition_id": "PRJNA1261861_control_1h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529291",
+      "biosample": "SAMN48439986",
+      "condition_id": "PRJNA1261861_furfural_0h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR33529300",
+      "biosample": "SAMN48439995",
+      "condition_id": "PRJNA1261861_control_0h",
+      "strain": "RIB40"
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJNA1261861_control_0h",
+      "condition_label": "RIB40 | mycelia | control (unstressed) | 0h",
+      "strain": "RIB40",
+      "time_value": "0",
+      "time_unit": "hour",
+      "treatment": "none (control)",
+      "recombinant_background": "wild_type",
+      "original_description": "RIB40, Control, 0h (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA1261861 (SRA study SRP584613, PMID:40781683): study_description 'Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams'; sample_title 'RIB40, Control, 0h, rep<n>'; sample_attributes strain=RIB40, genotype=WT, source_name=mycelia, tissue=mycelia, time=0h."
+    },
+    {
+      "condition_id": "PRJNA1261861_furfural_0h",
+      "condition_label": "RIB40 | mycelia | furfural stress (2.3 mM) | 0h",
+      "strain": "RIB40",
+      "time_value": "0",
+      "time_unit": "hour",
+      "stress": "chemical stress: furfural (lignocellulosic-hydrolysate fungistatic compound)",
+      "treatment": "Furfural (FF), 2.3 mM",
+      "recombinant_background": "wild_type",
+      "original_description": "RIB40, Furfural treated, 0h (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA1261861 (SRA study SRP584613, PMID:40781683): study_description 'Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams'; sample_title 'RIB40, Furfural treated, 0h, rep<n>'; sample_attributes strain=RIB40, genotype=WT, source_name=mycelia, tissue=mycelia, time=0h, concentration=2.3 mM."
+    },
+    {
+      "condition_id": "PRJNA1261861_control_1h",
+      "condition_label": "RIB40 | mycelia | control (unstressed) | 1h",
+      "strain": "RIB40",
+      "time_value": "1",
+      "time_unit": "hour",
+      "treatment": "none (control)",
+      "recombinant_background": "wild_type",
+      "original_description": "RIB40, Control, 1h (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA1261861 (SRA study SRP584613, PMID:40781683): study_description 'Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams'; sample_title 'RIB40, Control, 1h, rep<n>'; sample_attributes strain=RIB40, genotype=WT, source_name=mycelia, tissue=mycelia, time=1h."
+    },
+    {
+      "condition_id": "PRJNA1261861_furfural_1h",
+      "condition_label": "RIB40 | mycelia | furfural stress (2.3 mM) | 1h",
+      "strain": "RIB40",
+      "time_value": "1",
+      "time_unit": "hour",
+      "stress": "chemical stress: furfural (lignocellulosic-hydrolysate fungistatic compound)",
+      "treatment": "Furfural (FF), 2.3 mM",
+      "recombinant_background": "wild_type",
+      "original_description": "RIB40, Furfural treated, 1h (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA1261861 (SRA study SRP584613, PMID:40781683): study_description 'Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams'; sample_title 'RIB40, Furfural treated, 1h, rep<n>'; sample_attributes strain=RIB40, genotype=WT, source_name=mycelia, tissue=mycelia, time=1h, concentration=2.3 mM."
+    },
+    {
+      "condition_id": "PRJNA1261861_control_3h",
+      "condition_label": "RIB40 | mycelia | control (unstressed) | 3h",
+      "strain": "RIB40",
+      "time_value": "3",
+      "time_unit": "hour",
+      "treatment": "none (control)",
+      "recombinant_background": "wild_type",
+      "original_description": "RIB40, Control, 3h (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA1261861 (SRA study SRP584613, PMID:40781683): study_description 'Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams'; sample_title 'RIB40, Control, 3h, rep<n>'; sample_attributes strain=RIB40, genotype=WT, source_name=mycelia, tissue=mycelia, time=3h."
+    },
+    {
+      "condition_id": "PRJNA1261861_furfural_3h",
+      "condition_label": "RIB40 | mycelia | furfural stress (2.3 mM) | 3h",
+      "strain": "RIB40",
+      "time_value": "3",
+      "time_unit": "hour",
+      "stress": "chemical stress: furfural (lignocellulosic-hydrolysate fungistatic compound)",
+      "treatment": "Furfural (FF), 2.3 mM",
+      "recombinant_background": "wild_type",
+      "original_description": "RIB40, Furfural treated, 3h (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA1261861 (SRA study SRP584613, PMID:40781683): study_description 'Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams'; sample_title 'RIB40, Furfural treated, 3h, rep<n>'; sample_attributes strain=RIB40, genotype=WT, source_name=mycelia, tissue=mycelia, time=3h, concentration=2.3 mM."
+    },
+    {
+      "condition_id": "PRJNA1261861_control_5h",
+      "condition_label": "RIB40 | mycelia | control (unstressed) | 5h",
+      "strain": "RIB40",
+      "time_value": "5",
+      "time_unit": "hour",
+      "treatment": "none (control)",
+      "recombinant_background": "wild_type",
+      "original_description": "RIB40, Control, 5h (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA1261861 (SRA study SRP584613, PMID:40781683): study_description 'Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams'; sample_title 'RIB40, Control, 5h, rep<n>'; sample_attributes strain=RIB40, genotype=WT, source_name=mycelia, tissue=mycelia, time=5h."
+    },
+    {
+      "condition_id": "PRJNA1261861_furfural_5h",
+      "condition_label": "RIB40 | mycelia | furfural stress (2.3 mM) | 5h",
+      "strain": "RIB40",
+      "time_value": "5",
+      "time_unit": "hour",
+      "stress": "chemical stress: furfural (lignocellulosic-hydrolysate fungistatic compound)",
+      "treatment": "Furfural (FF), 2.3 mM",
+      "recombinant_background": "wild_type",
+      "original_description": "RIB40, Furfural treated, 5h (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA1261861 (SRA study SRP584613, PMID:40781683): study_description 'Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams'; sample_title 'RIB40, Furfural treated, 5h, rep<n>'; sample_attributes strain=RIB40, genotype=WT, source_name=mycelia, tissue=mycelia, time=5h, concentration=2.3 mM."
+    },
+    {
+      "condition_id": "PRJNA1261861_control_24h",
+      "condition_label": "RIB40 | mycelia | control (unstressed) | 24h",
+      "strain": "RIB40",
+      "time_value": "24",
+      "time_unit": "hour",
+      "treatment": "none (control)",
+      "recombinant_background": "wild_type",
+      "original_description": "RIB40, Control, 24h (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA1261861 (SRA study SRP584613, PMID:40781683): study_description 'Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams'; sample_title 'RIB40, Control, 24h, rep<n>'; sample_attributes strain=RIB40, genotype=WT, source_name=mycelia, tissue=mycelia, time=24h."
+    },
+    {
+      "condition_id": "PRJNA1261861_furfural_24h",
+      "condition_label": "RIB40 | mycelia | furfural stress (2.3 mM) | 24h",
+      "strain": "RIB40",
+      "time_value": "24",
+      "time_unit": "hour",
+      "stress": "chemical stress: furfural (lignocellulosic-hydrolysate fungistatic compound)",
+      "treatment": "Furfural (FF), 2.3 mM",
+      "recombinant_background": "wild_type",
+      "original_description": "RIB40, Furfural treated, 24h (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA1261861 (SRA study SRP584613, PMID:40781683): study_description 'Transcriptome analysis of Aspergillus oryzae RIB40 under chemical stress reveals mechanisms of adaptation to fungistatic compounds of lignocellulosic side streams'; sample_title 'RIB40, Furfural treated, 24h, rep<n>'; sample_attributes strain=RIB40, genotype=WT, source_name=mycelia, tissue=mycelia, time=24h, concentration=2.3 mM."
+    }
+  ]
+}

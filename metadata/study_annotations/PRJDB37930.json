@@ -1,0 +1,620 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJDB37930",
+  "related_identifiers": {
+    "bioproject": "PRJDB37930",
+    "sra_study": "DRP018854",
+    "geo_series": null
+  },
+  "paper": {
+    "status": "found",
+    "title": "Analysis of Short-Term Responses to Hypoxia During Stirred-Tank Fermentation in Aspergillus oryzae",
+    "authors": "Araki S, Susukida S, Miyazawa K, Kumagai T, Tokashiki J, Abe K",
+    "year": 2026,
+    "journal": "Journal of Fungi",
+    "doi": "10.3390/jof12050347",
+    "pmid": "42187829",
+    "pmcid": "PMC13208471",
+    "url": "https://doi.org/10.3390/jof12050347",
+    "access": "full_text",
+    "association_evidence": "Data availability: 'The raw RNA-seq data are deposited in the DDBJ Sequence Read Archive under Bioproject ID PRJDB37930.'",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Characterise the first hours (<= 6 h) of the A. oryzae response to hypoxia in an industrial-style stirred-tank bioreactor.",
+    "experimental_design": "Fed-batch 4 L bioreactor cultures of WT, the hyphal-dispersion mutant AGΔ-GAGΔ and its ΔaoxA derivative were held at 10% dissolved oxygen (control) or let fall to <=1% (hypoxia), sampled at baseline (B3h) and 0, 1, 3 and 6 h after hypoxia onset.",
+    "main_finding": "Hypoxia transiently repressed respiratory complexes I-III and immediately induced complex IV, the alternative oxidase gene and glycolysis, keeping ATP stable; a transient ROS burst was prolonged when aoxA was deleted."
+  },
+  "tag_sets": {
+    "stbr_fed_batch": [
+      {
+        "tag": "defined_medium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "modified chemically defined medium (Table S3)"
+      },
+      {
+        "tag": "glucose",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "fed as 50% glucose"
+      },
+      {
+        "tag": "urea",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "fed as 4% urea"
+      },
+      {
+        "tag": "bioreactor",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "4 L stirred-tank bioreactor"
+      },
+      {
+        "tag": "fed_batch",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "submerged",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "genotype_WT": [
+      {
+        "tag": "strain_ns4",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "paper_methods",
+        "confidence": "medium",
+        "note": "the paper's control strain 'WT-cutL1'"
+      },
+      {
+        "tag": "oe_cutL1",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "all three strains carry the '-cutL1' suffix (cutinase CutL1 expression construct); the construct is not described in the paper's main text"
+      }
+    ],
+    "genotype_AGGAG": [
+      {
+        "tag": "strain_ns4",
+        "source": "inferred_from_methods",
+        "confidence": "medium",
+        "note": "AG-GAG is derived from the NS4 background"
+      },
+      {
+        "tag": "knockout",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "alpha_1_3_glucan_deficient",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "galactosaminogalactan_deficient",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "hyphal_dispersion_mutant",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "oe_cutL1",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "all three strains carry the '-cutL1' suffix (cutinase CutL1 expression construct); the construct is not described in the paper's main text"
+      }
+    ],
+    "genotype_AOXA": [
+      {
+        "tag": "strain_ns4",
+        "source": "inferred_from_methods",
+        "confidence": "medium",
+        "note": "derived from AG-GAG (NS4 background)"
+      },
+      {
+        "tag": "knockout",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "alpha_1_3_glucan_deficient",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "galactosaminogalactan_deficient",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "hyphal_dispersion_mutant",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "del_aoxA",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "alternative oxidase gene aoxA deleted"
+      },
+      {
+        "tag": "oe_cutL1",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "all three strains carry the '-cutL1' suffix (cutinase CutL1 expression construct); the construct is not described in the paper's main text"
+      }
+    ],
+    "arm_ctrl": [
+      {
+        "tag": "control",
+        "source": "inferred_from_design",
+        "confidence": "high",
+        "note": "sample-title arm code mapped to the paper's control/hypoxic cultures"
+      },
+      {
+        "tag": "normoxia",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "dissolved oxygen held at 10%"
+      }
+    ],
+    "arm_hypo": [
+      {
+        "tag": "treated",
+        "source": "inferred_from_design",
+        "confidence": "high",
+        "note": "sample-title arm code mapped to the paper's control/hypoxic cultures"
+      },
+      {
+        "tag": "hypoxia",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "dissolved oxygen fell to <=1% (air only)"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJDB37930_WT_ctrl_B3h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_WT"
+      ],
+      "tags": [
+        {
+          "tag": "baseline",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "Baseline 3 h: after 3 h at 10% DO, before oxygen supply diverges"
+        },
+        {
+          "tag": "normoxia",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "dissolved oxygen held at 10%"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "high",
+          "note": "sample-title arm code mapped to the paper's control/hypoxic cultures"
+        }
+      ]
+    },
+    "PRJDB37930_WT_ctrl_H0h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_WT",
+        "arm_ctrl"
+      ],
+      "tags": [
+        {
+          "tag": "0h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_WT_ctrl_H1h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_WT",
+        "arm_ctrl"
+      ],
+      "tags": [
+        {
+          "tag": "1h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_WT_ctrl_H3h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_WT",
+        "arm_ctrl"
+      ],
+      "tags": [
+        {
+          "tag": "3h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_WT_ctrl_H6h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_WT",
+        "arm_ctrl"
+      ],
+      "tags": [
+        {
+          "tag": "6h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_WT_hypo_B3h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_WT"
+      ],
+      "tags": [
+        {
+          "tag": "baseline",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "Baseline 3 h: after 3 h at 10% DO, before oxygen supply diverges"
+        },
+        {
+          "tag": "normoxia",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "dissolved oxygen held at 10%"
+        }
+      ]
+    },
+    "PRJDB37930_WT_hypo_H0h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_WT",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "0h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_WT_hypo_H1h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_WT",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "1h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_WT_hypo_H3h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_WT",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "3h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_WT_hypo_H6h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_WT",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "6h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AGGAG_ctrl_B3h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AGGAG"
+      ],
+      "tags": [
+        {
+          "tag": "baseline",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "Baseline 3 h: after 3 h at 10% DO, before oxygen supply diverges"
+        },
+        {
+          "tag": "normoxia",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "dissolved oxygen held at 10%"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "high",
+          "note": "sample-title arm code mapped to the paper's control/hypoxic cultures"
+        }
+      ]
+    },
+    "PRJDB37930_AGGAG_ctrl_H0h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AGGAG",
+        "arm_ctrl"
+      ],
+      "tags": [
+        {
+          "tag": "0h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AGGAG_ctrl_H1h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AGGAG",
+        "arm_ctrl"
+      ],
+      "tags": [
+        {
+          "tag": "1h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AGGAG_ctrl_H3h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AGGAG",
+        "arm_ctrl"
+      ],
+      "tags": [
+        {
+          "tag": "3h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AGGAG_ctrl_H6h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AGGAG",
+        "arm_ctrl"
+      ],
+      "tags": [
+        {
+          "tag": "6h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AGGAG_hypo_B3h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AGGAG"
+      ],
+      "tags": [
+        {
+          "tag": "baseline",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "Baseline 3 h: after 3 h at 10% DO, before oxygen supply diverges"
+        },
+        {
+          "tag": "normoxia",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "dissolved oxygen held at 10%"
+        }
+      ]
+    },
+    "PRJDB37930_AGGAG_hypo_H0h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AGGAG",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "0h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AGGAG_hypo_H1h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AGGAG",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "1h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AGGAG_hypo_H3h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AGGAG",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "3h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AGGAG_hypo_H6h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AGGAG",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "6h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AOXA_hypo_B3h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AOXA"
+      ],
+      "tags": [
+        {
+          "tag": "baseline",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "Baseline 3 h: after 3 h at 10% DO, before oxygen supply diverges"
+        },
+        {
+          "tag": "normoxia",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "dissolved oxygen held at 10%"
+        }
+      ]
+    },
+    "PRJDB37930_AOXA_hypo_H0h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AOXA",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "0h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AOXA_hypo_H1h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AOXA",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "1h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AOXA_hypo_H3h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AOXA",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "3h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    },
+    "PRJDB37930_AOXA_hypo_H6h": {
+      "sets": [
+        "stbr_fed_batch",
+        "genotype_AOXA",
+        "arm_hypo"
+      ],
+      "tags": [
+        {
+          "tag": "6h_post_treatment",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hours after DO first reached 1% in the hypoxic culture (time-matched in controls)"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "Resolves fields left unresolved in metadata/conditions.tsv: 'ctrl' = DO maintained at 10%, 'hypo' = DO allowed to fall to <=1%, B3h = baseline after 3 h at 10% DO, 'AOXA' = deletion of the alternative oxidase gene aoxA in the AGΔ-GAGΔ background; 'AG-GAG' = alpha-1,3-glucan synthase + galactosaminogalactan synthase gene knockout."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-03",
+    "needs_pdf": false
+  }
+}

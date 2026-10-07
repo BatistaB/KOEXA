@@ -1,0 +1,1426 @@
+{
+  "bioproject": "PRJDB37930",
+  "collected_at": "2026-10-03T14:34:07+00:00",
+  "accessions_searched": [
+    "PRJDB37930",
+    "DRP018854"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "42187829",
+      "pmcid": "PMC13208471",
+      "doi": "10.3390/jof12050347",
+      "title": "Analysis of Short-Term Responses to Hypoxia During Stirred-Tank Fermentation in Aspergillus oryzae.",
+      "authors": "Araki S, Susukida S, Miyazawa K, Kumagai T, Tokashiki J, Abe K.",
+      "year": 2026,
+      "journal": "Journal of fungi (Basel, Switzerland)",
+      "url": "https://doi.org/10.3390/jof12050347",
+      "open_access": true,
+      "abstract": "During fermentation in stirred-tank bioreactors (STBR), filamentous fungi are frequently exposed to hypoxic conditions. However, their responses, especially short-term ones (≤6 h), remain unclear. In this study, we performed a short-term multi-omics profiling in an Aspergillus oryzae hyphal dispersion mutant (AGΔ-GAGΔ) during a controlled transition to hypoxia (a decrease in dissolved oxygen (DO) from 10% to ≤1%) in a 4 L STBR. In transcriptome analysis, the genes encoding mitochondrial respiratory chain Complexes I-III were transiently downregulated at 1 h from DO depletion and were then upregulated, whereas those of Complex IV were upregulated immediately at the onset of hypoxia. In relation to this respiratory remodeling, we also observed an immediate induction of an alternative oxidase (AOX) gene. However, our metabolome data showed no significant change in the ATP level. This result could be explained by the upregulation of the glycolytic genes in hypoxic cultures. Fluorescence imaging revealed a transient increase in intracellular reactive oxygen species (ROS) in hypoxia, and metabolomics data revealed a decrease in the reduced glutathione/oxidized glutathione ratio in hypoxic cultures. Deletion of the AOX gene prolonged the ROS increase. Together, these data indicate that early hypoxia triggers a transient increase in oxidative stress, mitigated by antioxidant systems and mitochondrial respiratory rebalancing including an AOX-mediated bypass.",
+      "found_by": [
+        "europepmc_fulltext:PRJDB37930"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJDB37930",
+          "text": " manuscript.Institutional Review Board StatementNot applicable.Informed Consent StatementNot applicable.Data Availability StatementThe raw RNA-seq data are deposited in the DDBJ Sequence Read Archive under Bioproject ID PRJDB37930. The other data that support the findings of this study are available from the corresponding author upon reas",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJDB37930",
+    "bioproject": "PRJDB37930",
+    "study_accession": "DRP018854",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae RIB40",
+    "strain": "AG-GAG, AG-GAG-AOXA, NS4",
+    "study_description": "Transcriptome analysis of Aspergillus oryzae",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "85 biosample(s), 85 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMD01703937",
+      "sample_title": "AOXA-H6h-hypo-rep3",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H6h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703936",
+      "sample_title": "AOXA-H6h-hypo-rep2",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H6h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703935",
+      "sample_title": "AOXA-H6h-hypo-rep1",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H6h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703934",
+      "sample_title": "AOXA-H3h-hypo-rep3",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H3h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703933",
+      "sample_title": "AOXA-H3h-hypo-rep2",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H3h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703932",
+      "sample_title": "AOXA-H3h-hypo-rep1",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H3h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703931",
+      "sample_title": "AOXA-H1h-hypo-rep3",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H1h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703930",
+      "sample_title": "AOXA-H1h-hypo-rep2",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H1h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703929",
+      "sample_title": "AOXA-H1h-hypo-rep1",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H1h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703928",
+      "sample_title": "AOXA-H0h-hypo-rep3",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H0h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703927",
+      "sample_title": "AOXA-H0h-hypo-rep2",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H0h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703926",
+      "sample_title": "AOXA-H0h-hypo-rep1",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-H0h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703925",
+      "sample_title": "AOXA-B3h-hypo-rep3",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-B3h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703924",
+      "sample_title": "AOXA-B3h-hypo-rep2",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-B3h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703923",
+      "sample_title": "AOXA-B3h-hypo-rep1",
+      "strain": "AG-GAG-AOXA",
+      "condition_clues": "strain=AG-GAG-AOXA; collection_date=2025-01-10; geo_loc_name=missing: lab stock; sample_name=AOXA-B3h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703922",
+      "sample_title": "WT-H6h-hypo-rep3",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2023-01-29; geo_loc_name=missing: lab stock; sample_name=WT-H6h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703921",
+      "sample_title": "WT-H6h-hypo-rep2",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-11-05; geo_loc_name=missing: lab stock; sample_name=WT-H6h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703920",
+      "sample_title": "WT-H6h-hypo-rep1",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-10-27; geo_loc_name=missing: lab stock; sample_name=WT-H6h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703919",
+      "sample_title": "WT-H3h-hypo-rep3",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2023-01-29; geo_loc_name=missing: lab stock; sample_name=WT-H3h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703918",
+      "sample_title": "WT-H3h-hypo-rep2",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-11-05; geo_loc_name=missing: lab stock; sample_name=WT-H3h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703917",
+      "sample_title": "WT-H3h-hypo-rep1",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-10-27; geo_loc_name=missing: lab stock; sample_name=WT-H3h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703916",
+      "sample_title": "WT-H1h-hypo-rep3",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2023-01-29; geo_loc_name=missing: lab stock; sample_name=WT-H1h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703915",
+      "sample_title": "WT-H1h-hypo-rep2",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-11-05; geo_loc_name=missing: lab stock; sample_name=WT-H1h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703914",
+      "sample_title": "WT-H1h-hypo-rep1",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-10-27; geo_loc_name=missing: lab stock; sample_name=WT-H1h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703913",
+      "sample_title": "WT-H0h-hypo-rep3",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2023-01-29; geo_loc_name=missing: lab stock; sample_name=WT-H0h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703912",
+      "sample_title": "WT-H0h-hypo-rep2",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-11-05; geo_loc_name=missing: lab stock; sample_name=WT-H0h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703911",
+      "sample_title": "WT-H0h-hypo-rep1",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-10-27; geo_loc_name=missing: lab stock; sample_name=WT-H0h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703910",
+      "sample_title": "WT-B3h-hypo-rep3",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2023-01-29; geo_loc_name=missing: lab stock; sample_name=WT-B3h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703909",
+      "sample_title": "WT-B3h-hypo-rep2",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-11-05; geo_loc_name=missing: lab stock; sample_name=WT-B3h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703908",
+      "sample_title": "WT-B3h-hypo-rep1",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-10-27; geo_loc_name=missing: lab stock; sample_name=WT-B3h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703907",
+      "sample_title": "WT-H6h-ctrl-rep3",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2023-01-21; geo_loc_name=missing: lab stock; sample_name=WT-H6h-ctrl-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703906",
+      "sample_title": "WT-H6h-ctrl-rep2",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-11-05; geo_loc_name=missing: lab stock; sample_name=WT-H6h-ctrl-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703905",
+      "sample_title": "WT-H6h-ctrl-rep1",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-10-27; geo_loc_name=missing: lab stock; sample_name=WT-H6h-ctrl-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703904",
+      "sample_title": "WT-H3h-ctrl-rep3",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2023-01-21; geo_loc_name=missing: lab stock; sample_name=WT-H3h-ctrl-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703903",
+      "sample_title": "WT-H3h-ctrl-rep2",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-11-05; geo_loc_name=missing: lab stock; sample_name=WT-H3h-ctrl-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703902",
+      "sample_title": "WT-H3h-ctrl-rep1",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-10-27; geo_loc_name=missing: lab stock; sample_name=WT-H3h-ctrl-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703901",
+      "sample_title": "WT-H1h-ctrl-rep3",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2023-01-21; geo_loc_name=missing: lab stock; sample_name=WT-H1h-ctrl-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703900",
+      "sample_title": "WT-H1h-ctrl-rep2",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-11-05; geo_loc_name=missing: lab stock; sample_name=WT-H1h-ctrl-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703899",
+      "sample_title": "WT-H1h-ctrl-rep1",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-10-27; geo_loc_name=missing: lab stock; sample_name=WT-H1h-ctrl-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703898",
+      "sample_title": "WT-H0h-ctrl-rep3",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2023-01-21; geo_loc_name=missing: lab stock; sample_name=WT-H0h-ctrl-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703897",
+      "sample_title": "WT-H0h-ctrl-rep2",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-11-05; geo_loc_name=missing: lab stock; sample_name=WT-H0h-ctrl-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703896",
+      "sample_title": "WT-H0h-ctrl-rep1",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-10-27; geo_loc_name=missing: lab stock; sample_name=WT-H0h-ctrl-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703895",
+      "sample_title": "WT-B3h-ctrl-rep3",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2023-01-21; geo_loc_name=missing: lab stock; sample_name=WT-B3h-ctrl-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703894",
+      "sample_title": "WT-B3h-ctrl-rep2",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-11-05; geo_loc_name=missing: lab stock; sample_name=WT-B3h-ctrl-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703893",
+      "sample_title": "WT-B3h-ctrl-rep1",
+      "strain": "NS4",
+      "condition_clues": "strain=NS4; collection_date=2022-10-27; geo_loc_name=missing: lab stock; sample_name=WT-B3h-ctrl-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703892",
+      "sample_title": "AGGAG-H6h-hypo-rep4",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-17; geo_loc_name=missing: lab stock; sample_name=AGGAG-H6h-hypo-rep4; biological_replicate=4; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703891",
+      "sample_title": "AGGAG-H6h-hypo-rep3",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-12; geo_loc_name=missing: lab stock; sample_name=AGGAG-H6h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703890",
+      "sample_title": "AGGAG-H6h-hypo-rep2",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-03; geo_loc_name=missing: lab stock; sample_name=AGGAG-H6h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703889",
+      "sample_title": "AGGAG-H6h-hypo-rep1",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-04-21; geo_loc_name=missing: lab stock; sample_name=AGGAG-H6h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703888",
+      "sample_title": "AGGAG-H3h-hypo-rep4",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-17; geo_loc_name=missing: lab stock; sample_name=AGGAG-H3h-hypo-rep4; biological_replicate=4; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703887",
+      "sample_title": "AGGAG-H3h-hypo-rep3",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-12; geo_loc_name=missing: lab stock; sample_name=AGGAG-H3h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703886",
+      "sample_title": "AGGAG-H3h-hypo-rep2",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-03; geo_loc_name=missing: lab stock; sample_name=AGGAG-H3h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703885",
+      "sample_title": "AGGAG-H3h-hypo-rep1",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-04-21; geo_loc_name=missing: lab stock; sample_name=AGGAG-H3h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703884",
+      "sample_title": "AGGAG-H1h-hypo-rep4",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-17; geo_loc_name=missing: lab stock; sample_name=AGGAG-H1h-hypo-rep4; biological_replicate=4; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703883",
+      "sample_title": "AGGAG-H1h-hypo-rep3",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-12; geo_loc_name=missing: lab stock; sample_name=AGGAG-H1h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703882",
+      "sample_title": "AGGAG-H1h-hypo-rep2",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-03; geo_loc_name=missing: lab stock; sample_name=AGGAG-H1h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703881",
+      "sample_title": "AGGAG-H1h-hypo-rep1",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-04-21; geo_loc_name=missing: lab stock; sample_name=AGGAG-H1h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703880",
+      "sample_title": "AGGAG-H0h-hypo-rep4",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-17; geo_loc_name=missing: lab stock; sample_name=AGGAG-H0h-hypo-rep4; biological_replicate=4; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703879",
+      "sample_title": "AGGAG-H0h-hypo-rep3",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-12; geo_loc_name=missing: lab stock; sample_name=AGGAG-H0h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703878",
+      "sample_title": "AGGAG-H0h-hypo-rep2",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-03; geo_loc_name=missing: lab stock; sample_name=AGGAG-H0h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703877",
+      "sample_title": "AGGAG-H0h-hypo-rep1",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-04-21; geo_loc_name=missing: lab stock; sample_name=AGGAG-H0h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703876",
+      "sample_title": "AGGAG-B3h-hypo-rep4",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-17; geo_loc_name=missing: lab stock; sample_name=AGGAG-B3h-hypo-rep4; biological_replicate=4; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703875",
+      "sample_title": "AGGAG-B3h-hypo-rep3",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-12; geo_loc_name=missing: lab stock; sample_name=AGGAG-B3h-hypo-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703874",
+      "sample_title": "AGGAG-B3h-hypo-rep2",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-03; geo_loc_name=missing: lab stock; sample_name=AGGAG-B3h-hypo-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703873",
+      "sample_title": "AGGAG-B3h-hypo-rep1",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-04-21; geo_loc_name=missing: lab stock; sample_name=AGGAG-B3h-hypo-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703872",
+      "sample_title": "AGGAG-H6h-ctrl-rep4",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-17; geo_loc_name=missing: lab stock; sample_name=AGGAG-H6h-ctrl-rep4; biological_replicate=4; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703871",
+      "sample_title": "AGGAG-H6h-ctrl-rep3",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-31; geo_loc_name=missing: lab stock; sample_name=AGGAG-H6h-ctrl-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703870",
+      "sample_title": "AGGAG-H6h-ctrl-rep2",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-12; geo_loc_name=missing: lab stock; sample_name=AGGAG-H6h-ctrl-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703869",
+      "sample_title": "AGGAG-H6h-ctrl-rep1",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-03; geo_loc_name=missing: lab stock; sample_name=AGGAG-H6h-ctrl-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703868",
+      "sample_title": "AGGAG-H3h-ctrl-rep4",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-17; geo_loc_name=missing: lab stock; sample_name=AGGAG-H3h-ctrl-rep4; biological_replicate=4; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703867",
+      "sample_title": "AGGAG-H3h-ctrl-rep3",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-31; geo_loc_name=missing: lab stock; sample_name=AGGAG-H3h-ctrl-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703866",
+      "sample_title": "AGGAG-H3h-ctrl-rep2",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-12; geo_loc_name=missing: lab stock; sample_name=AGGAG-H3h-ctrl-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703865",
+      "sample_title": "AGGAG-H3h-ctrl-rep1",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-03; geo_loc_name=missing: lab stock; sample_name=AGGAG-H3h-ctrl-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703864",
+      "sample_title": "AGGAG-H1h-ctrl-rep4",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-17; geo_loc_name=missing: lab stock; sample_name=AGGAG-H1h-ctrl-rep4; biological_replicate=4; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703863",
+      "sample_title": "AGGAG-H1h-ctrl-rep3",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-31; geo_loc_name=missing: lab stock; sample_name=AGGAG-H1h-ctrl-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703862",
+      "sample_title": "AGGAG-H1h-ctrl-rep2",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-12; geo_loc_name=missing: lab stock; sample_name=AGGAG-H1h-ctrl-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703861",
+      "sample_title": "AGGAG-H1h-ctrl-rep1",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-03; geo_loc_name=missing: lab stock; sample_name=AGGAG-H1h-ctrl-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703860",
+      "sample_title": "AGGAG-H0h-ctrl-rep4",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-17; geo_loc_name=missing: lab stock; sample_name=AGGAG-H0h-ctrl-rep4; biological_replicate=4; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703859",
+      "sample_title": "AGGAG-H0h-ctrl-rep3",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-31; geo_loc_name=missing: lab stock; sample_name=AGGAG-H0h-ctrl-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703858",
+      "sample_title": "AGGAG-H0h-ctrl-rep2",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-12; geo_loc_name=missing: lab stock; sample_name=AGGAG-H0h-ctrl-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703857",
+      "sample_title": "AGGAG-H0h-ctrl-rep1",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-03; geo_loc_name=missing: lab stock; sample_name=AGGAG-H0h-ctrl-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703856",
+      "sample_title": "AGGAG-B3h-ctrl-rep4",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-17; geo_loc_name=missing: lab stock; sample_name=AGGAG-B3h-ctrl-rep4; biological_replicate=4; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703855",
+      "sample_title": "AGGAG-B3h-ctrl-rep3",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-31; geo_loc_name=missing: lab stock; sample_name=AGGAG-B3h-ctrl-rep3; biological_replicate=3; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703854",
+      "sample_title": "AGGAG-B3h-ctrl-rep2",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-12; geo_loc_name=missing: lab stock; sample_name=AGGAG-B3h-ctrl-rep2; biological_replicate=2; host=Aspergillus oryzae; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01703853",
+      "sample_title": "AGGAG-B3h-ctrl-rep1",
+      "strain": "AG-GAG",
+      "condition_clues": "strain=AG-GAG; collection_date=2022-05-03; geo_loc_name=missing: lab stock; sample_name=AGGAG-B3h-ctrl-rep1; biological_replicate=1; host=Aspergillus oryzae; sample_type=whole organism"
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "DRR802015",
+      "biosample": "SAMD01703932",
+      "condition_id": "PRJDB37930_AOXA_hypo_H3h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR802009",
+      "biosample": "SAMD01703926",
+      "condition_id": "PRJDB37930_AOXA_hypo_H0h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR802007",
+      "biosample": "SAMD01703924",
+      "condition_id": "PRJDB37930_AOXA_hypo_B3h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR802001",
+      "biosample": "SAMD01703918",
+      "condition_id": "PRJDB37930_WT_hypo_H3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR802000",
+      "biosample": "SAMD01703917",
+      "condition_id": "PRJDB37930_WT_hypo_H3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801990",
+      "biosample": "SAMD01703907",
+      "condition_id": "PRJDB37930_WT_ctrl_H6h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801980",
+      "biosample": "SAMD01703897",
+      "condition_id": "PRJDB37930_WT_ctrl_H0h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801976",
+      "biosample": "SAMD01703893",
+      "condition_id": "PRJDB37930_WT_ctrl_B3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801965",
+      "biosample": "SAMD01703882",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H1h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801959",
+      "biosample": "SAMD01703876",
+      "condition_id": "PRJDB37930_AGGAG_hypo_B3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801945",
+      "biosample": "SAMD01703862",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H1h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR802017",
+      "biosample": "SAMD01703934",
+      "condition_id": "PRJDB37930_AOXA_hypo_H3h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR802008",
+      "biosample": "SAMD01703925",
+      "condition_id": "PRJDB37930_AOXA_hypo_B3h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR801991",
+      "biosample": "SAMD01703908",
+      "condition_id": "PRJDB37930_WT_hypo_B3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801981",
+      "biosample": "SAMD01703898",
+      "condition_id": "PRJDB37930_WT_ctrl_H0h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801975",
+      "biosample": "SAMD01703892",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H6h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801952",
+      "biosample": "SAMD01703869",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H6h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801949",
+      "biosample": "SAMD01703866",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801947",
+      "biosample": "SAMD01703864",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H1h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801943",
+      "biosample": "SAMD01703860",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H0h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801938",
+      "biosample": "SAMD01703855",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_B3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR802020",
+      "biosample": "SAMD01703937",
+      "condition_id": "PRJDB37930_AOXA_hypo_H6h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR802012",
+      "biosample": "SAMD01703929",
+      "condition_id": "PRJDB37930_AOXA_hypo_H1h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR801997",
+      "biosample": "SAMD01703914",
+      "condition_id": "PRJDB37930_WT_hypo_H1h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801995",
+      "biosample": "SAMD01703912",
+      "condition_id": "PRJDB37930_WT_hypo_H0h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801989",
+      "biosample": "SAMD01703906",
+      "condition_id": "PRJDB37930_WT_ctrl_H6h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801983",
+      "biosample": "SAMD01703900",
+      "condition_id": "PRJDB37930_WT_ctrl_H1h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801961",
+      "biosample": "SAMD01703878",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H0h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801955",
+      "biosample": "SAMD01703872",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H6h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801954",
+      "biosample": "SAMD01703871",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H6h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801953",
+      "biosample": "SAMD01703870",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H6h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801937",
+      "biosample": "SAMD01703854",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_B3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR802019",
+      "biosample": "SAMD01703936",
+      "condition_id": "PRJDB37930_AOXA_hypo_H6h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR802016",
+      "biosample": "SAMD01703933",
+      "condition_id": "PRJDB37930_AOXA_hypo_H3h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR802011",
+      "biosample": "SAMD01703928",
+      "condition_id": "PRJDB37930_AOXA_hypo_H0h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR802006",
+      "biosample": "SAMD01703923",
+      "condition_id": "PRJDB37930_AOXA_hypo_B3h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR801996",
+      "biosample": "SAMD01703913",
+      "condition_id": "PRJDB37930_WT_hypo_H0h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801973",
+      "biosample": "SAMD01703890",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H6h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801969",
+      "biosample": "SAMD01703886",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801968",
+      "biosample": "SAMD01703885",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801967",
+      "biosample": "SAMD01703884",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H1h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801962",
+      "biosample": "SAMD01703879",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H0h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801951",
+      "biosample": "SAMD01703868",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801946",
+      "biosample": "SAMD01703863",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H1h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR802013",
+      "biosample": "SAMD01703930",
+      "condition_id": "PRJDB37930_AOXA_hypo_H1h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR802004",
+      "biosample": "SAMD01703921",
+      "condition_id": "PRJDB37930_WT_hypo_H6h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801994",
+      "biosample": "SAMD01703911",
+      "condition_id": "PRJDB37930_WT_hypo_H0h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801993",
+      "biosample": "SAMD01703910",
+      "condition_id": "PRJDB37930_WT_hypo_B3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801982",
+      "biosample": "SAMD01703899",
+      "condition_id": "PRJDB37930_WT_ctrl_H1h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801977",
+      "biosample": "SAMD01703894",
+      "condition_id": "PRJDB37930_WT_ctrl_B3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801963",
+      "biosample": "SAMD01703880",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H0h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801958",
+      "biosample": "SAMD01703875",
+      "condition_id": "PRJDB37930_AGGAG_hypo_B3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801941",
+      "biosample": "SAMD01703858",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H0h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801936",
+      "biosample": "SAMD01703853",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_B3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR802014",
+      "biosample": "SAMD01703931",
+      "condition_id": "PRJDB37930_AOXA_hypo_H1h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR802005",
+      "biosample": "SAMD01703922",
+      "condition_id": "PRJDB37930_WT_hypo_H6h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801999",
+      "biosample": "SAMD01703916",
+      "condition_id": "PRJDB37930_WT_hypo_H1h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801986",
+      "biosample": "SAMD01703903",
+      "condition_id": "PRJDB37930_WT_ctrl_H3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801985",
+      "biosample": "SAMD01703902",
+      "condition_id": "PRJDB37930_WT_ctrl_H3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801984",
+      "biosample": "SAMD01703901",
+      "condition_id": "PRJDB37930_WT_ctrl_H1h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801979",
+      "biosample": "SAMD01703896",
+      "condition_id": "PRJDB37930_WT_ctrl_H0h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801978",
+      "biosample": "SAMD01703895",
+      "condition_id": "PRJDB37930_WT_ctrl_B3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801974",
+      "biosample": "SAMD01703891",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H6h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801971",
+      "biosample": "SAMD01703888",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801966",
+      "biosample": "SAMD01703883",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H1h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801964",
+      "biosample": "SAMD01703881",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H1h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801957",
+      "biosample": "SAMD01703874",
+      "condition_id": "PRJDB37930_AGGAG_hypo_B3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801950",
+      "biosample": "SAMD01703867",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801944",
+      "biosample": "SAMD01703861",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H1h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801942",
+      "biosample": "SAMD01703859",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H0h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801940",
+      "biosample": "SAMD01703857",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H0h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801939",
+      "biosample": "SAMD01703856",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_B3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR802018",
+      "biosample": "SAMD01703935",
+      "condition_id": "PRJDB37930_AOXA_hypo_H6h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR802003",
+      "biosample": "SAMD01703920",
+      "condition_id": "PRJDB37930_WT_hypo_H6h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR802002",
+      "biosample": "SAMD01703919",
+      "condition_id": "PRJDB37930_WT_hypo_H3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801960",
+      "biosample": "SAMD01703877",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H0h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801948",
+      "biosample": "SAMD01703865",
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR802010",
+      "biosample": "SAMD01703927",
+      "condition_id": "PRJDB37930_AOXA_hypo_H0h",
+      "strain": "AG-GAG-AOXA"
+    },
+    {
+      "sample_id": "DRR801998",
+      "biosample": "SAMD01703915",
+      "condition_id": "PRJDB37930_WT_hypo_H1h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801992",
+      "biosample": "SAMD01703909",
+      "condition_id": "PRJDB37930_WT_hypo_B3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801988",
+      "biosample": "SAMD01703905",
+      "condition_id": "PRJDB37930_WT_ctrl_H6h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801987",
+      "biosample": "SAMD01703904",
+      "condition_id": "PRJDB37930_WT_ctrl_H3h",
+      "strain": "NS4"
+    },
+    {
+      "sample_id": "DRR801972",
+      "biosample": "SAMD01703889",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H6h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801970",
+      "biosample": "SAMD01703887",
+      "condition_id": "PRJDB37930_AGGAG_hypo_H3h",
+      "strain": "AG-GAG"
+    },
+    {
+      "sample_id": "DRR801956",
+      "biosample": "SAMD01703873",
+      "condition_id": "PRJDB37930_AGGAG_hypo_B3h",
+      "strain": "AG-GAG"
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJDB37930_AGGAG_ctrl_B3h",
+      "condition_label": "AG-GAG | bioreactor | arm ctrl | time token B3h",
+      "strain": "AG-GAG",
+      "culture_mode": "submerged",
+      "time_value": "3",
+      "time_unit": "hour",
+      "treatment": "arm 'ctrl' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'ctrl' mapping unresolved",
+      "recombinant_background": "engineered hyphal-dispersion mutant derived from NS4 (strain 'AG-GAG'; ENA project description confirms 'hyphal-dispersion mutants' but the specific gene deletion(s) behind the name are NOT stated in the SRA/ENA metadata -- by the strain name and common A. oryzae nomenclature likely alpha-1,3-glucan (AG) and galactosaminogalactan (GAG) deficiency, UNCONFIRMED)",
+      "original_description": "AGGAG-B3h-ctrl",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AGGAG-B3h-ctrl-rep<n>'; sample_attributes strain=AG-GAG, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'ctrl' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'B3h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H0h",
+      "condition_label": "AG-GAG | bioreactor | arm ctrl | time token H0h",
+      "strain": "AG-GAG",
+      "culture_mode": "submerged",
+      "time_value": "0",
+      "time_unit": "hour",
+      "treatment": "arm 'ctrl' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'ctrl' mapping unresolved",
+      "recombinant_background": "engineered hyphal-dispersion mutant derived from NS4 (strain 'AG-GAG'; ENA project description confirms 'hyphal-dispersion mutants' but the specific gene deletion(s) behind the name are NOT stated in the SRA/ENA metadata -- by the strain name and common A. oryzae nomenclature likely alpha-1,3-glucan (AG) and galactosaminogalactan (GAG) deficiency, UNCONFIRMED)",
+      "original_description": "AGGAG-H0h-ctrl",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AGGAG-H0h-ctrl-rep<n>'; sample_attributes strain=AG-GAG, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'ctrl' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H0h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H1h",
+      "condition_label": "AG-GAG | bioreactor | arm ctrl | time token H1h",
+      "strain": "AG-GAG",
+      "culture_mode": "submerged",
+      "time_value": "1",
+      "time_unit": "hour",
+      "treatment": "arm 'ctrl' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'ctrl' mapping unresolved",
+      "recombinant_background": "engineered hyphal-dispersion mutant derived from NS4 (strain 'AG-GAG'; ENA project description confirms 'hyphal-dispersion mutants' but the specific gene deletion(s) behind the name are NOT stated in the SRA/ENA metadata -- by the strain name and common A. oryzae nomenclature likely alpha-1,3-glucan (AG) and galactosaminogalactan (GAG) deficiency, UNCONFIRMED)",
+      "original_description": "AGGAG-H1h-ctrl",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AGGAG-H1h-ctrl-rep<n>'; sample_attributes strain=AG-GAG, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'ctrl' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H1h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H3h",
+      "condition_label": "AG-GAG | bioreactor | arm ctrl | time token H3h",
+      "strain": "AG-GAG",
+      "culture_mode": "submerged",
+      "time_value": "3",
+      "time_unit": "hour",
+      "treatment": "arm 'ctrl' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'ctrl' mapping unresolved",
+      "recombinant_background": "engineered hyphal-dispersion mutant derived from NS4 (strain 'AG-GAG'; ENA project description confirms 'hyphal-dispersion mutants' but the specific gene deletion(s) behind the name are NOT stated in the SRA/ENA metadata -- by the strain name and common A. oryzae nomenclature likely alpha-1,3-glucan (AG) and galactosaminogalactan (GAG) deficiency, UNCONFIRMED)",
+      "original_description": "AGGAG-H3h-ctrl",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AGGAG-H3h-ctrl-rep<n>'; sample_attributes strain=AG-GAG, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'ctrl' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H3h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AGGAG_ctrl_H6h",
+      "condition_label": "AG-GAG | bioreactor | arm ctrl | time token H6h",
+      "strain": "AG-GAG",
+      "culture_mode": "submerged",
+      "time_value": "6",
+      "time_unit": "hour",
+      "treatment": "arm 'ctrl' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'ctrl' mapping unresolved",
+      "recombinant_background": "engineered hyphal-dispersion mutant derived from NS4 (strain 'AG-GAG'; ENA project description confirms 'hyphal-dispersion mutants' but the specific gene deletion(s) behind the name are NOT stated in the SRA/ENA metadata -- by the strain name and common A. oryzae nomenclature likely alpha-1,3-glucan (AG) and galactosaminogalactan (GAG) deficiency, UNCONFIRMED)",
+      "original_description": "AGGAG-H6h-ctrl",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AGGAG-H6h-ctrl-rep<n>'; sample_attributes strain=AG-GAG, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'ctrl' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H6h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AGGAG_hypo_B3h",
+      "condition_label": "AG-GAG | bioreactor | arm hypo | time token B3h",
+      "strain": "AG-GAG",
+      "culture_mode": "submerged",
+      "time_value": "3",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "engineered hyphal-dispersion mutant derived from NS4 (strain 'AG-GAG'; ENA project description confirms 'hyphal-dispersion mutants' but the specific gene deletion(s) behind the name are NOT stated in the SRA/ENA metadata -- by the strain name and common A. oryzae nomenclature likely alpha-1,3-glucan (AG) and galactosaminogalactan (GAG) deficiency, UNCONFIRMED)",
+      "original_description": "AGGAG-B3h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AGGAG-B3h-hypo-rep<n>'; sample_attributes strain=AG-GAG, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'B3h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AGGAG_hypo_H0h",
+      "condition_label": "AG-GAG | bioreactor | arm hypo | time token H0h",
+      "strain": "AG-GAG",
+      "culture_mode": "submerged",
+      "time_value": "0",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "engineered hyphal-dispersion mutant derived from NS4 (strain 'AG-GAG'; ENA project description confirms 'hyphal-dispersion mutants' but the specific gene deletion(s) behind the name are NOT stated in the SRA/ENA metadata -- by the strain name and common A. oryzae nomenclature likely alpha-1,3-glucan (AG) and galactosaminogalactan (GAG) deficiency, UNCONFIRMED)",
+      "original_description": "AGGAG-H0h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AGGAG-H0h-hypo-rep<n>'; sample_attributes strain=AG-GAG, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H0h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AGGAG_hypo_H1h",
+      "condition_label": "AG-GAG | bioreactor | arm hypo | time token H1h",
+      "strain": "AG-GAG",
+      "culture_mode": "submerged",
+      "time_value": "1",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "engineered hyphal-dispersion mutant derived from NS4 (strain 'AG-GAG'; ENA project description confirms 'hyphal-dispersion mutants' but the specific gene deletion(s) behind the name are NOT stated in the SRA/ENA metadata -- by the strain name and common A. oryzae nomenclature likely alpha-1,3-glucan (AG) and galactosaminogalactan (GAG) deficiency, UNCONFIRMED)",
+      "original_description": "AGGAG-H1h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AGGAG-H1h-hypo-rep<n>'; sample_attributes strain=AG-GAG, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H1h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AGGAG_hypo_H3h",
+      "condition_label": "AG-GAG | bioreactor | arm hypo | time token H3h",
+      "strain": "AG-GAG",
+      "culture_mode": "submerged",
+      "time_value": "3",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "engineered hyphal-dispersion mutant derived from NS4 (strain 'AG-GAG'; ENA project description confirms 'hyphal-dispersion mutants' but the specific gene deletion(s) behind the name are NOT stated in the SRA/ENA metadata -- by the strain name and common A. oryzae nomenclature likely alpha-1,3-glucan (AG) and galactosaminogalactan (GAG) deficiency, UNCONFIRMED)",
+      "original_description": "AGGAG-H3h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AGGAG-H3h-hypo-rep<n>'; sample_attributes strain=AG-GAG, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H3h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AGGAG_hypo_H6h",
+      "condition_label": "AG-GAG | bioreactor | arm hypo | time token H6h",
+      "strain": "AG-GAG",
+      "culture_mode": "submerged",
+      "time_value": "6",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "engineered hyphal-dispersion mutant derived from NS4 (strain 'AG-GAG'; ENA project description confirms 'hyphal-dispersion mutants' but the specific gene deletion(s) behind the name are NOT stated in the SRA/ENA metadata -- by the strain name and common A. oryzae nomenclature likely alpha-1,3-glucan (AG) and galactosaminogalactan (GAG) deficiency, UNCONFIRMED)",
+      "original_description": "AGGAG-H6h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AGGAG-H6h-hypo-rep<n>'; sample_attributes strain=AG-GAG, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H6h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AOXA_hypo_B3h",
+      "condition_label": "AG-GAG-AOXA | bioreactor | arm hypo | time token B3h",
+      "strain": "AG-GAG-AOXA",
+      "culture_mode": "submerged",
+      "time_value": "3",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "engineered derivative of the AG-GAG hyphal-dispersion mutant (strain 'AG-GAG-AOXA'; the 'AOXA' modification is NOT described in the SRA/ENA metadata -- unresolved)",
+      "original_description": "AOXA-B3h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AOXA-B3h-hypo-rep<n>'; sample_attributes strain=AG-GAG-AOXA, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'B3h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AOXA_hypo_H0h",
+      "condition_label": "AG-GAG-AOXA | bioreactor | arm hypo | time token H0h",
+      "strain": "AG-GAG-AOXA",
+      "culture_mode": "submerged",
+      "time_value": "0",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "engineered derivative of the AG-GAG hyphal-dispersion mutant (strain 'AG-GAG-AOXA'; the 'AOXA' modification is NOT described in the SRA/ENA metadata -- unresolved)",
+      "original_description": "AOXA-H0h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AOXA-H0h-hypo-rep<n>'; sample_attributes strain=AG-GAG-AOXA, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H0h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AOXA_hypo_H1h",
+      "condition_label": "AG-GAG-AOXA | bioreactor | arm hypo | time token H1h",
+      "strain": "AG-GAG-AOXA",
+      "culture_mode": "submerged",
+      "time_value": "1",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "engineered derivative of the AG-GAG hyphal-dispersion mutant (strain 'AG-GAG-AOXA'; the 'AOXA' modification is NOT described in the SRA/ENA metadata -- unresolved)",
+      "original_description": "AOXA-H1h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AOXA-H1h-hypo-rep<n>'; sample_attributes strain=AG-GAG-AOXA, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H1h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AOXA_hypo_H3h",
+      "condition_label": "AG-GAG-AOXA | bioreactor | arm hypo | time token H3h",
+      "strain": "AG-GAG-AOXA",
+      "culture_mode": "submerged",
+      "time_value": "3",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "engineered derivative of the AG-GAG hyphal-dispersion mutant (strain 'AG-GAG-AOXA'; the 'AOXA' modification is NOT described in the SRA/ENA metadata -- unresolved)",
+      "original_description": "AOXA-H3h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AOXA-H3h-hypo-rep<n>'; sample_attributes strain=AG-GAG-AOXA, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H3h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_AOXA_hypo_H6h",
+      "condition_label": "AG-GAG-AOXA | bioreactor | arm hypo | time token H6h",
+      "strain": "AG-GAG-AOXA",
+      "culture_mode": "submerged",
+      "time_value": "6",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "engineered derivative of the AG-GAG hyphal-dispersion mutant (strain 'AG-GAG-AOXA'; the 'AOXA' modification is NOT described in the SRA/ENA metadata -- unresolved)",
+      "original_description": "AOXA-H6h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'AOXA-H6h-hypo-rep<n>'; sample_attributes strain=AG-GAG-AOXA, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H6h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_WT_ctrl_B3h",
+      "condition_label": "NS4 | bioreactor | arm ctrl | time token B3h",
+      "strain": "NS4",
+      "culture_mode": "submerged",
+      "time_value": "3",
+      "time_unit": "hour",
+      "treatment": "arm 'ctrl' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'ctrl' mapping unresolved",
+      "recombinant_background": "wild_type (parental strain NS4; labelled 'WT' in sample titles)",
+      "original_description": "WT-B3h-ctrl",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'WT-B3h-ctrl-rep<n>'; sample_attributes strain=NS4, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'ctrl' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'B3h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_WT_ctrl_H0h",
+      "condition_label": "NS4 | bioreactor | arm ctrl | time token H0h",
+      "strain": "NS4",
+      "culture_mode": "submerged",
+      "time_value": "0",
+      "time_unit": "hour",
+      "treatment": "arm 'ctrl' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'ctrl' mapping unresolved",
+      "recombinant_background": "wild_type (parental strain NS4; labelled 'WT' in sample titles)",
+      "original_description": "WT-H0h-ctrl",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'WT-H0h-ctrl-rep<n>'; sample_attributes strain=NS4, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'ctrl' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H0h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_WT_ctrl_H1h",
+      "condition_label": "NS4 | bioreactor | arm ctrl | time token H1h",
+      "strain": "NS4",
+      "culture_mode": "submerged",
+      "time_value": "1",
+      "time_unit": "hour",
+      "treatment": "arm 'ctrl' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'ctrl' mapping unresolved",
+      "recombinant_background": "wild_type (parental strain NS4; labelled 'WT' in sample titles)",
+      "original_description": "WT-H1h-ctrl",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'WT-H1h-ctrl-rep<n>'; sample_attributes strain=NS4, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'ctrl' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H1h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_WT_ctrl_H3h",
+      "condition_label": "NS4 | bioreactor | arm ctrl | time token H3h",
+      "strain": "NS4",
+      "culture_mode": "submerged",
+      "time_value": "3",
+      "time_unit": "hour",
+      "treatment": "arm 'ctrl' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'ctrl' mapping unresolved",
+      "recombinant_background": "wild_type (parental strain NS4; labelled 'WT' in sample titles)",
+      "original_description": "WT-H3h-ctrl",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'WT-H3h-ctrl-rep<n>'; sample_attributes strain=NS4, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'ctrl' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H3h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_WT_ctrl_H6h",
+      "condition_label": "NS4 | bioreactor | arm ctrl | time token H6h",
+      "strain": "NS4",
+      "culture_mode": "submerged",
+      "time_value": "6",
+      "time_unit": "hour",
+      "treatment": "arm 'ctrl' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'ctrl' mapping unresolved",
+      "recombinant_background": "wild_type (parental strain NS4; labelled 'WT' in sample titles)",
+      "original_description": "WT-H6h-ctrl",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'WT-H6h-ctrl-rep<n>'; sample_attributes strain=NS4, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'ctrl' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H6h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_WT_hypo_B3h",
+      "condition_label": "NS4 | bioreactor | arm hypo | time token B3h",
+      "strain": "NS4",
+      "culture_mode": "submerged",
+      "time_value": "3",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "wild_type (parental strain NS4; labelled 'WT' in sample titles)",
+      "original_description": "WT-B3h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'WT-B3h-hypo-rep<n>'; sample_attributes strain=NS4, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'B3h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_WT_hypo_H0h",
+      "condition_label": "NS4 | bioreactor | arm hypo | time token H0h",
+      "strain": "NS4",
+      "culture_mode": "submerged",
+      "time_value": "0",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "wild_type (parental strain NS4; labelled 'WT' in sample titles)",
+      "original_description": "WT-H0h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'WT-H0h-hypo-rep<n>'; sample_attributes strain=NS4, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H0h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_WT_hypo_H1h",
+      "condition_label": "NS4 | bioreactor | arm hypo | time token H1h",
+      "strain": "NS4",
+      "culture_mode": "submerged",
+      "time_value": "1",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "wild_type (parental strain NS4; labelled 'WT' in sample titles)",
+      "original_description": "WT-H1h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'WT-H1h-hypo-rep<n>'; sample_attributes strain=NS4, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H1h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_WT_hypo_H3h",
+      "condition_label": "NS4 | bioreactor | arm hypo | time token H3h",
+      "strain": "NS4",
+      "culture_mode": "submerged",
+      "time_value": "3",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "wild_type (parental strain NS4; labelled 'WT' in sample titles)",
+      "original_description": "WT-H3h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'WT-H3h-hypo-rep<n>'; sample_attributes strain=NS4, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H3h' (meaning of the H/B prefix is NOT stated)."
+    },
+    {
+      "condition_id": "PRJDB37930_WT_hypo_H6h",
+      "condition_label": "NS4 | bioreactor | arm hypo | time token H6h",
+      "strain": "NS4",
+      "culture_mode": "submerged",
+      "time_value": "6",
+      "time_unit": "hour",
+      "treatment": "arm 'hypo' (with/without oxygen supplement; mapping unresolved)",
+      "oxygen_condition": "study varies oxygen supplementation; arm code 'hypo' mapping unresolved",
+      "recombinant_background": "wild_type (parental strain NS4; labelled 'WT' in sample titles)",
+      "original_description": "WT-H6h-hypo",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJDB37930 (DRA study DRP018854, Tohoku University): ENA project description 'Time-course RNA-seq analysis of Aspergillus oryzae NS4 and the hyphal-dispersion mutants grown in stirred-tank bioreactor with/without oxygen supplement'; sample_title 'WT-H6h-hypo-rep<n>'; sample_attributes strain=NS4, host=Aspergillus oryzae, sample_type=whole organism. Sample-title tokens are recorded literally: arm 'hypo' (ctrl vs hypo; which arm is with vs without oxygen supplement is NOT stated) and time token 'H6h' (meaning of the H/B prefix is NOT stated)."
+    }
+  ]
+}

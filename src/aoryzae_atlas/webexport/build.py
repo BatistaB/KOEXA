@@ -42,6 +42,7 @@ __all__ = [
     "export_classification",
     "export_expression_rank",
     "export_chromosome_expression",
+    "export_study_annotations",
     "write_all",
 ]
 
@@ -366,6 +367,78 @@ def export_chromosome_expression(conn: duckdb.DuckDBPyConnection, bin_size_bp: i
     return {"bin_size_bp": bin_size_bp, "bin_columns": _CHROMOSOME_BIN_COLUMNS, "chromosomes": chromosomes_payload}
 
 
+# Display order of tag chips (most identifying first); categories not
+# listed here sort last, alphabetically.
+TAG_CATEGORY_ORDER = [
+    "role", "genotype", "strain", "biological_material", "growth_phase", "culture_system", "medium",
+    "carbon_source", "nitrogen_source", "substrate", "compound", "stress", "oxygen", "temperature", "pH",
+    "time", "industrial_context",
+]
+
+
+def export_study_annotations(conn: duckdb.DuckDBPyConnection) -> dict[str, Any] | None:
+    """Paper + summary per study and the tags of every exported sample.
+
+    None if the annotation tables don't exist yet (database predates
+    migration 0002). Tag provenance (source/confidence) stays in the
+    database; the site only needs the tag and its category.
+    """
+    tables = {row[0] for row in conn.execute("SELECT table_name FROM information_schema.tables").fetchall()}
+    if "study_annotations" not in tables:
+        return None
+    studies = conn.execute(
+        f"""
+        SELECT a.*
+        FROM study_annotations a
+        WHERE a.bioproject IN (SELECT DISTINCT s.bioproject FROM samples s WHERE {CURATED_QUANTIFIED_FILTER})
+        ORDER BY a.bioproject
+        """
+    ).fetchdf()
+    tags = conn.execute(
+        f"""
+        SELECT t.bioproject, t.sample_id, s.condition_id, t.tag, t.category
+        FROM sample_tags t
+        JOIN samples s ON s.sample_id = t.sample_id
+        WHERE {CURATED_QUANTIFIED_FILTER}
+        """
+    ).fetchdf()
+    rank = {category: i for i, category in enumerate(TAG_CATEGORY_ORDER)}
+    tags["_order"] = tags["category"].map(lambda c: rank.get(c, len(rank)))
+    tags = tags.sort_values(["bioproject", "condition_id", "sample_id", "_order", "category", "tag"])
+
+    samples_by_study: dict[str, list[dict[str, Any]]] = {}
+    for (bioproject, sample_id, condition_id), group in tags.groupby(["bioproject", "sample_id", "condition_id"], sort=False):
+        samples_by_study.setdefault(bioproject, []).append(
+            {"sample_id": sample_id, "condition_id": condition_id, "tags": group["tag"].tolist()}
+        )
+
+    payload_studies = []
+    for record in _clean_records(studies):
+        bioproject = record["bioproject"]
+        payload_studies.append({
+            "bioproject": bioproject,
+            "paper": {
+                "status": record["paper_status"],
+                "title": record["paper_title"],
+                "authors": record["paper_authors"],
+                "year": record["paper_year"],
+                "journal": record["paper_journal"],
+                "doi": record["paper_doi"],
+                "pmid": record["paper_pmid"],
+                "url": record["paper_url"],
+            },
+            "summary": {
+                "objective": record["objective"],
+                "experimental_design": record["experimental_design"],
+                "main_finding": record["main_finding"],
+            },
+            "related_identifiers": json.loads(record["related_identifiers"] or "{}"),
+            "samples": samples_by_study.get(bioproject, []),
+        })
+    categories = dict(tags[["tag", "category"]].drop_duplicates().itertuples(index=False, name=None))
+    return {"studies": payload_studies, "tag_categories": categories, "category_order": TAG_CATEGORY_ORDER}
+
+
 def write_all(conn: duckdb.DuckDBPyConnection, out_dir: Path = WEB_DATA_DIR) -> dict[str, Any]:
     """Write every JSON snapshot; returns a summary dict for CLI reporting."""
     summary: dict[str, Any] = {}
@@ -413,5 +486,13 @@ def write_all(conn: duckdb.DuckDBPyConnection, out_dir: Path = WEB_DATA_DIR) -> 
     else:
         summary["chromosome_expression_bytes"] = 0
         summary["n_chromosome_bins"] = 0
+
+    study_annotations = export_study_annotations(conn)
+    if study_annotations is not None:
+        summary["study_annotations_bytes"] = _write_json(out_dir / "study_annotations.json", study_annotations)
+        summary["n_annotated_studies"] = len(study_annotations["studies"])
+    else:
+        summary["study_annotations_bytes"] = 0
+        summary["n_annotated_studies"] = 0
 
     return summary

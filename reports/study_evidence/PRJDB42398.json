@@ -1,0 +1,256 @@
+{
+  "bioproject": "PRJDB42398",
+  "collected_at": "2026-10-03T14:34:13+00:00",
+  "accessions_searched": [
+    "PRJDB42398",
+    "DRP019390"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "42783975",
+      "pmcid": "PMC13608414",
+      "doi": "10.3390/jof12090679",
+      "title": "Enhancing Lactate Assimilation in Aspergillus oryzae by Small Amounts of Metabolic Co-Substrates and Low pH.",
+      "authors": "Kikuta H, Muto M, Tanaka N, Tanaka T, Mano J.",
+      "year": 2026,
+      "journal": "Journal of fungi (Basel, Switzerland)",
+      "url": "https://doi.org/10.3390/jof12090679",
+      "open_access": true,
+      "abstract": "Lactate-rich byproducts and fermentation residues are generated during various food and fermentation processes, presenting opportunities for their conversion into value-added products through microbial bioprocesses. Aspergillus oryzae is a promising microbial host for such applications because of its ability to use diverse substrates and produce valuable products. However, the ability of A. oryzae to assimilate lactate and the factors limiting this process remain poorly understood despite its industrial importance. In this study, we investigated the transcriptional responses of A. oryzae during lactate assimilation and evaluated the culture conditions promoting this process. A. oryzae demonstrated only limited growth and lactate consumption when lactate was provided as its only carbon source in the synthetic minimal medium. Transcriptome analysis suggested possible metabolic constraints associated with carbon flux into the tricarboxylic acid (TCA) cycle, limiting lactate assimilation. To alleviate these constraints, the culture conditions were examined. Supplementation with small amounts of sugars, specific amino acids, and α-ketoglutarate promoted lactate assimilation. Moreover, low-pH conditions further improved lactate assimilation, reducing residual lactate concentrations to below the detection limit. These findings indicate that efficient lactate assimilation is promoted by small amounts of metabolic co-substrates, potentially through effects on central carbon metabolism, together with favorable low-pH conditions.",
+      "found_by": [
+        "europepmc_fulltext:PRJDB42398"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJDB42398",
+          "text": "[28]. Three independent biological replicates were analyzed under each condition (n = 3). The RNA-seq data generated in this study were deposited in the DDBJ Sequence Read Archive (DRA) under BioProject accession number PRJDB42398.The nf-core/RNA-seq pipeline (version 3.13.0) with the default parameters was used for RNA-seq data analysis ",
+          "deposition_statement": true
+        },
+        {
+          "accession": "PRJDB42398",
+          "text": "or analyzed during the current study are available from the corresponding author upon reasonable request. RNA-seq data supporting the results of this study were deposited in the DRA under the BioProject accession number PRJDB42398.Conflicts of InterestJ.M., H.K., M.M., and N.T. are inventors on a pending Japanese patent application relate",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJDB42398",
+    "bioproject": "PRJDB42398",
+    "study_accession": "DRP019390",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae RIB40",
+    "strain": "RIB40",
+    "study_description": "RNA-seq analysis of Aspergillus oryzae RIB40 under different carbon source conditions with a focus on lactate assimilation",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "5 biosample(s), 15 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMD01922520",
+      "sample_title": "Aspergillus oryzae RIB40 RNA-seq under 0.5% lactate + 0.1% glucose condition (day 5)",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolation_source=mycelia; collection_date=2026-01-13; geo_loc_name=Japan; sample_name=Lac+Glu_D5; carbon_source=0.5% lactate + 0.1% glucose (day 5); host=not applicable; sample_type=RNA"
+    },
+    {
+      "biosample": "SAMD01922519",
+      "sample_title": "Aspergillus oryzae RIB40 RNA-seq under 0.5% lactate + 0.1% glucose condition (day 3)",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolation_source=mycelia; collection_date=2026-01-11; geo_loc_name=Japan; sample_name=Lac+Glu_D3; carbon_source=0.5% lactate + 0.1% glucose (day 3); host=not applicable; sample_type=RNA"
+    },
+    {
+      "biosample": "SAMD01922518",
+      "sample_title": "Aspergillus oryzae RIB40 RNA-seq under 0.5% lactate + 0.1% glucose condition (day 1)",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolation_source=mycelia; collection_date=2026-01-09; geo_loc_name=Japan; sample_name=Lac+Glu_D1; carbon_source=0.5% lactate + 0.1% glucose (day 1); host=not applicable; sample_type=RNA"
+    },
+    {
+      "biosample": "SAMD01922517",
+      "sample_title": "Aspergillus oryzae RIB40 RNA-seq under 0.5% lactate condition",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolation_source=mycelia; collection_date=2025-12-11; geo_loc_name=Japan; sample_name=Lac; carbon_source=0.5% lactate; host=not applicable; sample_type=RNA"
+    },
+    {
+      "biosample": "SAMD01922516",
+      "sample_title": "Aspergillus oryzae RIB40 RNA-seq under 0.5% glucose (CD) condition",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolation_source=mycelia; collection_date=2025-12-09; geo_loc_name=Japan; sample_name=CD; carbon_source=0.5% glucose; host=not applicable; sample_type=RNA"
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "DRR1053978",
+      "biosample": "SAMD01922516",
+      "condition_id": "PRJDB42398_glucose0.5pct_CD_day2",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053979",
+      "biosample": "SAMD01922516",
+      "condition_id": "PRJDB42398_glucose0.5pct_CD_day2",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053980",
+      "biosample": "SAMD01922516",
+      "condition_id": "PRJDB42398_glucose0.5pct_CD_day2",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053981",
+      "biosample": "SAMD01922517",
+      "condition_id": "PRJDB42398_lactate0.5_day4",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053982",
+      "biosample": "SAMD01922517",
+      "condition_id": "PRJDB42398_lactate0.5_day4",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053983",
+      "biosample": "SAMD01922517",
+      "condition_id": "PRJDB42398_lactate0.5_day4",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053984",
+      "biosample": "SAMD01922518",
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day1",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053985",
+      "biosample": "SAMD01922518",
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day1",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053986",
+      "biosample": "SAMD01922518",
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day1",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053989",
+      "biosample": "SAMD01922519",
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day3",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053987",
+      "biosample": "SAMD01922519",
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day3",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053988",
+      "biosample": "SAMD01922519",
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day3",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053990",
+      "biosample": "SAMD01922520",
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day5",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053991",
+      "biosample": "SAMD01922520",
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day5",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR1053992",
+      "biosample": "SAMD01922520",
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day5",
+      "strain": "RIB40"
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJDB42398_glucose0.5pct_CD_day2",
+      "condition_label": "RIB40 | CD glucose minimal medium (0.5%) | submerged | 30C | day 2",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox-based glucose minimal medium)",
+      "culture_mode": "submerged",
+      "carbon_source": "glucose (0.5% w/v)",
+      "temperature_C": "30",
+      "time_value": "2",
+      "time_unit": "day",
+      "recombinant_background": "wild_type",
+      "original_description": "0.5% glucose (CD) condition; carbon-source control for the lactate-assimilation study",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB42398 (DRA study DRP019390), sample SAMD01922516 (runs DRR1053978/DRR1053979/DRR1053980 are three sequencing runs of THIS SAME biosample -- technical, not biological, replicates): sample_description 'Aspergillus oryzae RIB40 cultivated in medium containing 0.5% glucose as the sole carbon source at 30 degree Celsius with shaking at 100 rpm for 2 days, and mycelia were harvested for RNA extraction.'"
+    },
+    {
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day3",
+      "condition_label": "RIB40 | 0.5% lactate + 0.1% glucose | submerged | 30C | day 3",
+      "strain": "RIB40",
+      "medium": "minimal medium with lactate as primary carbon source",
+      "culture_mode": "submerged",
+      "carbon_source": "lactate (0.5% w/v) + glucose (0.1% w/v)",
+      "temperature_C": "30",
+      "time_value": "3",
+      "time_unit": "day",
+      "recombinant_background": "wild_type",
+      "original_description": "0.5% lactate + 0.1% glucose condition (day 3)",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB42398 (DRA study DRP019390), sample SAMD01922519 (runs DRR1053989/DRR1053987/DRR1053988 are three sequencing runs of THIS SAME biosample -- technical, not biological, replicates): sample_description 'Aspergillus oryzae RIB40 cultivated in medium containing 0.5% lactate with 0.1% glucose as an additional carbon source at 30 degree Celsius with shaking at 100 rpm, and mycelia were harvested at day 3 for RNA extraction.'"
+    },
+    {
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day5",
+      "condition_label": "RIB40 | 0.5% lactate + 0.1% glucose | submerged | 30C | day 5",
+      "strain": "RIB40",
+      "medium": "minimal medium with lactate as primary carbon source",
+      "culture_mode": "submerged",
+      "carbon_source": "lactate (0.5% w/v) + glucose (0.1% w/v)",
+      "temperature_C": "30",
+      "time_value": "5",
+      "time_unit": "day",
+      "recombinant_background": "wild_type",
+      "original_description": "0.5% lactate + 0.1% glucose condition (day 5); only ONE biological replicate (biosample SAMD01922520) sequenced across 3 runs",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB42398 (DRA study DRP019390), sample SAMD01922520 (runs DRR1053990/DRR1053991/DRR1053992 are three sequencing runs of THIS SAME biosample -- technical, not biological, replicates): sample_description 'Aspergillus oryzae RIB40 cultivated in medium containing 0.5% lactate with 0.1% glucose as an additional carbon source at 30 degree Celsius with shaking at 100 rpm, and mycelia were harvested at day 5 for RNA extraction.'"
+    },
+    {
+      "condition_id": "PRJDB42398_lactate0.5_glucose0.1_day1",
+      "condition_label": "RIB40 | 0.5% lactate + 0.1% glucose | submerged | 30C | day 1",
+      "strain": "RIB40",
+      "medium": "minimal medium with lactate as primary carbon source",
+      "culture_mode": "submerged",
+      "carbon_source": "lactate (0.5% w/v) + glucose (0.1% w/v)",
+      "temperature_C": "30",
+      "time_value": "1",
+      "time_unit": "day",
+      "recombinant_background": "wild_type",
+      "original_description": "0.5% lactate + 0.1% glucose condition (day 1); only ONE biological replicate (biosample SAMD01922518) sequenced across 3 runs",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB42398 (DRA study DRP019390), sample SAMD01922518 (runs DRR1053984/DRR1053985/DRR1053986 are three sequencing runs of THIS SAME biosample -- technical, not biological, replicates): sample_description 'Aspergillus oryzae RIB40 cultivated in medium containing 0.5% lactate with 0.1% glucose as an additional carbon source at 30 degree Celsius with shaking at 100 rpm, and mycelia were harvested at day 1 for RNA extraction.'"
+    },
+    {
+      "condition_id": "PRJDB42398_lactate0.5_day4",
+      "condition_label": "RIB40 | 0.5% lactate (no added glucose) | submerged | 30C | day 4",
+      "strain": "RIB40",
+      "medium": "minimal medium with lactate as sole carbon source",
+      "culture_mode": "submerged",
+      "carbon_source": "lactate (0.5% w/v)",
+      "temperature_C": "30",
+      "time_value": "4",
+      "time_unit": "day",
+      "recombinant_background": "wild_type",
+      "original_description": "0.5% lactate condition (\"Lac\", no glucose supplement), day 4; the study abstract's poor-lactate-utilization-without-glucose control. Only ONE biological replicate (biosample SAMD01922517) sequenced across 3 runs",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB42398 (DRA study DRP019390), sample SAMD01922517 (runs DRR1053981/DRR1053982/DRR1053983 are three sequencing runs of THIS SAME biosample -- technical, not biological, replicates): sample_description 'Aspergillus oryzae RIB40 cultivated in medium containing 0.5% lactate as the sole carbon source at 30 degree Celsius with shaking at 100 rpm for 4 days, and mycelia were harvested for RNA extraction.'; matches study_study_abstract's 'Lac condition' (lactate alone, no glucose supplement)."
+    }
+  ]
+}

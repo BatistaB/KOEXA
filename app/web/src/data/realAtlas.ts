@@ -9,6 +9,8 @@ import type {
   GeneExpressionRow,
   Sample,
   SampleQcMetrics,
+  StudyAnnotation,
+  StudyAnnotations,
 } from "./types";
 
 /**
@@ -36,6 +38,13 @@ export interface RealAtlasData {
   /** null until `atlas rank genes` has run and the web export has been refreshed. */
   expressionRank: ExpressionRank | null;
   chromosomeExpression: ChromosomeExpression | null;
+  /** null until `atlas database load-annotations` has run and the web export has been refreshed. */
+  studyAnnotations: StudyAnnotations | null;
+}
+
+interface StudyAnnotationsPayload {
+  studies: StudyAnnotation[];
+  tag_categories: Record<string, string>;
 }
 
 interface ExpressionRow {
@@ -171,7 +180,17 @@ function parseClassification(payload: ClassificationRow): Map<string, GeneClassi
 }
 
 export async function loadRealAtlas(): Promise<RealAtlasData> {
-  const [datasets, conditions, samples, sampleQc, expressionPayload, classificationPayload, chromosomeExpressionPayload, expressionRankPayload] =
+  const [
+    datasets,
+    conditions,
+    samples,
+    sampleQc,
+    expressionPayload,
+    classificationPayload,
+    chromosomeExpressionPayload,
+    expressionRankPayload,
+    studyAnnotationsPayload,
+  ] =
     await Promise.all([
       fetchJson<Dataset[]>("/data/datasets.json"),
       fetchJson<Condition[]>("/data/conditions.json"),
@@ -181,6 +200,7 @@ export async function loadRealAtlas(): Promise<RealAtlasData> {
       fetchJson<ClassificationRow | null>("/data/classification.json").catch(() => null),
       fetchJson<ChromosomeExpressionPayload | null>("/data/chromosome_expression.json").catch(() => null),
       fetchJson<ExpressionRankPayload | null>("/data/expression_rank.json").catch(() => null),
+      fetchJson<StudyAnnotationsPayload | null>("/data/study_annotations.json").catch(() => null),
     ]);
 
   return {
@@ -192,5 +212,11 @@ export async function loadRealAtlas(): Promise<RealAtlasData> {
     classification: classificationPayload ? parseClassification(classificationPayload) : new Map(),
     expressionRank: expressionRankPayload ? parseExpressionRank(expressionRankPayload) : null,
     chromosomeExpression: chromosomeExpressionPayload ? parseChromosomeExpression(chromosomeExpressionPayload) : null,
+    studyAnnotations: studyAnnotationsPayload
+      ? {
+          byBioproject: new Map(studyAnnotationsPayload.studies.map((s) => [s.bioproject, s])),
+          tagCategories: studyAnnotationsPayload.tag_categories,
+        }
+      : null,
   };
 }

@@ -25,6 +25,7 @@ const EMPTY_ATLAS: RealAtlasData = {
   classification: new Map(),
   expressionRank: null,
   chromosomeExpression: null,
+  studyAnnotations: null,
 };
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
   const [studyScope, setStudyScope] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification, expressionRank, chromosomeExpression } = atlas;
+  const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification, expressionRank, chromosomeExpression, studyAnnotations } = atlas;
 
   useEffect(() => {
     let cancelled = false;
@@ -221,8 +222,10 @@ function App() {
       dataset,
       sampleCount: relatedSamples.length,
       conditionCount: new Set(relatedSamples.map((s) => s.condition_id)).size,
+      annotation: studyAnnotations?.byBioproject.get(selectedBioproject) ?? null,
+      tagCategories: studyAnnotations?.tagCategories ?? {},
     };
-  }, [selectedBioproject, datasets, samples]);
+  }, [selectedBioproject, datasets, samples, studyAnnotations]);
 
   const filterSummary = useMemo(() => {
     const bits: string[] = [];

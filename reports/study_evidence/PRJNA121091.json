@@ -1,0 +1,246 @@
+{
+  "bioproject": "PRJNA121091",
+  "collected_at": "2026-10-03T14:34:43+00:00",
+  "accessions_searched": [
+    "PRJNA121091",
+    "SRP001894",
+    "GSE18851"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "20392818",
+      "pmcid": "PMC2926611",
+      "doi": "10.1093/nar/gkq256",
+      "title": "Survey of the transcriptome of Aspergillus oryzae via massively parallel mRNA sequencing.",
+      "authors": "Wang B, Guo G, Wang C, Lin Y, Wang X, Zhao M, Guo Y, He M, Zhang Y, Pan L.",
+      "year": 2010,
+      "journal": "Nucleic acids research",
+      "url": "https://doi.org/10.1093/nar/gkq256",
+      "open_access": true,
+      "abstract": "Aspergillus oryzae, an important filamentous fungus used in food fermentation and the enzyme industry, has been shown through genome sequencing and various other tools to have prominent features in its genomic composition. However, the functional complexity of the A. oryzae transcriptome has not yet been fully elucidated. Here, we applied direct high-throughput paired-end RNA-sequencing (RNA-Seq) to the transcriptome of A. oryzae under four different culture conditions. With the high resolution and sensitivity afforded by RNA-Seq, we were able to identify a substantial number of novel transcripts, new exons, untranslated regions, alternative upstream initiation codons and upstream open reading frames, which provide remarkable insight into the A. oryzae transcriptome. We were also able to assess the alternative mRNA isoforms in A. oryzae and found a large number of genes undergoing alternative splicing. Many genes and pathways that might be involved in higher levels of protein production in solid-state culture than in liquid culture were identified by comparing gene expression levels between different cultures. Our analysis indicated that the transcriptome of A. oryzae is much more complex than previously anticipated, and these results may provide a blueprint for further study of the A. oryzae transcriptome.",
+      "found_by": [
+        "europepmc_fulltext:GSE18851",
+        "ncbi_elink_bioproject_pubmed"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "GSE18851",
+          "text": "nced using the 1G Illumina Genome Analyzer. Two biological replicates of every sample were analyzed. The raw Illumina sequencing data are deposited in GEO (http://www.ncbi.nlm.nih.gov/geo/) at NCBI with accession number GSE18851.Mapping reads to reference genome and annotated genesThe A. oryzae RIB40 genome and gene infomation were down",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    },
+    {
+      "pmid": "23699226",
+      "pmcid": "PMC3730340",
+      "doi": "10.1093/gbe/evt077",
+      "title": "Fungal genes in context: genome architecture reflects regulatory complexity and function.",
+      "authors": "Noble LM, Andrianopoulos A.",
+      "year": 2013,
+      "journal": "Genome biology and evolution",
+      "url": "https://doi.org/10.1093/gbe/evt077",
+      "open_access": true,
+      "abstract": "Gene context determines gene expression, with local chromosomal environment most influential. Comparative genomic analysis is often limited in scope to conserved or divergent gene and protein families, and fungi are well suited to this approach with low functional redundancy and relatively streamlined genomes. We show here that one aspect of gene context, the amount of potential upstream regulatory sequence maintained through evolution, is highly predictive of both molecular function and biological process in diverse fungi. Orthologs with large upstream intergenic regions (UIRs) are strongly enriched in information processing functions, such as signal transduction and sequence-specific DNA binding, and, in the genus Aspergillus, include the majority of experimentally studied, high-level developmental and metabolic transcriptional regulators. Many uncharacterized genes are also present in this class and, by implication, may be of similar importance. Large intergenic regions also share two novel sequence characteristics, currently of unknown significance: they are enriched for plus-strand polypyrimidine tracts and an information-rich, putative regulatory motif that was present in the last common ancestor of the Pezizomycotina. Systematic consideration of gene UIR in comparative genomics, particularly for poorly characterized species, could help reveal organisms' regulatory priorities.",
+      "found_by": [
+        "europepmc_fulltext:GSE18851"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "GSE18851",
+          "text": "niger, and A. oryzae were downloaded from NCBI GEO (GSE4578, GSE38131, GSE37796, GSE37795, GSE36440, GSE32123, GSE30384, GSE27610, GSE25266, GSE24466, GSE23605, GSE22442, GSE22052, GSE21752, GSE2085, GSE19952, GSE19430, GSE18851, GSE16617, GSE16566, GSE16509, GSE15702, GSE14285, GSE12953, GSE11930, GSE11725, GSE10712, GSE10475, and GSE3",
+          "deposition_statement": false
+        }
+      ],
+      "deposition_statement": false
+    },
+    {
+      "pmid": "25757610",
+      "pmcid": "PMC4342825",
+      "doi": "10.1186/s12864-015-1224-y",
+      "title": "Tracking the best reference genes for RT-qPCR data normalization in filamentous fungi.",
+      "authors": "Llanos A, François JM, Parrou JL.",
+      "year": 2015,
+      "journal": "BMC genomics",
+      "url": "https://doi.org/10.1186/s12864-015-1224-y",
+      "open_access": true,
+      "abstract": "BackgroundA critical step in the RT-qPCR workflow for studying gene expression is data normalization, one of the strategies being the use of reference genes. This study aimed to identify and validate a selection of reference genes for relative quantification in Talaromyces versatilis, a relevant industrial filamentous fungus. Beyond T. versatilis, this study also aimed to propose reference genes that are applicable more widely for RT-qPCR data normalization in filamentous fungi.ResultsA selection of stable, potential reference genes was carried out in silico from RNA-seq based transcriptomic data obtained from T. versatilis. A dozen functionally unrelated candidate genes were analysed by RT-qPCR assays over more than 30 relevant culture conditions. By using geNorm, we showed that most of these candidate genes had stable transcript levels in most of the conditions, from growth environments to conidial germination. The overall robustness of these genes was explored further by showing that any combination of 3 of them led to minimal normalization bias. To extend the relevance of the study beyond T. versatilis, we challenged their stability together with sixteen other classically used genes such as β-tubulin or actin, in a representative sample of about 100 RNA-seq datasets. These datasets were obtained from 18 phylogenetically distant filamentous fungi exposed to prevalent experimental conditions. Although this wide analysis demonstrated that each of the chosen genes exhibited sporadic up- or down-regulation, their hierarchical clustering allowed the identification of a promising group of 6 genes, which presented weak expression changes and no tendency to up- or down-regulation over the whole set of conditions. This group included ubcB, sac7, fis1 and sarA genes, as well as TFC1 and UBC6 that were previously validated for their use in S. cerevisiae.ConclusionsWe propose a set of 6 genes that can be used as reference genes in RT-qPCR data normalization in any field of fungal biology. However, we recommend that the uniform transcription of these genes is tested by systematic experimental validation and to use the geometric averaging of at least 3 of the best ones. This will minimize the bias in normalization and will support trustworthy biological conclusions.",
+      "found_by": [
+        "europepmc_fulltext:GSE18851"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "GSE18851",
+          "text": "atasets were from Trichoderma reesei ([50], accession #GSE44648), Aspergillus niger ([51], #GSE33852), Aspergillus flavus ([52,53], #GSE40202 and #GSE30031), Aspergillus fumigatus (#GSE30579), Aspergillus oryzae ([54], #GSE18851), Aspergillus nidulans ([55], #GSE44100), Blumeria graminis ([11], #GSE43163), Colletotrichum graminicola ([5",
+          "deposition_statement": false
+        }
+      ],
+      "deposition_statement": false
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJNA121091",
+    "bioproject": "PRJNA121091",
+    "study_accession": "SRP001894",
+    "geo_accession": "GSE18851",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "RIB40",
+    "study_description": "Transcriptome of Aspergillus oryzae following ER stress",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "8 biosample(s), 8 run(s); PMID:20392818 (DOI/title not resolved -- needs a further lookup)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN00013393",
+      "sample_title": "Liquid_culture_ER_stress_RNA-Seq rep 2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=cell under ER stress in liquid culture"
+    },
+    {
+      "biosample": "SAMN00013392",
+      "sample_title": "Solid_culture_ER_stress_RNA-Seq rep 2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=cell under ER stress in solid culture"
+    },
+    {
+      "biosample": "SAMN00013391",
+      "sample_title": "Liquid_culture_control_RNA-Seq rep 2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=cell in liquid culture"
+    },
+    {
+      "biosample": "SAMN00013390",
+      "sample_title": "Solid_culture_control_RNA-Seq rep 2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=cell in solid culture"
+    },
+    {
+      "biosample": "SAMN00008751",
+      "sample_title": "Liquid culture ER stress RNA-Seq",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=cell under ER stress in liquid culture"
+    },
+    {
+      "biosample": "SAMN00008750",
+      "sample_title": "Solid culture ER stress RNA-seq",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=cell under ER stress in solid culture"
+    },
+    {
+      "biosample": "SAMN00008749",
+      "sample_title": "Liquid culture control RNA-Seq",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=cell in liquid culture"
+    },
+    {
+      "biosample": "SAMN00008748",
+      "sample_title": "Solid culture control RNA-Seq",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=cell in solid culture"
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "SRR065622",
+      "biosample": "SAMN00008751",
+      "condition_id": "PRJNA121091_liquid_ER_stress",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR043194",
+      "biosample": "SAMN00013393",
+      "condition_id": "PRJNA121091_liquid_ER_stress",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR035603",
+      "biosample": "SAMN00008749",
+      "condition_id": "PRJNA121091_liquid_control",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR043192",
+      "biosample": "SAMN00013391",
+      "condition_id": "PRJNA121091_liquid_control",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR065623",
+      "biosample": "SAMN00008750",
+      "condition_id": "PRJNA121091_solid_ER_stress",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR043193",
+      "biosample": "SAMN00013392",
+      "condition_id": "PRJNA121091_solid_ER_stress",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR063693",
+      "biosample": "SAMN00008748",
+      "condition_id": "PRJNA121091_solid_control",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "SRR043191",
+      "biosample": "SAMN00013390",
+      "condition_id": "PRJNA121091_solid_control",
+      "strain": "RIB40"
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJNA121091_liquid_control",
+      "condition_label": "RIB40 | liquid culture | control (unstressed)",
+      "strain": "RIB40",
+      "culture_mode": "submerged",
+      "treatment": "none (control)",
+      "recombinant_background": "wild_type",
+      "original_description": "cell in liquid culture (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA121091 (SRA study SRP001894): study_study_title 'Transcriptome of Aspergillus oryzae following ER stress'; study_study_abstract describes 4 culture conditions; sample_attributes source_name='cell (control) in liquid culture' (state=(control), culture=liquid)."
+    },
+    {
+      "condition_id": "PRJNA121091_liquid_ER_stress",
+      "condition_label": "RIB40 | liquid culture | ER stress",
+      "strain": "RIB40",
+      "culture_mode": "submerged",
+      "stress": "ER stress (endoplasmic reticulum stress; specific inducing agent not stated in available SRA metadata)",
+      "treatment": "ER stress inducer (unspecified)",
+      "recombinant_background": "wild_type",
+      "original_description": "cell under ER stress in liquid culture (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA121091 (SRA study SRP001894): study_study_title 'Transcriptome of Aspergillus oryzae following ER stress'; study_study_abstract describes 4 culture conditions; sample_attributes source_name='cell under ER stress in liquid culture' (state=under ER stress, culture=liquid)."
+    },
+    {
+      "condition_id": "PRJNA121091_solid_control",
+      "condition_label": "RIB40 | solid culture | control (unstressed)",
+      "strain": "RIB40",
+      "culture_mode": "solid-state",
+      "treatment": "none (control)",
+      "recombinant_background": "wild_type",
+      "original_description": "cell in solid culture (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA121091 (SRA study SRP001894): study_study_title 'Transcriptome of Aspergillus oryzae following ER stress'; study_study_abstract describes 4 culture conditions; sample_attributes source_name='cell (control) in solid culture' (state=(control), culture=solid)."
+    },
+    {
+      "condition_id": "PRJNA121091_solid_ER_stress",
+      "condition_label": "RIB40 | solid culture | ER stress",
+      "strain": "RIB40",
+      "culture_mode": "solid-state",
+      "stress": "ER stress (endoplasmic reticulum stress; specific inducing agent not stated in available SRA metadata)",
+      "treatment": "ER stress inducer (unspecified)",
+      "recombinant_background": "wild_type",
+      "original_description": "cell under ER stress in solid culture (source_name attribute)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA121091 (SRA study SRP001894): study_study_title 'Transcriptome of Aspergillus oryzae following ER stress'; study_study_abstract describes 4 culture conditions; sample_attributes source_name='cell under ER stress in solid culture' (state=under ER stress, culture=solid)."
+    }
+  ]
+}

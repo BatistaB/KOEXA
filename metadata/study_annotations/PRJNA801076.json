@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA801076",
+  "related_identifiers": {
+    "bioproject": "PRJNA801076",
+    "sra_study": "SRP357315",
+    "geo_series": null,
+    "other": [
+      "PRJNA800656 (genome assemblies of the same strains)"
+    ]
+  },
+  "paper": {
+    "status": "found",
+    "title": "Phenotypic, Genomic, and Transcriptomic Comparison of Industrial Aspergillus oryzae Used in Chinese and Japanese Soy Sauce: Analysis of Key Proteolytic Enzymes Produced by Koji Molds",
+    "authors": "Zhang L, Kang L, Xu Y",
+    "year": 2023,
+    "journal": "Microbiology Spectrum",
+    "doi": "10.1128/spectrum.00836-22",
+    "pmid": "36744888",
+    "pmcid": "PMC10100866",
+    "url": "https://doi.org/10.1128/spectrum.00836-22",
+    "access": "full_text",
+    "association_evidence": "Data availability: 'The transcriptome sequences are available in the NCBI Sequence Read Archive database under the accession number PRJNA801076.'",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Compare Chinese (3.042) and Japanese (LBM 30007, LBM 30008) industrial soy sauce koji strains to find the proteolytic enzymes behind their different performance.",
+    "experimental_design": "Each strain was grown as soy sauce koji (steamed soybean + wheat flour) and sampled at the mycelial expansion stage (30 °C) and the sporulation stage (28 °C); 3 replicates.",
+    "main_finding": "Protease gene content barely differed between strains, but protease secretion and transcription did; combining phenotype and transcriptome data gave 58 candidate key proteolytic enzymes for koji fermentation."
+  },
+  "tag_sets": {
+    "soy_sauce_koji": [
+      {
+        "tag": "solid_state",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "koji",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "soy_sauce",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "soybean",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "steamed soybean"
+      },
+      {
+        "tag": "wheat",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "wheat flour, 1:4 with soybean"
+      },
+      {
+        "tag": "industrial_strain",
+        "source": "paper_abstract",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      }
+    ],
+    "expansion": [
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelial expansion stage"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "sporulation": [
+      {
+        "tag": "sporulation",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "28C",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA801076_3.042_expansion": {
+      "sets": [
+        "soy_sauce_koji",
+        "expansion"
+      ],
+      "tags": [
+        {
+          "tag": "strain_3_042",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA801076_3.042_sporulation": {
+      "sets": [
+        "soy_sauce_koji",
+        "sporulation"
+      ],
+      "tags": [
+        {
+          "tag": "strain_3_042",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA801076_LBM30007_expansion": {
+      "sets": [
+        "soy_sauce_koji",
+        "expansion"
+      ],
+      "tags": [
+        {
+          "tag": "strain_lbm_30007",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA801076_LBM30007_sporulation": {
+      "sets": [
+        "soy_sauce_koji",
+        "sporulation"
+      ],
+      "tags": [
+        {
+          "tag": "strain_lbm_30007",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA801076_LBM30008_expansion": {
+      "sets": [
+        "soy_sauce_koji",
+        "expansion"
+      ],
+      "tags": [
+        {
+          "tag": "strain_lbm_30008",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA801076_LBM30008_sporulation": {
+      "sets": [
+        "soy_sauce_koji",
+        "sporulation"
+      ],
+      "tags": [
+        {
+          "tag": "strain_lbm_30008",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [],
+  "curation": {
+    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-03",
+    "needs_pdf": false
+  }
+}

@@ -24,6 +24,10 @@ import duckdb
 import pandas as pd
 
 from .. import __version__
+from ..annotation.evidence import collect_study_evidence, write_evidence
+from ..annotation.ingest import AnnotationValidationError, load_study_annotations
+from ..annotation.schema import load_all_annotations, validate_annotation
+from ..annotation.vocabulary import load_vocabulary
 from ..clustering.classify import classify_genes
 from ..config import ConfigError, load_pipeline_config, load_reference_config, load_storage_config
 from ..database.approve import SampleExcludedError, SampleNotFoundError, approve_sample
@@ -79,13 +83,13 @@ from ..paths import (
     EXPRESSION_RANK_SUMMARY_FILE,
     EXPRESSION_RANK_THRESHOLDS_FILE,
     EXPRESSION_RANK_TSV_FILE,
-    GENE_BY_BIOSAMPLE_TPM_FILE,
     FUNGIDB_GENE_ALIASES_FILE,
     FUNGIDB_GENE_PRODUCT_UPDATES_FILE,
     FUNGIDB_GENOME_FASTA_FILE,
     FUNGIDB_GFF_FILE,
     FUNGIDB_PROTEIN_FASTA_FILE,
     FUNGIDB_TRANSCRIPT_FASTA_FILE,
+    GENE_BY_BIOSAMPLE_TPM_FILE,
     GENE_BY_CONDITION_TPM_FILE,
     GENE_BY_SAMPLE_TPM_FILE,
     GENE_EXTERNAL_IDENTIFIERS_FILE,
@@ -98,9 +102,12 @@ from ..paths import (
     REQUIRED_CONFIG_FILES,
     REQUIRED_DIRS,
     RESULTS_DIR,
-    SAMPLE_CONDITION_MAP_FILE,
     SAMPLES_CURATION_FILE,
+    SAMPLE_CONDITION_MAP_FILE,
+    SAMPLE_TAG_VOCABULARY_FILE,
     SCRATCH_DIR,
+    STUDY_ANNOTATIONS_DIR,
+    STUDY_EVIDENCE_DIR,
     TRANSCRIPT_TO_GENE_FILE,
     UNIPROT_WORKBOOK_FILE,
     WEB_DATA_DIR,
@@ -537,6 +544,124 @@ def database_load_conditions() -> None:
     click.echo(f"Loaded {n_conditions} conditions, linked {n_links} samples in {DATABASE_FILE}")
 
 
+@database.command("load-annotations")
+def database_load_annotations() -> None:
+    """Load metadata/study_annotations/*.json + the tag vocabulary into DuckDB.
+
+    Truncate-and-reload of study_annotations / sample_tags / tag_vocabulary.
+    Every file is validated first (see 'atlas annotate validate'); any
+    problem aborts the load so the database never holds a partial set.
+    """
+    for path in (SAMPLE_TAG_VOCABULARY_FILE, SAMPLES_CURATION_FILE):
+        if not path.is_file():
+            raise click.ClickException(f"Missing {path}.")
+    apply_migrations(DATABASE_FILE)
+    conn = duckdb.connect(str(DATABASE_FILE))
+    try:
+        n_studies, n_tags = load_study_annotations(
+            conn, STUDY_ANNOTATIONS_DIR, SAMPLE_TAG_VOCABULARY_FILE, SAMPLES_CURATION_FILE
+        )
+    except AnnotationValidationError as exc:
+        raise click.ClickException(str(exc)) from exc
+    finally:
+        conn.close()
+    logger.info("Loaded %d study annotations, %d sample-tag rows into %s", n_studies, n_tags, DATABASE_FILE)
+    click.echo(f"Loaded {n_studies} study annotations, {n_tags} sample-tag rows into {DATABASE_FILE}")
+
+
+@cli.group()
+def annotate() -> None:
+    """Study enrichment: associated paper, short design summary, per-sample tags.
+
+    Workflow for a new study (also run by 'atlas refresh'):
+    'annotate collect' gathers accession-linked paper candidates and the
+    study's metadata into reports/study_evidence/<BIOPROJECT>.json; a curator
+    (human or agent -- see .claude/skills/annotate-study/SKILL.md) writes
+    metadata/study_annotations/<BIOPROJECT>.json from it; 'annotate validate'
+    checks it against the shared tag vocabulary.
+    """
+
+
+def _studies_in_curation() -> list[str]:
+    samples = pd.read_csv(SAMPLES_CURATION_FILE, sep="\t", dtype=str, keep_default_na=False)
+    return sorted(set(samples["bioproject"]) - {""})
+
+
+@annotate.command("collect")
+@click.argument("bioprojects", nargs=-1)
+@click.option("--missing", "only_missing", is_flag=True, help="Only studies with no evidence file yet.")
+def annotate_collect(bioprojects: tuple[str, ...], only_missing: bool) -> None:
+    """Fetch paper candidates + study metadata into reports/study_evidence/.
+
+    Metadata only (NCBI E-utilities, Europe PMC); never downloads reads.
+    With no BIOPROJECTS, every study in metadata/samples.tsv is considered.
+    """
+    targets = list(bioprojects) or _studies_in_curation()
+    if only_missing:
+        targets = [bp for bp in targets if not (STUDY_EVIDENCE_DIR / f"{bp}.json").is_file()]
+    if not targets:
+        click.echo("No study needs evidence collection.")
+        return
+    failures = []
+    for bioproject in targets:
+        try:
+            evidence = collect_study_evidence(bioproject, DISCOVERY_DIR, CONDITIONS_FILE, SAMPLES_CURATION_FILE)
+        except OSError as exc:  # network failure: report, keep going
+            failures.append(bioproject)
+            click.echo(f"{bioproject}: FAILED ({exc})")
+            continue
+        path = write_evidence(evidence, STUDY_EVIDENCE_DIR)
+        top = evidence["paper_candidates"][0] if evidence["paper_candidates"] else None
+        best = f"{top['pmid']} {top['title'][:70]}" if top else "no accession-linked paper"
+        click.echo(f"{bioproject}: {evidence['suggested_paper_status']:<9} {best}  -> {path.name}")
+        logger.info("annotate collect %s: %s candidates, suggested %s", bioproject,
+                    len(evidence["paper_candidates"]), evidence["suggested_paper_status"])
+    if failures:
+        raise click.ClickException(f"Evidence collection failed for {', '.join(failures)} (network?).")
+
+
+@annotate.command("status")
+def annotate_status() -> None:
+    """Which studies have evidence collected / a curated annotation."""
+    annotated = {a.bioproject: a for a in load_all_annotations(STUDY_ANNOTATIONS_DIR)}
+    pending = []
+    for bioproject in _studies_in_curation():
+        has_evidence = (STUDY_EVIDENCE_DIR / f"{bioproject}.json").is_file()
+        annotation = annotated.get(bioproject)
+        state = f"annotated (paper {annotation.paper.get('status')})" if annotation else "NEEDS CURATION"
+        if not annotation:
+            pending.append(bioproject)
+        click.echo(f"{bioproject:<14} evidence={'yes' if has_evidence else 'no ':<3}  {state}")
+    if pending:
+        click.echo(f"\n{len(pending)} study(ies) need an annotation: {', '.join(pending)}")
+
+
+@annotate.command("validate")
+def annotate_validate() -> None:
+    """Check every annotation file against the vocabulary and metadata/samples.tsv."""
+    vocabulary = load_vocabulary(SAMPLE_TAG_VOCABULARY_FILE)
+    samples = pd.read_csv(SAMPLES_CURATION_FILE, sep="\t", dtype=str, keep_default_na=False)
+    annotations = load_all_annotations(STUDY_ANNOTATIONS_DIR)
+    problems = [p for a in annotations for p in validate_annotation(a, vocabulary, samples)]
+    for problem in problems:
+        click.echo(problem)
+    if problems:
+        raise click.ClickException(f"{len(problems)} problem(s) in {len(annotations)} annotation file(s).")
+    click.echo(f"{len(annotations)} annotation file(s) valid; vocabulary has {len(vocabulary.entries)} tags.")
+
+
+@annotate.command("suggest")
+@click.argument("text")
+def annotate_suggest(text: str) -> None:
+    """Existing tags resembling TEXT -- run before adding a new vocabulary tag."""
+    vocabulary = load_vocabulary(SAMPLE_TAG_VOCABULARY_FILE)
+    reason = vocabulary.check(text)
+    click.echo(f"'{text}' is a valid tag ({vocabulary.category(text)})." if reason is None else reason)
+    for tag in vocabulary.suggest(text):
+        entry = vocabulary.entries[tag]
+        click.echo(f"  {tag:<28} [{entry.category}] {entry.description}")
+
+
 @cli.command()
 @click.pass_context
 def refresh(ctx: click.Context) -> None:
@@ -563,6 +688,8 @@ def refresh(ctx: click.Context) -> None:
         ("database load-genes", database_load_genes, {}),
         ("database load-discovery", database_load_discovery, {}),
         ("database load-conditions", database_load_conditions, {}),
+        ("annotate collect --missing", annotate_collect, {"bioprojects": (), "only_missing": True}),
+        ("database load-annotations", database_load_annotations, {}),
         ("process ingest --all", process_ingest, {"srr": None, "ingest_all": True}),
         ("matrix build", matrix_build, {}),
         ("stats genes", stats_genes, {}),
@@ -581,6 +708,13 @@ def refresh(ctx: click.Context) -> None:
             click.echo(f"SKIPPED: {exc.format_message()}")
             n_skipped += 1
     click.echo(f"\nrefresh complete: {n_ok} step(s) ran, {n_skipped} skipped.")
+    annotated = {a.bioproject for a in load_all_annotations(STUDY_ANNOTATIONS_DIR)}
+    pending = [bp for bp in _studies_in_curation() if bp not in annotated]
+    if pending:
+        click.echo(
+            f"NOTE: {len(pending)} study(ies) have no curated annotation yet: {', '.join(pending)}\n"
+            "      Curate metadata/study_annotations/<BIOPROJECT>.json (see .claude/skills/annotate-study/SKILL.md)."
+        )
 
 
 # --- Stub command groups mirroring PROJECT_MASTER_SPEC.md section 25 -------
@@ -969,6 +1103,10 @@ def app_export_web() -> None:
         click.echo(f"Chromosome map: {summary['n_chromosome_bins']:,} bins ({summary['chromosome_expression_bytes'] / 1024:.0f} KB)")
     else:
         click.echo("Chromosome map: not exported (run 'atlas stats genes' first)")
+    if summary.get("n_annotated_studies"):
+        click.echo(f"Study annotations: {summary['n_annotated_studies']} studies ({summary['study_annotations_bytes'] / 1024:.0f} KB)")
+    else:
+        click.echo("Study annotations: not exported (run 'atlas database load-annotations' first)")
     click.echo(f"-> {WEB_DATA_DIR}")
 
 

@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJDB4747",
+  "related_identifiers": {
+    "bioproject": "PRJDB4747",
+    "sra_study": "DRP003084",
+    "geo_series": null
+  },
+  "paper": {
+    "status": "found",
+    "title": "Comparative transcriptome analysis revealing dormant conidia and germination associated genes in Aspergillus species: an essential role for AtfA in conidial dormancy",
+    "authors": "Hagiwara D, Takahashi H, Kusuya Y, Kawamoto S, Kamei K, Gonoi T",
+    "year": 2016,
+    "journal": "BMC Genomics",
+    "doi": "10.1186/s12864-016-2689-z",
+    "pmid": "27185182",
+    "pmcid": "PMC4869263",
+    "url": "https://doi.org/10.1186/s12864-016-2689-z",
+    "access": "full_text",
+    "association_evidence": "Methods: 'The RNA-sequencing read data was deposited to the DDBJ Sequence Read Archive under accession No. PRJDB4747' (Europe PMC full-text accession search).",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Identify genes linked to conidial dormancy and early germination that are shared by A. fumigatus, A. niger and A. oryzae.",
+    "experimental_design": "For each species, hyphae (PDB, sub-stationary phase), dormant conidia (7-day PDA plates) and conidia incubated 1 h in PDB were compared; this BioProject holds the A. oryzae RIB40 libraries (one per stage, no replicates).",
+    "main_finding": "Dormant conidia were enriched for stress-protection transcripts (e.g. catalases) and 1-h conidia for ribosome/translation genes; in A. fumigatus the bZIP regulator AtfA was needed to keep the dormant-conidia program and repress germination genes."
+  },
+  "tag_sets": {
+    "common": [
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      },
+      {
+        "tag": "potato_dextrose_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "complex_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJDB4747_hyphae": {
+      "sets": [
+        "common"
+      ],
+      "tags": [
+        {
+          "tag": "mycelium",
+          "source": "paper_methods",
+          "confidence": "high"
+        },
+        {
+          "tag": "submerged",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB4747_conidia_ungerminated": {
+      "sets": [
+        "common"
+      ],
+      "tags": [
+        {
+          "tag": "dormant_conidia",
+          "source": "paper_methods",
+          "confidence": "high"
+        },
+        {
+          "tag": "surface_culture",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "conidia harvested from 7-day-old PDA plates"
+        },
+        {
+          "tag": "168h",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "7-day-old plate culture"
+        }
+      ]
+    },
+    "PRJDB4747_conidia_1h_germinated": {
+      "sets": [
+        "common"
+      ],
+      "tags": [
+        {
+          "tag": "germinating_conidia",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "no germ tube or swelling yet at 1 h"
+        },
+        {
+          "tag": "submerged",
+          "source": "paper_methods",
+          "confidence": "high"
+        },
+        {
+          "tag": "1h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "Single library per developmental stage (no biological replicates).",
+    "The paper's cross-species comparison also used A. fumigatus and A. niger data, which are not in this BioProject's atlas samples."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-03",
+    "needs_pdf": false
+  }
+}

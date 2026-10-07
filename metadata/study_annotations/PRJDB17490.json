@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJDB17490",
+  "related_identifiers": {
+    "bioproject": "PRJDB17490",
+    "sra_study": "DRP012033",
+    "geo_series": null
+  },
+  "paper": {
+    "status": "found",
+    "title": "Versatile filamentous fungal host highly-producing heterologous natural products developed by genome editing-mediated engineering of multiple metabolic pathways",
+    "authors": "Saito N, Katayama T, Minami A, Oikawa H, Maruyama JI",
+    "year": 2024,
+    "journal": "Communications Biology",
+    "doi": "10.1038/s42003-024-06958-0",
+    "pmid": "39367037",
+    "pmcid": "PMC11452556",
+    "url": "https://doi.org/10.1038/s42003-024-06958-0",
+    "access": "full_text",
+    "association_evidence": "Data availability: 'The RNA-seq raw data have been deposited in the DNA DataBank of Japan (DDBJ) with the accession code BioProject PRJDB17490.'",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Find the central carbon pathways to engineer so A. oryzae becomes a high-yield host for heterologous terpene (natural product) production.",
+    "experimental_design": "Wild-type RIB40 was grown in MPY liquid medium (2% maltose) at 30 °C and sampled daily from day 1 to day 5 (3 replicates per day) for RNA-seq and metabolomics.",
+    "main_finding": "Maltose was used up within day 1 and growth became stationary after ~3 days; the time course pointed to ethanol fermentation, cytosolic acetyl-CoA from citrate and the mevalonate pathway as targets, and a strain with 13 such edits raised terpene titres up to ~65-fold."
+  },
+  "tag_sets": {
+    "mpy_time_course": [
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      },
+      {
+        "tag": "mpy_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "complex_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "maltose",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "2% maltose"
+      },
+      {
+        "tag": "organic_nitrogen",
+        "source": "inferred_from_methods",
+        "confidence": "high",
+        "note": "peptone + yeast extract in MPY"
+      },
+      {
+        "tag": "submerged",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJDB17490_MPY_day1": {
+      "sets": [
+        "mpy_time_course"
+      ],
+      "tags": [
+        {
+          "tag": "24h",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "exponential_phase",
+          "source": "paper_abstract",
+          "confidence": "medium",
+          "note": "'proliferated actively within the first day'"
+        }
+      ]
+    },
+    "PRJDB17490_MPY_day2": {
+      "sets": [
+        "mpy_time_course"
+      ],
+      "tags": [
+        {
+          "tag": "48h",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB17490_MPY_day3": {
+      "sets": [
+        "mpy_time_course"
+      ],
+      "tags": [
+        {
+          "tag": "72h",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB17490_MPY_day4": {
+      "sets": [
+        "mpy_time_course"
+      ],
+      "tags": [
+        {
+          "tag": "96h",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "stationary_phase",
+          "source": "paper_abstract",
+          "confidence": "high",
+          "note": "shifted to stationary phase after 3 days"
+        },
+        {
+          "tag": "carbon_limitation",
+          "source": "inferred_from_methods",
+          "confidence": "medium",
+          "note": "maltose, then the glucose/ethanol it yielded, consumed by day 3"
+        }
+      ]
+    },
+    "PRJDB17490_MPY_day5": {
+      "sets": [
+        "mpy_time_course"
+      ],
+      "tags": [
+        {
+          "tag": "120h",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "stationary_phase",
+          "source": "paper_abstract",
+          "confidence": "high"
+        },
+        {
+          "tag": "carbon_limitation",
+          "source": "inferred_from_methods",
+          "confidence": "medium",
+          "note": "maltose, then the glucose/ethanol it yielded, consumed by day 3"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "RNA-seq is the wild-type characterisation step of the paper; the engineered terpene-producing strains were not sequenced."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-03",
+    "needs_pdf": false
+  }
+}

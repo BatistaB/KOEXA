@@ -17,6 +17,43 @@ export interface Dataset {
   source_repository: string;
 }
 
+/**
+ * Study enrichment (`atlas annotate` / `atlas database load-annotations`,
+ * src/aoryzae_atlas/annotation/): the paper that produced the data, a 3-part
+ * summary, and per-run tags from the shared vocabulary
+ * (metadata/sample_tag_vocabulary.tsv). Source/confidence of each tag live
+ * in the database only.
+ */
+export type PaperStatus = "found" | "not_found" | "ambiguous";
+
+export interface StudyAnnotation {
+  bioproject: string;
+  paper: {
+    status: PaperStatus;
+    title: string | null;
+    authors: string | null;
+    year: number | null;
+    journal: string | null;
+    doi: string | null;
+    pmid: string | null;
+    url: string | null;
+  };
+  summary: {
+    objective: string;
+    experimental_design: string;
+    main_finding: string;
+  };
+  related_identifiers: Record<string, string | string[] | null>;
+  /** One entry per exported run, tags already in display order. */
+  samples: { sample_id: string; condition_id: string; tags: string[] }[];
+}
+
+export interface StudyAnnotations {
+  byBioproject: Map<string, StudyAnnotation>;
+  /** tag -> vocabulary category (e.g. "glucose" -> "carbon_source"). */
+  tagCategories: Record<string, string>;
+}
+
 export interface Condition {
   condition_id: string;
   condition_label: string;

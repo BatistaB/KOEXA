@@ -1,7 +1,17 @@
-import type { Condition, Dataset, ExpressionRankRow, Gene, GeneClassification, Sample, SampleQcMetrics } from "../../data/types";
+import type {
+  Condition,
+  Dataset,
+  ExpressionRankRow,
+  Gene,
+  GeneClassification,
+  Sample,
+  SampleQcMetrics,
+  StudyAnnotation,
+} from "../../data/types";
 import { classColor, CLASS_DESCRIPTION, FLAG_TEXT, flagList } from "../../lib/expressionRank";
 import { StatusBadge } from "../common/StatusBadge";
 import { DatasetLink } from "../common/DatasetLink";
+import { StudyAnnotationView } from "./StudyAnnotationView";
 import { formatCounts, formatPercent, formatReadCount, formatTpm } from "../../lib/format";
 import { formatBp, geneLengthBp } from "../../lib/geneDisplay";
 import "./RightPanel.css";
@@ -40,6 +50,9 @@ export interface DatasetDetail {
   dataset: Dataset;
   sampleCount: number;
   conditionCount: number;
+  /** Curated paper/summary/tags (null if this study isn't annotated yet). */
+  annotation: StudyAnnotation | null;
+  tagCategories: Record<string, string>;
 }
 
 interface SelectedSampleDetail {
@@ -81,7 +94,7 @@ export function RightPanel({
   onSelectDataset,
 }: RightPanelProps) {
   if (datasetDetail) {
-    const { dataset, sampleCount, conditionCount } = datasetDetail;
+    const { dataset, sampleCount, conditionCount, annotation, tagCategories } = datasetDetail;
     return (
       <aside className="right-panel">
         <div className="right-panel__title-row">
@@ -94,8 +107,13 @@ export function RightPanel({
         <div className="right-panel__section">
           <div className="right-panel__sample-id mono">{dataset.bioproject}</div>
           <div className="right-panel__sample-sub">
-            {dataset.source_repository}
-            {dataset.geo_accession ? ` · ${dataset.geo_accession}` : ""}
+            {[
+              dataset.source_repository,
+              annotation?.related_identifiers.sra_study,
+              dataset.geo_accession ?? annotation?.related_identifiers.geo_series,
+            ]
+              .filter(Boolean)
+              .join(" · ")}
           </div>
         </div>
 
@@ -112,20 +130,25 @@ export function RightPanel({
           </div>
         </div>
 
-        <div className="right-panel__section">
-          <div className="right-panel__section-label">Publication</div>
-          <p className="right-panel__prose">
-            {dataset.publication_title || "No publication title recorded yet."}
-          </p>
-          <div className="right-panel__row">
-            <span className="right-panel__row-label">DOI</span>
-            <span className="right-panel__row-value mono">{dataset.publication_doi ?? "Not yet published"}</span>
+        {annotation ? (
+          <StudyAnnotationView annotation={annotation} tagCategories={tagCategories} />
+        ) : (
+          <div className="right-panel__section">
+            <div className="right-panel__section-label">Publication</div>
+            <p className="right-panel__prose">
+              {dataset.publication_title || "No publication title recorded yet."}
+            </p>
+            <div className="right-panel__row">
+              <span className="right-panel__row-label">DOI</span>
+              <span className="right-panel__row-value mono">{dataset.publication_doi ?? "Not yet published"}</span>
+            </div>
+            <p className="right-panel__note">Study not annotated yet (run the annotate-study curation).</p>
           </div>
-        </div>
+        )}
 
         <div className="right-panel__section">
-          <div className="right-panel__section-label">Design</div>
-          <p className="right-panel__prose">{dataset.study_description || "No study description recorded yet."}</p>
+          <div className="right-panel__section-label">Repository record</div>
+          {!annotation && <p className="right-panel__prose">{dataset.study_description || "No study description recorded yet."}</p>}
           <div className="right-panel__row">
             <span className="right-panel__row-label">Organism</span>
             <span className="right-panel__row-value">{dataset.organism}</span>
@@ -135,7 +158,6 @@ export function RightPanel({
             <span className="right-panel__row-value">{dataset.strain}</span>
           </div>
         </div>
-
       </aside>
     );
   }

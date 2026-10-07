@@ -1,0 +1,350 @@
+{
+  "bioproject": "PRJNA801076",
+  "collected_at": "2026-10-03T14:34:58+00:00",
+  "accessions_searched": [
+    "PRJNA801076",
+    "SRP357315"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "36744888",
+      "pmcid": "PMC10100866",
+      "doi": "10.1128/spectrum.00836-22",
+      "title": "Phenotypic, Genomic, and Transcriptomic Comparison of Industrial Aspergillus oryzae Used in Chinese and Japanese Soy Sauce: Analysis of Key Proteolytic Enzymes Produced by Koji Molds.",
+      "authors": "Zhang L, Kang L, Xu Y.",
+      "year": 2023,
+      "journal": "Microbiology spectrum",
+      "url": "https://doi.org/10.1128/spectrum.00836-22",
+      "open_access": true,
+      "abstract": "Aspergillus oryzae, which generates numerous enzymes for the breakdown of raw materials, is an essential koji mold in soy sauce production. For better soy sauce productivity and flavor quality, China and Japan have developed their own industrial A. oryzae strains at distinct evolutionary branches for use in soy sauce production for decades. However, systematic comparison between the two national industrial strains has been poorly conducted, and thus we have not been able to generate adequate knowledge, especially regarding what are the key hydrolytic enzymes produced by A. oryzae during koji production. This study sequenced and assembled three high-quality genome sequences of industrial A. oryzae originating from China and Japan. Based on the genome sequences, a phylogenetic tree analysis was performed and revealed the evolutional distances between the two national industrial koji molds. Meanwhile, a comparative phenotypic analysis revealed that the two national industrial strains differed in growth and catalytic characteristics, particularly in proteolytic enzyme activities. To investigate the molecular mechanism underlying the phenotypic difference, we conducted systematic comparative genome and transcriptome investigations. We found minor differences in the quantity and diversity of proteolytic enzyme genes between Chinese and Japanese koji molds, while the protease secretion ratio and transcriptional level were dissimilar. We identified 58 potential important enzymes associated with high protein breakdown efficiency during industrial koji fermentation by combining comparative phenotypic and transcriptome data. More research is required to confirm the function of these putative key hydrolytic enzymes. IMPORTANCE Aspergillus oryzae is widely used as an industrial koji mold for soy sauce brewing due to its powerful raw material decomposition capability. Although various proteases in A. oryzae have been identified, it remains a challenge to find essential enzymes involved in soy sauce production. Generally, the industrial A. oryzae used in soy sauce brewing has excellent proteolytic activity. Based on this, we analyzed key proteolytic enzymes according to a comparison of the genome and transcriptome between three industrial strains. This study found little difference in gene numbers and mutations of proteolytic enzymes between three industrial A. oryzae strains. However, variations in protease secretion ratio and transcriptome were discovered between industrial strains. Based on that, we generated 58 candidate key proteolytic enzymes. This work comprehensively analyzed three industrial koji molds, revealing genome development under separate artificial domestication and helping in the study of key proteolytic enzymes during soy sauce production.",
+      "found_by": [
+        "europepmc_fulltext:PRJNA801076"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJNA801076",
+          "text": "//www.ncbi.nlm.nih.gov/genbank/) under the accession number PRJNA800656. The transcriptome sequences are available in the NCBI Sequence Read Archive database (http://www.ncbi.nlm.nih.gov/sra/) under the accession number PRJNA801076.ACKNOWLEDGMENTSThis work was supported by the National Key R&D Program of China (2022YFD2101203) and the Nati",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJNA801076",
+    "bioproject": "PRJNA801076",
+    "study_accession": "SRP357315",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "3.042, LBM 30007, LBM 30008",
+    "study_description": "Aspergillus oryzae RNA-Seq raw reads",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "18 biosample(s), 18 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN25291184",
+      "sample_title": "",
+      "strain": "LBM 30008",
+      "condition_clues": "strain=LBM 30008; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-11; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 1; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291183",
+      "sample_title": "",
+      "strain": "LBM 30008",
+      "condition_clues": "strain=LBM 30008; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-10; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 3; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291182",
+      "sample_title": "",
+      "strain": "LBM 30008",
+      "condition_clues": "strain=LBM 30008; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-10; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 2; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291181",
+      "sample_title": "",
+      "strain": "LBM 30008",
+      "condition_clues": "strain=LBM 30008; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-10; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 1; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291180",
+      "sample_title": "",
+      "strain": "LBM 30007",
+      "condition_clues": "strain=LBM 30007; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-11; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 3; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291179",
+      "sample_title": "",
+      "strain": "LBM 30007",
+      "condition_clues": "strain=LBM 30007; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-11; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 2; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291178",
+      "sample_title": "",
+      "strain": "LBM 30007",
+      "condition_clues": "strain=LBM 30007; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-11; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 1; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291177",
+      "sample_title": "",
+      "strain": "LBM 30007",
+      "condition_clues": "strain=LBM 30007; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-10; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 3; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291192",
+      "sample_title": "",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=isolate from Chinese soy sauce koji; collection_date=2021-04-11; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 3; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291191",
+      "sample_title": "",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=isolate from Chinese soy sauce koji; collection_date=2021-04-11; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 2; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291190",
+      "sample_title": "",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=isolate from Chinese soy sauce koji; collection_date=2021-04-11; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 1; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291189",
+      "sample_title": "",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=isolate from Chinese soy sauce koji; collection_date=2021-04-10; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 3; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291188",
+      "sample_title": "",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=isolate from Chinese soy sauce koji; collection_date=2021-04-10; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 2; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291187",
+      "sample_title": "",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=isolate from Chinese soy sauce koji; collection_date=2021-04-10; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 1; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291186",
+      "sample_title": "",
+      "strain": "LBM 30008",
+      "condition_clues": "strain=LBM 30008; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-11; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 3; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291185",
+      "sample_title": "",
+      "strain": "LBM 30008",
+      "condition_clues": "strain=LBM 30008; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-11; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 2; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291176",
+      "sample_title": "",
+      "strain": "LBM 30007",
+      "condition_clues": "strain=LBM 30007; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-10; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 2; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN25291175",
+      "sample_title": "",
+      "strain": "LBM 30007",
+      "condition_clues": "strain=LBM 30007; isolate=isolate from Japanese soy sauce koji; collection_date=2021-04-10; geo_loc_name=Japan; host=Widely distributed, mainly distributed in grain, fermented food, spoiled organic matter and soil; sample_type=cell culture; replicate=replicate = biological replicate 1; BioSampleModel=Microbe, viral or environmental"
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "SRR17817507",
+      "biosample": "SAMN25291184",
+      "condition_id": "PRJNA801076_LBM30008_sporulation",
+      "strain": "LBM 30008"
+    },
+    {
+      "sample_id": "SRR17817508",
+      "biosample": "SAMN25291183",
+      "condition_id": "PRJNA801076_LBM30008_expansion",
+      "strain": "LBM 30008"
+    },
+    {
+      "sample_id": "SRR17817510",
+      "biosample": "SAMN25291181",
+      "condition_id": "PRJNA801076_LBM30008_expansion",
+      "strain": "LBM 30008"
+    },
+    {
+      "sample_id": "SRR17817517",
+      "biosample": "SAMN25291190",
+      "condition_id": "PRJNA801076_3.042_sporulation",
+      "strain": "3.042"
+    },
+    {
+      "sample_id": "SRR17817522",
+      "biosample": "SAMN25291185",
+      "condition_id": "PRJNA801076_LBM30008_sporulation",
+      "strain": "LBM 30008"
+    },
+    {
+      "sample_id": "SRR17817513",
+      "biosample": "SAMN25291178",
+      "condition_id": "PRJNA801076_LBM30007_sporulation",
+      "strain": "LBM 30007"
+    },
+    {
+      "sample_id": "SRR17817514",
+      "biosample": "SAMN25291177",
+      "condition_id": "PRJNA801076_LBM30007_expansion",
+      "strain": "LBM 30007"
+    },
+    {
+      "sample_id": "SRR17817512",
+      "biosample": "SAMN25291179",
+      "condition_id": "PRJNA801076_LBM30007_sporulation",
+      "strain": "LBM 30007"
+    },
+    {
+      "sample_id": "SRR17817523",
+      "biosample": "SAMN25291176",
+      "condition_id": "PRJNA801076_LBM30007_expansion",
+      "strain": "LBM 30007"
+    },
+    {
+      "sample_id": "SRR17817511",
+      "biosample": "SAMN25291180",
+      "condition_id": "PRJNA801076_LBM30007_sporulation",
+      "strain": "LBM 30007"
+    },
+    {
+      "sample_id": "SRR17817518",
+      "biosample": "SAMN25291189",
+      "condition_id": "PRJNA801076_3.042_expansion",
+      "strain": "3.042"
+    },
+    {
+      "sample_id": "SRR17817520",
+      "biosample": "SAMN25291187",
+      "condition_id": "PRJNA801076_3.042_expansion",
+      "strain": "3.042"
+    },
+    {
+      "sample_id": "SRR17817509",
+      "biosample": "SAMN25291182",
+      "condition_id": "PRJNA801076_LBM30008_expansion",
+      "strain": "LBM 30008"
+    },
+    {
+      "sample_id": "SRR17817516",
+      "biosample": "SAMN25291191",
+      "condition_id": "PRJNA801076_3.042_sporulation",
+      "strain": "3.042"
+    },
+    {
+      "sample_id": "SRR17817515",
+      "biosample": "SAMN25291192",
+      "condition_id": "PRJNA801076_3.042_sporulation",
+      "strain": "3.042"
+    },
+    {
+      "sample_id": "SRR17817524",
+      "biosample": "SAMN25291175",
+      "condition_id": "PRJNA801076_LBM30007_expansion",
+      "strain": "LBM 30007"
+    },
+    {
+      "sample_id": "SRR17817519",
+      "biosample": "SAMN25291188",
+      "condition_id": "PRJNA801076_3.042_expansion",
+      "strain": "3.042"
+    },
+    {
+      "sample_id": "SRR17817521",
+      "biosample": "SAMN25291186",
+      "condition_id": "PRJNA801076_LBM30008_sporulation",
+      "strain": "LBM 30008"
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJNA801076_3.042_expansion",
+      "condition_label": "3.042 | koji fermentation | mycelium expansion stage",
+      "strain": "3.042",
+      "culture_mode": "solid-state",
+      "temperature_C": "30",
+      "developmental_stage": "mycelium expansion stage",
+      "recombinant_background": "wild_type (industrial isolate from Chinese soy sauce koji)",
+      "production_context": "industrial Chinese soy sauce koji fermentation (Chinese vs Japanese soy sauce koji comparison)",
+      "original_description": "library codes A3_1_<rep>; koji fermentation, mycelium expansion stage",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA801076 (SRA SRP, title 'Aspergillus oryzae RNA-Seq raw reads', ENA description 'RNA-Seq of industrial Asperigillus oryzae koji strains'); article Zhang et al. 2023, Microbiology Spectrum, 'Phenotypic, Genomic, and Transcriptomic Comparison of Industrial Aspergillus oryzae Used in Chinese and Japanese Soy Sauce' (PMC10100866): koji fermentation of about 40-48 h in two stages, mycelium expansion then sporulation, three biological replicates per strain and stage; stage temperature/humidity as reported there (about 30C, 95% humidity), retrieved via automated page summary -- verify against the paper. ENA library_name scheme {strain code A1=LBM 30007, A3=3.042, A4=LBM 30008}_{stage digit}_{replicate}: the paper does NOT define the stage digits explicitly; digit 1 = mycelium expansion and 2 = sporulation is INFERRED (BioSample collection_date is always one day earlier for digit 1: 2021-04-10 vs 2021-04-11). Exact RNA harvest hours per stage are not stated; substrate/medium of the koji not stated."
+    },
+    {
+      "condition_id": "PRJNA801076_3.042_sporulation",
+      "condition_label": "3.042 | koji fermentation | sporulation stage",
+      "strain": "3.042",
+      "culture_mode": "solid-state",
+      "temperature_C": "28",
+      "developmental_stage": "sporulation stage",
+      "recombinant_background": "wild_type (industrial isolate from Chinese soy sauce koji)",
+      "production_context": "industrial Chinese soy sauce koji fermentation (Chinese vs Japanese soy sauce koji comparison)",
+      "original_description": "library codes A3_2_<rep>; koji fermentation, sporulation stage",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA801076 (SRA SRP, title 'Aspergillus oryzae RNA-Seq raw reads', ENA description 'RNA-Seq of industrial Asperigillus oryzae koji strains'); article Zhang et al. 2023, Microbiology Spectrum, 'Phenotypic, Genomic, and Transcriptomic Comparison of Industrial Aspergillus oryzae Used in Chinese and Japanese Soy Sauce' (PMC10100866): koji fermentation of about 40-48 h in two stages, mycelium expansion then sporulation, three biological replicates per strain and stage; stage temperature/humidity as reported there (about 28C, 80% humidity), retrieved via automated page summary -- verify against the paper. ENA library_name scheme {strain code A1=LBM 30007, A3=3.042, A4=LBM 30008}_{stage digit}_{replicate}: the paper does NOT define the stage digits explicitly; digit 1 = mycelium expansion and 2 = sporulation is INFERRED (BioSample collection_date is always one day earlier for digit 1: 2021-04-10 vs 2021-04-11). Exact RNA harvest hours per stage are not stated; substrate/medium of the koji not stated."
+    },
+    {
+      "condition_id": "PRJNA801076_LBM30007_expansion",
+      "condition_label": "LBM 30007 | koji fermentation | mycelium expansion stage",
+      "strain": "LBM 30007",
+      "culture_mode": "solid-state",
+      "temperature_C": "30",
+      "developmental_stage": "mycelium expansion stage",
+      "recombinant_background": "wild_type (industrial isolate from Japanese soy sauce koji)",
+      "production_context": "industrial Japanese soy sauce koji fermentation (Chinese vs Japanese soy sauce koji comparison)",
+      "original_description": "library codes A1_1_<rep>; koji fermentation, mycelium expansion stage",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA801076 (SRA SRP, title 'Aspergillus oryzae RNA-Seq raw reads', ENA description 'RNA-Seq of industrial Asperigillus oryzae koji strains'); article Zhang et al. 2023, Microbiology Spectrum, 'Phenotypic, Genomic, and Transcriptomic Comparison of Industrial Aspergillus oryzae Used in Chinese and Japanese Soy Sauce' (PMC10100866): koji fermentation of about 40-48 h in two stages, mycelium expansion then sporulation, three biological replicates per strain and stage; stage temperature/humidity as reported there (about 30C, 95% humidity), retrieved via automated page summary -- verify against the paper. ENA library_name scheme {strain code A1=LBM 30007, A3=3.042, A4=LBM 30008}_{stage digit}_{replicate}: the paper does NOT define the stage digits explicitly; digit 1 = mycelium expansion and 2 = sporulation is INFERRED (BioSample collection_date is always one day earlier for digit 1: 2021-04-10 vs 2021-04-11). Exact RNA harvest hours per stage are not stated; substrate/medium of the koji not stated."
+    },
+    {
+      "condition_id": "PRJNA801076_LBM30007_sporulation",
+      "condition_label": "LBM 30007 | koji fermentation | sporulation stage",
+      "strain": "LBM 30007",
+      "culture_mode": "solid-state",
+      "temperature_C": "28",
+      "developmental_stage": "sporulation stage",
+      "recombinant_background": "wild_type (industrial isolate from Japanese soy sauce koji)",
+      "production_context": "industrial Japanese soy sauce koji fermentation (Chinese vs Japanese soy sauce koji comparison)",
+      "original_description": "library codes A1_2_<rep>; koji fermentation, sporulation stage",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA801076 (SRA SRP, title 'Aspergillus oryzae RNA-Seq raw reads', ENA description 'RNA-Seq of industrial Asperigillus oryzae koji strains'); article Zhang et al. 2023, Microbiology Spectrum, 'Phenotypic, Genomic, and Transcriptomic Comparison of Industrial Aspergillus oryzae Used in Chinese and Japanese Soy Sauce' (PMC10100866): koji fermentation of about 40-48 h in two stages, mycelium expansion then sporulation, three biological replicates per strain and stage; stage temperature/humidity as reported there (about 28C, 80% humidity), retrieved via automated page summary -- verify against the paper. ENA library_name scheme {strain code A1=LBM 30007, A3=3.042, A4=LBM 30008}_{stage digit}_{replicate}: the paper does NOT define the stage digits explicitly; digit 1 = mycelium expansion and 2 = sporulation is INFERRED (BioSample collection_date is always one day earlier for digit 1: 2021-04-10 vs 2021-04-11). Exact RNA harvest hours per stage are not stated; substrate/medium of the koji not stated."
+    },
+    {
+      "condition_id": "PRJNA801076_LBM30008_expansion",
+      "condition_label": "LBM 30008 | koji fermentation | mycelium expansion stage",
+      "strain": "LBM 30008",
+      "culture_mode": "solid-state",
+      "temperature_C": "30",
+      "developmental_stage": "mycelium expansion stage",
+      "recombinant_background": "wild_type (industrial isolate from Japanese soy sauce koji)",
+      "production_context": "industrial Japanese soy sauce koji fermentation (Chinese vs Japanese soy sauce koji comparison)",
+      "original_description": "library codes A4_1_<rep>; koji fermentation, mycelium expansion stage",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA801076 (SRA SRP, title 'Aspergillus oryzae RNA-Seq raw reads', ENA description 'RNA-Seq of industrial Asperigillus oryzae koji strains'); article Zhang et al. 2023, Microbiology Spectrum, 'Phenotypic, Genomic, and Transcriptomic Comparison of Industrial Aspergillus oryzae Used in Chinese and Japanese Soy Sauce' (PMC10100866): koji fermentation of about 40-48 h in two stages, mycelium expansion then sporulation, three biological replicates per strain and stage; stage temperature/humidity as reported there (about 30C, 95% humidity), retrieved via automated page summary -- verify against the paper. ENA library_name scheme {strain code A1=LBM 30007, A3=3.042, A4=LBM 30008}_{stage digit}_{replicate}: the paper does NOT define the stage digits explicitly; digit 1 = mycelium expansion and 2 = sporulation is INFERRED (BioSample collection_date is always one day earlier for digit 1: 2021-04-10 vs 2021-04-11). Exact RNA harvest hours per stage are not stated; substrate/medium of the koji not stated."
+    },
+    {
+      "condition_id": "PRJNA801076_LBM30008_sporulation",
+      "condition_label": "LBM 30008 | koji fermentation | sporulation stage",
+      "strain": "LBM 30008",
+      "culture_mode": "solid-state",
+      "temperature_C": "28",
+      "developmental_stage": "sporulation stage",
+      "recombinant_background": "wild_type (industrial isolate from Japanese soy sauce koji)",
+      "production_context": "industrial Japanese soy sauce koji fermentation (Chinese vs Japanese soy sauce koji comparison)",
+      "original_description": "library codes A4_2_<rep>; koji fermentation, sporulation stage",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA801076 (SRA SRP, title 'Aspergillus oryzae RNA-Seq raw reads', ENA description 'RNA-Seq of industrial Asperigillus oryzae koji strains'); article Zhang et al. 2023, Microbiology Spectrum, 'Phenotypic, Genomic, and Transcriptomic Comparison of Industrial Aspergillus oryzae Used in Chinese and Japanese Soy Sauce' (PMC10100866): koji fermentation of about 40-48 h in two stages, mycelium expansion then sporulation, three biological replicates per strain and stage; stage temperature/humidity as reported there (about 28C, 80% humidity), retrieved via automated page summary -- verify against the paper. ENA library_name scheme {strain code A1=LBM 30007, A3=3.042, A4=LBM 30008}_{stage digit}_{replicate}: the paper does NOT define the stage digits explicitly; digit 1 = mycelium expansion and 2 = sporulation is INFERRED (BioSample collection_date is always one day earlier for digit 1: 2021-04-10 vs 2021-04-11). Exact RNA harvest hours per stage are not stated; substrate/medium of the koji not stated."
+    }
+  ]
+}

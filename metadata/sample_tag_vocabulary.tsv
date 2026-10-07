@@ -1,0 +1,53 @@
+tag	category	description	synonyms
+control	role	Reference/untreated group of the study's main comparison (no treatment or stress applied; time-matched where the study is a time course).	untreated;mock;reference_condition
+treated	role	Exposed to the study's main treatment/perturbation (chemical, physical or nutritional shift). Pair with the tag naming the treatment itself.	treatment;exposed
+baseline	role	Sampled from a culture that will be treated, but before the treatment/shift started (pre-treatment reference point).	pre_treatment;before_shift
+wild_type	genotype	No intended genetic modification relative to the study's parental strain (includes the study's own 'WT' control strain).	wt;parental_strain
+knockout	genotype	Carries at least one gene deletion/disruption. Pair with del_<gene> or a phenotype-level tag naming what was removed.	deletion_mutant;disruptant;gene_disruption
+overexpression	genotype	Carries a construct overexpressing an endogenous gene. Pair with oe_<gene>.	overexpressing_strain
+heterologous_expression	genotype	Expresses a gene from another organism.	recombinant_expression
+alpha_1_3_glucan_deficient	genotype	alpha-1,3-glucan synthase gene(s) deleted (cell-wall polysaccharide; deletion reduces hyphal aggregation).	ags_deletion;ag_deficient
+galactosaminogalactan_deficient	genotype	Galactosaminogalactan (GAG) synthesis gene(s) deleted (deletion reduces hyphal aggregation).	gag_deficient
+hyphal_dispersion_mutant	genotype	Engineered to grow as dispersed hyphae instead of pellets/aggregates in liquid culture.	dispersed_hyphae_strain
+industrial_strain	genotype	Strain used in industrial/food production (e.g. koji starter), as opposed to a laboratory reference strain.	production_strain;koji_strain
+submerged	culture_system	Liquid (submerged) culture of any kind: shake flask, tube or bioreactor.	liquid_culture;submerged_culture;liquid
+solid_state	culture_system	Solid-state fermentation on a moist particulate substrate (e.g. koji on steamed soybean/wheat). Not agar plates -- see surface_culture.	solid_state_fermentation;ssf;solid_culture;koji_culture
+surface_culture	culture_system	Growth on the surface of agar (optionally over cellophane) or of a soaked support; some authors call this 'solid culture'.	agar_plate;plate_culture;cellophane_culture
+shake_flask	culture_system	Shaken flask culture.	flask_culture;erlenmeyer
+bioreactor	culture_system	Controlled stirred-tank (or similar) bioreactor culture.	stirred_tank;fermenter;stbr
+fed_batch	culture_system	Fed-batch operation (nutrient feed during cultivation).	fed_batch_culture
+defined_medium	medium	Chemically defined medium (includes minimal media such as Czapek-Dox).	synthetic_medium;minimal_medium;chemically_defined_medium
+complex_medium	medium	Medium containing undefined natural components (peptone, yeast extract, potato infusion, ...).	rich_medium;undefined_medium
+czapek_dox_medium	medium	Czapek-Dox (CD/CZ) minimal medium or a modification of it.	cd_medium;czapek_medium;cz_medium
+potato_dextrose_medium	medium	Potato dextrose broth or agar (PDB/PDA).	pdb;pda
+mpy_medium	medium	Maltose-peptone-yeast extract (MPY) medium.	maltose_peptone_yeast_medium
+glucose	carbon_source	Glucose is a supplied carbon source (sole or co-substrate).	dextrose;glc
+maltose	carbon_source	Maltose is the supplied carbon source.
+fructose	carbon_source	Fructose is the supplied carbon source.
+lactate	carbon_source	Lactate/lactic acid is a supplied carbon source.	lactic_acid
+mixed_carbon_source	carbon_source	Two or more carbon sources supplied together.	co_substrate;carbon_mixture
+non_fermentable_carbon	carbon_source	Main carbon source is non-fermentable (e.g. lactate, acetate, glycerol).	gluconeogenic_carbon
+carbon_limitation	carbon_source	Carbon supply limiting growth, or the supplied carbon source(s) reported as exhausted at sampling time.	carbon_depletion;carbon_starvation;carbon_exhaustion
+nitrate	nitrogen_source	Nitrate (e.g. NaNO3) is the nitrogen source.	sodium_nitrate
+urea	nitrogen_source	Urea is a nitrogen source.
+organic_nitrogen	nitrogen_source	Nitrogen supplied as peptone/yeast extract/protein-rich material.	peptone;yeast_extract;complex_nitrogen
+soybean	substrate	Steamed soybean (or soybean-based material) as growth substrate.	soy
+wheat	substrate	Wheat flour or wheat bran as growth substrate.	wheat_flour;wheat_bran
+koji	industrial_context	Koji (mold-fermented substrate) production.	koji_making;koji_fermentation
+soy_sauce	industrial_context	Context of soy sauce brewing.	shoyu
+dithiothreitol	compound	DTT (reducing agent) added; classic inducer of ER stress.	dtt
+furfural	compound	Furfural added (furan aldehyde, lignocellulosic-hydrolysate inhibitor).	ff
+triton_x100	compound	Triton X-100 (non-ionic surfactant) in the medium.	triton
+surfactant	compound	A surfactant/detergent is present in the medium.	detergent
+er_stress	stress	Endoplasmic reticulum (protein-folding) stress induced by the treatment.	endoplasmic_reticulum_stress;unfolded_protein_stress;secretion_stress
+chemical_stress	stress	Exposure to a growth-inhibitory chemical (toxin, inhibitor, xenobiotic).	inhibitor_stress;toxic_compound;xenobiotic_stress
+lignocellulosic_inhibitor	stress	Exposure to a by-product of lignocellulose pretreatment (furfural, HMF, vanillin, ferulic/levulinic acid, ...).	lignocellulose_inhibitor;hydrolysate_inhibitor
+hypoxia	oxygen	Low oxygen availability (e.g. dissolved oxygen <= 1%).	low_oxygen;oxygen_limitation
+normoxia	oxygen	Oxygen supply maintained (not oxygen-limited) in a study that manipulates oxygen.	aerobic;oxygen_sufficient
+exponential_phase	growth_phase	Active (exponential / mid-log) growth at sampling.	log_phase;mid_log_phase;active_growth
+stationary_phase	growth_phase	Growth has ceased / stationary phase at sampling.	late_phase
+mycelium	biological_material	Sampled material is vegetative mycelium (hyphae).	hyphae;vegetative_hyphae;vegetative_mycelium
+dormant_conidia	biological_material	Resting (dormant, ungerminated) conidia.	resting_conidia;ungerminated_conidia;spores
+germinating_conidia	biological_material	Conidia incubated under germination-permissive conditions (before/at germ-tube emergence).	germination;early_germination
+sporulation	biological_material	Culture sampled during conidiation/sporulation.	conidiation;sporulating
+ammonium	nitrogen_source	Ammonium (e.g. (NH4)2SO4) is the nitrogen source.	ammonium_sulfate;ammonia

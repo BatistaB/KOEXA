@@ -1,0 +1,723 @@
+{
+  "bioproject": "PRJDB8293",
+  "collected_at": "2026-10-03T14:34:29+00:00",
+  "accessions_searched": [
+    "PRJDB8293",
+    "DRP005148"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "33897630",
+      "pmcid": "PMC8062725",
+      "doi": "10.3389/fmicb.2021.605095",
+      "title": "Improvement of Free Fatty Acid Secretory Productivity in Aspergillus oryzae by Comprehensive Analysis on Time-Series Gene Expression.",
+      "authors": "Wong PS, Tamano K, Aburatani S.",
+      "year": 2021,
+      "journal": "Frontiers in microbiology",
+      "url": "https://doi.org/10.3389/fmicb.2021.605095",
+      "open_access": true,
+      "abstract": "Aspergillus oryzae is a filamentous fungus that has historically been utilized in the fermentation of food products. In recent times, it has also been introduced as a component in the industrial biosynthesis of consumable compounds, including free fatty acids (FFAs), which are valuable and versatile products that can be utilized as feedstocks in the production of other commodities, such as pharmaceuticals and dietary supplements. To improve the FFA secretory productivity of A. oryzae in the presence of Triton X-100, we analyzed the gene expression of a wild-type control strain and a disruptant strain of an acyl-CoA synthetase gene, faaA, in a time-series experiment. We employed a comprehensive analysis strategy using the baySeq, DESeq2, and edgeR algorithms to clarify the vital pathways for FFA secretory productivity and select genes for gene modification. We found that the transport and metabolism of inorganic ions are crucial in the initial stages of FFA production and revealed 16 candidate genes to be modified in conjunction with the faaA disruption. These genes were verified through the construction of overexpression strains, and showed that the manipulation of reactions closer to the FFA biosynthesis step led to a higher increase in FFA secretory productivity. This resulted in the most successful overexpression strains to have an FFA secretory productivity more than two folds higher than that of the original faaA disruptant. Our study provides guidance for further gene modification for FFA biosynthesis in A. oryzae and for enhancing the productivity of other metabolites in other microorganisms through metabolic engineering.",
+      "found_by": [
+        "europepmc_fulltext:PRJDB8293"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJDB8293",
+          "text": "et al., 2009), and the A. oryzae RIB40 ASM18445v3 reference genome (BioProject: PRJNA20809). The expression data are publicly available at GenBank1 of the National Center for Biotechnology Information (accession number: PRJDB8293).Differential Gene Expression AnalysisA flow chart of the multi-step comprehensive data analysis performed in",
+          "deposition_statement": true
+        },
+        {
+          "accession": "PRJDB8293",
+          "text": "nk database (accession No. PRJNA20809). The RNA-seq raw data generated in this study using an Illumina HiSeq 2500 for all samples have been deposited in the NCBI GenBank database and is publicly available (accession No. PRJDB8293).Author ContributionsKT conceived and conducted the experiments. PSW analyzed the results. SA supervised the ",
+          "deposition_statement": true
+        },
+        {
+          "accession": "PRJDB8293",
+          "text": "nk database (accession No. PRJNA20809). The RNA-seq raw data generated in this study using an Illumina HiSeq 2500 for all samples have been deposited in the NCBI GenBank database and is publicly available (accession No. PRJDB8293).",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    },
+    {
+      "pmid": "38485948",
+      "pmcid": "PMC10940619",
+      "doi": "10.1038/s41467-024-46314-8",
+      "title": "Edible mycelium bioengineered for enhanced nutritional value and sensory appeal using a modular synthetic biology toolkit.",
+      "authors": "Maini Rekdal V, van der Luijt CRB, Chen Y, Kakumanu R, Baidoo EEK, Petzold CJ, Cruz-Morales P, Keasling JD.",
+      "year": 2024,
+      "journal": "Nature communications",
+      "url": "https://doi.org/10.1038/s41467-024-46314-8",
+      "open_access": true,
+      "abstract": "Filamentous fungi are critical in the transition to a more sustainable food system. While genetic modification of these organisms has promise for enhancing the nutritional value, sensory appeal, and scalability of fungal foods, genetic tools and demonstrated use cases for bioengineered food production by edible strains are lacking. Here, we develop a modular synthetic biology toolkit for Aspergillus oryzae, an edible fungus used in fermented foods, protein production, and meat alternatives. Our toolkit includes a CRISPR-Cas9 method for gene integration, neutral loci, and tunable promoters. We use these tools to elevate intracellular levels of the nutraceutical ergothioneine and the flavor-and color molecule heme in the edible biomass. The strain overproducing heme is red in color and is readily formulated into imitation meat patties with minimal processing. These findings highlight the promise of synthetic biology to enhance fungal foods and provide useful genetic tools for applications in food production and beyond.",
+      "found_by": [
+        "europepmc_fulltext:PRJDB8293"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJDB8293",
+          "text": "eMakeMolecules/Core-to-Tree.Computational identification of candidate neutral, highly transcribed integration sites for protein expressionThese sites were identified from a dataset deposited under BioProject accession: “PRJDB8293”. This set of Illumina RNAseq data included 18 libraries which were obtained from A. oryzae RIB40 growing in ",
+          "deposition_statement": true
+        },
+        {
+          "accession": "PRJDB8293",
+          "text": "under Bioproject “PRJNA987873”. The previously published transcriptome data used to identify endogenous neutral loci and bidirectional promoters in Aspergillus oryzae can be found in GenBank under BioProject accession: “PRJDB8293”. CAoGD (Comprehensive Aspergillus oryzae Genome Database) v.2.4 was used to identify the genomic location an",
+          "deposition_statement": false
+        },
+        {
+          "accession": "PRJDB8293",
+          "text": "under Bioproject “PRJNA987873”. The previously published transcriptome data used to identify endogenous neutral loci and bidirectional promoters in Aspergillus oryzae can be found in GenBank under BioProject accession: “PRJDB8293”. CAoGD (Comprehensive Aspergillus oryzae Genome Database) v.2.4 was used to identify the genomic location an",
+          "deposition_statement": false
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJDB8293",
+    "bioproject": "PRJDB8293",
+    "study_accession": "DRP005148",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae RIB40",
+    "strain": "RIB40",
+    "study_description": "Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "36 biosample(s), 36 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMD00171605",
+      "sample_title": "faaA disruptant_168h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6060; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171604",
+      "sample_title": "faaA disruptant_168h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6059; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171603",
+      "sample_title": "faaA disruptant_168h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6058; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    },
+    {
+      "biosample": "SAMD00171602",
+      "sample_title": "faaA disruptant_144h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6057; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171601",
+      "sample_title": "faaA disruptant_144h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6056; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171600",
+      "sample_title": "faaA disruptant_144h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6055; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    },
+    {
+      "biosample": "SAMD00171599",
+      "sample_title": "faaA disruptant_120h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6054; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171598",
+      "sample_title": "faaA disruptant_120h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6053; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171597",
+      "sample_title": "faaA disruptant_120h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6052; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    },
+    {
+      "biosample": "SAMD00171596",
+      "sample_title": "faaA disruptant_96h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6051; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171595",
+      "sample_title": "faaA disruptant_96h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6050; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171594",
+      "sample_title": "faaA disruptant_96h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6049; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    },
+    {
+      "biosample": "SAMD00171593",
+      "sample_title": "faaA disruptant_72h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6048; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171592",
+      "sample_title": "faaA disruptant_72h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6047; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171591",
+      "sample_title": "faaA disruptant_72h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6046; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    },
+    {
+      "biosample": "SAMD00171590",
+      "sample_title": "faaA disruptant_48h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6045; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171589",
+      "sample_title": "faaA disruptant_48h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6044; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171588",
+      "sample_title": "faaA disruptant_48h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=faaA_deleted; sample_name=Ir6043; biological_replicate=1; genetic_modification=faaA disruption; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    },
+    {
+      "biosample": "SAMD00171587",
+      "sample_title": "RIB40_168h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6042; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171586",
+      "sample_title": "RIB40_168h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6041; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171585",
+      "sample_title": "RIB40_168h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6040; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    },
+    {
+      "biosample": "SAMD00171584",
+      "sample_title": "RIB40_144h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6039; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171583",
+      "sample_title": "RIB40_144h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6038; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171582",
+      "sample_title": "RIB40_144h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6037; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    },
+    {
+      "biosample": "SAMD00171581",
+      "sample_title": "RIB40_120h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6036; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171580",
+      "sample_title": "RIB40_120h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6035; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171579",
+      "sample_title": "RIB40_120h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6034; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    },
+    {
+      "biosample": "SAMD00171578",
+      "sample_title": "RIB40_96h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6033; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171577",
+      "sample_title": "RIB40_96h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6032; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171576",
+      "sample_title": "RIB40_96h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6031; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    },
+    {
+      "biosample": "SAMD00171575",
+      "sample_title": "RIB40_72h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6030; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171574",
+      "sample_title": "RIB40_72h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6029; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171573",
+      "sample_title": "RIB40_72h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6028; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    },
+    {
+      "biosample": "SAMD00171572",
+      "sample_title": "RIB40_48h_No.3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6027; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=3"
+    },
+    {
+      "biosample": "SAMD00171571",
+      "sample_title": "RIB40_48h_No.2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6026; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=2"
+    },
+    {
+      "biosample": "SAMD00171570",
+      "sample_title": "RIB40_48h_No.1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; genotype=wild type; sample_name=Ir6025; biological_replicate=1; genetic_modification=missing; growth_condition=50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100; growth_protocol=2.5x10^7 spores inoculation, 200 rpm; technical_replicate=1"
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "DRR178671",
+      "biosample": "SAMD00171591",
+      "condition_id": "PRJDB8293_faaA_72h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178661",
+      "biosample": "SAMD00171581",
+      "condition_id": "PRJDB8293_WT_120h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178657",
+      "biosample": "SAMD00171577",
+      "condition_id": "PRJDB8293_WT_96h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178655",
+      "biosample": "SAMD00171575",
+      "condition_id": "PRJDB8293_WT_72h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178682",
+      "biosample": "SAMD00171602",
+      "condition_id": "PRJDB8293_faaA_144h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178668",
+      "biosample": "SAMD00171588",
+      "condition_id": "PRJDB8293_faaA_48h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178662",
+      "biosample": "SAMD00171582",
+      "condition_id": "PRJDB8293_WT_144h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178659",
+      "biosample": "SAMD00171579",
+      "condition_id": "PRJDB8293_WT_120h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178680",
+      "biosample": "SAMD00171600",
+      "condition_id": "PRJDB8293_faaA_144h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178679",
+      "biosample": "SAMD00171599",
+      "condition_id": "PRJDB8293_faaA_120h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178678",
+      "biosample": "SAMD00171598",
+      "condition_id": "PRJDB8293_faaA_120h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178677",
+      "biosample": "SAMD00171597",
+      "condition_id": "PRJDB8293_faaA_120h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178674",
+      "biosample": "SAMD00171594",
+      "condition_id": "PRJDB8293_faaA_96h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178669",
+      "biosample": "SAMD00171589",
+      "condition_id": "PRJDB8293_faaA_48h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178653",
+      "biosample": "SAMD00171573",
+      "condition_id": "PRJDB8293_WT_72h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178684",
+      "biosample": "SAMD00171604",
+      "condition_id": "PRJDB8293_faaA_168h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178675",
+      "biosample": "SAMD00171595",
+      "condition_id": "PRJDB8293_faaA_96h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178663",
+      "biosample": "SAMD00171583",
+      "condition_id": "PRJDB8293_WT_144h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178660",
+      "biosample": "SAMD00171580",
+      "condition_id": "PRJDB8293_WT_120h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178650",
+      "biosample": "SAMD00171570",
+      "condition_id": "PRJDB8293_WT_48h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178685",
+      "biosample": "SAMD00171605",
+      "condition_id": "PRJDB8293_faaA_168h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178681",
+      "biosample": "SAMD00171601",
+      "condition_id": "PRJDB8293_faaA_144h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178656",
+      "biosample": "SAMD00171576",
+      "condition_id": "PRJDB8293_WT_96h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178654",
+      "biosample": "SAMD00171574",
+      "condition_id": "PRJDB8293_WT_72h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178651",
+      "biosample": "SAMD00171571",
+      "condition_id": "PRJDB8293_WT_48h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178666",
+      "biosample": "SAMD00171586",
+      "condition_id": "PRJDB8293_WT_168h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178683",
+      "biosample": "SAMD00171603",
+      "condition_id": "PRJDB8293_faaA_168h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178676",
+      "biosample": "SAMD00171596",
+      "condition_id": "PRJDB8293_faaA_96h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178665",
+      "biosample": "SAMD00171585",
+      "condition_id": "PRJDB8293_WT_168h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178658",
+      "biosample": "SAMD00171578",
+      "condition_id": "PRJDB8293_WT_96h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178673",
+      "biosample": "SAMD00171593",
+      "condition_id": "PRJDB8293_faaA_72h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178672",
+      "biosample": "SAMD00171592",
+      "condition_id": "PRJDB8293_faaA_72h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178670",
+      "biosample": "SAMD00171590",
+      "condition_id": "PRJDB8293_faaA_48h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178667",
+      "biosample": "SAMD00171587",
+      "condition_id": "PRJDB8293_WT_168h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178664",
+      "biosample": "SAMD00171584",
+      "condition_id": "PRJDB8293_WT_144h",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR178652",
+      "biosample": "SAMD00171572",
+      "condition_id": "PRJDB8293_WT_48h",
+      "strain": "RIB40"
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJDB8293_WT_120h",
+      "condition_label": "RIB40 wild type | CD + 1% Triton X-100 | submerged | 30C | 120h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "120",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "wild_type (genotype \"wild type\", genetic_modification \"none\")",
+      "original_description": "RIB40_120h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=wild type, genetic_modification=none, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=120 h, sample_title 'RIB40_120h_No.<n>'."
+    },
+    {
+      "condition_id": "PRJDB8293_WT_144h",
+      "condition_label": "RIB40 wild type | CD + 1% Triton X-100 | submerged | 30C | 144h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "144",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "wild_type (genotype \"wild type\", genetic_modification \"none\")",
+      "original_description": "RIB40_144h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=wild type, genetic_modification=none, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=144 h, sample_title 'RIB40_144h_No.<n>'."
+    },
+    {
+      "condition_id": "PRJDB8293_WT_168h",
+      "condition_label": "RIB40 wild type | CD + 1% Triton X-100 | submerged | 30C | 168h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "168",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "wild_type (genotype \"wild type\", genetic_modification \"none\")",
+      "original_description": "RIB40_168h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=wild type, genetic_modification=none, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=168 h, sample_title 'RIB40_168h_No.<n>'."
+    },
+    {
+      "condition_id": "PRJDB8293_WT_48h",
+      "condition_label": "RIB40 wild type | CD + 1% Triton X-100 | submerged | 30C | 48h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "48",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "wild_type (genotype \"wild type\", genetic_modification \"none\")",
+      "original_description": "RIB40_48h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=wild type, genetic_modification=none, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=48 h, sample_title 'RIB40_48h_No.<n>'."
+    },
+    {
+      "condition_id": "PRJDB8293_WT_72h",
+      "condition_label": "RIB40 wild type | CD + 1% Triton X-100 | submerged | 30C | 72h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "72",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "wild_type (genotype \"wild type\", genetic_modification \"none\")",
+      "original_description": "RIB40_72h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=wild type, genetic_modification=none, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=72 h, sample_title 'RIB40_72h_No.<n>'."
+    },
+    {
+      "condition_id": "PRJDB8293_WT_96h",
+      "condition_label": "RIB40 wild type | CD + 1% Triton X-100 | submerged | 30C | 96h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "96",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "wild_type (genotype \"wild type\", genetic_modification \"none\")",
+      "original_description": "RIB40_96h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=wild type, genetic_modification=none, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=96 h, sample_title 'RIB40_96h_No.<n>'."
+    },
+    {
+      "condition_id": "PRJDB8293_faaA_120h",
+      "condition_label": "RIB40 faaA disruptant | CD + 1% Triton X-100 | submerged | 30C | 120h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "120",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "faaA disruption (SRA genotype \"faaA_deleted\", genetic_modification \"faaA disruption\"; strain attribute RIB40)",
+      "original_description": "faaA disruptant_120h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=faaA_deleted, genetic_modification=faaA disruption, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=120 h, sample_title 'faaA disruptant_120h_No.<n>'."
+    },
+    {
+      "condition_id": "PRJDB8293_faaA_144h",
+      "condition_label": "RIB40 faaA disruptant | CD + 1% Triton X-100 | submerged | 30C | 144h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "144",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "faaA disruption (SRA genotype \"faaA_deleted\", genetic_modification \"faaA disruption\"; strain attribute RIB40)",
+      "original_description": "faaA disruptant_144h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=faaA_deleted, genetic_modification=faaA disruption, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=144 h, sample_title 'faaA disruptant_144h_No.<n>'."
+    },
+    {
+      "condition_id": "PRJDB8293_faaA_168h",
+      "condition_label": "RIB40 faaA disruptant | CD + 1% Triton X-100 | submerged | 30C | 168h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "168",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "faaA disruption (SRA genotype \"faaA_deleted\", genetic_modification \"faaA disruption\"; strain attribute RIB40)",
+      "original_description": "faaA disruptant_168h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=faaA_deleted, genetic_modification=faaA disruption, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=168 h, sample_title 'faaA disruptant_168h_No.<n>'."
+    },
+    {
+      "condition_id": "PRJDB8293_faaA_48h",
+      "condition_label": "RIB40 faaA disruptant | CD + 1% Triton X-100 | submerged | 30C | 48h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "48",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "faaA disruption (SRA genotype \"faaA_deleted\", genetic_modification \"faaA disruption\"; strain attribute RIB40)",
+      "original_description": "faaA disruptant_48h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=faaA_deleted, genetic_modification=faaA disruption, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=48 h, sample_title 'faaA disruptant_48h_No.<n>'."
+    },
+    {
+      "condition_id": "PRJDB8293_faaA_72h",
+      "condition_label": "RIB40 faaA disruptant | CD + 1% Triton X-100 | submerged | 30C | 72h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "72",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "faaA disruption (SRA genotype \"faaA_deleted\", genetic_modification \"faaA disruption\"; strain attribute RIB40)",
+      "original_description": "faaA disruptant_72h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=faaA_deleted, genetic_modification=faaA disruption, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=72 h, sample_title 'faaA disruptant_72h_No.<n>'."
+    },
+    {
+      "condition_id": "PRJDB8293_faaA_96h",
+      "condition_label": "RIB40 faaA disruptant | CD + 1% Triton X-100 | submerged | 30C | 96h",
+      "strain": "RIB40",
+      "medium": "CD (Czapek-Dox) liquid medium supplemented with 1% (w/v) Triton X-100",
+      "culture_mode": "submerged",
+      "temperature_C": "30",
+      "time_value": "96",
+      "time_unit": "hour",
+      "treatment": "1% (w/v) Triton X-100 (non-ionic surfactant) in the medium",
+      "developmental_stage": "hyphae",
+      "recombinant_background": "faaA disruption (SRA genotype \"faaA_deleted\", genetic_modification \"faaA disruption\"; strain attribute RIB40)",
+      "original_description": "faaA disruptant_96h",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJDB8293 (DRA study, AIST BPRI/CBBD-OIL): title 'Time-course mRNA-Seq analysis of Aspergillus oryzae RIB40 and the faaA disruptant grown in the presence of 1% Triton X-100'; BioSample attributes: strain=RIB40, genotype=faaA_deleted, genetic_modification=faaA disruption, temp=30 degrees, growth_condition='50mL Czapek-Dox liquid medium supplemented with 1% (w/v) Triton X-100', growth_protocol='2.5x10^7 spores inoculation, 200 rpm', tissue=hyphae, time=96 h, sample_title 'faaA disruptant_96h_No.<n>'."
+    }
+  ]
+}
