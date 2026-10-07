@@ -1,10 +1,11 @@
-threshold	value	meaning
-expressed genes (median TPM >= 0.1)	9810.0	reference population for level quantiles
-level_low  (Q20 of expressed)	1.267	median log2(TPM+1); = 1.41 TPM; Low/Core boundary
-level_high (Q80 of expressed)	5.84	median log2(TPM+1); = 56.3 TPM; Core/High boundary
-burst floor	14.579	TPM at the Q50 level of expressed genes: to count as context-specific a gene must reach at least this in one sample (become a normally expressed gene somewhere)
-burst-capable genes	9417.0	reference population for the specificity quantiles
-Tau cut (Q75 of burst-capable)	0.638	Context-Specific needs Tau >= this
-peak-share cut (Q75 of burst-capable)	0.541	Context-Specific needs peak share >= this
-broad-prevalence cut (Q25 of expressed)	0.9934	fraction of samples with TPM >= 0.1 needed to be called 'detected everywhere'
-tail quantile (dispersion, Tau)	0.8	within-tier percentile above which dispersion/Tau count as high
+threshold	value
+n_expressed_genes	10024.0
+level_low	1.3010533328681422
+level_high	5.837115782355116
+floor_level	3.9218239089559424
+floor_tpm	14.156071111952729
+n_burst_capable_genes	9841.0
+tau_specific	0.660945544685658
+peak_specific	0.5334769006085477
+prevalence_broad	0.9852941176470589
+n_eligible_genes	8631.0
