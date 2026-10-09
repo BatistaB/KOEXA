@@ -23,10 +23,11 @@ from pathlib import Path
 import duckdb
 import pandas as pd
 
-from .approve import SampleNotFoundError
+from .approve import SampleExcludedError, SampleNotFoundError
 from ..state import SampleState
 
 __all__ = [
+    "SampleExcludedError",
     "SampleNotFoundError",
     "ResultsNotFoundError",
     "ResultsIncompleteError",
@@ -97,6 +98,9 @@ def ingest_sample_results(
     if row is None:
         raise SampleNotFoundError(sample_id)
     previous_status = row[0]
+    if previous_status == SampleState.EXCLUDED.value:
+        # An excluded sample's Colab results may still sit in results/; they must not flip it back to QUANTIFIED.
+        raise SampleExcludedError(sample_id)
 
     sample_dir = results_dir / sample_id
     if not sample_dir.is_dir():

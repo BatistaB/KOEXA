@@ -32,9 +32,11 @@ from ..clustering.classify import classify_genes
 from ..config import ConfigError, load_pipeline_config, load_reference_config, load_storage_config
 from ..database.approve import (
     SampleExcludedError,
+    SampleHasResultsError,
     SampleNotApprovedError,
     SampleNotFoundError,
     approve_sample,
+    exclude_sample,
     unapprove_sample,
 )
 from ..database.ingest_conditions import load_conditions, load_sample_condition_links
@@ -892,6 +894,34 @@ def sample_unapprove(srr: str, reason: str) -> None:
     click.echo(f"Unapproved {srr} (now METADATA_REVIEW).")
 
 
+@sample.command("exclude")
+@click.argument("srr")
+@click.option(
+    "--reason",
+    required=True,
+    help="Why the sample is unusable (stored in samples.exclusion_reason and processing_events).",
+)
+def sample_exclude(srr: str, reason: str) -> None:
+    """Exclude a sample from the atlas for good (e.g. a platform the pipeline cannot quantify)."""
+    if not DATABASE_FILE.is_file():
+        raise click.ClickException("No database found. Run 'atlas database migrate' first.")
+    conn = duckdb.connect(str(DATABASE_FILE))
+    try:
+        try:
+            changed = exclude_sample(conn, srr, reason=reason)
+        except SampleNotFoundError:
+            raise click.ClickException(f"Sample {srr} not found.")
+        except SampleHasResultsError:
+            raise click.ClickException(f"Sample {srr} already has expression results in the atlas; remove them first.")
+    finally:
+        conn.close()
+    if changed:
+        logger.info("Excluded sample %s: %s", srr, reason)
+        click.echo(f"Excluded {srr}.")
+    else:
+        click.echo(f"Sample {srr} is already EXCLUDED.")
+
+
 @sample.command("queue")
 @click.argument("srr")
 def sample_queue(srr: str) -> None:
@@ -959,6 +989,9 @@ def process_ingest(srr: str | None, ingest_all: bool) -> None:
                 )
             except SampleNotFoundError:
                 click.echo(f"{accession}: SKIPPED -- not found in database (run 'atlas database load-discovery' first).")
+                continue
+            except SampleExcludedError:
+                click.echo(f"{accession}: SKIPPED -- sample is EXCLUDED from the atlas.")
                 continue
             except ResultsNotFoundError:
                 click.echo(f"{accession}: SKIPPED -- no results/{accession}/ folder found.")

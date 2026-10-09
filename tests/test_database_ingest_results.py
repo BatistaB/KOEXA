@@ -6,7 +6,7 @@ import json
 import duckdb
 import pytest
 
-from aoryzae_atlas.database.approve import SampleNotFoundError
+from aoryzae_atlas.database.approve import SampleExcludedError, SampleNotFoundError
 from aoryzae_atlas.database.ingest_results import (
     ResultsIncompleteError,
     ResultsNotFoundError,
@@ -135,3 +135,12 @@ def test_find_ingestable_accessions_only_lists_done_folders(tmp_path):
 
 def test_find_ingestable_accessions_returns_empty_list_for_missing_dir(tmp_path):
     assert find_ingestable_accessions(tmp_path / "does_not_exist") == []
+
+
+def test_ingest_sample_results_refuses_excluded_sample(tmp_path, conn):
+    conn.execute("UPDATE samples SET pipeline_status = 'EXCLUDED' WHERE sample_id = 'DRR1'")
+    _write_sample_dir(tmp_path, "DRR1")
+    with pytest.raises(SampleExcludedError):
+        ingest_sample_results(conn, "DRR1", tmp_path)
+    assert conn.execute("SELECT pipeline_status FROM samples WHERE sample_id = 'DRR1'").fetchone()[0] == "EXCLUDED"
+    assert conn.execute("SELECT COUNT(*) FROM gene_expression WHERE sample_id = 'DRR1'").fetchone()[0] == 0

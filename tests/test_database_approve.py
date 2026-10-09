@@ -6,9 +6,11 @@ import pytest
 
 from aoryzae_atlas.database.approve import (
     SampleExcludedError,
+    SampleHasResultsError,
     SampleNotApprovedError,
     SampleNotFoundError,
     approve_sample,
+    exclude_sample,
     unapprove_sample,
 )
 from aoryzae_atlas.database.migrate import apply_migrations
@@ -86,3 +88,25 @@ def test_unapprove_sample_refuses_non_approved_sample(conn):
 def test_unapprove_sample_raises_for_unknown_sample(conn):
     with pytest.raises(SampleNotFoundError):
         unapprove_sample(conn, "SRR_DOES_NOT_EXIST")
+
+
+def test_exclude_sample_sets_status_reason_and_logs_event(conn):
+    assert exclude_sample(conn, "SRR3", reason="Oxford Nanopore reads; pipeline is short-read") is True
+    row = conn.execute("SELECT pipeline_status, exclusion_reason FROM samples WHERE sample_id = 'SRR3'").fetchone()
+    assert row == ("EXCLUDED", "Oxford Nanopore reads; pipeline is short-read")
+    event = conn.execute("SELECT event_type FROM processing_events WHERE sample_id = 'SRR3'").fetchone()
+    assert event == ("excluded",)
+
+
+def test_exclude_sample_is_a_noop_for_already_excluded(conn):
+    assert exclude_sample(conn, "SRR2", reason="again") is False
+    assert conn.execute("SELECT COUNT(*) FROM processing_events WHERE sample_id = 'SRR2'").fetchone()[0] == 0
+
+
+def test_exclude_sample_refuses_sample_with_results_and_unknown_sample(conn):
+    conn.execute("INSERT INTO gene_expression (sample_id, canonical_gene_id, TPM) VALUES ('SRR1', 'G1', 1.0)")
+    with pytest.raises(SampleHasResultsError):
+        exclude_sample(conn, "SRR1", reason="x")
+    assert conn.execute("SELECT pipeline_status FROM samples WHERE sample_id = 'SRR1'").fetchone()[0] == "METADATA_REVIEW"
+    with pytest.raises(SampleNotFoundError):
+        exclude_sample(conn, "SRR_DOES_NOT_EXIST", reason="x")
