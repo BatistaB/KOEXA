@@ -1,0 +1,95 @@
+{
+  "bioproject": "PRJDB16475",
+  "collected_at": "2026-10-09T11:14:10+00:00",
+  "accessions_searched": [
+    "PRJDB16475",
+    "DRP011127"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "38392785",
+      "pmcid": "PMC10890517",
+      "doi": "10.3390/jof10020113",
+      "title": "The Identification of a Target Gene of the Transcription Factor KojR and Elucidation of Its Role in Carbon Metabolism for Kojic Acid Biosynthesis in Aspergillus oryzae.",
+      "authors": "Mizutani T, Oka H, Goto R, Tsurigami R, Maruyama JI, Shimizu M, Kato M, Nakano H, Kojima T.",
+      "year": 2024,
+      "journal": "Journal of fungi (Basel, Switzerland)",
+      "url": "https://doi.org/10.3390/jof10020113",
+      "open_access": true,
+      "abstract": "DNA-binding transcription factors are broadly characterized as proteins that bind to specific sequences within genomic DNA and modulate the expression of downstream genes. This study focused on KojR, a transcription factor involved in the metabolism of kojic acid, which is an organic acid synthesized in Aspergillus oryzae and is known for its tyrosinase-inhibitory properties. However, the regulatory mechanism underlying KojR-mediated kojic acid synthesis remains unclear. Hence, we aimed to obtain a comprehensive identification of KojR-associated genes using genomic systematic evolution of ligands by exponential enrichment with high-throughput DNA sequencing (gSELEX-Seq) and RNA-Seq. During the genome-wide exploration of KojR-binding sites via gSELEX-Seq and identification of KojR-dependent differentially expressed genes (DEGs) using RNA-Seq, we confirmed that KojR preferentially binds to 5'-CGGCTAATGCGG-3', and KojR directly regulates kojT, as was previously reported. We also observed that kojA expression, which may be controlled by KojR, was significantly reduced in a ΔkojR strain. Notably, no binding of KojR to the kojA promoter region was detected. Furthermore, certain KojR-dependent DEGs identified in the present study were associated with enzymes implicated in the carbon metabolic pathway of A. oryzae. This strongly indicates that KojR plays a central role in carbon metabolism in A. oryzae.",
+      "found_by": [
+        "europepmc_fulltext:PRJDB16475"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJDB16475",
+          "text": "s not used in differential expression analyses because it did not yield a sufficient amount of count data. All sequencing data will be made available through the DNA Databank of Japan (DDBJ; Bioproject accession number: PRJDB16475). The sequenced data obtained using MinION was subjected to differential expression analysis as follows: (1) ",
+          "deposition_statement": true
+        },
+        {
+          "accession": "PRJDB16475",
+          "text": "nt Not applicable. Informed Consent Statement Not applicable. Data Availability Statement The reported nucleotide sequence data are available in the DDBJ Sequenced Read Archive under the accession numbers PRJDB16474 and PRJDB16475. Conflicts of Interest The authors declare no conflict of interest. The funders had no role in the study desi",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJDB16475",
+    "bioproject": "PRJDB16475",
+    "study_accession": "DRP011127",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "",
+    "study_description": "Identification of target genes for KojR using RNA-Seq",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "6 biosample(s), 6 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMD00638630",
+      "sample_title": "Aspergillus_oryzae_MT3_RNA-Seq",
+      "strain": "",
+      "condition_clues": "collection_date=2022; geo_loc_name=Japan; sample_name=RNA-Seq_MT3; biological_replicate=3"
+    },
+    {
+      "biosample": "SAMD00638629",
+      "sample_title": "Aspergillus_oryzae_MT2_RNA-Seq",
+      "strain": "",
+      "condition_clues": "collection_date=2022; geo_loc_name=Japan; sample_name=RNA-Seq_MT2; biological_replicate=2"
+    },
+    {
+      "biosample": "SAMD00638628",
+      "sample_title": "Aspergillus_oryzae_MT1_RNA-Seq",
+      "strain": "",
+      "condition_clues": "collection_date=2022; geo_loc_name=Japan; sample_name=RNA-Seq_MT1; biological_replicate=1"
+    },
+    {
+      "biosample": "SAMD00638627",
+      "sample_title": "Aspergillus_oryzae_WT3_RNA-Seq",
+      "strain": "",
+      "condition_clues": "collection_date=2022; geo_loc_name=Japan; sample_name=RNA-Seq_WT3; biological_replicate=3"
+    },
+    {
+      "biosample": "SAMD00638626",
+      "sample_title": "Aspergillus_oryzae_WT2_RNA-Seq",
+      "strain": "",
+      "condition_clues": "collection_date=2022; geo_loc_name=Japan; sample_name=RNA-Seq_WT2; biological_replicate=2"
+    },
+    {
+      "biosample": "SAMD00638625",
+      "sample_title": "Aspergillus_oryzae_WT1_RNA-Seq",
+      "strain": "",
+      "condition_clues": "collection_date=2022; geo_loc_name=Japan; sample_name=RNA-Seq_WT1; biological_replicate=1"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

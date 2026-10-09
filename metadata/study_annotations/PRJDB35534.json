@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJDB35534",
+  "related_identifiers": {
+    "bioproject": "PRJDB35534",
+    "sra_study": "DRP013801",
+    "geo_series": null,
+    "other": []
+  },
+  "paper": {
+    "status": "not_found"
+  },
+  "study_summary": {
+    "objective": "Test how overexpressing the candidate omega-3 desaturase gene AO090010000714 changes the transcriptome of A. oryzae RIB40 (from the BioProject title).",
+    "experimental_design": "RNA-seq of RIB40 wild type and an overexpression strain (AT24), one library each; culture medium, temperature and time are not stated in the BioProject or BioSamples.",
+    "main_finding": "Not available: no accession-linked paper was found, so no result is reported here."
+  },
+  "tag_sets": {},
+  "conditions": {
+    "PRJDB35534_RIB40_WT": {
+      "sets": [],
+      "tags": [
+        {
+          "tag": "strain_rib40",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "NBRC 100959"
+        },
+        {
+          "tag": "wild_type",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "BioSample genotype 'wild-type'"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "medium",
+          "note": "wild-type reference for the overexpression strain"
+        }
+      ]
+    },
+    "PRJDB35534_AT24_oe": {
+      "sets": [],
+      "tags": [
+        {
+          "tag": "strain_rib40",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "RIB40 background (NBRC 100959)"
+        },
+        {
+          "tag": "overexpression",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "BioSample genotype 'Overexpression of AO090010000714'"
+        },
+        {
+          "tag": "oe_AO090010000714",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "candidate omega-3 desaturase gene"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "No accession-linked paper found; how the overexpression strain was built and how it was cultured are unknown.",
+    "Both samples have an empty strain field in the SRA run table; the BioSample records say strain RIB40 (NBRC 100959)."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-09",
+    "needs_pdf": false
+  }
+}

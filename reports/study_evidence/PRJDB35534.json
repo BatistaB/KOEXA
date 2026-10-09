@@ -1,0 +1,42 @@
+{
+  "bioproject": "PRJDB35534",
+  "collected_at": "2026-10-09T11:13:54+00:00",
+  "accessions_searched": [
+    "PRJDB35534",
+    "DRP013801"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [],
+  "suggested_paper_status": "not_found",
+  "study": {
+    "dataset_id": "PRJDB35534",
+    "bioproject": "PRJDB35534",
+    "study_accession": "DRP013801",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "",
+    "study_description": "RNA-Seq analysis of Aspergillus oryzae RIB40 wild-type and a strain overexpressing the candidate omega-3 desaturase gene AO090010000714",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "2 biosample(s), 2 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMD01582613",
+      "sample_title": "A. oryzae_AT24",
+      "strain": "",
+      "condition_clues": "genotype=Overexpression of AO090010000714; collection_date=2022-08-25; geo_loc_name=Japan; culture_collection=NBRC: 100959; sample_name=A. oryzae_AT24; biomaterial_provider=NBRC 100959; env_broad_scale=Laboratory; host=not applicable"
+    },
+    {
+      "biosample": "SAMD01582612",
+      "sample_title": "A. oryzae_RIB40",
+      "strain": "",
+      "condition_clues": "genotype=wild-type; collection_date=2024-12-16; geo_loc_name=Japan; culture_collection=NBRC: 100959; sample_name=A. oryzae_RIB40; biomaterial_provider=NBRC 100959; env_broad_scale=Laboratory; host=not applicable"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

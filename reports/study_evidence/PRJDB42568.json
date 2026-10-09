@@ -1,0 +1,82 @@
+{
+  "bioproject": "PRJDB42568",
+  "collected_at": "2026-10-09T11:13:46+00:00",
+  "accessions_searched": [
+    "PRJDB42568",
+    "DRP019119"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "42729629",
+      "pmcid": "PMC13562431",
+      "doi": "10.1016/j.isci.2026.117405",
+      "title": "Giant transposable elements drive genetic diversification in Aspergillus oryzae, a domesticated fungus traditionally used in food fermentation.",
+      "authors": "Hamanaka Y, Katayama T, Chiken Y, Nishiguchi K, Yamaguchi K, Shigenobu S, Maruyama JI.",
+      "year": 2026,
+      "journal": "iScience",
+      "url": "https://doi.org/10.1016/j.isci.2026.117405",
+      "open_access": true,
+      "abstract": "Starships are giant transposable elements recently reported in fungi that carry cargo genes and drive rapid adaptation. While inter-species variation by Starships has been investigated, their role in intra-species variation remains unclear. Here, we investigated Starships in Aspergillus oryzae, a filamentous fungus differentiated from mycotoxigenic Aspergillus flavus and subsequently domesticated for various applications in food fermentation, such as sake, miso, and soy sauce production in Japan. Comparative analysis between A. flavus and A. oryzae revealed that cargo gene gains/losses during domestication likely contribute to safe and stable food production. Furthermore, cargo gene composition varied even among A. oryzae strains harboring the same Starship classes, suggesting its correlation with specific strain usage. These findings indicate that Starships facilitate rapid evolution and diversification under artificial selection by acquiring and rearranging cargo genes. Our study highlights Starships as key vehicles driving genetic diversification in the domestication of A. oryzae for multipurpose industrial applications.",
+      "found_by": [
+        "europepmc_fulltext:PRJDB42568"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJDB42568",
+          "text": " annotation data of A. oryzae strains are deposited in the DDBJ as accession number BioProject PRJDB37648 ( key resources table ). The RNA-seq data of A. oryzae strains is available as the DDBJ BioProject PRJDB37768 and PRJDB42568 ( key resources table ). • This study does not report original code. • Any additional information required to",
+          "deposition_statement": true
+        },
+        {
+          "accession": "PRJDB42568",
+          "text": " Short read sequence data for RNA-seq analysis of A. oryzae RIB40 strain in liquid medium This study DDBJ: PRJDB37768 Short read sequence data for RNA-seq analysis of A. oryzae strains in PD agar medium This study DDBJ: PRJDB42568 Experimental models: Organisms/strains A. oryzae: Strain RIB40 Machida et al. 40 NBRC 100959 A. oryzae: Strai",
+          "deposition_statement": false
+        },
+        {
+          "accession": "PRJDB42568",
+          "text": " annotation data of A. oryzae strains are deposited in the DDBJ as accession number BioProject PRJDB37648 ( key resources table ). The RNA-seq data of A. oryzae strains is available as the DDBJ BioProject PRJDB37768 and PRJDB42568 ( key resources table ). • This study does not report original code. • Any additional information required to",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJDB42568",
+    "bioproject": "PRJDB42568",
+    "study_accession": "DRP019119",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "RIB40, TK-35, TK-41",
+    "study_description": "RNA-seq analysis of Aspergillus oryzae strains in PD agar medium for 2 day",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "3 biosample(s), 3 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMD01933070",
+      "sample_title": "TK-35_PD_2d",
+      "strain": "TK-35",
+      "condition_clues": "strain=TK-35; isolation_source=missing; collection_date=2024-04; geo_loc_name=Japan; sample_name=TK-35_PD_2d; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01933071",
+      "sample_title": "TK-41_PD_2d",
+      "strain": "TK-41",
+      "condition_clues": "strain=TK-41; isolation_source=missing; collection_date=2024-04; geo_loc_name=Japan; sample_name=TK-41_PD_2d; sample_type=whole organism"
+    },
+    {
+      "biosample": "SAMD01933069",
+      "sample_title": "RIB40_PD_2d",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolation_source=missing; collection_date=2024-04; geo_loc_name=Japan; sample_name=RIB40_PD_2d; sample_type=whole organism"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

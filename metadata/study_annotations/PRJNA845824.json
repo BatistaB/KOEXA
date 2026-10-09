@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA845824",
+  "related_identifiers": {
+    "bioproject": "PRJNA845824",
+    "sra_study": "SRP378542",
+    "geo_series": null,
+    "other": []
+  },
+  "paper": {
+    "status": "found",
+    "title": "RNA-Seq Based Transcriptome Analysis of Aspergillus oryzae DSM 1863 Grown on Glucose, Acetate and an Aqueous Condensate from the Fast Pyrolysis of Wheat Straw",
+    "authors": "Kubisch C, Kovilein A, Aliyu H, Ochsenreither K.",
+    "year": 2022,
+    "journal": "Journal of Fungi",
+    "doi": "10.3390/jof8080765",
+    "pmid": "35893132",
+    "pmcid": "PMC9394295",
+    "url": "https://doi.org/10.3390/jof8080765",
+    "access": "full_text",
+    "association_evidence": "Data Availability Statement: 'The RNA-seq data underlying this study were uploaded to the NCBI Sequence Read Archive (SRA) database under the following BioProject ID: PRJNA845824.'",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Describe how A. oryzae DSM 1863 responds transcriptionally to growth on 20% detoxified pyrolytic aqueous condensate (PAC) from wheat straw compared with pure acetate and glucose.",
+    "experimental_design": "Shake-flask cultures in a defined mineral medium at 30 C with glucose, acetate or 20% detoxified PAC as carbon source, harvested at 24 h (glucose, acetate) or 48 h (PAC) to match growth phase; 3 biological replicates each.",
+    "main_finding": "About 3,460 genes were differentially expressed; acetate and PAC cultures looked alike (ribosome and RNA-processing genes up, transmembrane transport down), and only pyruvate metabolism differed significantly between them."
+  },
+  "tag_sets": {
+    "dsm1863_mineral_flask": [
+      {
+        "tag": "strain_dsm_1863",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      },
+      {
+        "tag": "defined_medium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mineral salts medium with ammonium sulfate"
+      },
+      {
+        "tag": "submerged",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "shake_flask",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "500 mL flasks with 100 mL medium, 100 rpm"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "inferred_from_methods",
+        "confidence": "medium",
+        "note": "biomass collected by filtering the flask content"
+      }
+    ],
+    "glucose_reference": [
+      {
+        "tag": "glucose",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "control",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "glucose is the reference carbon source against which acetate and PAC are compared"
+      }
+    ],
+    "acetate_culture": [
+      {
+        "tag": "acetate",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "non_fermentable_carbon",
+        "source": "inferred_from_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "treated",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "carbon-source shift relative to the glucose reference"
+      }
+    ],
+    "pac_culture": [
+      {
+        "tag": "pyrolytic_aqueous_condensate",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "20% detoxified PAC as sole carbon source"
+      },
+      {
+        "tag": "acetate",
+        "source": "paper_abstract",
+        "confidence": "medium",
+        "note": "acetate is the main carbon source in PAC"
+      },
+      {
+        "tag": "non_fermentable_carbon",
+        "source": "inferred_from_design",
+        "confidence": "medium"
+      },
+      {
+        "tag": "lignocellulosic_inhibitor",
+        "source": "paper_abstract",
+        "confidence": "medium",
+        "note": "PAC contains inhibitors; used after detoxification at 20%"
+      },
+      {
+        "tag": "treated",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "carbon-source shift relative to the glucose reference"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA845824_glucose_24h": {
+      "sets": [
+        "dsm1863_mineral_flask",
+        "glucose_reference"
+      ],
+      "tags": [
+        {
+          "tag": "24h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA845824_acetate_24h": {
+      "sets": [
+        "dsm1863_mineral_flask",
+        "acetate_culture"
+      ],
+      "tags": [
+        {
+          "tag": "24h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA845824_PAC20_48h": {
+      "sets": [
+        "dsm1863_mineral_flask",
+        "pac_culture"
+      ],
+      "tags": [
+        {
+          "tag": "48h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "Which run is glucose, acetate or PAC comes from the SRA experiment titles / library names; the BioSample attributes only list 'sample 1-9' and the replicate number.",
+    "Glucose and acetate were sampled at 24 h and PAC at 48 h to match growth phase, so substrate and time are confounded by design."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-09",
+    "needs_pdf": false
+  }
+}

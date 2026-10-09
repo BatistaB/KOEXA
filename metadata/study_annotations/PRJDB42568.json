@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJDB42568",
+  "related_identifiers": {
+    "bioproject": "PRJDB42568",
+    "sra_study": "DRP019119",
+    "geo_series": null,
+    "other": [
+      "PRJDB37768 (RNA-seq of RIB40 in liquid medium, same paper)",
+      "PRJDB37648 (genome annotation data, same paper)"
+    ]
+  },
+  "paper": {
+    "status": "found",
+    "title": "Giant transposable elements drive genetic diversification in Aspergillus oryzae, a domesticated fungus traditionally used in food fermentation",
+    "authors": "Hamanaka Y, Katayama T, Chiken Y, Nishiguchi K, Yamaguchi K, Shigenobu S, Maruyama JI.",
+    "year": 2026,
+    "journal": "iScience",
+    "doi": "10.1016/j.isci.2026.117405",
+    "pmid": "42729629",
+    "pmcid": "PMC13562431",
+    "url": "https://doi.org/10.1016/j.isci.2026.117405",
+    "access": "full_text",
+    "association_evidence": "Data availability: 'The RNA-seq data of A. oryzae strains is available as the DDBJ BioProject PRJDB37768 and PRJDB42568'; key resources table lists PRJDB42568 as RNA-seq of A. oryzae strains in PD agar medium.",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Map the giant Starship transposable elements of A. oryzae, compare them with A. flavus, and ask how their cargo genes contribute to strain diversification during domestication.",
+    "experimental_design": "Genomes of five industrial TK strains were sequenced and compared with RIB40; RNA-seq of RIB40, TK-35 and TK-41 grown on PD agar over cellophane at 30 C for 2 days (one library per strain) tested whether Starship cargo genes are expressed.",
+    "main_finding": "Cargo genes inside Starship elements are transcribed and not silenced relative to genes elsewhere in the genome, so they may remain functional."
+  },
+  "tag_sets": {
+    "pd_cellophane_2d": [
+      {
+        "tag": "potato_dextrose_medium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "PD medium"
+      },
+      {
+        "tag": "complex_medium",
+        "source": "inferred_from_methods",
+        "confidence": "medium",
+        "note": "potato infusion is an undefined component"
+      },
+      {
+        "tag": "surface_culture",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "PD medium overlaid with cellophane"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "inferred_from_methods",
+        "confidence": "medium",
+        "note": "mycelium grown on the cellophane surface"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      },
+      {
+        "tag": "48h",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "2 days"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJDB42568_RIB40_PD_2d": {
+      "sets": [
+        "pd_cellophane_2d"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib40",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB42568_TK35_PD_2d": {
+      "sets": [
+        "pd_cellophane_2d"
+      ],
+      "tags": [
+        {
+          "tag": "strain_tk_35",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "industrial_strain",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "TK strains are industrial strains (clade C)"
+        }
+      ]
+    },
+    "PRJDB42568_TK41_PD_2d": {
+      "sets": [
+        "pd_cellophane_2d"
+      ],
+      "tags": [
+        {
+          "tag": "strain_tk_41",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "industrial_strain",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "TK strains are industrial strains (clade G)"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "One library per strain (no biological replicates).",
+    "The same paper also deposited RNA-seq of RIB40 in DPY liquid medium (PRJDB37768), a separate BioProject."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-09",
+    "needs_pdf": false
+  }
+}

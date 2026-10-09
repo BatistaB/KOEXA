@@ -51,3 +51,5 @@ dormant_conidia	biological_material	Resting (dormant, ungerminated) conidia.	res
 germinating_conidia	biological_material	Conidia incubated under germination-permissive conditions (before/at germ-tube emergence).	germination;early_germination
 sporulation	biological_material	Culture sampled during conidiation/sporulation.	conidiation;sporulating
 ammonium	nitrogen_source	Ammonium (e.g. (NH4)2SO4) is the nitrogen source.	ammonium_sulfate;ammonia
+acetate	carbon_source	Acetate/acetic acid is a supplied carbon source.	acetic_acid;sodium_acetate
+pyrolytic_aqueous_condensate	substrate	Aqueous condensate from fast pyrolysis of lignocellulosic biomass (e.g. wheat straw) used as a carbon-source feedstock; rich in acetate and contains inhibitors.	pac;pyrolysis_condensate;pyrolysis_liquor
