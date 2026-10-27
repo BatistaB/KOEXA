@@ -1,0 +1,67 @@
+{
+  "bioproject": "PRJNA534476",
+  "collected_at": "2026-10-14T12:18:55+00:00",
+  "accessions_searched": [
+    "PRJNA534476",
+    "SRP193744",
+    "GSE130260"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [],
+  "suggested_paper_status": "not_found",
+  "study": {
+    "dataset_id": "PRJNA534476",
+    "bioproject": "PRJNA534476",
+    "study_accession": "SRP193744",
+    "geo_accession": "GSE130260",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae RIB40",
+    "strain": "RIB40",
+    "study_description": "Evidence of DNA methylation in Aspergillus oryzae [RNA-seq]",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "6 biosample(s), 6 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN11490898",
+      "sample_title": "Solid_WB_r3_RNA-seq",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=Solid culture with WB replicate 3; tissue=Hyphae"
+    },
+    {
+      "biosample": "SAMN11490899",
+      "sample_title": "Solid_WB_r2_RNA-seq",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=Solid culture with WB replicate 2; tissue=Hyphae"
+    },
+    {
+      "biosample": "SAMN11490900",
+      "sample_title": "Solid_WB_r1_RNA-seq",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=Solid culture with WB replicate 1; tissue=Hyphae"
+    },
+    {
+      "biosample": "SAMN11490901",
+      "sample_title": "Liquid_CD-Glc_r3_RNA-seq",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=Liquid culture with CD-Glc replicate 3; tissue=Hyphae"
+    },
+    {
+      "biosample": "SAMN11490902",
+      "sample_title": "Liquid_CD-Glc_r2_RNA-seq",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=Liquid culture with CD-Glc replicate 2; tissue=Hyphae"
+    },
+    {
+      "biosample": "SAMN11490903",
+      "sample_title": "Liquid_CD-Glc_r1_RNA-seq",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; source_name=Liquid culture with CD-Glc replicate 1; tissue=Hyphae"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

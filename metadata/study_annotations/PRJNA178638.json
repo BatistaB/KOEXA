@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA178638",
+  "related_identifiers": {
+    "bioproject": "PRJNA178638",
+    "sra_study": "SRP016952",
+    "geo_series": null,
+    "other": [
+      "SRX202391-SRX202398 (A. oryzae RNAseq experiments cited by the paper)",
+      "A. flavus runs of this BioProject are not in the atlas"
+    ]
+  },
+  "paper": {
+    "status": "found",
+    "title": "Assessing the genome-wide effect of promoter region tandem repeat natural variation on gene expression",
+    "authors": "Elmore MH, Gibbons JG, Rokas A.",
+    "year": 2012,
+    "journal": "G3: Genes, Genomes, Genetics",
+    "doi": "10.1534/g3.112.004663",
+    "pmid": "23275886",
+    "pmcid": "PMC3516485",
+    "url": "https://doi.org/10.1534/g3.112.004663",
+    "access": "full_text",
+    "association_evidence": "Data availability: 'SRX202391 - SRX202398 (A. oryzae RNAseq)'; these are the experiment accessions of this BioProject's A. oryzae runs, and the BioProject abstract is the paper's abstract.",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Test whether natural variation in promoter-region tandem repeats (microsatellites and minisatellites) changes the expression of the downstream genes in A. flavus and its domesticated form A. oryzae.",
+    "experimental_design": "Eight A. oryzae and eight A. flavus isolates were grown from spores on PDA covered with cellophane at 30 C for 24 h, one RNA-seq library each (HiSeq 2000); 143 promoter repeats were tested, and 7 of the 8 A. oryzae isolates are in the atlas.",
+    "main_finding": "Only 4.3% of the repeat-expression relationships tested were significant, fitting repeats acting as tuning, volume or optimality knobs rather than switches, and genes differing between the two species showed no repeat enrichment."
+  },
+  "tag_sets": {
+    "pda_cellophane_24h": [
+      {
+        "tag": "potato_dextrose_medium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "PDA covered with sterile porous cellophane"
+      },
+      {
+        "tag": "complex_medium",
+        "source": "inferred_from_methods",
+        "confidence": "medium",
+        "note": "potato infusion is an undefined component"
+      },
+      {
+        "tag": "surface_culture",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "24h",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high",
+        "note": "natural isolate"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA178638_RIB333_PDA_24h": {
+      "sets": [
+        "pda_cellophane_24h"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib333",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA178638_RIB642_PDA_24h": {
+      "sets": [
+        "pda_cellophane_24h"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib642",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA178638_RIB331_PDA_24h": {
+      "sets": [
+        "pda_cellophane_24h"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib331",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA178638_RIB302_PDA_24h": {
+      "sets": [
+        "pda_cellophane_24h"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib302",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA178638_RIB40_PDA_24h": {
+      "sets": [
+        "pda_cellophane_24h"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib40",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA178638_RIB632_PDA_24h": {
+      "sets": [
+        "pda_cellophane_24h"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib632",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA178638_RIB949_PDA_24h": {
+      "sets": [
+        "pda_cellophane_24h"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib949",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "One library per isolate, so strain and replicate are not separable; this is a strain-diversity dataset rather than a treatment comparison.",
+    "RIB537 (SRX202396, run SRR610546) belongs to the same experiment set but was excluded earlier because its BioSample has an empty species field; the paper lists RIB 537 as an A. oryzae isolate."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-19",
+    "needs_pdf": false
+  }
+}

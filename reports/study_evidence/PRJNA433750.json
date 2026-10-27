@@ -1,0 +1,200 @@
+{
+  "bioproject": "PRJNA433750",
+  "collected_at": "2026-10-12T18:57:50+00:00",
+  "accessions_searched": [
+    "PRJNA433750",
+    "SRP132645"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "29978373",
+      "pmcid": "PMC6105210",
+      "doi": "10.1007/s10295-018-2059-8",
+      "title": "Genomic and transcriptomic comparison of Aspergillus oryzae strains: a case study in soy sauce koji fermentation.",
+      "authors": "Zhong Y, Lu X, Xing L, Ho SWA, Kwan HS.",
+      "year": 2018,
+      "journal": "Journal of industrial microbiology & biotechnology",
+      "url": "https://doi.org/10.1007/s10295-018-2059-8",
+      "open_access": true,
+      "abstract": "The filamentous fungus Aspergillus oryzae is used in soy sauce koji making due to its high productivity of hydrolytic enzymes. In this study, we compared the genomes and transcriptomes of an industrial strain RD2 and a strain with decreased fermentation performance TS2, aiming to explain their phenotypic differences at the molecular level. Under the regulation of conidiation and fermentation conditions, the enhanced hydrolytic enzyme production and flavor precursor formation in RD2 described a complete expression profile necessary to maintain desirable fermentation performance. By contrast, central carbon metabolism was up-regulated in TS2 for fast growth, suggesting a conflicting relationship between mycelium growth and fermentation performance. Accumulation of mutations also lowered the fermentation performance of TS2. Our study has deepened the understanding of the metabolism and related regulatory mechanisms in desirable koji fermentation. A list of potential molecular markers identified here could facilitate targeted strain maintenance and improvement for better koji fermentation.",
+      "found_by": [
+        "europepmc_fulltext:SRP132645"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "SRP132645",
+          "text": " six genes were calculated (Fig. S1). Nucleotide sequence accession numbers DNA-Seq and RNA-Seq data generated in this study are available in the sequence read archive (SRA) of NCBI under accession numbers SRP132444 and SRP132645, respectively. Results and discussion Strain growth and enzyme activities RD2 and TS2 exhibited different phe",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJNA433750",
+    "bioproject": "PRJNA433750",
+    "study_accession": "SRP132645",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "RD2, TS2",
+    "study_description": "Comparative transcriptomics of Aspergillus oryzae industrial strain and its degenerative strain during koji fermentation",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "2 biosample(s), 6 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN08493997",
+      "sample_title": "",
+      "strain": "RD2",
+      "condition_clues": "strain=RD2; collection_date=2013-06-06; geo_loc_name=China:Guangdong,Jiangmen; env_biome=human fermentation; env_feature=soy sauce factory; env_material=soy sauce; estimated_size=37 Mb; isol_growth_condt=10.1093/dnares/dss019"
+    },
+    {
+      "biosample": "SAMN08493998",
+      "sample_title": "",
+      "strain": "TS2",
+      "condition_clues": "strain=TS2; collection_date=2013-06-06; geo_loc_name=China:Guangdong,Jiangmen; env_biome=human fermentation; env_feature=soy sauce factory; env_material=soy sauce; estimated_size=37 Mb; isol_growth_condt=10.1093/dnares/dss019"
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "SRR6705647",
+      "biosample": "SAMN08493998",
+      "condition_id": "PRJNA433750_TS2_MS_71h",
+      "strain": "TS2"
+    },
+    {
+      "sample_id": "SRR6705644",
+      "biosample": "SAMN08493997",
+      "condition_id": "PRJNA433750_RD2_ME_28h",
+      "strain": "RD2"
+    },
+    {
+      "sample_id": "SRR6705645",
+      "biosample": "SAMN08493998",
+      "condition_id": "PRJNA433750_TS2_ME_28h",
+      "strain": "TS2"
+    },
+    {
+      "sample_id": "SRR6705643",
+      "biosample": "SAMN08493997",
+      "condition_id": "PRJNA433750_RD2_ES_48h",
+      "strain": "RD2"
+    },
+    {
+      "sample_id": "SRR6705648",
+      "biosample": "SAMN08493998",
+      "condition_id": "PRJNA433750_TS2_ES_44h",
+      "strain": "TS2"
+    },
+    {
+      "sample_id": "SRR6705646",
+      "biosample": "SAMN08493997",
+      "condition_id": "PRJNA433750_RD2_MS_72h",
+      "strain": "RD2"
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJNA433750_RD2_ES_48h",
+      "condition_label": "RD2 | soy sauce koji | early sporulation | 30C | 48h",
+      "strain": "RD2",
+      "culture_mode": "solid-state (koji: steamed soybean + wheat flour)",
+      "substrate": "steamed soybean mixed with wheat flour",
+      "temperature_C": "30",
+      "time_value": "48",
+      "time_unit": "hour",
+      "developmental_stage": "early sporulation",
+      "recombinant_background": "wild_type (industrial soy-sauce koji strain RD2)",
+      "production_context": "industrial Chinese soy sauce koji fermentation (high-performing strain vs degenerated strain)",
+      "original_description": "RNA-Seq of Aspergillus oryzae RD2: early sporulation (A_oryzae_RD2_48h)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA433750 (SRA SRP132645, Chinese University of Hong Kong), article 'Genomic and transcriptomic comparison of Aspergillus oryzae strains: a case study in soy sauce koji fermentation' (J Ind Microbiol Biotechnol 2018, doi 10.1007/s10295-018-2059-8, PMC6105210; data statement lists SRP132645 for the RNA-Seq data): koji made from steamed soybeans mixed with wheat flour and inoculated with the strain's spore preparation, fermented at about 30 C for about 72 h at high humidity; stage I mycelium expansion ~28 h, stage II early sporulation ~48 h, stage III mature sporulation ~72 h; RNA from ground spores/mycelia, Illumina HiSeq 2000 (BGI). SRA library A_oryzae_RD2_48h ('early sporulation'); BioSample SAMN08493997 (strain RD2). Strain RD2 is a productive industrial soy-sauce strain; TS2 was isolated after repeated use of RD2 and has inferior fermentation performance. The paper says samples were collected in duplicate but one run per strain and stage is deposited here."
+    },
+    {
+      "condition_id": "PRJNA433750_RD2_ME_28h",
+      "condition_label": "RD2 | soy sauce koji | mycelium expansion | 30C | 28h",
+      "strain": "RD2",
+      "culture_mode": "solid-state (koji: steamed soybean + wheat flour)",
+      "substrate": "steamed soybean mixed with wheat flour",
+      "temperature_C": "30",
+      "time_value": "28",
+      "time_unit": "hour",
+      "developmental_stage": "mycelium expansion",
+      "recombinant_background": "wild_type (industrial soy-sauce koji strain RD2)",
+      "production_context": "industrial Chinese soy sauce koji fermentation (high-performing strain vs degenerated strain)",
+      "original_description": "RNA-Seq of Aspergillus oryzae RD2: mycelium expansion (A_oryzae_RD2_28h)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA433750 (SRA SRP132645, Chinese University of Hong Kong), article 'Genomic and transcriptomic comparison of Aspergillus oryzae strains: a case study in soy sauce koji fermentation' (J Ind Microbiol Biotechnol 2018, doi 10.1007/s10295-018-2059-8, PMC6105210; data statement lists SRP132645 for the RNA-Seq data): koji made from steamed soybeans mixed with wheat flour and inoculated with the strain's spore preparation, fermented at about 30 C for about 72 h at high humidity; stage I mycelium expansion ~28 h, stage II early sporulation ~48 h, stage III mature sporulation ~72 h; RNA from ground spores/mycelia, Illumina HiSeq 2000 (BGI). SRA library A_oryzae_RD2_28h ('mycelium expansion'); BioSample SAMN08493997 (strain RD2). Strain RD2 is a productive industrial soy-sauce strain; TS2 was isolated after repeated use of RD2 and has inferior fermentation performance. The paper says samples were collected in duplicate but one run per strain and stage is deposited here."
+    },
+    {
+      "condition_id": "PRJNA433750_RD2_MS_72h",
+      "condition_label": "RD2 | soy sauce koji | mature sporulation | 30C | 72h",
+      "strain": "RD2",
+      "culture_mode": "solid-state (koji: steamed soybean + wheat flour)",
+      "substrate": "steamed soybean mixed with wheat flour",
+      "temperature_C": "30",
+      "time_value": "72",
+      "time_unit": "hour",
+      "developmental_stage": "mature sporulation",
+      "recombinant_background": "wild_type (industrial soy-sauce koji strain RD2)",
+      "production_context": "industrial Chinese soy sauce koji fermentation (high-performing strain vs degenerated strain)",
+      "original_description": "RNA-Seq of Aspergillus oryzae RD2: mature sporulation (A_oryzae_RD2_72h)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA433750 (SRA SRP132645, Chinese University of Hong Kong), article 'Genomic and transcriptomic comparison of Aspergillus oryzae strains: a case study in soy sauce koji fermentation' (J Ind Microbiol Biotechnol 2018, doi 10.1007/s10295-018-2059-8, PMC6105210; data statement lists SRP132645 for the RNA-Seq data): koji made from steamed soybeans mixed with wheat flour and inoculated with the strain's spore preparation, fermented at about 30 C for about 72 h at high humidity; stage I mycelium expansion ~28 h, stage II early sporulation ~48 h, stage III mature sporulation ~72 h; RNA from ground spores/mycelia, Illumina HiSeq 2000 (BGI). SRA library A_oryzae_RD2_72h ('mature sporulation'); BioSample SAMN08493997 (strain RD2). Strain RD2 is a productive industrial soy-sauce strain; TS2 was isolated after repeated use of RD2 and has inferior fermentation performance. The paper says samples were collected in duplicate but one run per strain and stage is deposited here."
+    },
+    {
+      "condition_id": "PRJNA433750_TS2_ES_44h",
+      "condition_label": "TS2 | soy sauce koji | early sporulation | 30C | 44h",
+      "strain": "TS2",
+      "culture_mode": "solid-state (koji: steamed soybean + wheat flour)",
+      "substrate": "steamed soybean mixed with wheat flour",
+      "temperature_C": "30",
+      "time_value": "44",
+      "time_unit": "hour",
+      "developmental_stage": "early sporulation",
+      "recombinant_background": "wild_type (degenerated derivative of RD2 with inferior koji performance, strain TS2)",
+      "production_context": "industrial Chinese soy sauce koji fermentation (high-performing strain vs degenerated strain)",
+      "original_description": "RNA-Seq of Aspergillus oryzae TS2: early sporulation (A_oryzae_TS2_44h)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA433750 (SRA SRP132645, Chinese University of Hong Kong), article 'Genomic and transcriptomic comparison of Aspergillus oryzae strains: a case study in soy sauce koji fermentation' (J Ind Microbiol Biotechnol 2018, doi 10.1007/s10295-018-2059-8, PMC6105210; data statement lists SRP132645 for the RNA-Seq data): koji made from steamed soybeans mixed with wheat flour and inoculated with the strain's spore preparation, fermented at about 30 C for about 72 h at high humidity; stage I mycelium expansion ~28 h, stage II early sporulation ~48 h, stage III mature sporulation ~72 h; RNA from ground spores/mycelia, Illumina HiSeq 2000 (BGI). SRA library A_oryzae_TS2_44h ('early sporulation'); BioSample SAMN08493998 (strain TS2). Strain RD2 is a productive industrial soy-sauce strain; TS2 was isolated after repeated use of RD2 and has inferior fermentation performance. The paper says samples were collected in duplicate but one run per strain and stage is deposited here."
+    },
+    {
+      "condition_id": "PRJNA433750_TS2_ME_28h",
+      "condition_label": "TS2 | soy sauce koji | mycelium expansion | 30C | 28h",
+      "strain": "TS2",
+      "culture_mode": "solid-state (koji: steamed soybean + wheat flour)",
+      "substrate": "steamed soybean mixed with wheat flour",
+      "temperature_C": "30",
+      "time_value": "28",
+      "time_unit": "hour",
+      "developmental_stage": "mycelium expansion",
+      "recombinant_background": "wild_type (degenerated derivative of RD2 with inferior koji performance, strain TS2)",
+      "production_context": "industrial Chinese soy sauce koji fermentation (high-performing strain vs degenerated strain)",
+      "original_description": "RNA-Seq of Aspergillus oryzae TS2: mycelium expansion (A_oryzae_TS2_28h)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA433750 (SRA SRP132645, Chinese University of Hong Kong), article 'Genomic and transcriptomic comparison of Aspergillus oryzae strains: a case study in soy sauce koji fermentation' (J Ind Microbiol Biotechnol 2018, doi 10.1007/s10295-018-2059-8, PMC6105210; data statement lists SRP132645 for the RNA-Seq data): koji made from steamed soybeans mixed with wheat flour and inoculated with the strain's spore preparation, fermented at about 30 C for about 72 h at high humidity; stage I mycelium expansion ~28 h, stage II early sporulation ~48 h, stage III mature sporulation ~72 h; RNA from ground spores/mycelia, Illumina HiSeq 2000 (BGI). SRA library A_oryzae_TS2_28h ('mycelium expansion'); BioSample SAMN08493998 (strain TS2). Strain RD2 is a productive industrial soy-sauce strain; TS2 was isolated after repeated use of RD2 and has inferior fermentation performance. The paper says samples were collected in duplicate but one run per strain and stage is deposited here."
+    },
+    {
+      "condition_id": "PRJNA433750_TS2_MS_71h",
+      "condition_label": "TS2 | soy sauce koji | mature sporulation | 30C | 71h",
+      "strain": "TS2",
+      "culture_mode": "solid-state (koji: steamed soybean + wheat flour)",
+      "substrate": "steamed soybean mixed with wheat flour",
+      "temperature_C": "30",
+      "time_value": "71",
+      "time_unit": "hour",
+      "developmental_stage": "mature sporulation",
+      "recombinant_background": "wild_type (degenerated derivative of RD2 with inferior koji performance, strain TS2)",
+      "production_context": "industrial Chinese soy sauce koji fermentation (high-performing strain vs degenerated strain)",
+      "original_description": "RNA-Seq of Aspergillus oryzae TS2: mature sporulation (A_oryzae_TS2_71h)",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA433750 (SRA SRP132645, Chinese University of Hong Kong), article 'Genomic and transcriptomic comparison of Aspergillus oryzae strains: a case study in soy sauce koji fermentation' (J Ind Microbiol Biotechnol 2018, doi 10.1007/s10295-018-2059-8, PMC6105210; data statement lists SRP132645 for the RNA-Seq data): koji made from steamed soybeans mixed with wheat flour and inoculated with the strain's spore preparation, fermented at about 30 C for about 72 h at high humidity; stage I mycelium expansion ~28 h, stage II early sporulation ~48 h, stage III mature sporulation ~72 h; RNA from ground spores/mycelia, Illumina HiSeq 2000 (BGI). SRA library A_oryzae_TS2_71h ('mature sporulation'); BioSample SAMN08493998 (strain TS2). Strain RD2 is a productive industrial soy-sauce strain; TS2 was isolated after repeated use of RD2 and has inferior fermentation performance. The paper says samples were collected in duplicate but one run per strain and stage is deposited here."
+    }
+  ]
+}

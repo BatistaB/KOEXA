@@ -1,0 +1,182 @@
+{
+  "bioproject": "PRJNA484246",
+  "collected_at": "2026-10-12T18:57:57+00:00",
+  "accessions_searched": [
+    "PRJNA484246",
+    "SRP156238"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "30678639",
+      "pmcid": "PMC6346535",
+      "doi": "10.1186/s12864-019-5446-2",
+      "title": "Transcriptome analysis of genes and metabolic pathways associated with nicotine degradation in Aspergillus oryzae 112822.",
+      "authors": "He C, Huang Y, Liu P, Wei J, Yang Y, Xu L, Xiao M.",
+      "year": 2019,
+      "journal": "BMC genomics",
+      "url": "https://doi.org/10.1186/s12864-019-5446-2",
+      "open_access": true,
+      "abstract": "Background Nicotine-degrading microorganisms (NDMs) have recently received much attention since they can consume nicotine as carbon and nitrogen source for growth. In our previous work, we isolated an efficient nicotine-degrading fungus Aspergillus oryzae 112822 and first proposed a novel demethylation pathway of nicotine degradation in fungi. However, the underlying mechanisms of the demethylation pathway remain unresolved. In the present study, we performed a comparative transcriptome analysis to elucidate the molecular mechanisms of nicotine tolerance and degradation in A. oryzae 112822. Results We acquired a global view of the transcriptional regulation of A. oryzae 112822 exposed to nicotine and identified 4381 differentially expressed genes (DEGs) by nicotine treatment. Candidate genes encoding cytochrome P450 monooxygenases (CYPs), FAD-containing amine oxidase, molybdenum cofactor (Moco)-containing hydroxylase, and NADH-dependent and FAD-containing hydroxylase were proposed to participate in the demethylation pathway of nicotine degradation. Analysis of these data also revealed that increased energy was invested to drive nicotine detoxification. Nicotine treatment led to overproduction of reactive oxygen species (ROS), which formed intracellular oxidative stress that could induce the expression of several antioxidant enzymes, such as superoxide dismutase (SOD), catalase (CAT), and peroxiredoxin (Prx). Thioredoxin system was induced to restore the intracellular redox homeostasis. Several glutathione S-transferases (GSTs) were induced, most likely to participate in phase II detoxification of nicotine by catalyzing the conjugation of glutathione (GSH) to active metabolites. The toxin efflux pumps, such as the ATP-Binding Cassette (ABC) transporters and the major facilitator superfamily (MFS) transporters, were overexpressed to overcome the intracellular toxin accumulation. By contrast, the metabolic pathways related to cellular growth and reproduction, such as ribosome biogenesis and DNA replication, were inhibited by nicotine treatment. Conclusion These results revealed that complex regulation networks, involving detoxification, transport, and oxidative stress response accompanied by increased energy investment, were developed for nicotine tolerance and degradation in A. oryzae 112822. This work provided the first insight into the metabolic regulation of nicotine degradation and laid the foundation for further revealing the molecular mechanisms of the nicotine demethylation pathway in filamentous fungi.",
+      "found_by": [
+        "europepmc_fulltext:SRP156238"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "SRP156238",
+          "text": "na (31170054). Availability of data and materials The datasets supporting the conclusions of this article are available in the Sequence Read Archive (SRA) database at NCBI and can be retrieved under the accession number SRP156238 ( https://www.ncbi.nlm.nih.gov/sra/?term=SRP156238 ). Other data are included within the article and its addi",
+          "deposition_statement": true
+        },
+        {
+          "accession": "SRP156238",
+          "text": "he datasets supporting the conclusions of this article are available in the Sequence Read Archive (SRA) database at NCBI and can be retrieved under the accession number SRP156238 ( https://www.ncbi.nlm.nih.gov/sra/?term=SRP156238 ). Other data are included within the article and its additional files. Abbreviations 2, 3-DHP 2, 3-dihydroxy",
+          "deposition_statement": true
+        },
+        {
+          "accession": "SRP156238",
+          "text": "erisks. (TIF 1866 kb) Data Availability Statement The datasets supporting the conclusions of this article are available in the Sequence Read Archive (SRA) database at NCBI and can be retrieved under the accession number SRP156238 ( https://www.ncbi.nlm.nih.gov/sra/?term=SRP156238 ). Other data are included within the article and its addi",
+          "deposition_statement": true
+        },
+        {
+          "accession": "SRP156238",
+          "text": "he datasets supporting the conclusions of this article are available in the Sequence Read Archive (SRA) database at NCBI and can be retrieved under the accession number SRP156238 ( https://www.ncbi.nlm.nih.gov/sra/?term=SRP156238 ). Other data are included within the article and its additional files.",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJNA484246",
+    "bioproject": "PRJNA484246",
+    "study_accession": "SRP156238",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "Aspergillus oryzae 112822",
+    "study_description": "Transcriptome analysis of genes and metabolic pathways associated with nicotine degradation in Aspergillus oryzae 112822",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "6 biosample(s), 6 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN09762306",
+      "sample_title": "",
+      "strain": "Aspergillus oryzae 112822",
+      "condition_clues": "strain=Aspergillus oryzae 112822; isolate=mycelia cultured in nicotine-containing media; isolation_source=tabacco leaf; collection_date=2017-05; geo_loc_name=China:Jinan; culture_collection=CGMCC:3687; sample_type=RNA; replicate=replicate = biological replicate 3"
+    },
+    {
+      "biosample": "SAMN09762305",
+      "sample_title": "",
+      "strain": "Aspergillus oryzae 112822",
+      "condition_clues": "strain=Aspergillus oryzae 112822; isolate=mycelia cultured in nicotine-containing media; isolation_source=tabacco leaf; collection_date=2017-05; geo_loc_name=China:Jinan; culture_collection=CGMCC:3687; sample_type=RNA; replicate=replicate = biological replicate 2"
+    },
+    {
+      "biosample": "SAMN09762302",
+      "sample_title": "",
+      "strain": "Aspergillus oryzae 112822",
+      "condition_clues": "strain=Aspergillus oryzae 112822; isolate=mycelia cultured in dextrose-containing media; isolation_source=tabacco leaf; collection_date=2017-05; geo_loc_name=China:Jinan; culture_collection=CGMCC:3687; sample_type=RNA; replicate=replicate = biological replicate 2"
+    },
+    {
+      "biosample": "SAMN09762301",
+      "sample_title": "",
+      "strain": "Aspergillus oryzae 112822",
+      "condition_clues": "strain=Aspergillus oryzae 112822; isolate=mycelia cultured in dextrose-containing media; isolation_source=tabacco leaf; collection_date=2017-05; geo_loc_name=China:Jinan; culture_collection=CGMCC:3687; sample_type=RNA; replicate=replicate = biological replicate 1"
+    },
+    {
+      "biosample": "SAMN09762304",
+      "sample_title": "",
+      "strain": "Aspergillus oryzae 112822",
+      "condition_clues": "strain=Aspergillus oryzae 112822; isolate=mycelia cultured in nicotine-containing media; isolation_source=tabacco leaf; collection_date=2017-05; geo_loc_name=China:Jinan; culture_collection=CGMCC:3687; sample_type=RNA; replicate=replicate = biological replicate 1"
+    },
+    {
+      "biosample": "SAMN09762303",
+      "sample_title": "",
+      "strain": "Aspergillus oryzae 112822",
+      "condition_clues": "strain=Aspergillus oryzae 112822; isolate=mycelia cultured in dextrose-containing media; isolation_source=tabacco leaf; collection_date=2017-05; geo_loc_name=China:Jinan; culture_collection=CGMCC:3687; sample_type=RNA; replicate=replicate = biological replicate 3"
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "SRR7640479",
+      "biosample": "SAMN09762306",
+      "condition_id": "PRJNA484246_Nic_nicotine_16h",
+      "strain": "Aspergillus oryzae 112822"
+    },
+    {
+      "sample_id": "SRR7640483",
+      "biosample": "SAMN09762304",
+      "condition_id": "PRJNA484246_Nic_nicotine_16h",
+      "strain": "Aspergillus oryzae 112822"
+    },
+    {
+      "sample_id": "SRR7640484",
+      "biosample": "SAMN09762303",
+      "condition_id": "PRJNA484246_YD_control_16h",
+      "strain": "Aspergillus oryzae 112822"
+    },
+    {
+      "sample_id": "SRR7640480",
+      "biosample": "SAMN09762305",
+      "condition_id": "PRJNA484246_Nic_nicotine_16h",
+      "strain": "Aspergillus oryzae 112822"
+    },
+    {
+      "sample_id": "SRR7640481",
+      "biosample": "SAMN09762302",
+      "condition_id": "PRJNA484246_YD_control_16h",
+      "strain": "Aspergillus oryzae 112822"
+    },
+    {
+      "sample_id": "SRR7640482",
+      "biosample": "SAMN09762301",
+      "condition_id": "PRJNA484246_YD_control_16h",
+      "strain": "Aspergillus oryzae 112822"
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJNA484246_Nic_nicotine_16h",
+      "condition_label": "112822 | nicotine (2 g/L) medium | submerged | 28C | 16h after transfer",
+      "strain": "112822 (CGMCC 3687)",
+      "medium": "nicotine-containing medium (2 g/L yeast extract, 2 g/L nicotine, 1 mM Mn2+, pH 6.5; no dextrose)",
+      "culture_mode": "submerged",
+      "nitrogen_source": "yeast extract (2 g/L)",
+      "temperature_C": "28",
+      "pH": "6.5",
+      "time_value": "16",
+      "time_unit": "hour",
+      "stress": "nicotine exposure (xenobiotic / oxidative stress)",
+      "treatment": "nicotine (2 g/L) replacing dextrose",
+      "developmental_stage": "mycelium",
+      "recombinant_background": "wild_type (tobacco-leaf isolate A. oryzae 112822)",
+      "production_context": "nicotine tolerance and degradation (bioremediation of tobacco waste)",
+      "original_description": "Nic1, Nic2, Nic3",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJNA484246 (SRA SRP156238, Shandong University), article 'Transcriptome analysis of genes and metabolic pathways associated with nicotine degradation in Aspergillus oryzae 112822' (BMC Genomics 2019, doi 10.1186/s12864-019-5446-2, PMC6346535; data statement gives SRP156238): conidia pre-cultured 20 h at 28 C in an activated medium (10 g/L yeast extract, 20 g/L dextrose, 1 mM Mn2+, pH 6.5), mycelia filtered and transferred equivalently into nicotine-containing medium (2 g/L yeast extract, 2 g/L nicotine, 1 mM Mn2+, pH 6.5; no dextrose) and cultured at 28 C for another 16 h; total RNA from three biological replicates per group; Illumina HiSeq 4000 (BGI-Tech). Library Nic1, Nic2, Nic3 (BioSample SAMN09762304 / SAMN09762305 / SAMN09762306: strain A. oryzae 112822, CGMCC 3687, isolated from tobacco leaves; isolate field 'mycelia cultured in nicotine-containing media')."
+    },
+    {
+      "condition_id": "PRJNA484246_YD_control_16h",
+      "condition_label": "112822 | dextrose (10 g/L) medium | submerged | 28C | 16h after transfer",
+      "strain": "112822 (CGMCC 3687)",
+      "medium": "dextrose-containing medium (2 g/L yeast extract, 10 g/L dextrose, 1 mM Mn2+, pH 6.5)",
+      "culture_mode": "submerged",
+      "carbon_source": "dextrose (10 g/L)",
+      "nitrogen_source": "yeast extract (2 g/L)",
+      "temperature_C": "28",
+      "pH": "6.5",
+      "time_value": "16",
+      "time_unit": "hour",
+      "developmental_stage": "mycelium",
+      "recombinant_background": "wild_type (tobacco-leaf isolate A. oryzae 112822)",
+      "production_context": "nicotine tolerance and degradation (bioremediation of tobacco waste)",
+      "original_description": "YD1, YD2, YD3",
+      "metadata_confidence": "high",
+      "metadata_source": "BioProject PRJNA484246 (SRA SRP156238, Shandong University), article 'Transcriptome analysis of genes and metabolic pathways associated with nicotine degradation in Aspergillus oryzae 112822' (BMC Genomics 2019, doi 10.1186/s12864-019-5446-2, PMC6346535; data statement gives SRP156238): conidia pre-cultured 20 h at 28 C in an activated medium (10 g/L yeast extract, 20 g/L dextrose, 1 mM Mn2+, pH 6.5), mycelia filtered and transferred equivalently into dextrose-containing medium (2 g/L yeast extract, 10 g/L dextrose, 1 mM Mn2+, pH 6.5) and cultured at 28 C for another 16 h; total RNA from three biological replicates per group; Illumina HiSeq 4000 (BGI-Tech). Library YD1, YD2, YD3 (BioSample SAMN09762301 / SAMN09762302 / SAMN09762303: strain A. oryzae 112822, CGMCC 3687, isolated from tobacco leaves; isolate field 'mycelia cultured in dextrose-containing media')."
+    }
+  ]
+}

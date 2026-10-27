@@ -1,0 +1,66 @@
+{
+  "bioproject": "PRJDB9259",
+  "collected_at": "2026-10-14T12:19:09+00:00",
+  "accessions_searched": [
+    "PRJDB9259",
+    "DRP007393"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "32518660",
+      "pmcid": "PMC7275602",
+      "doi": "10.1186/s40694-020-00099-9",
+      "title": "Invasive growth of Aspergillus oryzae in rice koji and increase of nuclear number.",
+      "authors": "Yasui M, Oda K, Masuo S, Hosoda S, Katayama T, Maruyama JI, Takaya N, Takeshita N.",
+      "year": 2020,
+      "journal": "Fungal biology and biotechnology",
+      "url": "https://doi.org/10.1186/s40694-020-00099-9",
+      "open_access": true,
+      "abstract": "Background 'Rice koji' is a solid culture of Aspergillus oryzae on steamed rice grains. Multiple parallel fermentation, wherein saccharification of rice by A. oryzae and alcohol fermentation by the budding yeast occur simultaneously, leads to the formation of a variety of ingredients of Japanese sake. In sake brewing, the degree of mycelial invasive growth into the steamed rice, called 'haze-komi', highly correlates with the digestibility and quality of rice koji, since the hyphae growing into the rice secrete amylases and digest starch. Results In this study, we investigated mycelial distribution of GFP-tagged A. oryzae in rice koji made with different types of rice, such as sake rice and eating rice, with 50 or 90% polishing rate to remove abundant proteins and lipids near the surface. In addition, we compared transcriptomes of A. oryzae in the different types of rice koji. Finally, we found that A. oryzae increases the nuclear number and hyphal width in the course of 1-3 days cultivation. Conclusions Our imaging analyses indicate that A. oryzae hyphae grew more deeply into 50% polished rice than 90% polished rice. The increases of nuclear number may be a selectively acquired characteristic for the high secretory capacity during the long history of cultivation of this species.",
+      "found_by": [
+        "ncbi_elink_bioproject_pubmed"
+      ],
+      "accession_snippets": [],
+      "deposition_statement": false
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJDB9259",
+    "bioproject": "PRJDB9259",
+    "study_accession": "DRP007393",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae RIB40",
+    "strain": "",
+    "study_description": "Mycelial penetration in rice koji and nuclear increase of Aspergillus oryzae",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "3 biosample(s), 3 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMD00202700",
+      "sample_title": "Yamada-nishiki 90%",
+      "strain": "",
+      "condition_clues": "sample_name=Y90"
+    },
+    {
+      "biosample": "SAMD00202699",
+      "sample_title": "Yamada-nishiki 50%",
+      "strain": "",
+      "condition_clues": "sample_name=Y50"
+    },
+    {
+      "biosample": "SAMD00202698",
+      "sample_title": "Chiyo-nishiki 50%",
+      "strain": "",
+      "condition_clues": "sample_name=C50"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

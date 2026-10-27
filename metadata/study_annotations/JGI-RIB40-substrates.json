@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "bioproject": "JGI-RIB40-substrates",
+  "related_identifiers": {
+    "bioproject": "JGI-RIB40-substrates",
+    "sra_study": null,
+    "geo_series": null,
+    "other": [
+      "Study group of 26 single-run BioProjects (PRJNA1381821 to PRJNA1383149, see metadata/study_groups.tsv)",
+      "PRJNA1381823 (xylan 2 h, replicate 3) is registered but has no reads in ENA"
+    ]
+  },
+  "paper": {
+    "status": "not_found"
+  },
+  "study_summary": {
+    "objective": "Profile how wild-type RIB40 reprograms its transcription on plant polysaccharides and biomass, to understand how variations in the regulatory system of different fungi affect enzyme production (from the BioSample text).",
+    "experimental_design": "RIB40 grown in 1% D-xylose (2 h), D-xylan, D-xyloglucan, WB or SBH (2 h and 8 h each), 3 replicates per condition (2 for xylan at 2 h); one single-run BioProject per sample, from the DOE JGI; medium and pre-growth are not stated.",
+    "main_finding": "Not available: no accession-linked paper was found, so no result is reported here."
+  },
+  "tag_sets": {
+    "rib40_wild_type": [
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "BioSample: 'Aspergillus oryzae RIB40 (wild type)'"
+      },
+      {
+        "tag": "submerged",
+        "source": "inferred_from_design",
+        "confidence": "low",
+        "note": "wording 'cells grown in 1% ...' implies liquid culture; not stated"
+      }
+    ],
+    "xylose": [
+      {
+        "tag": "xylose",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "1% D-xylose"
+      }
+    ],
+    "xylan": [
+      {
+        "tag": "xylan",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "1% D-xylan"
+      }
+    ],
+    "xyloglucan": [
+      {
+        "tag": "xyloglucan",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "1% D-xyloglucan"
+      }
+    ],
+    "wheat_bran": [
+      {
+        "tag": "wheat",
+        "source": "sample_metadata",
+        "confidence": "medium",
+        "note": "'1% WB' read as wheat bran"
+      },
+      {
+        "tag": "lignocellulosic_biomass",
+        "source": "sample_metadata",
+        "confidence": "medium"
+      }
+    ],
+    "soybean_hulls": [
+      {
+        "tag": "soybean",
+        "source": "sample_metadata",
+        "confidence": "low",
+        "note": "'1% SBH' read as soybean hulls; abbreviation not spelled out in the record"
+      },
+      {
+        "tag": "lignocellulosic_biomass",
+        "source": "sample_metadata",
+        "confidence": "low"
+      }
+    ]
+  },
+  "conditions": {
+    "JGI-RIB40-substrates_SBH_2h": {
+      "sets": [
+        "rib40_wild_type",
+        "soybean_hulls"
+      ],
+      "tags": [
+        {
+          "tag": "2h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "cells grown in the substrate for 2 h"
+        }
+      ]
+    },
+    "JGI-RIB40-substrates_SBH_8h": {
+      "sets": [
+        "rib40_wild_type",
+        "soybean_hulls"
+      ],
+      "tags": [
+        {
+          "tag": "8h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "cells grown in the substrate for 8 h"
+        }
+      ]
+    },
+    "JGI-RIB40-substrates_WB_2h": {
+      "sets": [
+        "rib40_wild_type",
+        "wheat_bran"
+      ],
+      "tags": [
+        {
+          "tag": "2h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "cells grown in the substrate for 2 h"
+        }
+      ]
+    },
+    "JGI-RIB40-substrates_WB_8h": {
+      "sets": [
+        "rib40_wild_type",
+        "wheat_bran"
+      ],
+      "tags": [
+        {
+          "tag": "8h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "cells grown in the substrate for 8 h"
+        }
+      ]
+    },
+    "JGI-RIB40-substrates_xylan_2h": {
+      "sets": [
+        "rib40_wild_type",
+        "xylan"
+      ],
+      "tags": [
+        {
+          "tag": "2h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "cells grown in the substrate for 2 h"
+        }
+      ]
+    },
+    "JGI-RIB40-substrates_xylan_8h": {
+      "sets": [
+        "rib40_wild_type",
+        "xylan"
+      ],
+      "tags": [
+        {
+          "tag": "8h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "cells grown in the substrate for 8 h"
+        }
+      ]
+    },
+    "JGI-RIB40-substrates_xyloglucan_2h": {
+      "sets": [
+        "rib40_wild_type",
+        "xyloglucan"
+      ],
+      "tags": [
+        {
+          "tag": "2h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "cells grown in the substrate for 2 h"
+        }
+      ]
+    },
+    "JGI-RIB40-substrates_xyloglucan_8h": {
+      "sets": [
+        "rib40_wild_type",
+        "xyloglucan"
+      ],
+      "tags": [
+        {
+          "tag": "8h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "cells grown in the substrate for 8 h"
+        }
+      ]
+    },
+    "JGI-RIB40-substrates_xylose_2h": {
+      "sets": [
+        "rib40_wild_type",
+        "xylose"
+      ],
+      "tags": [
+        {
+          "tag": "2h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "cells grown in the substrate for 2 h"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The JGI deposited every sample as its own BioProject; the atlas groups the 26 as one study (docs/decisions/0009-study-groups.md) and keeps each run's original BioProject in samples.source_bioproject.",
+    "Planned design is 5 substrates x 2 times x 3 replicates = 30; D-xylose was not sampled at 8 h in the deposited data and xylan at 2 h lacks replicate 3, leaving 26 runs.",
+    "'WB' and 'SBH' are read as wheat bran and soybean hulls; the records give only the abbreviations.",
+    "Culture medium, temperature and pre-growth carbon source are marked missing in the BioSamples, so only substrate, time and strain are tagged."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from the BioSample records of the 26 member BioProjects",
+    "curated_at": "2026-10-27",
+    "needs_pdf": false
+  }
+}

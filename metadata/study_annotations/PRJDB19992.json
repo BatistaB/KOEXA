@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJDB19992",
+  "related_identifiers": {
+    "bioproject": "PRJDB19992",
+    "sra_study": "DRP012531",
+    "geo_series": null,
+    "other": [
+      "A. nidulans libraries of the same BioProject are not part of this atlas"
+    ]
+  },
+  "paper": {
+    "status": "found",
+    "title": "The increase in cell volume and nuclear number of the koji-fungus Aspergillus oryzae contributes to its high enzyme productivity",
+    "authors": "Itani A, Motomura H, Oda K, Yamashita H, Sakai K, Kusumoto KI, Shigeto S, Ichikawa T, Mubarak HM, Fukuma T, Katayama T, Maruyama JI, Masuo S, Takaya N, Takeshita N.",
+    "year": 2025,
+    "journal": "eLife",
+    "doi": "10.7554/eLife.107043",
+    "pmid": "40984741",
+    "pmcid": "PMC12456952",
+    "url": "https://doi.org/10.7554/eLife.107043",
+    "access": "full_text",
+    "association_evidence": "Methods, data availability: 'The RNA-seq data have been deposited in DDBJ as BioProject PRJDB19992.'",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Find out why koji-mold hyphae become thick with hundreds of nuclei and whether this increase in cell volume and nuclear number explains the high enzyme secretion of A. oryzae.",
+    "experimental_design": "Colonies of RIB40 and RIB915 grew 3 days at 30 C on minimal-medium agar over cellophane, with or without 1% yeast extract (one library each); thick (3 libraries) and thin (2) hyphae of RIB40 were cut out by laser microdissection.",
+    "main_finding": "Yeast extract made RIB915 form hyphae with more nuclei and raised the expression of 660 genes more than fourfold; thick RIB40 hyphae had 558 such genes and higher ribosome-related expression than thin ones."
+  },
+  "tag_sets": {
+    "cellophane_mm_3d": [
+      {
+        "tag": "surface_culture",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "minimal-medium agar overlaid with cellophane"
+      },
+      {
+        "tag": "defined_medium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "minimal medium (MM)"
+      },
+      {
+        "tag": "maltose",
+        "source": "inferred_from_methods",
+        "confidence": "medium",
+        "note": "maltose (1%) is the stated MM carbon source in the same paper; not restated for the RNA-seq cultures"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "72h",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "3 days"
+      },
+      {
+        "tag": "mycelium",
+        "source": "inferred_from_methods",
+        "confidence": "medium"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      }
+    ],
+    "yeast_extract_added": [
+      {
+        "tag": "complex_medium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "1% yeast extract added to MM"
+      },
+      {
+        "tag": "organic_nitrogen",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "yeast extract"
+      },
+      {
+        "tag": "treated",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "yeast-extract supplementation relative to plain MM"
+      }
+    ],
+    "plain_mm": [
+      {
+        "tag": "control",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "plain MM is the reference for the yeast-extract comparison"
+      }
+    ],
+    "microdissected_hyphae": [
+      {
+        "tag": "defined_medium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "MM liquid on membrane slides, static culture"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "72h",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "3 days"
+      },
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJDB19992_RIB40_MM_3d": {
+      "sets": [
+        "cellophane_mm_3d",
+        "plain_mm"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib40",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB19992_RIB40_MM_YE_3d": {
+      "sets": [
+        "cellophane_mm_3d",
+        "yeast_extract_added"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib40",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB19992_RIB915_MM_3d": {
+      "sets": [
+        "cellophane_mm_3d",
+        "plain_mm"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib915",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB19992_RIB915_MM_YE_3d": {
+      "sets": [
+        "cellophane_mm_3d",
+        "yeast_extract_added"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rib915",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJDB19992_RIB40_thick_hyphae": {
+      "sets": [
+        "microdissected_hyphae"
+      ],
+      "tags": [
+        {
+          "tag": "thick_hyphae",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hyphae with increased nuclei, cut out by laser microdissection"
+        }
+      ]
+    },
+    "PRJDB19992_RIB40_thin_hyphae": {
+      "sets": [
+        "microdissected_hyphae"
+      ],
+      "tags": [
+        {
+          "tag": "thin_hyphae",
+          "source": "paper_methods",
+          "confidence": "high",
+          "note": "hyphae without increased nuclei, cut out by laser microdissection"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "medium",
+          "note": "comparison group for the thick hyphae"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The six cellophane-culture libraries (RIB40, RIB915, A. nidulans, each with and without yeast extract) have no biological replicates; only the RIB40 and RIB915 ones are in the atlas.",
+    "Cellophane-culture libraries were sequenced as 36 bp paired-end reads on NextSeq 500, microdissected ones as 150 bp paired-end reads on NovaSeq 6000, so the two groups differ in platform and read length as well as in sample type.",
+    "The paper describes the RNA-seq medium only as 'minimal medium'; maltose is the carbon source it states for MM in its secretion assays."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-12",
+    "needs_pdf": false
+  }
+}

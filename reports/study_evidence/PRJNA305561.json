@@ -1,0 +1,48 @@
+{
+  "bioproject": "PRJNA305561",
+  "collected_at": "2026-10-14T12:19:01+00:00",
+  "accessions_searched": [
+    "PRJNA305561",
+    "SRP067204"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [],
+  "suggested_paper_status": "not_found",
+  "study": {
+    "dataset_id": "PRJNA305561",
+    "bioproject": "PRJNA305561",
+    "study_accession": "SRP067204",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "The A. oryzae strain HacA-CA, a hacA in constitutively active expression derived from the A. oryzae HacA-DE strain, The A. oryzae strain HacA-DE, a hacA disruption derived from the A. oryzae niaD300 strain, The A. oryzae strain niaD300, a niaD mutant derived from the A. oryzae RIB40 wild-type strain was obtained from the NITE Biological Resource Center (NBRC) in Japan",
+    "study_description": "Aspergillus oryzae Transcriptome or Gene expression",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "3 biosample(s), 3 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN04328800",
+      "sample_title": "The hacA in constitutively active expression strain",
+      "strain": "The A. oryzae strain HacA-CA, a hacA in constitutively active expression derived from the A. oryzae HacA-DE strain",
+      "condition_clues": "strain=The A. oryzae strain HacA-CA, a hacA in constitutively active expression derived from the A. oryzae HacA-DE strain; isolate=Aspergillus oryzae HacA-CA; isolation_source=not applicable; collection_date=2014-12-10; geo_loc_name=China: Guangzhou; host=missing; sample_type=fungal culture; biomaterial_provider=Prof. Li Pan-Room 315 Building B6, School of Bioscience and Bioengineering, South China University of Technology, Guangzhou Higher Education Mega Center, Panyu town, Guangzhou city, 510006, Guangdong province, P. R. China."
+    },
+    {
+      "biosample": "SAMN04328799",
+      "sample_title": "The hacA gene knockout strain",
+      "strain": "The A. oryzae strain HacA-DE, a hacA disruption derived from the A. oryzae niaD300 strain",
+      "condition_clues": "strain=The A. oryzae strain HacA-DE, a hacA disruption derived from the A. oryzae niaD300 strain; isolate=Aspergillus oryzae HacA-DE; isolation_source=not applicable; collection_date=2014-05-30; geo_loc_name=China: Guangzhou; host=missing; sample_type=fungal culture; biomaterial_provider=Prof. Li Pan-Room 315 Building B6, School of Bioscience and Bioengineering, South China University of Technology, Guangzhou Higher Education Mega Center, Panyu town, Guangzhou city, 510006, Guangdong province, P. R. China."
+    },
+    {
+      "biosample": "SAMN04328801",
+      "sample_title": "niaD300",
+      "strain": "The A. oryzae strain niaD300, a niaD mutant derived from the A. oryzae RIB40 wild-type strain was obtained from the NITE Biological Resource Center (NBRC) in Japan",
+      "condition_clues": "strain=The A. oryzae strain niaD300, a niaD mutant derived from the A. oryzae RIB40 wild-type strain was obtained from the NITE Biological Resource Center (NBRC) in Japan; isolate=Aspergillus oryzae niaD300; isolation_source=not applicable; collection_date=missing; geo_loc_name=China: Guangzhou; host=missing; sample_type=fungal culture; biomaterial_provider=Prof. Li Pan-Room 315 Building B6, School of Bioscience and Bioengineering, South China University of Technology, Guangzhou Higher Education Mega Center, Panyu town, Guangzhou city, 510006, Guangdong province, P. R. China."
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

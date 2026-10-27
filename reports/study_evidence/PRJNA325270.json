@@ -1,0 +1,151 @@
+{
+  "bioproject": "PRJNA325270",
+  "collected_at": "2026-10-14T12:19:13+00:00",
+  "accessions_searched": [
+    "PRJNA325270",
+    "SRP076408",
+    "GSE83207"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [],
+  "suggested_paper_status": "not_found",
+  "study": {
+    "dataset_id": "PRJNA325270",
+    "bioproject": "PRJNA325270",
+    "study_accession": "SRP076408",
+    "geo_accession": "GSE83207",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "",
+    "study_description": "RNA-Seq analysis of Aspergillus oryzae admA and admB gene deletion strains",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "20 biosample(s), 20 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN05224556",
+      "sample_title": "∆admB rep 5",
+      "strain": "",
+      "condition_clues": "source_name=admB deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admB[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224555",
+      "sample_title": "∆admB rep 4",
+      "strain": "",
+      "condition_clues": "source_name=admB deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admB[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224554",
+      "sample_title": "∆admB rep 3",
+      "strain": "",
+      "condition_clues": "source_name=admB deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admB[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224553",
+      "sample_title": "∆admB rep 2",
+      "strain": "",
+      "condition_clues": "source_name=admB deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admB[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224552",
+      "sample_title": "∆admB rep 1",
+      "strain": "",
+      "condition_clues": "source_name=admB deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admB[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224551",
+      "sample_title": "∆admA rep 5",
+      "strain": "",
+      "condition_clues": "source_name=admA deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admA[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224550",
+      "sample_title": "∆admA rep 4",
+      "strain": "",
+      "condition_clues": "source_name=admA deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admA[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224549",
+      "sample_title": "∆admA rep 3",
+      "strain": "",
+      "condition_clues": "source_name=admA deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admA[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224548",
+      "sample_title": "∆admA rep 2",
+      "strain": "",
+      "condition_clues": "source_name=admA deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admA[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224547",
+      "sample_title": "∆admA rep 1",
+      "strain": "",
+      "condition_clues": "source_name=admA deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admA[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224546",
+      "sample_title": "∆admA∆admB rep5",
+      "strain": "",
+      "condition_clues": "source_name=admA/admB deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admA del-admB[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224545",
+      "sample_title": "∆admA∆admB rep4",
+      "strain": "",
+      "condition_clues": "source_name=admA/admB deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admA del-admB[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224544",
+      "sample_title": "∆admA∆admB rep3",
+      "strain": "",
+      "condition_clues": "source_name=admA/admB deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admA del-admB[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224543",
+      "sample_title": "∆admA∆admB rep2",
+      "strain": "",
+      "condition_clues": "source_name=admA/admB deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admA del-admB[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224542",
+      "sample_title": "∆admA∆admB rep1",
+      "strain": "",
+      "condition_clues": "source_name=admA/admB deletion mutant cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG del-admA del-admB[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224541",
+      "sample_title": "Deletion-control rep 5",
+      "strain": "",
+      "condition_clues": "source_name=deletion control cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224540",
+      "sample_title": "Deletion-control rep 4",
+      "strain": "",
+      "condition_clues": "source_name=deletion control cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224539",
+      "sample_title": "Deletion-control rep 3",
+      "strain": "",
+      "condition_clues": "source_name=deletion control cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224538",
+      "sample_title": "Deletion-control rep 2",
+      "strain": "",
+      "condition_clues": "source_name=deletion control cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    },
+    {
+      "biosample": "SAMN05224537",
+      "sample_title": "Deletion-control rep 1",
+      "strain": "",
+      "condition_clues": "source_name=deletion control cultivated in wheat bran solid culture; strain/background=RIB40; genotype/variation=del-pyrG[pyrG+ ligD+]; growth media=wheat bran solid medium; incubation temperature=30ºC; incubation time=72 h"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

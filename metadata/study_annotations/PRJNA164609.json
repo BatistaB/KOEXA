@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA164609",
+  "related_identifiers": {
+    "bioproject": "PRJNA164609",
+    "sra_study": "SRP012984",
+    "geo_series": null,
+    "other": []
+  },
+  "paper": {
+    "status": "not_found"
+  },
+  "study_summary": {
+    "objective": "Compare gene expression of A. oryzae isolates with A. flavus grown on rice (from the BioProject text).",
+    "experimental_design": "RNA-seq of three A. oryzae isolates (RIB40, RIB632, RIB642) grown on rice, one library each; the rice preparation, temperature and time are not stated, and RIB642 was sequenced on a Genome Analyzer II rather than a HiSeq 2000.",
+    "main_finding": "Not available: no accession-linked paper was found, so no result is reported here."
+  },
+  "tag_sets": {},
+  "conditions": {
+    "PRJNA164609_RIB40_rice": {
+      "sets": [],
+      "tags": [
+        {
+          "tag": "strain_rib40",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "wild_type",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "natural isolate"
+        },
+        {
+          "tag": "rice",
+          "source": "bioproject_description",
+          "confidence": "medium",
+          "note": "grown on rice; preparation not stated"
+        }
+      ]
+    },
+    "PRJNA164609_RIB632_rice": {
+      "sets": [],
+      "tags": [
+        {
+          "tag": "strain_rib632",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "wild_type",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "natural isolate"
+        },
+        {
+          "tag": "rice",
+          "source": "bioproject_description",
+          "confidence": "medium",
+          "note": "grown on rice; preparation not stated"
+        }
+      ]
+    },
+    "PRJNA164609_RIB642_rice": {
+      "sets": [],
+      "tags": [
+        {
+          "tag": "strain_rib642",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "wild_type",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "natural isolate"
+        },
+        {
+          "tag": "rice",
+          "source": "bioproject_description",
+          "confidence": "medium",
+          "note": "grown on rice; preparation not stated"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The same three isolates were also sequenced on PDA in PRJNA178638, which allows a rice versus PDA comparison per isolate only if the two sequencing batches are treated as comparable."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-19",
+    "needs_pdf": false
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA484246",
+  "related_identifiers": {
+    "bioproject": "PRJNA484246",
+    "sra_study": "SRP156238",
+    "geo_series": null,
+    "other": []
+  },
+  "paper": {
+    "status": "found",
+    "title": "Transcriptome analysis of genes and metabolic pathways associated with nicotine degradation in Aspergillus oryzae 112822",
+    "authors": "He C, Huang Y, Liu P, Wei J, Yang Y, Xu L, Xiao M.",
+    "year": 2019,
+    "journal": "BMC Genomics",
+    "doi": "10.1186/s12864-019-5446-2",
+    "pmid": "30678639",
+    "pmcid": "PMC6346535",
+    "url": "https://doi.org/10.1186/s12864-019-5446-2",
+    "access": "full_text",
+    "association_evidence": "Availability of data: 'retrieved under the accession number SRP156238'; SRP156238 is the study accession (ENA secondary id) of PRJNA484246.",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Identify the genes and pathways that let the tobacco-leaf isolate A. oryzae 112822 tolerate and degrade nicotine.",
+    "experimental_design": "Mycelia were grown 20 h in rich medium, then moved to a dextrose medium (control, YD) or a nicotine medium (Nic) for 16 h at 28 C; three biological replicates each, sequenced on HiSeq 4000.",
+    "main_finding": "Nicotine changed 4,381 genes (2,291 up, 2,090 down), including cytochrome P450 and oxidase candidates for nicotine demethylation, antioxidant enzymes and glutathione S-transferases."
+  },
+  "tag_sets": {
+    "a112822_flask": [
+      {
+        "tag": "strain_112822",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "CGMCC 3687, isolated from tobacco leaves"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      },
+      {
+        "tag": "submerged",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia transferred into liquid media"
+      },
+      {
+        "tag": "complex_medium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "2 g/L yeast extract in both media"
+      },
+      {
+        "tag": "organic_nitrogen",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "yeast extract"
+      },
+      {
+        "tag": "28C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "16h",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "after transfer to the test medium"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "dextrose_control": [
+      {
+        "tag": "glucose",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "dextrose, 10 g/L"
+      },
+      {
+        "tag": "control",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "YD control group"
+      }
+    ],
+    "nicotine_exposure": [
+      {
+        "tag": "nicotine",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "2 g/L nicotine in place of dextrose"
+      },
+      {
+        "tag": "chemical_stress",
+        "source": "paper_abstract",
+        "confidence": "high"
+      },
+      {
+        "tag": "oxidative_stress",
+        "source": "paper_abstract",
+        "confidence": "high",
+        "note": "nicotine led to overproduction of reactive oxygen species"
+      },
+      {
+        "tag": "treated",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA484246_YD_control_16h": {
+      "sets": [
+        "a112822_flask",
+        "dextrose_control"
+      ],
+      "tags": []
+    },
+    "PRJNA484246_Nic_nicotine_16h": {
+      "sets": [
+        "a112822_flask",
+        "nicotine_exposure"
+      ],
+      "tags": []
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The nicotine medium contains no dextrose, so the carbon source changes together with the nicotine exposure.",
+    "Resting cells from the nicotine medium degraded 83% of added nicotine in 48 h, while cells from the dextrose medium did not (paper, Fig. 1)."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-12",
+    "needs_pdf": false
+  }
+}

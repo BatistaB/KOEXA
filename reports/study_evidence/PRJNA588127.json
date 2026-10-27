@@ -1,0 +1,201 @@
+{
+  "bioproject": "PRJNA588127",
+  "collected_at": "2026-10-19T15:18:15+00:00",
+  "accessions_searched": [
+    "PRJNA588127",
+    "SRP228859"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "34488759",
+      "pmcid": "PMC8419926",
+      "doi": "10.1186/s12915-021-01114-0",
+      "title": "Profiling of chromatin accessibility identifies transcription factor binding sites across the genome of Aspergillus species.",
+      "authors": "Huang L, Li X, Dong L, Wang B, Pan L.",
+      "year": 2021,
+      "journal": "BMC biology",
+      "url": "https://doi.org/10.1186/s12915-021-01114-0",
+      "open_access": true,
+      "abstract": "Background The identification of open chromatin regions and transcription factor binding sites (TFBs) is an important step in understanding the regulation of gene expression in diverse species. ATAC-seq is a technique used for such purpose by providing high-resolution measurements of chromatin accessibility revealed through integration of Tn5 transposase. However, the existence of cell walls in filamentous fungi and associated difficulty in purifying nuclei have precluded the routine application of this technique, leading to a lack of experimentally determined and computationally inferred data on the identity of genome-wide cis-regulatory elements (CREs) and TFBs. In this study, we constructed an ATAC-seq platform suitable for filamentous fungi and generated ATAC-seq libraries of Aspergillus niger and Aspergillus oryzae grown under a variety of conditions. Results We applied the ATAC-seq assay for filamentous fungi to delineate the syntenic orthologue and differentially changed chromatin accessibility regions among different Aspergillus species, during different culture conditions, and among specific TF-deleted strains. The syntenic orthologues of accessible regions were responsible for the conservative functions across Aspergillus species, while regions differentially changed between culture conditions and TFs mutants drove differential gene expression programs. Importantly, we suggest criteria to determine TFBs through the analysis of unbalanced cleavage of distinct TF-bound DNA strands by Tn5 transposase. Based on this criterion, we constructed data libraries of the in vivo genomic footprint of A. niger under distinct conditions, and generated a database of novel transcription factor binding motifs through comparison of footprints in TF-deleted strains. Furthermore, we validated the novel TFBs in vivo through an artificial synthetic minimal promoter system. Conclusions We characterized the chromatin accessibility regions of filamentous fungi species, and identified a complete TFBs map by ATAC-seq, which provides valuable data for future analyses of transcriptional regulation in filamentous fungi.",
+      "found_by": [
+        "europepmc_fulltext:PRJNA588127"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJNA588127",
+          "text": "e goxC; the primers used are listed in Additional file 12 : Table S11. The resulting libraries were sequenced at the Beijing Genomics Institute (BGI) with 50 bp single-end reads on the BGISEQ-500 (NCBI accession number, PRJNA588127). The RNA quality was assessed with an Agilent Bioanalyzer 2100 system to confirm that all samples had an RNA",
+          "deposition_statement": true
+        },
+        {
+          "accession": "PRJNA588127",
+          "text": "posited in the NCBI SRA database under the accession number PRJNA566304, PRJNA587805, PRJNA692847, and PRJNA692789. The raw RNA-seq sequencing data have been deposited in the NCBI SRA database under the accession number PRJNA588127. The Supporting data are included in the additional files 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 and 13",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    },
+    {
+      "pmid": "35887436",
+      "pmcid": "PMC9319794",
+      "doi": "10.3390/jof8070679",
+      "title": "A Special Phenotype of Aconidial Aspergillus niger SH2 and Its Mechanism of Formation via CRISPRi.",
+      "authors": "Yu LY, Li LX, Yao LL, Zheng JW, Wang B, Pan L.",
+      "year": 2022,
+      "journal": "Journal of fungi (Basel, Switzerland)",
+      "url": "https://doi.org/10.3390/jof8070679",
+      "open_access": true,
+      "abstract": "The complex morphological structure of Aspergillus niger influences its production of proteins, metabolites, etc., making the genetic manipulation and clonal purification of this species increasingly difficult, especially in aconidial Aspergillus niger. In this study, we found that N-acetyl-D-glucosamine (GlcNAc) could induce the formation of spore-like propagules in the aconidial Aspergillus niger SH2 strain. The spore-like propagules possessed life activities such as drug resistance, genetic transformation, and germination. Transcriptomic analysis indicated that the spore-like propagules were resting conidia entering dormancy and becoming more tolerant to environmental stresses. The Dac1 gene and the metabolic pathway of GlcNAc converted to glycolysis are related to the formation of the spore-like propagules, as evidenced by the CRISPRi system, qPCR, and semi-quantitative RT-PCR. Moreover, a method based on the CRISPR-Cas9 tool to rapidly recycle screening tags and recover genes was suitable for Aspergillus niger SH2. To sum up, this suggests that the spore-like propagules are resting conidia and the mechanism of their formation is the metabolic pathway of GlcNAc converted to glycolysis, particularly the Dac1 gene. This study can improve our understanding of the critical factors involved in mechanisms of phenotypic change and provides a good model for researching phenotypic change in filamentous fungi.",
+      "found_by": [
+        "europepmc_fulltext:PRJNA588127"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJNA588127",
+          "text": "n RNA integrity value. All samples were prepared in duplicate. Transcriptome library sequencing was performed by the Beijing Genomics Institute (BGI) with 50 bp single-end reads on the BGISEQ-500 (NCBI accession number, PRJNA588127). After the initial quality control, clean reads were mapped to the genome and cDNA using HISAT [ 38 ] and Bo",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJNA588127",
+    "bioproject": "PRJNA588127",
+    "study_accession": "SRP228859",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "",
+    "study_description": "Aspergillus RNA-seq Raw sequence reads",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "6 biosample(s), 6 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN13228265",
+      "sample_title": "",
+      "strain": "Aspergillus_oryzae_OElaeA2",
+      "condition_clues": "isolate=Aspergillus_oryzae_OElaeA2; collection_date=2013-01-01; geo_loc_name=China; host=Aspergillus_oryzae; sample_type=whole organism; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN13228264",
+      "sample_title": "",
+      "strain": "Aspergillus_oryzae_OElaeA1",
+      "condition_clues": "isolate=Aspergillus_oryzae_OElaeA1; collection_date=2013-01-01; geo_loc_name=China; host=Aspergillus_oryzae; sample_type=whole organism; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN13228263",
+      "sample_title": "",
+      "strain": "Aspergillus_oryzae_WT2",
+      "condition_clues": "isolate=Aspergillus_oryzae_WT2; collection_date=2013-01-01; geo_loc_name=China; host=Aspergillus_oryzae; sample_type=whole organism; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN13228262",
+      "sample_title": "",
+      "strain": "Aspergillus_oryzae_WT1",
+      "condition_clues": "isolate=Aspergillus_oryzae_WT1; collection_date=2013-01-01; geo_loc_name=China; host=Aspergillus_oryzae; sample_type=whole organism; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN13228261",
+      "sample_title": "",
+      "strain": "Aspergillus_oryzae_dellaeA2",
+      "condition_clues": "isolate=Aspergillus_oryzae_dellaeA2; collection_date=2013-01-01; geo_loc_name=China; host=Aspergillus_oryzae; sample_type=whole organism; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN13228260",
+      "sample_title": "",
+      "strain": "Aspergillus_oryzae_dellaeA1",
+      "condition_clues": "isolate=Aspergillus_oryzae_dellaeA1; collection_date=2013-01-01; geo_loc_name=China; host=Aspergillus_oryzae; sample_type=whole organism; BioSampleModel=Microbe, viral or environmental"
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "SRR10411464",
+      "biosample": "SAMN13228265",
+      "condition_id": "PRJNA588127_OElaeA",
+      "strain": "Aspergillus_oryzae_OElaeA2"
+    },
+    {
+      "sample_id": "SRR10411469",
+      "biosample": "SAMN13228262",
+      "condition_id": "PRJNA588127_niaD300_WT",
+      "strain": "Aspergillus_oryzae_WT1"
+    },
+    {
+      "sample_id": "SRR10411466",
+      "biosample": "SAMN13228263",
+      "condition_id": "PRJNA588127_niaD300_WT",
+      "strain": "Aspergillus_oryzae_WT2"
+    },
+    {
+      "sample_id": "SRR10411481",
+      "biosample": "SAMN13228260",
+      "condition_id": "PRJNA588127_dellaeA",
+      "strain": "Aspergillus_oryzae_dellaeA1"
+    },
+    {
+      "sample_id": "SRR10411465",
+      "biosample": "SAMN13228264",
+      "condition_id": "PRJNA588127_OElaeA",
+      "strain": "Aspergillus_oryzae_OElaeA1"
+    },
+    {
+      "sample_id": "SRR10411480",
+      "biosample": "SAMN13228261",
+      "condition_id": "PRJNA588127_dellaeA",
+      "strain": "Aspergillus_oryzae_dellaeA2"
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJNA588127_OElaeA",
+      "condition_label": "niaD300 | laeA overexpression | DPY medium, mid-log",
+      "strain": "niaD300",
+      "medium": "DPY medium (2% glucose, 1% peptone, 0.5% yeast extract; assumed, see source)",
+      "culture_mode": "submerged",
+      "carbon_source": "glucose (2%)",
+      "nitrogen_source": "peptone and yeast extract",
+      "developmental_stage": "mid-log mycelium",
+      "recombinant_background": "overexpression of laeA in niaD300",
+      "production_context": "laeA / secondary metabolism and chromatin accessibility (ATAC-seq + RNA-seq)",
+      "original_description": "OElaeA1, OElaeA2",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA588127 (SRA 'Aspergillus RNA-seq Raw sequence reads', RNA-seq half of an ATAC-seq/RNA-seq study from the Li Pan lab), article 'Profiling of chromatin accessibility identifies transcription factor binding sites across the genome of Aspergillus species' (BMC Biol 2021, doi 10.1186/s12915-021-01114-0, PMC8419926; methods: 'sequenced at BGI with 50 bp single-end reads on the BGISEQ-500 (NCBI accession number, PRJNA588127)'): A. oryzae niaD300 (wild type and laeA deletion and overexpression mutants) 'grown to mid-log phase in DPY medium or conditional induction medium' (DPY: 2% glucose, 1% peptone, 0.5% yeast extract, 0.5% KH2PO4, 0.05% MgSO4); RNA from the mycelium left over from ATAC-seq library preparation. Library OElaeA1, OElaeA2. Culture temperature and time are not stated, and the text does not say which of the two media the A. oryzae cultures used (DPY is assumed). A. niger runs of the same BioProject are not in the atlas."
+    },
+    {
+      "condition_id": "PRJNA588127_dellaeA",
+      "condition_label": "niaD300 | laeA deletion | DPY medium, mid-log",
+      "strain": "niaD300",
+      "medium": "DPY medium (2% glucose, 1% peptone, 0.5% yeast extract; assumed, see source)",
+      "culture_mode": "submerged",
+      "carbon_source": "glucose (2%)",
+      "nitrogen_source": "peptone and yeast extract",
+      "developmental_stage": "mid-log mycelium",
+      "recombinant_background": "deletion of laeA (global regulator of secondary metabolism) in niaD300",
+      "production_context": "laeA / secondary metabolism and chromatin accessibility (ATAC-seq + RNA-seq)",
+      "original_description": "dellaeA1, dellaeA2",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA588127 (SRA 'Aspergillus RNA-seq Raw sequence reads', RNA-seq half of an ATAC-seq/RNA-seq study from the Li Pan lab), article 'Profiling of chromatin accessibility identifies transcription factor binding sites across the genome of Aspergillus species' (BMC Biol 2021, doi 10.1186/s12915-021-01114-0, PMC8419926; methods: 'sequenced at BGI with 50 bp single-end reads on the BGISEQ-500 (NCBI accession number, PRJNA588127)'): A. oryzae niaD300 (wild type and laeA deletion and overexpression mutants) 'grown to mid-log phase in DPY medium or conditional induction medium' (DPY: 2% glucose, 1% peptone, 0.5% yeast extract, 0.5% KH2PO4, 0.05% MgSO4); RNA from the mycelium left over from ATAC-seq library preparation. Library dellaeA1, dellaeA2. Culture temperature and time are not stated, and the text does not say which of the two media the A. oryzae cultures used (DPY is assumed). A. niger runs of the same BioProject are not in the atlas."
+    },
+    {
+      "condition_id": "PRJNA588127_niaD300_WT",
+      "condition_label": "niaD300 | niaD300 wild type | DPY medium, mid-log",
+      "strain": "niaD300",
+      "medium": "DPY medium (2% glucose, 1% peptone, 0.5% yeast extract; assumed, see source)",
+      "culture_mode": "submerged",
+      "carbon_source": "glucose (2%)",
+      "nitrogen_source": "peptone and yeast extract",
+      "developmental_stage": "mid-log mycelium",
+      "recombinant_background": "wild_type (niaD300: niaD mutant derived from RIB40; parent of the laeA mutants)",
+      "production_context": "laeA / secondary metabolism and chromatin accessibility (ATAC-seq + RNA-seq)",
+      "original_description": "niaDWT1, niaDWT2",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJNA588127 (SRA 'Aspergillus RNA-seq Raw sequence reads', RNA-seq half of an ATAC-seq/RNA-seq study from the Li Pan lab), article 'Profiling of chromatin accessibility identifies transcription factor binding sites across the genome of Aspergillus species' (BMC Biol 2021, doi 10.1186/s12915-021-01114-0, PMC8419926; methods: 'sequenced at BGI with 50 bp single-end reads on the BGISEQ-500 (NCBI accession number, PRJNA588127)'): A. oryzae niaD300 (wild type and laeA deletion and overexpression mutants) 'grown to mid-log phase in DPY medium or conditional induction medium' (DPY: 2% glucose, 1% peptone, 0.5% yeast extract, 0.5% KH2PO4, 0.05% MgSO4); RNA from the mycelium left over from ATAC-seq library preparation. Library niaDWT1, niaDWT2. Culture temperature and time are not stated, and the text does not say which of the two media the A. oryzae cultures used (DPY is assumed). A. niger runs of the same BioProject are not in the atlas."
+    }
+  ]
+}

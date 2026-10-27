@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJDB9259",
+  "related_identifiers": {
+    "bioproject": "PRJDB9259",
+    "sra_study": "DRP007393",
+    "geo_series": null,
+    "other": [
+      "DRA009542 (DRA submission cited by the paper)"
+    ]
+  },
+  "paper": {
+    "status": "found",
+    "title": "Invasive growth of Aspergillus oryzae in rice koji and increase of nuclear number",
+    "authors": "Yasui M, Oda K, Masuo S, Hosoda S, Katayama T, Maruyama JI, Takaya N, Takeshita N.",
+    "year": 2020,
+    "journal": "Fungal Biology and Biotechnology",
+    "doi": "10.1186/s40694-020-00099-9",
+    "pmid": "32518660",
+    "pmcid": "PMC7275602",
+    "url": "https://doi.org/10.1186/s40694-020-00099-9",
+    "access": "full_text",
+    "association_evidence": "Methods: 'The dataset of RNA-seq was deposited at DDBJ Sequence Read Archive (DRA) under the accession DRA009542'; ENA lists DRA009542 as the submission of PRJDB9259.",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Show how A. oryzae grows into steamed rice grains in koji, how its nuclear number rises during this invasive growth, and how rice variety and polishing ratio change its gene expression.",
+    "experimental_design": "RIB40 grew on steamed Yamada-nishiki (sake rice) polished to 50% or 90% and on Chiyo-nishiki (eating rice), 33 h at 30 C then a stepwise rise to 42 C, 48 h in total; one NovaSeq RNA-seq library per rice sample.",
+    "main_finding": "Hyphae penetrated deeper into 50% polished rice than 90%, and hyphal tip cells reached more than 200 nuclei; amylase and glucoamylase genes were more highly expressed on 50% polished rice (about 5.2- and 1.7-fold)."
+  },
+  "tag_sets": {
+    "rice_koji": [
+      {
+        "tag": "solid_state",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "steamed rice in lab dishes"
+      },
+      {
+        "tag": "koji",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "sake",
+        "source": "paper_abstract",
+        "confidence": "high",
+        "note": "sake rice and sake koji context"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "first 33 h; then stepwise rise to 42 C"
+      },
+      {
+        "tag": "48h",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "inferred_from_methods",
+        "confidence": "medium",
+        "note": "invading mycelium in koji"
+      },
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJDB9259_Yamada_nishiki_50": {
+      "sets": [
+        "rice_koji"
+      ],
+      "tags": [
+        {
+          "tag": "rice",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "Yamada-nishiki sake rice, polishing ratio 50%"
+        }
+      ]
+    },
+    "PRJDB9259_Yamada_nishiki_90": {
+      "sets": [
+        "rice_koji"
+      ],
+      "tags": [
+        {
+          "tag": "rice",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "Yamada-nishiki sake rice, polishing ratio 90%"
+        }
+      ]
+    },
+    "PRJDB9259_Chiyo_nishiki": {
+      "sets": [
+        "rice_koji"
+      ],
+      "tags": [
+        {
+          "tag": "rice",
+          "source": "sample_metadata",
+          "confidence": "medium",
+          "note": "Chiyo-nishiki eating rice; polishing ratio 50% per BioSample, 90% per the paper text"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The paper names its three groups Y50, Y90 and C90, but the Chiyo-nishiki BioSample is titled 'Chiyo-nishiki 50%' (sample name C50); its polishing ratio is therefore unresolved.",
+    "The temperature was raised from 30 C to 42 C during the 48 h culture, so time and temperature are confounded within each sample.",
+    "One library per rice sample, no biological replicates."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-14",
+    "needs_pdf": false
+  }
+}

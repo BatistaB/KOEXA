@@ -53,3 +53,24 @@ sporulation	biological_material	Culture sampled during conidiation/sporulation.	
 ammonium	nitrogen_source	Ammonium (e.g. (NH4)2SO4) is the nitrogen source.	ammonium_sulfate;ammonia
 acetate	carbon_source	Acetate/acetic acid is a supplied carbon source.	acetic_acid;sodium_acetate
 pyrolytic_aqueous_condensate	substrate	Aqueous condensate from fast pyrolysis of lignocellulosic biomass (e.g. wheat straw) used as a carbon-source feedstock; rich in acetate and contains inhibitors.	pac;pyrolysis_condensate;pyrolysis_liquor
+nicotine	compound	Nicotine (tobacco alkaloid) is present as the treatment/exposure compound.	nicotine_exposure
+oxidative_stress	stress	Intracellular oxidative stress (reactive oxygen species) induced by the treatment or reported as a response to it.	ros_stress;oxidative
+degenerated_strain	genotype	Strain that lost industrial performance (e.g. enzyme or fermentation capacity) after repeated sub-culturing or use; compared with its productive parent.	strain_degeneration;degenerative_strain
+thick_hyphae	biological_material	Hyphae with increased nuclear number and cell volume (wider than typical hyphae), sampled separately, e.g. by laser microdissection.	thick_hypha;multinucleate_hyphae
+thin_hyphae	biological_material	Hyphae without the increase in nuclear number/cell volume, sampled separately from thick hyphae of the same culture.	thin_hypha
+rice	substrate	Steamed polished rice grains as growth substrate (rice koji); put the variety and polishing ratio in the tag note.	steamed_rice;rice_koji_substrate
+sake	industrial_context	Context of sake brewing (sake koji, polished sake rice).	sake_koji
+blue_light	light	Grown under blue light (wavelength and intensity in the tag note).	blue
+green_light	light	Grown under green light (wavelength and intensity in the tag note).	green
+red_light	light	Grown under red light (wavelength and intensity in the tag note).	red
+darkness	light	Grown in darkness; the control of light-exposure studies.	dark;dark_control
+constitutively_active_allele	genotype	Expresses a constitutively active form of a regulator (e.g. an intron-spliced or truncated version) in place of the native allele.	constitutive_active;ca_allele
+hmf	compound	5-Hydroxymethylfurfural (HMF) added (furan aldehyde, lignocellulosic-hydrolysate inhibitor).	hydroxymethylfurfural;5_hmf
+vanillin	compound	Vanillin added (phenolic aldehyde, lignocellulosic-hydrolysate inhibitor).	
+dpy_medium	medium	DPY medium: peptone-yeast extract with glucose or dextrin (YPD-like rich medium); put the exact recipe in the tag note.	ypd_like_medium
+ferulic_acid	compound	Ferulic acid added (phenolic acid, lignocellulosic-hydrolysate inhibitor).	
+levulinic_acid	compound	Levulinic acid added (organic acid, lignocellulosic-hydrolysate inhibitor).	
+xylose	carbon_source	D-xylose (pentose sugar) is the supplied carbon source.	d_xylose
+xylan	carbon_source	Xylan (hemicellulose polymer) is the supplied carbon source.	d_xylan
+xyloglucan	carbon_source	Xyloglucan (hemicellulose polymer) is the supplied carbon source.	d_xyloglucan
+lignocellulosic_biomass	substrate	Plant biomass (e.g. wheat bran, soybean hulls, straw) as carbon source or growth substrate.	plant_biomass;lignocellulose

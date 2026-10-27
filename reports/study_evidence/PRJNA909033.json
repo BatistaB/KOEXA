@@ -1,0 +1,126 @@
+{
+  "bioproject": "PRJNA909033",
+  "collected_at": "2026-10-14T12:19:21+00:00",
+  "accessions_searched": [
+    "PRJNA909033",
+    "SRP411815"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "40699772",
+      "pmcid": "PMC12110235",
+      "doi": "10.3390/cimb47050373",
+      "title": "Light-Regulated Gene Expression Patterns During Conidial Formation in Aspergillus oryzae.",
+      "authors": "Lin S, Yang J, Wang A, Fu Q, Huang S, Liu M.",
+      "year": 2025,
+      "journal": "Current issues in molecular biology",
+      "url": "https://doi.org/10.3390/cimb47050373",
+      "open_access": true,
+      "abstract": "With the effect of light on the conidial formation of Aspergillus oryzae now being known, the molecular mechanism of its light response has become a research hotspot. However, the light-regulated genes investigated in earlier studies do not clearly explain the light response patterns of related genes at the transcriptional level. This study employed RNA sequencing technology to preliminarily identify the light-regulated genes among the genes related to conidia production and photoreception in A. oryzae GDMCC 3.31. Subsequently, the effects of light dose on the light-regulated genes were analyzed by qRT-PCR. We identified a total of six genes (tcsA, catA, gld1, Aowc-1, abaA, and AofphA) as light-regulated genes. The expression pattern of abaA was dependent on the light spectrum and light dose. When the light dose was maintained at a high level, the abaA gene served as a red-green light-regulated gene. Otherwise, the abaA gene showed no response to light. The phytochrome-like gene AofphA was regulated by red and blue light with a biphasic response under varying light doses, suggesting the existence of a light dose threshold. These findings provide new targets for the photoresponse molecular mechanisms in A. oryzae.",
+      "found_by": [
+        "europepmc_fulltext:PRJNA909033"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJNA909033",
+          "text": "supervision, Q.F.; funding acquisition, S.L. and M.L. All authors have read and agreed to the published version of the manuscript. Data Availability Statement Raw data were uploaded to the SRA library (accession number: PRJNA909033, Table S5 ). Conflicts of Interest The authors declare no conflicts of interest. References 1. Zhao S. Hao C.",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJNA909033",
+    "bioproject": "PRJNA909033",
+    "study_accession": "SRP411815",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "3.042",
+    "study_description": "Comparative Transcriptomes Analysis of Aspergillus oryzae GDMCC 3.31 under three kinds of light",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "12 biosample(s), 12 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN32064720",
+      "sample_title": "mycelium C1",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    },
+    {
+      "biosample": "SAMN32064719",
+      "sample_title": "mycelium B3",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    },
+    {
+      "biosample": "SAMN32064718",
+      "sample_title": "mycelium B2",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    },
+    {
+      "biosample": "SAMN32064717",
+      "sample_title": "mycelium B1",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    },
+    {
+      "biosample": "SAMN32064716",
+      "sample_title": "mycelium G3",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    },
+    {
+      "biosample": "SAMN32064715",
+      "sample_title": "mycelium G2",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    },
+    {
+      "biosample": "SAMN32064714",
+      "sample_title": "mycelium G1",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    },
+    {
+      "biosample": "SAMN32064713",
+      "sample_title": "mycelium R3",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    },
+    {
+      "biosample": "SAMN32064722",
+      "sample_title": "mycelium C3",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    },
+    {
+      "biosample": "SAMN32064721",
+      "sample_title": "mycelium C2",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    },
+    {
+      "biosample": "SAMN32064712",
+      "sample_title": "mycelium R2",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    },
+    {
+      "biosample": "SAMN32064711",
+      "sample_title": "mycelium R1",
+      "strain": "3.042",
+      "condition_clues": "strain=3.042; isolate=brought from China Guangdong Microbial Culture Collection Center (Guangdong, China); isolation_source=not applicable; collection_date=missing; geo_loc_name=China:Guangzhou; culture_collection=GDMCC:3.31; host=not collected; sample_type=tissue"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

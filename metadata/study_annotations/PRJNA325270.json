@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA325270",
+  "related_identifiers": {
+    "bioproject": "PRJNA325270",
+    "sra_study": "SRP076408",
+    "geo_series": "GSE83207",
+    "other": []
+  },
+  "paper": {
+    "status": "not_found"
+  },
+  "study_summary": {
+    "objective": "Learn the biological function of the two ADAM (A Disintegrin and Metalloprotease) genes admA and admB in A. oryzae (from the GEO/BioProject text).",
+    "experimental_design": "A deletion control and the DeltaadmA, DeltaadmB and DeltaadmA DeltaadmB strains (RIB40 background) were grown on wheat bran solid medium at 30 C for 72 h; 5 biological replicates each, Illumina GAIIx single-end reads.",
+    "main_finding": "Not available: no accession-linked paper was found, so no result is reported here."
+  },
+  "tag_sets": {
+    "wheat_bran_72h": [
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "RIB40 background"
+      },
+      {
+        "tag": "solid_state",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "wheat bran solid culture"
+      },
+      {
+        "tag": "wheat",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "wheat bran"
+      },
+      {
+        "tag": "30C",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "72h",
+        "source": "sample_metadata",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA325270_control": {
+      "sets": [
+        "wheat_bran_72h"
+      ],
+      "tags": [
+        {
+          "tag": "wild_type",
+          "source": "curated_condition",
+          "confidence": "medium",
+          "note": "deletion control del-pyrG[pyrG+ ligD+], the reference for the admA/admB deletions"
+        },
+        {
+          "tag": "control",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "BioSample 'Deletion-control'"
+        }
+      ]
+    },
+    "PRJNA325270_dAdmA": {
+      "sets": [
+        "wheat_bran_72h"
+      ],
+      "tags": [
+        {
+          "tag": "knockout",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_admA",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA325270_dAdmB": {
+      "sets": [
+        "wheat_bran_72h"
+      ],
+      "tags": [
+        {
+          "tag": "knockout",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_admB",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA325270_dAdmA_dAdmB": {
+      "sets": [
+        "wheat_bran_72h"
+      ],
+      "tags": [
+        {
+          "tag": "knockout",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_admA",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_admB",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The sample strain field in the SRA run table is empty; the BioSample 'strain/background' attribute says RIB40, which the atlas export now takes from the curated condition.",
+    "All four genotypes carry a deleted pyrG with the pyrG+ and ligD+ markers re-introduced (BioSample genotype field),, consistent with a control built in the same background as the mutants."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-14",
+    "needs_pdf": false
+  }
+}

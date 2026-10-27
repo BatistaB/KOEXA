@@ -22,7 +22,7 @@
   },
   "study_summary": {
     "objective": "Learn how A. oryzae tolerates inhibitors released by lignocellulose pretreatment, to engineer strains that grow on lignocellulosic side streams.",
-    "experimental_design": "Pre-grown RIB40 mycelium was moved to Czapek-Dox fructose medium (28 °C) with or without an inhibitor at its IC50 and sampled 0, 1, 3, 5 and 24 h later; the atlas holds the control and furfural (2.3 mM) series.",
+    "experimental_design": "Pre-grown RIB40 mycelium was moved to Czapek-Dox fructose medium (28 C) with or without an inhibitor at its IC50 and sampled 0, 1, 3, 5 and 24 h later; the atlas holds the control and all five inhibitors: furfural 2.3 mM, HMF 13.5 mM, vanillin 2.6 mM, ferulic acid 6.5 mM and levulinic acid 24.5 mM.",
     "main_finding": "Most inhibitors caused ROS-linked stress with an early shutdown of cell-cycle, ribosome and ER protein-folding pathways, and strong induction of NAD(P)H-dependent oxidoreductases and ABC/MFS efflux transporters; aldehydes (especially HMF) caused the strongest response."
   },
   "tag_sets": {
@@ -96,6 +96,98 @@
         "source": "sample_metadata",
         "confidence": "high",
         "note": "2.3 mM (IC50)"
+      },
+      {
+        "tag": "chemical_stress",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "lignocellulosic_inhibitor",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "hmf": [
+      {
+        "tag": "treated",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "hmf",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "13.5 mM (IC50)"
+      },
+      {
+        "tag": "chemical_stress",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "lignocellulosic_inhibitor",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "vanillin": [
+      {
+        "tag": "treated",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "vanillin",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "2.6 mM (IC50)"
+      },
+      {
+        "tag": "chemical_stress",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "lignocellulosic_inhibitor",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "ferulic_acid": [
+      {
+        "tag": "treated",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "ferulic_acid",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "6.5 mM (IC50)"
+      },
+      {
+        "tag": "chemical_stress",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "lignocellulosic_inhibitor",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "levulinic_acid": [
+      {
+        "tag": "treated",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "levulinic_acid",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "24.5 mM (IC50)"
       },
       {
         "tag": "chemical_stress",
@@ -264,15 +356,224 @@
           "confidence": "high"
         }
       ]
+    },
+    "PRJNA1261861_HMF_0h": {
+      "sets": [
+        "cz_fructose",
+        "hmf"
+      ],
+      "tags": [
+        {
+          "tag": "0h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_HMF_1h": {
+      "sets": [
+        "cz_fructose",
+        "hmf"
+      ],
+      "tags": [
+        {
+          "tag": "1h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_HMF_3h": {
+      "sets": [
+        "cz_fructose",
+        "hmf"
+      ],
+      "tags": [
+        {
+          "tag": "3h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_HMF_5h": {
+      "sets": [
+        "cz_fructose",
+        "hmf"
+      ],
+      "tags": [
+        {
+          "tag": "5h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_HMF_24h": {
+      "sets": [
+        "cz_fructose",
+        "hmf"
+      ],
+      "tags": [
+        {
+          "tag": "24h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_vanillin_0h": {
+      "sets": [
+        "cz_fructose",
+        "vanillin"
+      ],
+      "tags": [
+        {
+          "tag": "0h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_vanillin_1h": {
+      "sets": [
+        "cz_fructose",
+        "vanillin"
+      ],
+      "tags": [
+        {
+          "tag": "1h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_vanillin_3h": {
+      "sets": [
+        "cz_fructose",
+        "vanillin"
+      ],
+      "tags": [
+        {
+          "tag": "3h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_vanillin_5h": {
+      "sets": [
+        "cz_fructose",
+        "vanillin"
+      ],
+      "tags": [
+        {
+          "tag": "5h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_vanillin_24h": {
+      "sets": [
+        "cz_fructose",
+        "vanillin"
+      ],
+      "tags": [
+        {
+          "tag": "24h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_ferulic_acid_0h": {
+      "sets": [
+        "cz_fructose",
+        "ferulic_acid"
+      ],
+      "tags": [
+        {
+          "tag": "0h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_ferulic_acid_1h": {
+      "sets": [
+        "cz_fructose",
+        "ferulic_acid"
+      ],
+      "tags": [
+        {
+          "tag": "1h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_ferulic_acid_24h": {
+      "sets": [
+        "cz_fructose",
+        "ferulic_acid"
+      ],
+      "tags": [
+        {
+          "tag": "24h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_levulinic_acid_0h": {
+      "sets": [
+        "cz_fructose",
+        "levulinic_acid"
+      ],
+      "tags": [
+        {
+          "tag": "0h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_levulinic_acid_1h": {
+      "sets": [
+        "cz_fructose",
+        "levulinic_acid"
+      ],
+      "tags": [
+        {
+          "tag": "1h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1261861_levulinic_acid_24h": {
+      "sets": [
+        "cz_fructose",
+        "levulinic_acid"
+      ],
+      "tags": [
+        {
+          "tag": "24h_post_treatment",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
     }
   },
   "sample_tags": {},
   "notes": [
-    "The BioProject has 83 runs covering furfural, HMF, levulinic acid, ferulic acid and vanillin; only the control and furfural series are curated in the atlas so far."
+    "The BioProject has 83 runs covering furfural, HMF, levulinic acid, ferulic acid and vanillin; all 83 are now in the atlas.",
+    "Ferulic acid and levulinic acid were sampled only at 0, 1 and 24 h; furfural, HMF and vanillin also at 3 and 5 h. Controls have 4 replicates, treatments 3."
   ],
   "curation": {
-    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text",
-    "curated_at": "2026-10-03",
+    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text; extended with HMF, vanillin, ferulic acid and levulinic acid by claude-sonnet-5-5",
+    "curated_at": "2026-10-22",
     "needs_pdf": false
   }
 }

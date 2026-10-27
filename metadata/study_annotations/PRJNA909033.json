@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA909033",
+  "related_identifiers": {
+    "bioproject": "PRJNA909033",
+    "sra_study": "SRP411815",
+    "geo_series": null,
+    "other": []
+  },
+  "paper": {
+    "status": "found",
+    "title": "Light-Regulated Gene Expression Patterns During Conidial Formation in Aspergillus oryzae",
+    "authors": "Lin S, Yang J, Wang A, Fu Q, Huang S, Liu M.",
+    "year": 2025,
+    "journal": "Current Issues in Molecular Biology",
+    "doi": "10.3390/cimb47050373",
+    "pmid": "40699772",
+    "pmcid": "PMC12110235",
+    "url": "https://doi.org/10.3390/cimb47050373",
+    "access": "full_text",
+    "association_evidence": "Data availability: 'Raw data were uploaded to the SRA library (accession number: PRJNA909033, Table S5).'",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Find which genes of the koji mold A. oryzae respond to the colour of light, focusing on genes for conidia formation and light sensing.",
+    "experimental_design": "Strain GDMCC 3.31 grew 72 h at 30 C on PDA plates covered with cellophane under blue (475 nm), green (520 nm) or red (630 nm) LED light at 80 umol m-2 s-1, or in darkness as control; 3 replicates each, then qRT-PCR on light doses.",
+    "main_finding": "Red, green and blue light changed 501, 424 and 742 genes compared with darkness (406 only with blue); six genes (tcsA, catA, gld1, Aowc-1, abaA, AofphA) were light-regulated, and abaA depended on both colour and dose."
+  },
+  "tag_sets": {
+    "pda_cellophane_72h": [
+      {
+        "tag": "potato_dextrose_medium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "PDA plates covered with cellophane"
+      },
+      {
+        "tag": "complex_medium",
+        "source": "inferred_from_methods",
+        "confidence": "medium",
+        "note": "potato infusion is an undefined component"
+      },
+      {
+        "tag": "surface_culture",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "72h",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "illumination from inoculation to harvest"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "strain_3_042",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "BioSample strain '3.042'; the paper calls the strain GDMCC 3.31"
+      },
+      {
+        "tag": "wild_type",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "BioSample genotype 'WT'"
+      }
+    ],
+    "light_treated": [
+      {
+        "tag": "treated",
+        "source": "inferred_from_design",
+        "confidence": "high",
+        "note": "light exposure relative to the darkness control"
+      }
+    ],
+    "dark_control": [
+      {
+        "tag": "darkness",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "control",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "darkness served as the control"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA909033_blue_72h": {
+      "sets": [
+        "pda_cellophane_72h",
+        "light_treated"
+      ],
+      "tags": [
+        {
+          "tag": "blue_light",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "475 nm, 80 umol m-2 s-1"
+        }
+      ]
+    },
+    "PRJNA909033_green_72h": {
+      "sets": [
+        "pda_cellophane_72h",
+        "light_treated"
+      ],
+      "tags": [
+        {
+          "tag": "green_light",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "520 nm, 80 umol m-2 s-1"
+        }
+      ]
+    },
+    "PRJNA909033_red_72h": {
+      "sets": [
+        "pda_cellophane_72h",
+        "light_treated"
+      ],
+      "tags": [
+        {
+          "tag": "red_light",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "630 nm, 80 umol m-2 s-1"
+        }
+      ]
+    },
+    "PRJNA909033_dark_72h": {
+      "sets": [
+        "pda_cellophane_72h",
+        "dark_control"
+      ],
+      "tags": []
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The BioSamples carry strain '3.042' with culture collection GDMCC:3.31. PRJNA801076 uses the same '3.042' strain label; whether both are the same stock is not established here.",
+    "The paper also ran qRT-PCR with a low light dose (30 min after 40 h in darkness); those samples are not part of this RNA-seq BioProject."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-14",
+    "needs_pdf": false
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA433750",
+  "related_identifiers": {
+    "bioproject": "PRJNA433750",
+    "sra_study": "SRP132645",
+    "geo_series": null,
+    "other": [
+      "SRP132444 (DNA-Seq of the same two strains, same paper)"
+    ]
+  },
+  "paper": {
+    "status": "found",
+    "title": "Genomic and transcriptomic comparison of Aspergillus oryzae strains: a case study in soy sauce koji fermentation",
+    "authors": "Zhong Y, Lu X, Xing L, Ho SWA, Kwan HS.",
+    "year": 2018,
+    "journal": "Journal of Industrial Microbiology & Biotechnology",
+    "doi": "10.1007/s10295-018-2059-8",
+    "pmid": "29978373",
+    "pmcid": "PMC6105210",
+    "url": "https://doi.org/10.1007/s10295-018-2059-8",
+    "access": "full_text",
+    "association_evidence": "Data availability: 'DNA-Seq and RNA-Seq data ... are available in the SRA under accession numbers SRP132444 and SRP132645, respectively'; SRP132645 is the study accession (ENA secondary id) of PRJNA433750.",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Explain at the molecular level why the degenerated strain TS2 ferments worse than its industrial parent RD2 in soy sauce koji.",
+    "experimental_design": "RD2 and TS2 were grown as koji (steamed soybean with wheat flour, about 30 C, high humidity) and sampled at mycelium expansion (about 28 h), early sporulation (about 48 h) and mature sporulation (about 72 h); one RNA-Seq library per strain and stage is deposited.",
+    "main_finding": "RD2 expressed more hydrolytic-enzyme and flavor-precursor genes under conidiation and fermentation control, whereas central carbon metabolism was up in TS2 for faster growth, which the authors read as a growth versus fermentation trade-off."
+  },
+  "tag_sets": {
+    "soy_sauce_koji": [
+      {
+        "tag": "solid_state",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "koji fermentation on steamed soybean"
+      },
+      {
+        "tag": "koji",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "soy_sauce",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "soybean",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "steamed soybean"
+      },
+      {
+        "tag": "wheat",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "wheat flour mixed with the soybean"
+      },
+      {
+        "tag": "industrial_strain",
+        "source": "paper_abstract",
+        "confidence": "high",
+        "note": "RD2 is a productive commercial soy-sauce strain; TS2 derives from it"
+      },
+      {
+        "tag": "30C",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ],
+    "rd2_industrial": [
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "high",
+        "note": "productive industrial strain RD2"
+      }
+    ],
+    "ts2_degenerated": [
+      {
+        "tag": "degenerated_strain",
+        "source": "paper_abstract",
+        "confidence": "high",
+        "note": "TS2 was isolated after repeated use of RD2 and ferments worse"
+      },
+      {
+        "tag": "wild_type",
+        "source": "curated_condition",
+        "confidence": "medium",
+        "note": "no intended genetic modification; accumulated mutations relative to RD2"
+      }
+    ],
+    "mycelium_expansion": [
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "stage I, white mycelium covers the soybeans"
+      }
+    ],
+    "sporulation_stage": [
+      {
+        "tag": "sporulation",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "stage II early or stage III mature sporulation"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA433750_RD2_ME_28h": {
+      "sets": [
+        "soy_sauce_koji",
+        "rd2_industrial",
+        "mycelium_expansion"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rd2",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "28h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA433750_RD2_ES_48h": {
+      "sets": [
+        "soy_sauce_koji",
+        "rd2_industrial",
+        "sporulation_stage"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rd2",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "48h",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA433750_RD2_MS_72h": {
+      "sets": [
+        "soy_sauce_koji",
+        "rd2_industrial",
+        "sporulation_stage"
+      ],
+      "tags": [
+        {
+          "tag": "strain_rd2",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "72h",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA433750_TS2_ME_28h": {
+      "sets": [
+        "soy_sauce_koji",
+        "ts2_degenerated",
+        "mycelium_expansion"
+      ],
+      "tags": [
+        {
+          "tag": "strain_ts2",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "28h",
+          "source": "paper_methods",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA433750_TS2_ES_44h": {
+      "sets": [
+        "soy_sauce_koji",
+        "ts2_degenerated",
+        "sporulation_stage"
+      ],
+      "tags": [
+        {
+          "tag": "strain_ts2",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "44h",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA433750_TS2_MS_71h": {
+      "sets": [
+        "soy_sauce_koji",
+        "ts2_degenerated",
+        "sporulation_stage"
+      ],
+      "tags": [
+        {
+          "tag": "strain_ts2",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "71h",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The paper says spores and mycelia were collected in duplicate from the three stages, but only one run per strain and stage is deposited (run names like 'RD48h2_2.fq' suggest a second replicate).",
+    "Library names give the actual sampling hours: RD2 28/48/72 h, TS2 28/44/71 h, against nominal stage times of about 28/48/72 h.",
+    "The BioSamples record temperatures of 30 C (RD2) and 31 C (TS2); the paper gives 30 C for koji fermentation."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-12",
+    "needs_pdf": false
+  }
+}

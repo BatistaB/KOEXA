@@ -1,0 +1,104 @@
+{
+  "bioproject": "PRJNA164609",
+  "collected_at": "2026-10-19T15:19:51+00:00",
+  "accessions_searched": [
+    "PRJNA164609",
+    "SRP012984"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [],
+  "suggested_paper_status": "not_found",
+  "study": {
+    "dataset_id": "PRJNA164609",
+    "bioproject": "PRJNA164609",
+    "study_accession": "SRP012984",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "",
+    "study_description": "Aspergillus oryzae Transcriptome or Gene expression",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "3 biosample(s), 3 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN00992183",
+      "sample_title": "A. oryzae RIB 642 sample",
+      "strain": "",
+      "condition_clues": ""
+    },
+    {
+      "biosample": "SAMN00992182",
+      "sample_title": "A. oryzae RIB 632 sample",
+      "strain": "",
+      "condition_clues": ""
+    },
+    {
+      "biosample": "SAMN00992181",
+      "sample_title": "A. oryzae RIB 40 sample",
+      "strain": "",
+      "condition_clues": ""
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "SRR495776",
+      "biosample": "SAMN00992182",
+      "condition_id": "PRJNA164609_RIB632_rice",
+      "strain": ""
+    },
+    {
+      "sample_id": "SRR495777",
+      "biosample": "SAMN00992183",
+      "condition_id": "PRJNA164609_RIB642_rice",
+      "strain": ""
+    },
+    {
+      "sample_id": "SRR495775",
+      "biosample": "SAMN00992181",
+      "condition_id": "PRJNA164609_RIB40_rice",
+      "strain": ""
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJNA164609_RIB40_rice",
+      "condition_label": "RIB40 | grown on rice | time and temperature not stated",
+      "strain": "RIB40",
+      "culture_mode": "solid-state (rice)",
+      "substrate": "rice",
+      "recombinant_background": "wild_type (natural isolate)",
+      "production_context": "A. oryzae vs A. flavus comparison on rice",
+      "original_description": "A. oryzae RIB 40 sample",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJNA164609 (SRA study SRP012984, Vanderbilt University, title 'Aspergillus oryzae Transcriptome or Gene expression'): 'Comparative gene expression to A. flavus while grown on rice. 3 isolates: RIB 40, RIB 632, RIB 642.' SRA library Lib 1 ('A. oryzae RIB 40 sample', BioSample SAMN00992181, Illumina HiSeq 2000). The record gives no rice preparation, temperature or time, and no accession-linked paper was found. The same three isolates were also sequenced on potato dextrose agar in PRJNA178638."
+    },
+    {
+      "condition_id": "PRJNA164609_RIB632_rice",
+      "condition_label": "RIB632 | grown on rice | time and temperature not stated",
+      "strain": "RIB632",
+      "culture_mode": "solid-state (rice)",
+      "substrate": "rice",
+      "recombinant_background": "wild_type (natural isolate)",
+      "production_context": "A. oryzae vs A. flavus comparison on rice",
+      "original_description": "A. oryzae RIB 632 sample",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJNA164609 (SRA study SRP012984, Vanderbilt University, title 'Aspergillus oryzae Transcriptome or Gene expression'): 'Comparative gene expression to A. flavus while grown on rice. 3 isolates: RIB 40, RIB 632, RIB 642.' SRA library Lib 1 ('A. oryzae RIB 632 sample', BioSample SAMN00992182, Illumina HiSeq 2000). The record gives no rice preparation, temperature or time, and no accession-linked paper was found. The same three isolates were also sequenced on potato dextrose agar in PRJNA178638."
+    },
+    {
+      "condition_id": "PRJNA164609_RIB642_rice",
+      "condition_label": "RIB642 | grown on rice | time and temperature not stated",
+      "strain": "RIB642",
+      "culture_mode": "solid-state (rice)",
+      "substrate": "rice",
+      "recombinant_background": "wild_type (natural isolate)",
+      "production_context": "A. oryzae vs A. flavus comparison on rice",
+      "original_description": "A. oryzae RIB 642 sample",
+      "metadata_confidence": "low",
+      "metadata_source": "BioProject PRJNA164609 (SRA study SRP012984, Vanderbilt University, title 'Aspergillus oryzae Transcriptome or Gene expression'): 'Comparative gene expression to A. flavus while grown on rice. 3 isolates: RIB 40, RIB 632, RIB 642.' SRA library Lib 3 ('A. oryzae RIB 642 sample', BioSample SAMN00992183, Illumina Genome Analyzer II). The record gives no rice preparation, temperature or time, and no accession-linked paper was found. The same three isolates were also sequenced on potato dextrose agar in PRJNA178638."
+    }
+  ]
+}

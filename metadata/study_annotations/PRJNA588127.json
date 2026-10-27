@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA588127",
+  "related_identifiers": {
+    "bioproject": "PRJNA588127",
+    "sra_study": null,
+    "geo_series": null,
+    "other": [
+      "PRJNA692789 (PrtT ChIP-seq of the same paper, A. niger)",
+      "A. niger runs of this BioProject are not in the atlas"
+    ]
+  },
+  "paper": {
+    "status": "found",
+    "title": "Profiling of chromatin accessibility identifies transcription factor binding sites across the genome of Aspergillus species",
+    "authors": "Huang L, Li X, Dong L, Wang B, Pan L.",
+    "year": 2021,
+    "journal": "BMC Biology",
+    "doi": "10.1186/s12915-021-01114-0",
+    "pmid": "34488759",
+    "pmcid": "PMC8419926",
+    "url": "https://doi.org/10.1186/s12915-021-01114-0",
+    "access": "full_text",
+    "association_evidence": "Methods: 'sequenced at BGI with 50 bp single-end reads on the BGISEQ-500 (NCBI accession number, PRJNA588127)'.",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Map open chromatin (ATAC-seq) in A. niger and A. oryzae to find transcription factor binding sites, and test how the regulator LaeA changes secondary-metabolism gene clusters in A. oryzae.",
+    "experimental_design": "A. oryzae niaD300 wild type and its laeA deletion and overexpression mutants were grown to mid-log phase (DPY medium assumed), 2 biological replicates each, with RNA-seq on the mycelium left from ATAC-seq (BGISEQ-500, 50 bp single end).",
+    "main_finding": "laeA deletion and overexpression changed chromatin accessibility at 164 and 138 secondary-metabolism genes and the expression of 32 and 42 of them, but only for clusters already expressed in the wild type, never switching on silent ones."
+  },
+  "tag_sets": {
+    "dpy_flask": [
+      {
+        "tag": "strain_niad300",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "niaD mutant derived from RIB40"
+      },
+      {
+        "tag": "dpy_medium",
+        "source": "paper_methods",
+        "confidence": "medium",
+        "note": "2% glucose, 1% peptone, 0.5% yeast extract, 0.5% KH2PO4, 0.05% MgSO4; the paper says DPY or a conditional induction medium for these cultures"
+      },
+      {
+        "tag": "complex_medium",
+        "source": "paper_methods",
+        "confidence": "medium"
+      },
+      {
+        "tag": "glucose",
+        "source": "paper_methods",
+        "confidence": "medium",
+        "note": "2%"
+      },
+      {
+        "tag": "organic_nitrogen",
+        "source": "paper_methods",
+        "confidence": "medium",
+        "note": "peptone and yeast extract"
+      },
+      {
+        "tag": "submerged",
+        "source": "inferred_from_methods",
+        "confidence": "medium",
+        "note": "liquid culture, mycelium filtered with Miracloth"
+      },
+      {
+        "tag": "exponential_phase",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "grown to mid-log phase"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA588127_niaD300_WT": {
+      "sets": [
+        "dpy_flask"
+      ],
+      "tags": [
+        {
+          "tag": "wild_type",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "niaD300 is the reference strain of the study"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "medium",
+          "note": "reference for the laeA mutants"
+        }
+      ]
+    },
+    "PRJNA588127_dellaeA": {
+      "sets": [
+        "dpy_flask"
+      ],
+      "tags": [
+        {
+          "tag": "knockout",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_laeA",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA588127_OElaeA": {
+      "sets": [
+        "dpy_flask"
+      ],
+      "tags": [
+        {
+          "tag": "overexpression",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "oe_laeA",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "Temperature and time are not stated, and the text does not say whether the A. oryzae cultures used DPY or the conditional induction medium; DPY is assumed.",
+    "A figure legend calls the two replicates 'technical' while the text calls them biological; they are treated as biological replicates.",
+    "The BioProject also holds A. niger runs (CBS513.88, SH2 and transcription-factor deletions), which are outside the atlas."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-19",
+    "needs_pdf": false
+  }
+}

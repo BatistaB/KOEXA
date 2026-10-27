@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA534476",
+  "related_identifiers": {
+    "bioproject": "PRJNA534476",
+    "sra_study": "SRP193744",
+    "geo_series": "GSE130260",
+    "other": [
+      "GSE130261 (SuperSeries of the RNA-seq and bisulfite-seq subseries)",
+      "PRJNA534472 (umbrella BioProject)"
+    ]
+  },
+  "paper": {
+    "status": "not_found"
+  },
+  "study_summary": {
+    "objective": "Check whether A. oryzae has DNA methylation, a point earlier work on Aspergillus disputed; this BioProject holds the RNA-seq half (bisulfite-seq is in a sibling series), from the GEO/BioProject text.",
+    "experimental_design": "RIB40 grown in liquid CD-Glc medium or on solid wheat bran, 3 biological replicates each; each library was sequenced as 6 SRA runs and only the first run of each is in the atlas.",
+    "main_finding": "Not available: no accession-linked paper was found, so no result is reported here."
+  },
+  "tag_sets": {
+    "rib40_reference": [
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "wild_type",
+        "source": "sample_metadata",
+        "confidence": "medium",
+        "note": "RIB40 reference strain"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA534476_RIB40_liquid_CD_Glc": {
+      "sets": [
+        "rib40_reference"
+      ],
+      "tags": [
+        {
+          "tag": "submerged",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "liquid culture"
+        },
+        {
+          "tag": "czapek_dox_medium",
+          "source": "sample_metadata",
+          "confidence": "medium",
+          "note": "'CD' in the sample title"
+        },
+        {
+          "tag": "defined_medium",
+          "source": "sample_metadata",
+          "confidence": "medium"
+        },
+        {
+          "tag": "glucose",
+          "source": "sample_metadata",
+          "confidence": "medium",
+          "note": "'Glc' in the sample title"
+        }
+      ]
+    },
+    "PRJNA534476_RIB40_solid_WB": {
+      "sets": [
+        "rib40_reference"
+      ],
+      "tags": [
+        {
+          "tag": "solid_state",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "solid culture"
+        },
+        {
+          "tag": "wheat",
+          "source": "sample_metadata",
+          "confidence": "medium",
+          "note": "'WB' in the sample title read as wheat bran"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "Medium abbreviations in the GEO sample titles (CD-Glc, WB) are read here as Czapek-Dox with glucose and wheat bran; temperature and time are not stated.",
+    "Each library has 6 SRA runs (r1 to r6); only r1 was processed, giving about 4 M read pairs and 3.2 M gene-assigned counts per sample, shallow compared with the rest of the atlas."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-14",
+    "needs_pdf": false
+  }
+}

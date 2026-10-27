@@ -1,0 +1,278 @@
+{
+  "bioproject": "PRJDB19992",
+  "collected_at": "2026-10-12T18:57:42+00:00",
+  "accessions_searched": [
+    "PRJDB19992",
+    "DRP012531"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "40984741",
+      "pmcid": "PMC12456952",
+      "doi": "10.7554/elife.107043",
+      "title": "The increase in cell volume and nuclear number of the koji-fungus Aspergillus oryzae contributes to its high enzyme productivity.",
+      "authors": "Itani A, Motomura H, Oda K, Yamashita H, Sakai K, Kusumoto KI, Shigeto S, Ichikawa T, Mubarak HM, Fukuma T, Katayama T, Maruyama JI, Masuo S, Takaya N, Takeshita N.",
+      "year": 2025,
+      "journal": "eLife",
+      "url": "https://doi.org/10.7554/elife.107043",
+      "open_access": true,
+      "abstract": "While the ratio of nuclei to cell volume is well regulated, it remains largely unexplored in multinucleate organisms. The koji-fungus Aspergillus oryzae, traditionally used in Japanese brewing and fermentation for over a thousand years, is now widely utilized in modern biotechnology as a host for enzyme production. We discovered that, over time in culture, hyphae become thicker, resulting in a tenfold increase in cell volume, and the number of nuclei in hyphal cells also increases tenfold, exceeding 200. The increase in cell volume and nuclear number is unique among the investigated Aspergillus species and correlates with its high enzyme production capabilities. Since nuclear number and cell volume are correlated, both must increase simultaneously for either to expand. Our analyses identified genetic factors and nutritional environmental signals involved in each of these increases. Increases in nuclear number and cell volume were also observed in other fungi bred for industrial use. This study not only deepens our understanding of the evolutionary processes that promote high enzyme productivity through fungal breeding, but also provides insights into the molecular mechanisms regulating cell volume and nuclear number in multinucleate organisms.",
+      "found_by": [
+        "europepmc_fulltext:PRJDB19992"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJDB19992",
+          "text": "isted by FreeBayes ( Garrison and Marth, 2012 ), and detailed comparative analysis of genomes was performed on Integrative Genome Viewer (IGV) manually. RNA-seq The RNA-seq data have been deposited in DDBJ as BioProject PRJDB19992. Funding Information This paper was supported by the following grants: http://dx.doi.org/10.13039/50110000170",
+          "deposition_statement": true
+        },
+        {
+          "accession": "PRJDB19992",
+          "text": "between TK-41 and TK-47. Supplementary file 6. Strains used in this study. Supplementary file 7. Composition of minimal medium. MDAR checklist Data availability The RNA-seq data have been deposited in DDBJ as BioProject PRJDB19992. The following dataset was generated: Itani A 2025 The increase in cell volume and number of nuclei of the Ko",
+          "deposition_statement": true
+        },
+        {
+          "accession": "PRJDB19992",
+          "text": "roject PRJDB19992. The following dataset was generated: Itani A 2025 The increase in cell volume and number of nuclei of the Koji-kin Aspergillus oryzae contributes to its high enzyme productivity DNA Data Bank of Japan PRJDB19992 10.7554/eLife.107043 PMC12456952 40984741 References Amodeo AA Skotheim JM 2016 Cell-size control Cold Spring",
+          "deposition_statement": false
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJDB19992",
+    "bioproject": "PRJDB19992",
+    "study_accession": "DRP012531",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "RIB40, RIB915",
+    "study_description": "The increase in cell volume and number of nuclei of the Koji-kin Aspergillus oryzae contributes to its high enzyme productivity",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "9 biosample(s), 9 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMD00876708",
+      "sample_title": "Ao RIB915 MM",
+      "strain": "RIB915",
+      "condition_clues": "strain=RIB915; isolate=not applicable; isolation_source=not applicable; collection_date=2022-10-02; geo_loc_name=Japan; sample_name=RIB915MM; host=not applicable; sample_type=Whole organism"
+    },
+    {
+      "biosample": "SAMD00876706",
+      "sample_title": "Ao RIB40 MM",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolate=not applicable; isolation_source=not applicable; collection_date=2022-10-02; geo_loc_name=Japan; sample_name=RIB40MM; host=not applicable; sample_type=Whole organism"
+    },
+    {
+      "biosample": "SAMD00876707",
+      "sample_title": "Ao RIB40 YE",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolate=not applicable; isolation_source=not applicable; collection_date=2022-10-02; geo_loc_name=Japan; sample_name=RIB40YE; host=not applicable; sample_type=Whole organism"
+    },
+    {
+      "biosample": "SAMD00876712",
+      "sample_title": "Ao RIB40 Thick_1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolate=not applicable; isolation_source=not applicable; collection_date=2023-02-07; geo_loc_name=Japan; sample_name=RIB40Thick-1; host=not applicable; sample_type=Whole organism"
+    },
+    {
+      "biosample": "SAMD00876715",
+      "sample_title": "Ao RIB40 Thin_1",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolate=not applicable; isolation_source=not applicable; collection_date=2023-02-07; geo_loc_name=Japan; sample_name=RIB40Thin-1; host=not applicable; sample_type=Whole organism"
+    },
+    {
+      "biosample": "SAMD00876709",
+      "sample_title": "Ao RIB915 YE",
+      "strain": "RIB915",
+      "condition_clues": "strain=RIB915; isolate=not applicable; isolation_source=not applicable; collection_date=2022-10-02; geo_loc_name=Japan; sample_name=RIB915YE; host=not applicable; sample_type=Whole organism"
+    },
+    {
+      "biosample": "SAMD00876714",
+      "sample_title": "Ao RIB40 Thick_3",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolate=not applicable; isolation_source=not applicable; collection_date=2023-02-07; geo_loc_name=Japan; sample_name=RIB40Thick-3; host=not applicable; sample_type=Whole organism"
+    },
+    {
+      "biosample": "SAMD00876716",
+      "sample_title": "Ao RIB40 Thin_2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolate=not applicable; isolation_source=not applicable; collection_date=2023-02-07; geo_loc_name=Japan; sample_name=RIB40Thin-2; host=not applicable; sample_type=Whole organism"
+    },
+    {
+      "biosample": "SAMD00876713",
+      "sample_title": "Ao RIB40 Thick_2",
+      "strain": "RIB40",
+      "condition_clues": "strain=RIB40; isolate=not applicable; isolation_source=not applicable; collection_date=2023-02-07; geo_loc_name=Japan; sample_name=RIB40Thick-2; host=not applicable; sample_type=Whole organism"
+    }
+  ],
+  "atlas_samples": [
+    {
+      "sample_id": "DRR634322",
+      "biosample": "SAMD00876709",
+      "condition_id": "PRJDB19992_RIB915_MM_YE_3d",
+      "strain": "RIB915"
+    },
+    {
+      "sample_id": "DRR634325",
+      "biosample": "SAMD00876712",
+      "condition_id": "PRJDB19992_RIB40_thick_hyphae",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR634321",
+      "biosample": "SAMD00876708",
+      "condition_id": "PRJDB19992_RIB915_MM_3d",
+      "strain": "RIB915"
+    },
+    {
+      "sample_id": "DRR634328",
+      "biosample": "SAMD00876715",
+      "condition_id": "PRJDB19992_RIB40_thin_hyphae",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR634326",
+      "biosample": "SAMD00876713",
+      "condition_id": "PRJDB19992_RIB40_thick_hyphae",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR634319",
+      "biosample": "SAMD00876706",
+      "condition_id": "PRJDB19992_RIB40_MM_3d",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR634327",
+      "biosample": "SAMD00876714",
+      "condition_id": "PRJDB19992_RIB40_thick_hyphae",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR634320",
+      "biosample": "SAMD00876707",
+      "condition_id": "PRJDB19992_RIB40_MM_YE_3d",
+      "strain": "RIB40"
+    },
+    {
+      "sample_id": "DRR634329",
+      "biosample": "SAMD00876716",
+      "condition_id": "PRJDB19992_RIB40_thin_hyphae",
+      "strain": "RIB40"
+    }
+  ],
+  "curated_conditions": [
+    {
+      "condition_id": "PRJDB19992_RIB40_MM_3d",
+      "condition_label": "RIB40 | MM | cellophane on agar | 30C | 3 days",
+      "strain": "RIB40",
+      "medium": "minimal medium (MM) agar overlaid with sterilized cellophane",
+      "culture_mode": "surface (cellophane on agar)",
+      "carbon_source": "maltose (1%, stated for MM elsewhere in the paper; not restated for the RNA-seq cultures)",
+      "temperature_C": "30",
+      "time_value": "3",
+      "time_unit": "day",
+      "developmental_stage": "mycelium on cellophane (3-day colony)",
+      "recombinant_background": "wild_type (RIB40 reference strain; hyphae with increased nuclei)",
+      "production_context": "nuclear number / cell volume / enzyme secretion study of koji mold",
+      "original_description": "RIB40MM",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJDB19992 (DRA DRP012531, Univ. of Tsukuba), article 'The increase in cell volume and nuclear number of the koji-fungus Aspergillus oryzae contributes to its high enzyme productivity' (eLife 2025, doi 10.7554/eLife.107043, PMC12456952; data statement 'RNA-seq data deposited in DDBJ as BioProject PRJDB19992'). Methods: sterilized cellophane placed on agar plates, conidia inoculated, cultured at 30 C for 3 days, frozen and ground, RNeasy Mini Kit; 36 bp paired-end reads on Illumina NextSeq 500 (University of Tsukuba). The paper describes the medium only as minimal medium (MM) with or without 1% yeast extract; 1% maltose is the carbon source stated for MM in its protein-secretion assays, not restated for the RNA-seq cultures. BioSample SAMD00876706 sample_name 'RIB40MM'. One library per strain x medium, no biological replicates."
+    },
+    {
+      "condition_id": "PRJDB19992_RIB40_MM_YE_3d",
+      "condition_label": "RIB40 | MM + 1% yeast extract | cellophane on agar | 30C | 3 days",
+      "strain": "RIB40",
+      "medium": "minimal medium (MM) agar overlaid with sterilized cellophane + 1% yeast extract",
+      "culture_mode": "surface (cellophane on agar)",
+      "carbon_source": "maltose (1%, stated for MM elsewhere in the paper; not restated for the RNA-seq cultures)",
+      "nitrogen_source": "yeast extract (1%)",
+      "temperature_C": "30",
+      "time_value": "3",
+      "time_unit": "day",
+      "treatment": "1% yeast extract added to the minimal medium",
+      "developmental_stage": "mycelium on cellophane (3-day colony)",
+      "recombinant_background": "wild_type (RIB40 reference strain; hyphae with increased nuclei)",
+      "production_context": "nuclear number / cell volume / enzyme secretion study of koji mold",
+      "original_description": "RIB40YE",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJDB19992 (DRA DRP012531, Univ. of Tsukuba), article 'The increase in cell volume and nuclear number of the koji-fungus Aspergillus oryzae contributes to its high enzyme productivity' (eLife 2025, doi 10.7554/eLife.107043, PMC12456952; data statement 'RNA-seq data deposited in DDBJ as BioProject PRJDB19992'). Methods: sterilized cellophane placed on agar plates, conidia inoculated, cultured at 30 C for 3 days, frozen and ground, RNeasy Mini Kit; 36 bp paired-end reads on Illumina NextSeq 500 (University of Tsukuba). The paper describes the medium only as minimal medium (MM) with or without 1% yeast extract; 1% maltose is the carbon source stated for MM in its protein-secretion assays, not restated for the RNA-seq cultures. BioSample SAMD00876707 sample_name 'RIB40YE'. One library per strain x medium, no biological replicates."
+    },
+    {
+      "condition_id": "PRJDB19992_RIB40_thick_hyphae",
+      "condition_label": "RIB40 | thick hyphae (laser microdissection) | MM liquid on membrane slide | 30C | 3 days",
+      "strain": "RIB40",
+      "medium": "minimal medium (MM) liquid, static on membrane slides",
+      "culture_mode": "static liquid on membrane slide (laser microdissection)",
+      "temperature_C": "30",
+      "time_value": "3",
+      "time_unit": "day",
+      "developmental_stage": "thick hyphae (increased nuclear number and cell volume)",
+      "recombinant_background": "wild_type (RIB40 reference strain)",
+      "production_context": "nuclear number / cell volume / enzyme secretion study of koji mold",
+      "original_description": "RIB40Thick-1, RIB40Thick-2, RIB40Thick-3",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJDB19992 (DRA DRP012531, Univ. of Tsukuba), article 'The increase in cell volume and nuclear number of the koji-fungus Aspergillus oryzae contributes to its high enzyme productivity' (eLife 2025, doi 10.7554/eLife.107043, PMC12456952; data statement 'RNA-seq data deposited in DDBJ as BioProject PRJDB19992'). Methods: sterilized membrane slides immersed in MM liquid, conidia inoculated, static culture at 30 C for 3 days; thick and thin hyphae cut out with a PALM MicroBeam laser microdissection system (500-700 sections per sample), RNeasy Mini Kit; 150 bp paired-end reads on Illumina NovaSeq 6000 (Takara Bio). Thick hyphae (n = 3) are hyphae with increased nuclear number and cell volume; thin hyphae (n = 2) are the comparison. BioSample SAMD00876712 / SAMD00876713 / SAMD00876714 sample_name 'RIB40Thick-1, RIB40Thick-2, RIB40Thick-3'. 3 biological replicates (thick hyphae). Sequencing platform and read length differ from the cellophane-culture libraries of this BioProject."
+    },
+    {
+      "condition_id": "PRJDB19992_RIB40_thin_hyphae",
+      "condition_label": "RIB40 | thin hyphae (laser microdissection) | MM liquid on membrane slide | 30C | 3 days",
+      "strain": "RIB40",
+      "medium": "minimal medium (MM) liquid, static on membrane slides",
+      "culture_mode": "static liquid on membrane slide (laser microdissection)",
+      "temperature_C": "30",
+      "time_value": "3",
+      "time_unit": "day",
+      "developmental_stage": "thin hyphae (no increase in nuclei)",
+      "recombinant_background": "wild_type (RIB40 reference strain)",
+      "production_context": "nuclear number / cell volume / enzyme secretion study of koji mold",
+      "original_description": "RIB40Thin-1, RIB40Thin-2",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJDB19992 (DRA DRP012531, Univ. of Tsukuba), article 'The increase in cell volume and nuclear number of the koji-fungus Aspergillus oryzae contributes to its high enzyme productivity' (eLife 2025, doi 10.7554/eLife.107043, PMC12456952; data statement 'RNA-seq data deposited in DDBJ as BioProject PRJDB19992'). Methods: sterilized membrane slides immersed in MM liquid, conidia inoculated, static culture at 30 C for 3 days; thick and thin hyphae cut out with a PALM MicroBeam laser microdissection system (500-700 sections per sample), RNeasy Mini Kit; 150 bp paired-end reads on Illumina NovaSeq 6000 (Takara Bio). Thick hyphae (n = 3) are hyphae with increased nuclear number and cell volume; thin hyphae (n = 2) are the comparison. BioSample SAMD00876715 / SAMD00876716 sample_name 'RIB40Thin-1, RIB40Thin-2'. 2 biological replicates (thin hyphae). Sequencing platform and read length differ from the cellophane-culture libraries of this BioProject."
+    },
+    {
+      "condition_id": "PRJDB19992_RIB915_MM_3d",
+      "condition_label": "RIB915 | MM | cellophane on agar | 30C | 3 days",
+      "strain": "RIB915",
+      "medium": "minimal medium (MM) agar overlaid with sterilized cellophane",
+      "culture_mode": "surface (cellophane on agar)",
+      "carbon_source": "maltose (1%, stated for MM elsewhere in the paper; not restated for the RNA-seq cultures)",
+      "temperature_C": "30",
+      "time_value": "3",
+      "time_unit": "day",
+      "developmental_stage": "mycelium on cellophane (3-day colony)",
+      "recombinant_background": "wild_type (RIB915 laboratory strain; hyphae without increased nuclei unless yeast extract is added)",
+      "production_context": "nuclear number / cell volume / enzyme secretion study of koji mold",
+      "original_description": "RIB915MM",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJDB19992 (DRA DRP012531, Univ. of Tsukuba), article 'The increase in cell volume and nuclear number of the koji-fungus Aspergillus oryzae contributes to its high enzyme productivity' (eLife 2025, doi 10.7554/eLife.107043, PMC12456952; data statement 'RNA-seq data deposited in DDBJ as BioProject PRJDB19992'). Methods: sterilized cellophane placed on agar plates, conidia inoculated, cultured at 30 C for 3 days, frozen and ground, RNeasy Mini Kit; 36 bp paired-end reads on Illumina NextSeq 500 (University of Tsukuba). The paper describes the medium only as minimal medium (MM) with or without 1% yeast extract; 1% maltose is the carbon source stated for MM in its protein-secretion assays, not restated for the RNA-seq cultures. BioSample SAMD00876708 sample_name 'RIB915MM'. One library per strain x medium, no biological replicates."
+    },
+    {
+      "condition_id": "PRJDB19992_RIB915_MM_YE_3d",
+      "condition_label": "RIB915 | MM + 1% yeast extract | cellophane on agar | 30C | 3 days",
+      "strain": "RIB915",
+      "medium": "minimal medium (MM) agar overlaid with sterilized cellophane + 1% yeast extract",
+      "culture_mode": "surface (cellophane on agar)",
+      "carbon_source": "maltose (1%, stated for MM elsewhere in the paper; not restated for the RNA-seq cultures)",
+      "nitrogen_source": "yeast extract (1%)",
+      "temperature_C": "30",
+      "time_value": "3",
+      "time_unit": "day",
+      "treatment": "1% yeast extract added to the minimal medium",
+      "developmental_stage": "mycelium on cellophane (3-day colony)",
+      "recombinant_background": "wild_type (RIB915 laboratory strain; hyphae without increased nuclei unless yeast extract is added)",
+      "production_context": "nuclear number / cell volume / enzyme secretion study of koji mold",
+      "original_description": "RIB915YE",
+      "metadata_confidence": "medium",
+      "metadata_source": "BioProject PRJDB19992 (DRA DRP012531, Univ. of Tsukuba), article 'The increase in cell volume and nuclear number of the koji-fungus Aspergillus oryzae contributes to its high enzyme productivity' (eLife 2025, doi 10.7554/eLife.107043, PMC12456952; data statement 'RNA-seq data deposited in DDBJ as BioProject PRJDB19992'). Methods: sterilized cellophane placed on agar plates, conidia inoculated, cultured at 30 C for 3 days, frozen and ground, RNeasy Mini Kit; 36 bp paired-end reads on Illumina NextSeq 500 (University of Tsukuba). The paper describes the medium only as minimal medium (MM) with or without 1% yeast extract; 1% maltose is the carbon source stated for MM in its protein-secretion assays, not restated for the RNA-seq cultures. BioSample SAMD00876709 sample_name 'RIB915YE'. One library per strain x medium, no biological replicates."
+    }
+  ]
+}

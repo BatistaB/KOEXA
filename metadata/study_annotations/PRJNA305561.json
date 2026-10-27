@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA305561",
+  "related_identifiers": {
+    "bioproject": "PRJNA305561",
+    "sra_study": "SRP067204",
+    "geo_series": null,
+    "other": []
+  },
+  "paper": {
+    "status": "not_found"
+  },
+  "study_summary": {
+    "objective": "Evaluate the role of the transcription factor HacA in coping with ER stress and as a possible regulator of the unfolded protein response in A. oryzae (from the BioProject text).",
+    "experimental_design": "RNA-seq of the parent niaD300, a hacA knockout (HacA-DE, hacA replaced by a pyrG cassette) and a constitutively active hacA strain (HacA-CA, spliced hacA at the hacA locus); one library each, culture conditions not stated.",
+    "main_finding": "Not available: no accession-linked paper was found, so no result is reported here."
+  },
+  "tag_sets": {},
+  "conditions": {
+    "PRJNA305561_niaD300_WT": {
+      "sets": [],
+      "tags": [
+        {
+          "tag": "strain_niad300",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "niaD mutant derived from RIB40 (NBRC)"
+        },
+        {
+          "tag": "wild_type",
+          "source": "curated_condition",
+          "confidence": "medium",
+          "note": "reference/parent strain of the hacA mutants"
+        },
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "medium",
+          "note": "parent strain for the hacA mutants"
+        }
+      ]
+    },
+    "PRJNA305561_HacA_DE": {
+      "sets": [],
+      "tags": [
+        {
+          "tag": "strain_haca_de",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "knockout",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "del_hacA",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "hacA (AO090124000074) replaced by a pyrG cassette"
+        }
+      ]
+    },
+    "PRJNA305561_HacA_CA": {
+      "sets": [],
+      "tags": [
+        {
+          "tag": "strain_haca_ca",
+          "source": "sample_metadata",
+          "confidence": "high"
+        },
+        {
+          "tag": "constitutively_active_allele",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "spliced (intron-free) hacA integrated at the hacA locus of HacA-DE"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "Medium, temperature, time and whether ER stress was applied are not stated in the BioProject or BioSamples, so no culture or stress tags were assigned."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from reports/study_evidence/ + open-access full text",
+    "curated_at": "2026-10-14",
+    "needs_pdf": false
+  }
+}
