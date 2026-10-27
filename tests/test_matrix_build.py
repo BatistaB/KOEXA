@@ -49,6 +49,44 @@ def test_collapse_technical_replicates_averages_same_biosample_runs():
     assert collapsed.iloc[0]["biological_replicate"] == "1"
 
 
+def test_biosample_units_split_a_biosample_that_spans_several_conditions(tmp_path):
+    import duckdb
+
+    from aoryzae_atlas.database.migrate import apply_migrations
+    from aoryzae_atlas.matrix.build import fetch_biosample_units
+
+    db_path = tmp_path / "units.duckdb"
+    apply_migrations(db_path)
+    rows = [
+        # (sample_id, biosample, bioproject, condition_id)
+        ("r1", "BS_A", "PRJ1", "PRJ1_x"),   # re-sequenced twice inside one condition: one unit
+        ("r2", "BS_A", "PRJ1", "PRJ1_x"),
+        ("r3", "BS_B", "PRJ1", "PRJ1_x"),   # one BioSample registered for two cultures: two units
+        ("r4", "BS_B", "PRJ1", "PRJ1_y"),
+        ("r5", "BS_C", "PRJ1", None),       # one curated condition plus an uncurated run: still one unit
+        ("r6", "BS_C", "PRJ1", "PRJ1_x"),
+        ("r9", "BS_D", "PRJ1", "PRJ1_x"),   # two conditions plus an uncurated run: the uncurated one keeps the plain unit
+        ("r10", "BS_D", "PRJ1", "PRJ1_y"),
+        ("r11", "BS_D", "PRJ1", None),
+        ("r7", "", "PRJ1", "PRJ1_x"),       # no biosample accession: its own unit, whatever the condition
+        ("r8", "", "PRJ1", "PRJ1_y"),
+    ]
+    conn = duckdb.connect(str(db_path))
+    for sample_id, biosample, bioproject, condition_id in rows:
+        conn.execute(
+            "INSERT INTO samples (sample_id, run_accession, biosample, bioproject, condition_id, pipeline_status) "
+            "VALUES (?, ?, ?, ?, ?, 'QUANTIFIED')",
+            [sample_id, sample_id, biosample, bioproject, condition_id],
+        )
+    units = fetch_biosample_units(conn).set_index("sample_id")["unit_id"].to_dict()
+    conn.close()
+    assert units["r1"] == units["r2"] == "PRJ1|BS_A"
+    assert units["r3"] == "PRJ1|BS_B|PRJ1_x" and units["r4"] == "PRJ1|BS_B|PRJ1_y"
+    assert units["r5"] == units["r6"] == "PRJ1|BS_C"
+    assert units["r9"] == "PRJ1|BS_D|PRJ1_x" and units["r10"] == "PRJ1|BS_D|PRJ1_y" and units["r11"] == "PRJ1|BS_D"
+    assert units["r7"] == "PRJ1|r7" and units["r8"] == "PRJ1|r8"
+
+
 def test_condition_level_stats_nan_variance_for_singleton_replicate():
     replicate_df = pd.DataFrame(
         {

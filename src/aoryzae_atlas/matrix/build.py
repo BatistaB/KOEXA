@@ -82,11 +82,24 @@ def fetch_biosample_units(conn: duckdb.DuckDBPyConnection) -> pd.DataFrame:
     material and must not count as independent evidence. A run with no
     biosample accession falls back to being its own unit (never merged by
     guesswork).
+
+    Exception: when the curated conditions say the runs of one biosample are
+    different cultures (a depositor registered a single BioSample for several
+    carbon sources / time points), they are not re-sequencing of one material;
+    the condition id is appended so each condition is its own unit. Runs
+    without a curated condition keep the plain biosample unit.
     """
     return conn.execute(
         """
         SELECT sample_id,
-               bioproject || '|' || COALESCE(NULLIF(biosample, ''), sample_id) AS unit_id,
+               bioproject || '|' || COALESCE(NULLIF(biosample, ''), sample_id)
+                 || CASE
+                      WHEN NULLIF(biosample, '') IS NOT NULL
+                       AND condition_id IS NOT NULL
+                       AND COUNT(DISTINCT condition_id) OVER (PARTITION BY bioproject, biosample) > 1
+                      THEN '|' || condition_id
+                      ELSE ''
+                    END AS unit_id,
                bioproject,
                NULLIF(strain, '') AS strain,
                biosample
