@@ -10,7 +10,7 @@ def test_doctor_exits_zero_on_healthy_repo():
     runner = CliRunner()
     result = runner.invoke(cli, ["doctor"])
     assert result.exit_code == 0, result.output
-    assert "AOED doctor report" in result.output
+    assert "KOEXA doctor report" in result.output
 
 
 def test_init_is_idempotent():

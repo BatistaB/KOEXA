@@ -43,8 +43,8 @@ export function TopBar({
       <button type="button" className="top-bar__brand" onClick={onBrandClick}>
         <img className="top-bar__logo" src={lebimoLogo} alt="LEBIMO — Metabolic Engineering Lab" />
         <span className="top-bar__brand-divider" aria-hidden="true" />
-        <span className="top-bar__brand-mark">AOED</span>
-        <span className="top-bar__brand-sub">A. oryzae Expression Database</span>
+        <span className="top-bar__brand-mark">KOEXA</span>
+        <span className="top-bar__brand-sub">Koji Expression Atlas</span>
       </button>
 
       <div className="top-bar__filter">

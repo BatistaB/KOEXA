@@ -3,7 +3,7 @@
 Needed to aggregate Salmon's transcript-level quantification up to AO09
 gene-level TPM/counts (PROJECT_MASTER_SPEC.md section 9's "transcript-to-gene
 aggregation" step). nf-core/rnaseq does not derive this for a custom
-non-Ensembl reference, so it is AOED-specific derived metadata, not a
+non-Ensembl reference, so it is KOEXA-specific derived metadata, not a
 reimplementation of anything nf-core/Salmon already does.
 """
 from __future__ import annotations

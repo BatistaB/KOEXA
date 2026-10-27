@@ -40,7 +40,7 @@ __all__ = ["collect_study_evidence", "deposition_snippets", "write_evidence"]
 
 EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
 EUROPEPMC = "https://www.ebi.ac.uk/europepmc/webservices/rest/"
-USER_AGENT = "aoryzae-atlas/0.1 (AOED study annotation)"
+USER_AGENT = "aoryzae-atlas/0.1 (KOEXA study annotation)"
 _DEPOSIT_WORDS = re.compile(
     r"deposit|data availability|available (?:in|at|under|from)|accession (?:code|number|no)|"
     r"generated in this study|submitted to|have been (?:uploaded|archived)",

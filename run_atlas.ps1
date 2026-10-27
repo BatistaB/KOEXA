@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    AOED / Aspergillus oryzae Transcriptome Atlas - local launcher.
+    KOEXA / Koji Expression Atlas - local launcher.
 
 .DESCRIPTION
     Thin wrapper so the user never has to remember Python venv activation or
@@ -63,11 +63,11 @@ function Resolve-BasePython {
             }
         }
     }
-    throw "No working Python >= 3.10 interpreter found on PATH (candidates tried: $($candidates -join ', ')). Install Python 3.10+ before running AOED."
+    throw "No working Python >= 3.10 interpreter found on PATH (candidates tried: $($candidates -join ', ')). Install Python 3.10+ before running KOEXA."
 }
 
 if (-not (Test-Path $VenvPython)) {
-    Write-Host "AOED: creating virtual environment at $VenvDir ..."
+    Write-Host "KOEXA: creating virtual environment at $VenvDir ..."
     $base = Resolve-BasePython
     $baseParts = $base -split " "
     & $baseParts[0] @(Get-ExtraArgs $baseParts) -m venv $VenvDir
@@ -86,7 +86,7 @@ if (Test-Path $MarkerFile) {
 }
 
 if ($NeedsInstall) {
-    Write-Host "AOED: installing/updating aoryzae_atlas (editable) ..."
+    Write-Host "KOEXA: installing/updating aoryzae_atlas (editable) ..."
     & $VenvPython -m pip install --quiet --upgrade pip
     & $VenvPython -m pip install --quiet -e "$RepoRoot"
     Set-Content -Path $MarkerFile -Value $PyprojectHash

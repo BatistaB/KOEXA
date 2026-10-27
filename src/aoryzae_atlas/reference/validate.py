@@ -96,7 +96,7 @@ def validate_reference(
 
 def render_validation_report(report: ReferenceValidationReport) -> str:
     lines = [
-        "AOED Milestone 3 -- canonical RIB40 reference structural validation",
+        "KOEXA Milestone 3 -- canonical RIB40 reference structural validation",
         "",
         f"Genome: {report.genome_sequence_count} sequences, {report.genome_total_length:,} bp total",
         f"GFF protein-coding genes: {report.gff_gene_count}",

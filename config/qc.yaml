@@ -1,4 +1,4 @@
-# QC thresholds and rules for the AOED pipeline.
+# QC thresholds and rules for the KOEXA pipeline.
 #
 # Per PROJECT_MASTER_SPEC.md section 10: these are configurable rules, not a
 # single hard-coded detection threshold. Values below are conservative

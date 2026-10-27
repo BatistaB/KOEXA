@@ -1,10 +1,10 @@
-# TODO — AOED / Aspergillus oryzae Transcriptome Atlas
+# TODO — KOEXA / Koji Expression Atlas
 
 Tracks live progress against the milestones in `PROJECT_MASTER_SPEC.md`
 section 37. Keep this file honest: check an item only when it is actually
 done, not scaffolded.
 
-## Milestone 0 — Repository and runnable AOED shell (COMPLETE)
+## Milestone 0 — Repository and runnable KOEXA shell (COMPLETE)
 
 - [x] Create project directory structure (config/, metadata/, workflows/,
       reference/, scratch/, runtime/, results/, database/, matrices/,
@@ -483,7 +483,7 @@ User's idea (2026-09-21), for the eventual site/app: a window showing all
 8 nuclear chromosomes of RIB40, colored by transcript abundance (TPM) per
 genomic region, to visually spot high- and low-expression regions. Not an
 AFED feature (docs/decisions/0002-afed-audit.md's audited interface has no
-genome/ideogram view) -- an AOED-original addition. Closer in spirit to
+genome/ideogram view) -- a KOEXA-original addition. Closer in spirit to
 the JBrowse ambition already flagged for Milestone 8 (PROJECT_MASTER_SPEC.md
 section 37/40), but meaningfully lighter: it only needs gene-level Salmon
 TPM + gene coordinates already in the database, not STAR alignment/BAM/
@@ -672,7 +672,7 @@ no new sequencing/pipeline work):**
 
 **Open questions, deliberately not decided here:**
 - **Multi-strain support.** Per the cross-strain scope decision above
-  ("Sample curation" section, 2026-09-20): AOED's sample scope already
+  ("Sample curation" section, 2026-09-20): KOEXA's sample scope already
   spans strains beyond RIB40, but a genome browser needs an actual
   reference sequence + annotation per strain shown -- GDV only ever shows
   one fixed NCBI assembly. Whether/how to browse a non-RIB40 strain
@@ -814,7 +814,7 @@ No backend change -- reads the same `classification.json`
 
 Started ahead of Milestone 7's formal gate (Milestones 1-6 aren't all
 validated yet), at the user's request, to do the UX/product design work
-for the AOED interface while it's fresh. Resolved ADR 0002's deferred
+for the KOEXA interface while it's fresh. Resolved ADR 0002's deferred
 "Shiny vs. Python-native" question: **React + TypeScript + Vite**, not
 AFED's Shiny code -- see `docs/decisions/0005-milestone7-frontend-stack.md`.
 `app/aoed_shiny/` (empty placeholder) removed; lives in `app/web/` now.

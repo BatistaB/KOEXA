@@ -3,7 +3,7 @@
 Only the identifier-relevant columns are read. The source workbook was
 reused from an unrelated metabolic-model spreadsheet and also carries
 columns such as "Model Function"/"Translation Reaction"; those are ignored
-here and must not be treated as AOED data.
+here and must not be treated as KOEXA data.
 """
 from __future__ import annotations
 

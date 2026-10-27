@@ -1,4 +1,4 @@
-"""AOED / Aspergillus oryzae Transcriptome Atlas.
+"""KOEXA / Koji Expression Atlas.
 
 See PROJECT_MASTER_SPEC.md at the repository root for the full specification.
 This package intentionally starts as a thin skeleton (Milestone 0): config

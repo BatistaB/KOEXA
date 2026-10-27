@@ -107,7 +107,7 @@ def run_doctor() -> list[CheckResult]:
 def doctor_report_text() -> tuple[str, bool]:
     """Return (report_text, all_required_ok)."""
     results = run_doctor()
-    lines = [f"AOED doctor report (aoryzae_atlas {__version__})", f"Project root: {PROJECT_ROOT}", ""]
+    lines = [f"KOEXA doctor report (aoryzae_atlas {__version__})", f"Project root: {PROJECT_ROOT}", ""]
     all_required_ok = True
     for r in results:
         if r.required and not r.ok:

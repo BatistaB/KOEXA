@@ -45,7 +45,7 @@ def render_markdown_report(
     layout_counts = Counter(r.library_layout for r in tables.runs)
 
     lines = [
-        "# AOED discovery report -- Aspergillus oryzae RNA-Seq (SRA)",
+        "# KOEXA discovery report -- Aspergillus oryzae RNA-Seq (SRA)",
         "",
         f"Query date (UTC): {provenance.query_date_utc}",
         f"Source API: NCBI SRA, via {provenance.tool} {provenance.tool_version}",

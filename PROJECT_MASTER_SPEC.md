@@ -2,16 +2,16 @@
 
 ## Aspergillus oryzae Transcriptome Atlas
 
-**Project type:** AOED (*Aspergillus oryzae* Expression Database), a
+**Project type:** KOEXA (KOji EXpression Atlas), a
 reproducible public RNA-seq compendium and transcriptome atlas inspired
 by AFED (*Aspergillus flavus* Expression Database)\
 **Primary organism:** *Aspergillus oryzae*\
 **Primary goal:** first reproduce the scientifically useful first layer
 of AFED for *A. oryzae*: discover and curate public transcriptome
 studies, process them uniformly, expose AO09-centered expression and
-metadata through an interactive AOED interface, and retain compact,
+metadata through an interactive KOEXA interface, and retain compact,
 traceable outputs. After this acquisition and expression-database layer
-is validated, extend AOED with prevalence, variability, Tsallis/Hill
+is validated, extend KOEXA with prevalence, variability, Tsallis/Hill
 diversity, specificity, clustering, biological classification,
 promoter-candidate discovery, and future analyses.
 
@@ -20,7 +20,7 @@ the public-data pipeline from scratch. Use `pysradb` and official
 NCBI/ENA APIs for discovery, `nf-core/fetchngs` for approved downloads,
 `nf-core/rnaseq` for reproducible QC and quantification, Nextflow for
 checkpointing/resume, and the MIT-licensed AFED code and publication as
-the methodological and interface reference. AOED-specific code owns
+the methodological and interface reference. KOEXA-specific code owns
 AO09/UniProt reconciliation, condition curation, database ingestion,
 storage policy, atlas construction, and advanced analyses.
 
@@ -42,7 +42,7 @@ Priorities, in order:
 8.  **Extensibility**
 9.  **Performance**
 
-The first product milestone is AOED functional parity with the useful
+The first product milestone is KOEXA functional parity with the useful
 core of AFED, adapted to *A. oryzae*. Treat AFED as a cited reference
 implementation, not as an unexamined black box. Preserve its MIT license
 and attribution for reused code. Audit dependencies, data assumptions,
@@ -57,10 +57,10 @@ problem well:
     validation;
 -   `nf-core/rnaseq` for reproducible RNA-seq QC and quantification;
 -   Nextflow `-resume` for durable recovery after interruption;
--   AFED's Shiny interface patterns for the first AOED user experience.
+-   AFED's Shiny interface patterns for the first KOEXA user experience.
 
 Custom code must be limited to the parts that are scientifically or
-operationally specific to AOED: AO09/UniProt identifiers, metadata and
+operationally specific to KOEXA: AO09/UniProt identifiers, metadata and
 condition curation, study approval, provenance, safe cleanup, compact
 database ingestion, atlas matrices, and downstream analyses.
 
@@ -120,7 +120,7 @@ The atlas should eventually support questions such as:
 
 Development is deliberately divided into two scientific layers.
 
-**Layer 1 --- AOED expression database:**
+**Layer 1 --- KOEXA expression database:**
 
 -   inventory public *A. oryzae* transcriptome studies;
 -   curate studies, samples, conditions, strains, and replicates;
@@ -131,7 +131,7 @@ Development is deliberately divided into two scientific layers.
 -   provide gene barplots, heatmaps, PCA, downloads, co-expression, and
     genome-browser support as the data permit.
 
-**Layer 2 --- AOED atlas analytics:**
+**Layer 2 --- KOEXA atlas analytics:**
 
 -   sample- and condition-level matrices;
 -   prevalence, variability, and specificity;
@@ -142,7 +142,7 @@ Development is deliberately divided into two scientific layers.
 
 Layer 2 must not delay delivery and validation of Layer 1. Advanced
 classification begins only after discovery, acquisition, reference
-selection, QC, and the AOED expression database are functioning.
+selection, QC, and the KOEXA expression database are functioning.
 
 **Important:** the raw TPM matrix is the primary reusable scientific
 asset. Classification is downstream and must never replace or overwrite
@@ -172,7 +172,7 @@ the measurements.
     logs, and provenance are retained.
 -   Large raw/intermediate files are deleted after successful
     validation.
--   An AOED interactive application modeled on AFED, initially
+-   A KOEXA interactive application modeled on AFED, initially
     supporting gene search, per-sample TPM barplots, metadata inspection,
     heatmaps, PCA, downloadable tables, and QC visibility.
 -   UniProt Entry, Entry Name, protein names, and aliases as searchable
@@ -186,13 +186,13 @@ the measurements.
 -   GEM integration.
 -   Differential expression.
 -   Publicly hosted, production-scale web deployment; the MVP may run
-    the AOED interface locally.
+    the KOEXA interface locally.
 -   Immediate feature parity with every AFED visualization before the
-    first AOED data release.
+    first KOEXA data release.
 -   Machine-learning biological interpretation.
 -   Automatic literature interpretation by an LLM.
 -   Processing every public sample immediately.
--   Tsallis/Hill classification before the AOED acquisition,
+-   Tsallis/Hill classification before the KOEXA acquisition,
     quantification, metadata, and basic interface layers are validated.
 
 These may be added later.
@@ -423,15 +423,15 @@ State transitions must be logged with timestamps.
 
 The pipeline must be resumable.
 
-AOED status and Nextflow status are complementary. DuckDB records the
+KOEXA status and Nextflow status are complementary. DuckDB records the
 scientific/business state of each sample and processing event. Nextflow
 records task-level execution and cache state. Store the Nextflow run
 name/session, pipeline revision, parameters, work directory, and resume
-command with the AOED processing event.
+command with the KOEXA processing event.
 
 A normal pause should stop at a safe task boundary. An abrupt shutdown
 must leave incomplete files/directories marked as partial and must not
-advance the AOED state. On restart, inspect the prior Nextflow session
+advance the KOEXA state. On restart, inspect the prior Nextflow session
 and resume completed cached tasks rather than restarting the sample.
 Never treat the presence of an unvalidated output file as a completed
 checkpoint.
@@ -700,7 +700,7 @@ Also export wide matrices for users.
 
 Do not build a new download and general-purpose RNA-seq processing
 pipeline when maintained community workflows already provide those
-capabilities. AOED should orchestrate pinned releases of:
+capabilities. KOEXA should orchestrate pinned releases of:
 
 -   `nf-core/fetchngs` for approved accession resolution, metadata,
     FASTQ acquisition, and checksum validation;
@@ -708,7 +708,7 @@ capabilities. AOED should orchestrate pinned releases of:
     quantification;
 -   Nextflow for task isolation, caching, provenance, and `-resume`.
 
-For the primary AOED matrix, prefer Salmon transcript-level
+For the primary KOEXA matrix, prefer Salmon transcript-level
 quantification and gene-level aggregation to avoid permanently retaining
 BAM files. Pin workflow, container, reference, and software versions.
 
@@ -741,7 +741,7 @@ copy AFED's cluster-specific `sbatch` orchestration when Nextflow already
 provides resumability and portable execution. Reused AFED code must
 retain its MIT license notice and citation.
 
-STAR may be used as a secondary, explicitly configured route when AOED
+STAR may be used as a secondary, explicitly configured route when KOEXA
 needs genome-aligned coverage for JBrowse or alignment-derived QC. BAM
 files remain temporary. Retain compact coverage such as bigWig only
 after validation, then delete BAM safely according to the Storage
@@ -756,7 +756,7 @@ Preserve the raw transcript-level `quant.sf` or a compact equivalent if
 storage permits; gene-level data are mandatory.
 
 Place Nextflow work files under a dedicated scratch directory. Never run
-`nextflow clean` or remove work directories until AOED has validated and
+`nextflow clean` or remove work directories until KOEXA has validated and
 registered all required compact outputs for the affected run. A resumed
 execution must use the same pinned inputs, parameters, code revision,
 and reference or must start a new versioned run.
@@ -883,7 +883,7 @@ averaging them.
 
 The project aims to express genes using canonical `AO09...` identifiers.
 
-AO09 is the primary gene key throughout AOED. UniProt accessions,
+AO09 is the primary gene key throughout KOEXA. UniProt accessions,
 UniProt Entry Names, gene symbols, protein names, and historical aliases
 are searchable secondary identifiers and annotations. They must never
 replace AO09 as the canonical key.
@@ -1386,7 +1386,7 @@ QUEUE
 PROCESS
 ```
 
-Before approving downloads, generate an AOED discovery report containing
+Before approving downloads, generate a KOEXA discovery report containing
 at minimum:
 
 -   query date, source APIs, exact queries, and tool versions;
@@ -1429,7 +1429,7 @@ Aim for diversity:
 
 ------------------------------------------------------------------------
 
-# 24. MVP --- AOED first layer
+# 24. MVP --- KOEXA first layer
 
 Do not start with the full public universe.
 
@@ -1454,15 +1454,15 @@ MVP must demonstrate:
 5.  `nf-core/fetchngs` acquisition for approved accessions;
 6.  `nf-core/rnaseq` QC and Salmon quantification;
 7.  storage safety and safe deletion after validation;
-8.  interruption followed by successful Nextflow/AOED resume;
+8.  interruption followed by successful Nextflow/KOEXA resume;
 9.  sample-level gene TPM matrix;
 10. basic replicate QC;
-11. AOED gene-expression barplot with sample metadata;
-12. AOED heatmap and PCA views;
+11. KOEXA gene-expression barplot with sample metadata;
+12. KOEXA heatmap and PCA views;
 13. downloadable expression and metadata tables;
 14. visible sample QC and inclusion/exclusion status.
 
-AFED-equivalent co-expression and JBrowse are the next AOED feature
+AFED-equivalent co-expression and JBrowse are the next KOEXA feature
 milestone. Tsallis/Hill metrics, specificity, clustering, and biological
 class naming begin only after this first layer passes tests and its data
 are reviewed.
@@ -1522,7 +1522,7 @@ The user-facing launcher on Windows should be:
 .\run_atlas.ps1
 ```
 
-It should expose the AOED console and local application without
+It should expose the KOEXA console and local application without
 requiring the user to remember Nextflow commands. Under the hood,
 commands must save the pinned `nf-core` release and the exact Nextflow
 command. Long-running workflows must support graceful interruption and
@@ -1544,7 +1544,7 @@ Scratch usage:        ...
 Current sample:       ...
 Next resumable step:  ...
 Nextflow run/session: ...
-AOED app:             ...
+KOEXA app:             ...
 ```
 
 ------------------------------------------------------------------------
@@ -1626,7 +1626,7 @@ At minimum:
 -   Hill numbers
 -   prevalence
 -   replicate aggregation
--   AOED application queries against a small fixture database
+-   KOEXA application queries against a small fixture database
 
 ## Integration tests
 
@@ -1670,7 +1670,7 @@ Possible options:
     workstation;
 -   pinned Docker/Apptainer containers selected by nf-core profiles;
 -   Conda/Mamba only where containers are impractical;
--   a native Python environment for the lightweight AOED CLI when useful.
+-   a native Python environment for the lightweight KOEXA CLI when useful.
 
 Record exact versions of:
 
@@ -1747,7 +1747,7 @@ gene_clusters.parquet
 aoed_release_manifest.json
 ```
 
-AOED version 0.1 also delivers a runnable local interactive application
+KOEXA version 0.1 also delivers a runnable local interactive application
 with gene search, expression barplots, sample metadata/QC, heatmaps,
 PCA, and table downloads. Application views are derived from versioned
 database exports and must display the release/reference version.
@@ -1852,7 +1852,7 @@ Attach publications and evidence to genes/conditions.
 
 ## Interface
 
-The AOED interface is part of the first product layer, not a distant
+The KOEXA interface is part of the first product layer, not a distant
 extension. Begin from the MIT-licensed AFED Shiny implementation or
 reproduce its behavior with a justified alternative. The initial local
 interface must prioritize:
@@ -1865,7 +1865,7 @@ interface must prioritize:
 -   PCA;
 -   downloadable expression and metadata tables.
 
-Add co-expression, enrichment, and JBrowse after the basic AOED views
+Add co-expression, enrichment, and JBrowse after the basic KOEXA views
 are validated. Public hosting, user accounts, and production-scale web
 operations remain future work.
 
@@ -1948,7 +1948,7 @@ Affected samples can be queued for reprocessing.
 
 # 37. First implementation milestones
 
-## Milestone 0 --- Repository and runnable AOED shell
+## Milestone 0 --- Repository and runnable KOEXA shell
 
 -   create project structure, environment, configuration, and logging;
 -   create `run_atlas.ps1`, `atlas doctor`, `atlas status`, and CLI
@@ -1978,7 +1978,7 @@ Affected samples can be queued for reprocessing.
 -   estimate download volume;
 -   characterize strains, conditions, layouts, replicates, and metadata
     completeness;
--   generate the human- and machine-readable AOED discovery report;
+-   generate the human- and machine-readable KOEXA discovery report;
 -   propose, but do not automatically approve, the first studies.
 
 ## Milestone 3 --- Canonical RIB40 reference
@@ -1994,7 +1994,7 @@ Affected samples can be queued for reprocessing.
 
 -   create DuckDB schema and migrations;
 -   implement study/sample/condition/identifier/provenance models;
--   implement AOED state tracking around Nextflow task state;
+-   implement KOEXA state tracking around Nextflow task state;
 -   monitor disk and isolate scratch/work directories;
 -   implement graceful pause, restart recovery, and safe cleanup tests;
 -   ensure `-resume` inputs and session provenance are preserved.
@@ -2026,7 +2026,7 @@ declaring this milestone complete.
 -   implement basic replicate QC and condition aggregation;
 -   confirm sample/run/technical-replicate distinctions.
 
-## Milestone 7 --- AOED basic interface
+## Milestone 7 --- KOEXA basic interface
 
 Adapt the AFED user experience for *A. oryzae*:
 
@@ -2038,10 +2038,10 @@ Adapt the AFED user experience for *A. oryzae*:
 -   PCA;
 -   downloadable matrices and metadata.
 
-This milestone, together with Milestones 0--6, defines AOED version
+This milestone, together with Milestones 0--6, defines KOEXA version
 0.1.
 
-## Milestone 8 --- AOED scale-up and AFED-equivalent extensions
+## Milestone 8 --- KOEXA scale-up and AFED-equivalent extensions
 
 -   expand to 20--40 reviewed samples, then to additional approved
     public studies in controlled batches;
@@ -2053,7 +2053,7 @@ This milestone, together with Milestones 0--6, defines AOED version
 ## Milestone 9 --- Gene statistics
 
 Implement abundance, prevalence, variability, specificity, and
-condition-enrichment metrics on the validated AOED matrix.
+condition-enrichment metrics on the validated KOEXA matrix.
 
 ## Milestone 10 --- Tsallis/Hill
 
@@ -2066,7 +2066,7 @@ imbalance.
 Benchmark clustering methods, retain computational cluster IDs, and
 assign cautious biological labels only after stability review.
 
-## Milestone 12 --- Advanced AOED report
+## Milestone 12 --- Advanced KOEXA report
 
 Generate a versioned report describing datasets, conditions, QC,
 replicates, TPM atlas, gene statistics, entropy, clusters, limitations,
@@ -2118,7 +2118,7 @@ computer and:
 11. inspect sample and workflow status;
 12. generate a gene × sample TPM matrix;
 13. aggregate biological replicates without losing individual samples;
-14. use a local AOED interface to view gene TPM barplots and metadata;
+14. use a local KOEXA interface to view gene TPM barplots and metadata;
 15. create heatmaps and PCA from selected valid samples;
 16. export expression and metadata tables;
 17. trace every TPM value back to its source accession, reference,
@@ -2126,7 +2126,7 @@ computer and:
 
 Gene-level Tsallis/Hill diversity, computational clustering, and
 biological class naming are version 0.2 analytical goals. They are not
-required to declare the AOED acquisition and expression layer usable.
+required to declare the KOEXA acquisition and expression layer usable.
 
 ------------------------------------------------------------------------
 
@@ -2139,13 +2139,13 @@ Start by:
 1.  reviewing this specification;
 2.  auditing the AFED article, MIT-licensed repository, data model,
     interface, and reusable components;
-3.  proposing the exact AOED repository architecture and local launcher;
+3.  proposing the exact KOEXA repository architecture and local launcher;
 4.  creating the repository skeleton, tests, `run_atlas.ps1`, and CLI
     needed for Milestone 0;
 5.  auditing the supplied AO09/UniProt workbook and protein FASTA and
     generating the Milestone 1 reconciliation report;
 6.  implementing discovery without downloading reads;
-7.  producing the dated AOED public-transcriptome inventory required by
+7.  producing the dated KOEXA public-transcriptome inventory required by
     Milestone 2;
 8.  identifying uncertain biological/technical assumptions and
     proposing the first manually reviewed study set;
@@ -2175,7 +2175,7 @@ nf-core acquisition + standardized processing
       ↓
 quality-controlled AO09/UniProt expression
       ↓
-AOED first layer: metadata + plots + heatmaps + PCA + downloads
+KOEXA first layer: metadata + plots + heatmaps + PCA + downloads
       ↓
 compact permanent atlas and advanced analytical layer
       ↓
@@ -2194,9 +2194,9 @@ repeatedly downloading and processing the raw RNA-seq data.
 
 ------------------------------------------------------------------------
 
-# 42. AFED reference implementation and AOED relationship
+# 42. AFED reference implementation and KOEXA relationship
 
-AOED version 0.1 is explicitly inspired by:
+KOEXA version 0.1 is explicitly inspired by:
 
 > Brian M. Mack and Matthew D. Lebar. AFED, a comprehensive resource for
 > *Aspergillus flavus* gene expression profiling. *Database*, 2025,
@@ -2208,16 +2208,16 @@ Reference implementation:
 https://github.com/kcamnairb/a_flavus_expression_db
 ```
 
-The AFED repository is published under the MIT license. Any AOED source
+The AFED repository is published under the MIT license. Any KOEXA source
 file substantially derived from AFED must preserve the required license
-and copyright notice. AOED documentation and publications must cite the
+and copyright notice. KOEXA documentation and publications must cite the
 AFED article and clearly distinguish reused, adapted, and newly developed
 components.
 
-AOED is not merely a renamed AFED deployment. It changes the organism,
+KOEXA is not merely a renamed AFED deployment. It changes the organism,
 reference, canonical identifier system, metadata ontology, processing
 orchestration, storage constraints, and downstream scientific scope.
 The AFED interface and scientific workflow define the first-layer
 product benchmark; AO09/UniProt reconciliation, Nextflow/nf-core
 execution, resumability, storage safety, condition-level analysis, and
-advanced atlas analytics are AOED-specific requirements.
+advanced atlas analytics are KOEXA-specific requirements.

@@ -1,6 +1,6 @@
 ---
 name: annotate-study
-description: Enrich an AOED study (BioProject) with its originating paper, a 3-part summary (objective / experimental design / main finding) and per-sample tags from the shared vocabulary. Use when a new study enters metadata/samples.tsv, when `atlas refresh` / `atlas annotate status` reports a study that "needs curation", or when the user asks to annotate, tag, or find the paper for a study.
+description: Enrich a KOEXA study (BioProject) with its originating paper, a 3-part summary (objective / experimental design / main finding) and per-sample tags from the shared vocabulary. Use when a new study enters metadata/samples.tsv, when `atlas refresh` / `atlas annotate status` reports a study that "needs curation", or when the user asks to annotate, tag, or find the paper for a study.
 ---
 
 # Annotate a study

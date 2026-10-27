@@ -228,7 +228,7 @@ def write_mapping_tsv(mapping_rows: list[MappingRow], out_path: Path) -> None:
 
 def render_summary_report(summary: ReconciliationSummary, reference_version: str) -> str:
     lines = [
-        "AOED Milestone 1 -- AO09/UniProt reconciliation report",
+        "KOEXA Milestone 1 -- AO09/UniProt reconciliation report",
         f"Reference version (evidence, not frozen): {reference_version}",
         "",
         f"UniProt workbook rows:        {summary.n_uniprot_rows}",

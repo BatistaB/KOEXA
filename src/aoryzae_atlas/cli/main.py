@@ -1,4 +1,4 @@
-"""AOED command-line interface.
+"""KOEXA command-line interface.
 
 Implements the CLI shell described in PROJECT_MASTER_SPEC.md section 25.
 `init`, `doctor`, `status`, `storage status`, and `identifiers reconcile`
@@ -159,7 +159,7 @@ def _not_implemented(milestone: str, what: str) -> None:
 @click.group()
 @click.version_option(version=__version__, prog_name="atlas")
 def cli() -> None:
-    """AOED / Aspergillus oryzae Transcriptome Atlas command-line interface."""
+    """KOEXA / Koji Expression Atlas command-line interface."""
 
 
 @cli.command()
@@ -182,7 +182,7 @@ def init() -> None:
     status = init_runtime_status()
     logger.info("Runtime status ready (initialized_at=%s)", status.initialized_at)
 
-    click.echo(f"AOED project root: {PROJECT_ROOT}")
+    click.echo(f"KOEXA project root: {PROJECT_ROOT}")
     click.echo(f"Directories created this run: {len(missing_dirs)}")
     if missing_configs:
         click.echo(f"Missing config files: {len(missing_configs)} (see warnings above)")
@@ -251,7 +251,7 @@ def status() -> None:
         f"Current sample:       {rstatus.current_sample if rstatus else 'N/A (run `atlas init` first)'}",
         f"Next resumable step:  {rstatus.next_resumable_step if rstatus else 'N/A'}",
         f"Nextflow run/session: {rstatus.nextflow_run_name if rstatus else 'N/A'}",
-        f"AOED app:             not implemented yet (Milestone 7)",
+        f"KOEXA app:             not implemented yet (Milestone 7)",
     ]
     click.echo("\n".join(lines))
 
@@ -1137,12 +1137,12 @@ def matrix_build() -> None:
 
 @cli.group(name="app")
 def app_group() -> None:
-    """AOED interactive application commands (Milestone 7)."""
+    """KOEXA interactive application commands (Milestone 7)."""
 
 
 @app_group.command("serve")
 def app_serve() -> None:
-    _not_implemented("Milestone 7 (AOED basic interface)", "atlas app serve")
+    _not_implemented("Milestone 7 (KOEXA basic interface)", "atlas app serve")
 
 
 @app_group.command("export-web")
@@ -1560,7 +1560,7 @@ def report() -> None:
 
 @report.command("build")
 def report_build() -> None:
-    _not_implemented("Milestone 12 (Advanced AOED report)", "atlas report build")
+    _not_implemented("Milestone 12 (Advanced KOEXA report)", "atlas report build")
 
 
 if __name__ == "__main__":

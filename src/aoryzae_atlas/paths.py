@@ -13,7 +13,7 @@ def find_project_root(start: Path | None = None) -> Path:
     """Walk upward from `start` (default: this file) to find the repo root.
 
     The repo root is identified by the presence of PROJECT_MASTER_SPEC.md,
-    which every AOED checkout must have at its top level.
+    which every KOEXA checkout must have at its top level.
     """
     here = (start or Path(__file__)).resolve()
     for candidate in [here, *here.parents]:

@@ -1,6 +1,6 @@
 # app/
 
-Home of the AOED interactive application.
+Home of the KOEXA interactive application.
 
 `web/` — React + TypeScript + Vite frontend (Milestone 7). AFED's
 interface/UX patterns remain the design benchmark (see

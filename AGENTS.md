@@ -39,7 +39,7 @@ file and the spec as a bug in this file.
   visualization, entropy, or clustering features ahead of the acquisition,
   QC, and database layers they depend on.
 - Reuse `nf-core/fetchngs`, `nf-core/rnaseq`, and Nextflow rather than
-  reimplementing download/QC/quantification. AOED-specific code is limited to
+  reimplementing download/QC/quantification. KOEXA-specific code is limited to
   identifier reconciliation, condition curation, database ingestion, storage
   policy, atlas construction, and downstream analyses.
 - Any code substantially derived from AFED (MIT license) must retain its

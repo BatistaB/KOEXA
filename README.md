@@ -1,4 +1,4 @@
-# AOED — *Aspergillus oryzae* Expression Database / Transcriptome Atlas
+# KOEXA — KOji EXpression Atlas
 
 A reproducible, public RNA-seq compendium and transcriptome atlas for
 *Aspergillus oryzae*, inspired by [AFED](https://github.com/kcamnairb/a_flavus_expression_db)
@@ -13,7 +13,7 @@ README is an orientation pointer only — when in doubt, the spec wins.
 
 Milestones 0-3 are complete:
 
-- **Milestone 0** (repository and runnable AOED shell): CLI shell
+- **Milestone 0** (repository and runnable KOEXA shell): CLI shell
   (`atlas doctor` / `atlas init` / `atlas status`) functional on the
   maintainer's Windows machine; Nextflow/nf-core execution available via
   Docker Desktop (WSL2 backend) with a WSL2 Ubuntu distro running Nextflow
@@ -82,6 +82,6 @@ kept permanently on disk (see the Storage Guardian, section 5).
 
 ## License and attribution
 
-AOED-specific code is original. Any component substantially derived from
+KOEXA-specific code is original. Any component substantially derived from
 AFED (MIT-licensed) retains its license and copyright notice and is called
 out explicitly in code comments and in `docs/decisions/`.

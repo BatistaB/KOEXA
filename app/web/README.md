@@ -1,7 +1,7 @@
-# AOED web
+# KOEXA web
 
 React + TypeScript + Vite frontend for the *A. oryzae* Expression
-Database (AOED). See `docs/decisions/0005-milestone7-frontend-stack.md`
+Database (KOEXA). See `docs/decisions/0005-milestone7-frontend-stack.md`
 at the repo root for why this stack was chosen over the AFED-derived
 R/Shiny reference implementation, and `PROJECT_MASTER_SPEC.md` section 24
 for the product scope this is working toward.
@@ -69,7 +69,7 @@ site to reflect the latest data. Its last step alone
 already-computed matrices/classification without recomputing them.
 
 Or preview from the repo root via the Claude Code browser preview config
-(`.claude/launch.json`, name `aoed-web`) — run `atlas refresh` first.
+(`.claude/launch.json`, name `koexa-web`) — run `atlas refresh` first.
 
 ## Design notes
 
