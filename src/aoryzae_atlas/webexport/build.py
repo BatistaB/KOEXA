@@ -159,11 +159,16 @@ def export_samples(conn: duckdb.DuckDBPyConnection) -> list[dict[str, Any]]:
     df = conn.execute(
         f"""
         SELECT
-            s.sample_id, s.run_accession, s.biosample, s.bioproject, s.strain,
+            s.sample_id, s.run_accession, s.biosample, s.bioproject,
+            -- the curated condition's strain wins: raw SRA/BioSample strain fields are
+            -- sometimes blank or a free-text sentence, and load-discovery rewrites them
+            -- on every refresh, so a fix cannot live on the sample row.
+            COALESCE(NULLIF(c.strain, ''), NULLIF(s.strain, ''), '') AS strain,
             s.condition_id, TRY_CAST(s.biological_replicate AS INTEGER) AS biological_replicate,
             s.library_layout, s.library_strategy, s.read_count,
             s.pipeline_status, s.reference_version, s.pipeline_version
         FROM samples s
+        LEFT JOIN conditions c ON c.condition_id = s.condition_id
         WHERE {CURATED_QUANTIFIED_FILTER}
         ORDER BY s.sample_id
         """
@@ -396,7 +401,7 @@ def export_chromosome_expression(conn: duckdb.DuckDBPyConnection, bin_size_bp: i
 # listed here sort last, alphabetically.
 TAG_CATEGORY_ORDER = [
     "role", "genotype", "strain", "biological_material", "growth_phase", "culture_system", "medium",
-    "carbon_source", "nitrogen_source", "substrate", "compound", "stress", "oxygen", "temperature", "pH",
+    "carbon_source", "nitrogen_source", "substrate", "compound", "stress", "oxygen", "light", "temperature", "pH",
     "time", "industrial_context",
 ]
 
