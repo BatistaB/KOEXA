@@ -41,6 +41,7 @@ from ..database.approve import (
 )
 from ..database.ingest_conditions import load_conditions, load_sample_condition_links
 from ..database.ingest_discovery import load_datasets, load_samples
+from ..database.study_groups import load_study_groups
 from ..database.ingest_genes import load_gene_external_identifiers, load_genes
 from ..database.ingest_results import (
     ResultsIncompleteError,
@@ -116,6 +117,7 @@ from ..paths import (
     SCRATCH_DIR,
     STUDY_ANNOTATIONS_DIR,
     STUDY_EVIDENCE_DIR,
+    STUDY_GROUPS_FILE,
     TRANSCRIPT_TO_GENE_FILE,
     UNIPROT_WORKBOOK_FILE,
     WEB_DATA_DIR,
@@ -519,8 +521,9 @@ def database_load_discovery() -> None:
     apply_migrations(DATABASE_FILE)
     conn = duckdb.connect(str(DATABASE_FILE))
     try:
-        n_datasets = load_datasets(conn, studies_path)
-        n_samples = load_samples(conn, runs_path, samples_path)
+        groups = load_study_groups(STUDY_GROUPS_FILE)
+        n_datasets = load_datasets(conn, studies_path, groups)
+        n_samples = load_samples(conn, runs_path, samples_path, groups)
     finally:
         conn.close()
     logger.info("Loaded %d datasets and %d samples into %s", n_datasets, n_samples, DATABASE_FILE)
@@ -611,7 +614,11 @@ def annotate_collect(bioprojects: tuple[str, ...], only_missing: bool) -> None:
         click.echo("No study needs evidence collection.")
         return
     failures = []
+    grouped = set(load_study_groups(STUDY_GROUPS_FILE).values())
     for bioproject in targets:
+        if bioproject in grouped:
+            click.echo(f"{bioproject}: study group (member BioProjects in metadata/study_groups.tsv) -- curate by hand, no evidence collected.")
+            continue
         try:
             evidence = collect_study_evidence(bioproject, DISCOVERY_DIR, CONDITIONS_FILE, SAMPLES_CURATION_FILE)
         except OSError as exc:  # network failure: report, keep going

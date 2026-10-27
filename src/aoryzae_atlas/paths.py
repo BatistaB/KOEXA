@@ -65,6 +65,8 @@ GENE_MASTER_FILE = METADATA_DIR / "gene_master.tsv"
 
 CONDITIONS_FILE = METADATA_DIR / "conditions.tsv"
 SAMPLES_CURATION_FILE = METADATA_DIR / "samples.tsv"
+# BioProjects that are one study (see aoryzae_atlas.database.study_groups).
+STUDY_GROUPS_FILE = METADATA_DIR / "study_groups.tsv"
 
 # Study enrichment (`atlas annotate ...`): curated paper/summary/tags per
 # study, the shared tag vocabulary, and the auto-collected evidence they

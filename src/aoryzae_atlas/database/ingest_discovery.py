@@ -21,6 +21,7 @@ import duckdb
 import pandas as pd
 
 from ..state import SampleState
+from .study_groups import group_description
 
 _DISCOVERY_STATUS_TO_SAMPLE_STATE = {
     "REQUIRES_REVIEW": SampleState.METADATA_REVIEW.value,
@@ -28,8 +29,34 @@ _DISCOVERY_STATUS_TO_SAMPLE_STATE = {
 }
 
 
-def load_datasets(conn: duckdb.DuckDBPyConnection, studies_tsv: Path) -> int:
+def _join_unique(values) -> str:
+    return "; ".join(dict.fromkeys(v for v in values if v))
+
+
+def _collapse_grouped_datasets(frame: pd.DataFrame, groups: dict[str, str]) -> pd.DataFrame:
+    """One dataset row per study group in place of its member BioProjects' rows."""
+    member_mask = frame["bioproject"].isin(groups)
+    collapsed = []
+    for study_id in sorted(set(frame.loc[member_mask, "bioproject"].map(groups))):
+        members = frame[member_mask & (frame["bioproject"].map(groups) == study_id)]
+        row = {column: _join_unique(members[column]) for column in frame.columns}
+        row.update(
+            dataset_id=study_id,
+            bioproject=study_id,
+            study_description=group_description(sorted(members["study_description"]), len(members)),
+            discovery_date=min(members["discovery_date"]),
+            notes=f"Study group {study_id}; member BioProjects: " + ", ".join(sorted(members["bioproject"])),
+        )
+        collapsed.append(row)
+    return pd.concat([frame[~member_mask], pd.DataFrame(collapsed, columns=frame.columns)], ignore_index=True)
+
+
+def load_datasets(conn: duckdb.DuckDBPyConnection, studies_tsv: Path, groups: dict[str, str] | None = None) -> int:
     frame = pd.read_csv(studies_tsv, sep="\t", dtype=str, keep_default_na=False)
+    if groups:
+        # Rows loaded before the group existed would otherwise linger beside the group's row.
+        conn.execute(f"DELETE FROM datasets WHERE bioproject IN ({','.join('?' * len(groups))})", list(groups))
+        frame = _collapse_grouped_datasets(frame, groups)
     conn.register("datasets_frame", frame)
     conn.execute(
         """
@@ -54,11 +81,14 @@ def load_datasets(conn: duckdb.DuckDBPyConnection, studies_tsv: Path) -> int:
     return len(frame)
 
 
-def load_samples(conn: duckdb.DuckDBPyConnection, runs_tsv: Path, samples_tsv: Path) -> int:
+def load_samples(
+    conn: duckdb.DuckDBPyConnection, runs_tsv: Path, samples_tsv: Path, groups: dict[str, str] | None = None
+) -> int:
     runs = pd.read_csv(runs_tsv, sep="\t", dtype=str, keep_default_na=False)
     samples = pd.read_csv(samples_tsv, sep="\t", dtype=str, keep_default_na=False)
     strain_by_biosample = dict(zip(samples["biosample"], samples["strain"]))
 
+    groups = groups or {}
     now = datetime.now(timezone.utc)
     rows = []
     for _, run in runs.iterrows():
@@ -69,7 +99,8 @@ def load_samples(conn: duckdb.DuckDBPyConnection, runs_tsv: Path, samples_tsv: P
                 "run_accession": run["run_accession"],
                 "biosample": run["biosample"],
                 "experiment_accession": run["experiment_accession"],
-                "bioproject": run["bioproject"],
+                "bioproject": groups.get(run["bioproject"], run["bioproject"]),
+                "source_bioproject": run["bioproject"],
                 "strain": strain_by_biosample.get(run["biosample"], ""),
                 "library_layout": run["library_layout"],
                 "library_strategy": run["library_strategy"],
@@ -88,11 +119,11 @@ def load_samples(conn: duckdb.DuckDBPyConnection, runs_tsv: Path, samples_tsv: P
     conn.execute(
         """
         INSERT INTO samples (
-            sample_id, run_accession, biosample, experiment_accession, bioproject,
+            sample_id, run_accession, biosample, experiment_accession, bioproject, source_bioproject,
             strain, library_layout, library_strategy, library_source, read_count,
             download_size, pipeline_status, exclusion_reason, created_at, updated_at
         )
-        SELECT sample_id, run_accession, biosample, experiment_accession, bioproject,
+        SELECT sample_id, run_accession, biosample, experiment_accession, bioproject, source_bioproject,
                strain, library_layout, library_strategy, library_source, read_count,
                download_size, pipeline_status, exclusion_reason, created_at, updated_at
         FROM samples_frame
@@ -100,6 +131,7 @@ def load_samples(conn: duckdb.DuckDBPyConnection, runs_tsv: Path, samples_tsv: P
             biosample = excluded.biosample,
             experiment_accession = excluded.experiment_accession,
             bioproject = excluded.bioproject,
+            source_bioproject = excluded.source_bioproject,
             strain = excluded.strain,
             library_layout = excluded.library_layout,
             library_strategy = excluded.library_strategy,
