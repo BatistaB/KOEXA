@@ -1,0 +1,207 @@
+{
+  "pipeline_version": "1",
+  "generated_at": "2026-10-27T12:55:37+00:00",
+  "params": {
+    "min_assigned_reads": 10000000.0,
+    "min_mean_tpm": 1.0,
+    "method": "spearman",
+    "top_n": 50,
+    "min_samples": 20,
+    "min_samples_per_study": 3,
+    "null_pairs": 200000,
+    "seed": 0
+  },
+  "n_biosamples_total": 370,
+  "n_biosamples_unknown_depth": 0,
+  "n_biosamples_selected": 309,
+  "n_studies_selected": 18,
+  "n_strains_selected": 18,
+  "median_assigned_reads_selected": 21349373.365,
+  "depth_table": [
+    {
+      "min_assigned_reads_M": 0,
+      "biosamples": 370,
+      "studies": 23,
+      "strains": 24
+    },
+    {
+      "min_assigned_reads_M": 5,
+      "biosamples": 354,
+      "studies": 21,
+      "strains": 24
+    },
+    {
+      "min_assigned_reads_M": 10,
+      "biosamples": 309,
+      "studies": 18,
+      "strains": 18
+    },
+    {
+      "min_assigned_reads_M": 20,
+      "biosamples": 178,
+      "studies": 11,
+      "strains": 15
+    },
+    {
+      "min_assigned_reads_M": 30,
+      "biosamples": 78,
+      "studies": 4,
+      "strains": 3
+    }
+  ],
+  "n_genes": 10177,
+  "modes": {
+    "all_samples": {
+      "n_biosamples": 309,
+      "n_studies": 18,
+      "n_genes": 10177,
+      "top_n": 50,
+      "null": {
+        "n_pairs": 199977,
+        "mean_r": 0.14679016172885895,
+        "q50_r": 0.15657825767993927,
+        "q99_r": 0.7423441410064697,
+        "fraction_abs_r_ge_0.5": 0.13870095060932008,
+        "fraction_r_ge_0.5": 0.12489936342679409
+      },
+      "benchmark": [
+        {
+          "group": "translation_ribosome",
+          "n_genes": 242,
+          "n_pairs": 29873,
+          "auc": 0.7085179646862817,
+          "median_r": 0.5146156549453735
+        },
+        {
+          "group": "central_metabolism",
+          "n_genes": 68,
+          "n_pairs": 29582,
+          "auc": 0.4909785742086728,
+          "median_r": 0.15278959274291992
+        },
+        {
+          "group": "proteasome_ubiquitin",
+          "n_genes": 173,
+          "n_pairs": 29796,
+          "auc": 0.6597793870137193,
+          "median_r": 0.3585176467895508
+        },
+        {
+          "group": "stress_response",
+          "n_genes": 149,
+          "n_pairs": 29803,
+          "auc": 0.44837958432125713,
+          "median_r": 0.09283217787742615
+        },
+        {
+          "group": "secreted_enzymes",
+          "n_genes": 463,
+          "n_pairs": 29940,
+          "auc": 0.5232772040995803,
+          "median_r": 0.18821924924850464
+        },
+        {
+          "group": "secondary_metabolism",
+          "n_genes": 144,
+          "n_pairs": 29769,
+          "auc": 0.547280034184011,
+          "median_r": 0.19576339423656464
+        },
+        {
+          "group": "cytoskeleton_chromatin",
+          "n_genes": 143,
+          "n_pairs": 29790,
+          "auc": 0.5789667279511564,
+          "median_r": 0.2652719020843506
+        }
+      ],
+      "median_top1_r": 0.818645715713501,
+      "median_top_n_r": 0.6948960423469543,
+      "n_genes_with_enrichment": 5603,
+      "n_genes_with_gene_set_enrichment": 1286
+    },
+    "within_study": {
+      "n_biosamples": 302,
+      "n_studies": 14,
+      "n_genes": 10177,
+      "top_n": 50,
+      "null": {
+        "n_pairs": 199980,
+        "mean_r": 0.1316177099943161,
+        "q50_r": 0.13031592965126038,
+        "q99_r": 0.6785634160041809,
+        "fraction_abs_r_ge_0.5": 0.07791279127912791,
+        "fraction_r_ge_0.5": 0.07477247724772478
+      },
+      "benchmark": [
+        {
+          "group": "translation_ribosome",
+          "n_genes": 242,
+          "n_pairs": 29886,
+          "auc": 0.7811301662355221,
+          "median_r": 0.4915335774421692
+        },
+        {
+          "group": "central_metabolism",
+          "n_genes": 68,
+          "n_pairs": 29593,
+          "auc": 0.5046658030619066,
+          "median_r": 0.1337597668170929
+        },
+        {
+          "group": "proteasome_ubiquitin",
+          "n_genes": 173,
+          "n_pairs": 29830,
+          "auc": 0.6905415684042424,
+          "median_r": 0.34432053565979004
+        },
+        {
+          "group": "stress_response",
+          "n_genes": 149,
+          "n_pairs": 29805,
+          "auc": 0.4865113954777461,
+          "median_r": 0.11586388945579529
+        },
+        {
+          "group": "secreted_enzymes",
+          "n_genes": 463,
+          "n_pairs": 29932,
+          "auc": 0.46206049827888035,
+          "median_r": 0.09500139951705933
+        },
+        {
+          "group": "secondary_metabolism",
+          "n_genes": 144,
+          "n_pairs": 29782,
+          "auc": 0.4545365872293361,
+          "median_r": 0.08480919897556305
+        },
+        {
+          "group": "cytoskeleton_chromatin",
+          "n_genes": 143,
+          "n_pairs": 29798,
+          "auc": 0.6644092807998835,
+          "median_r": 0.3272772431373596
+        }
+      ],
+      "median_top1_r": 0.7660271525382996,
+      "median_top_n_r": 0.627495288848877,
+      "n_genes_with_enrichment": 5981,
+      "n_genes_with_gene_set_enrichment": 859
+    }
+  },
+  "skipped_modes": {},
+  "go": {
+    "source": "GO annotations propagated over is_a/part_of with go-basic.obo",
+    "n_terms": 3551,
+    "n_annotated_genes": 6675,
+    "min_term_size": 5,
+    "max_term_size": 500,
+    "alpha": 0.05
+  },
+  "gene_sets": {
+    "secreted": {
+      "n_in_network": 896
+    }
+  }
+}

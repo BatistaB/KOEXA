@@ -1,36 +1,61 @@
 {
   "pipeline_version": "1",
-  "generated_at": "2026-10-09T11:25:25+00:00",
+  "generated_at": "2026-10-27T12:53:35+00:00",
   "n_genes": 12078,
-  "n_runs": 228,
-  "n_samples": 218,
-  "n_studies": 11,
-  "n_strains": 11,
+  "n_runs": 384,
+  "n_samples": 370,
+  "n_studies": 23,
+  "n_strains": 24,
   "samples_per_study": {
     "PRJDB37930": 85,
+    "PRJNA1261861": 83,
     "PRJDB8293": 36,
-    "PRJNA1261861": 35,
-    "PRJNA801076": 17,
+    "JGI-RIB40-substrates": 26,
+    "PRJNA325270": 20,
+    "PRJNA801076": 18,
     "PRJDB17490": 15,
+    "PRJNA909033": 12,
+    "PRJDB19992": 9,
     "PRJNA845824": 9,
     "PRJNA121091": 8,
+    "PRJNA178638": 7,
+    "PRJNA484246": 6,
+    "PRJNA534476": 6,
+    "PRJNA588127": 6,
     "PRJDB42398": 5,
     "PRJDB42568": 3,
     "PRJDB4747": 3,
-    "PRJDB35534": 2
+    "PRJDB9259": 3,
+    "PRJNA164609": 3,
+    "PRJNA305561": 3,
+    "PRJDB35534": 2,
+    "PRJNA433750": 2
   },
   "samples_per_strain": {
-    "RIB40": 103,
+    "RIB40": 190,
     "AG-GAG": 40,
+    "unknown": 35,
     "NS4": 30,
+    "3.042": 18,
     "AG-GAG-AOXA": 15,
     "DSM 1863": 9,
+    "Aspergillus oryzae 112822": 6,
     "LBM 30007": 6,
     "LBM 30008": 6,
-    "3.042": 5,
-    "unknown": 2,
+    "RIB915": 2,
     "TK-35": 1,
-    "TK-41": 1
+    "TK-41": 1,
+    "The A. oryzae strain HacA-DE, a hacA disruption derived from the A. oryzae niaD300 strain": 1,
+    "The A. oryzae strain HacA-CA, a hacA in constitutively active expression derived from the A. oryzae HacA-DE strain": 1,
+    "The A. oryzae strain niaD300, a niaD mutant derived from the A. oryzae RIB40 wild-type strain was obtained from the NITE Biological Resource Center (NBRC) in Japan": 1,
+    "RD2": 1,
+    "TS2": 1,
+    "Aspergillus_oryzae_dellaeA1": 1,
+    "Aspergillus_oryzae_dellaeA2": 1,
+    "Aspergillus_oryzae_WT1": 1,
+    "Aspergillus_oryzae_WT2": 1,
+    "Aspergillus_oryzae_OElaeA1": 1,
+    "Aspergillus_oryzae_OElaeA2": 1
   },
   "class_order": [
     "Constitutive High",
@@ -42,31 +67,31 @@
     "Intermediate"
   ],
   "class_counts": {
-    "Constitutive High": 1415,
-    "Constitutive Core": 3744,
-    "Constitutive Low": 69,
-    "Broad Variable": 1715,
-    "Context-Specific": 2051,
-    "Rare/Silent": 1385,
-    "Intermediate": 1699
+    "Constitutive High": 1476,
+    "Constitutive Core": 4032,
+    "Constitutive Low": 72,
+    "Broad Variable": 1768,
+    "Context-Specific": 2168,
+    "Rare/Silent": 997,
+    "Intermediate": 1565
   },
   "flag_rates": {
-    "possible_study_effect": 0.03270409008113926,
-    "possible_strain_effect": 0.019208478224871667,
-    "low_sample_support": 0.001407517800960424,
-    "borderline_class": 0.06077165093558536
+    "possible_study_effect": 0.02409339294585196,
+    "possible_strain_effect": 0.0038085775790693823,
+    "low_sample_support": 0.0007451564828614009,
+    "borderline_class": 0.060109289617486336
   },
   "thresholds": {
-    "n_expressed_genes": 10011,
-    "level_low": 1.3114520746897762,
-    "level_high": 5.830367035860401,
-    "floor_level": 3.92138845346102,
-    "floor_tpm": 14.151497173360953,
-    "n_burst_capable_genes": 9925,
-    "tau_specific": 0.6747326005174058,
-    "peak_specific": 0.5376774091236906,
-    "prevalence_broad": 0.9862385321100917,
-    "n_eligible_genes": 8642
+    "n_expressed_genes": 10240,
+    "level_low": 1.369589497390421,
+    "level_high": 5.874548296751252,
+    "floor_level": 4.066495929877432,
+    "floor_tpm": 15.754722997969612,
+    "n_burst_capable_genes": 10545,
+    "tau_specific": 0.7117692531589513,
+    "peak_specific": 0.5807655610748835,
+    "prevalence_broad": 0.9702702702702702,
+    "n_eligible_genes": 8913
   },
   "params": {
     "detect_tpm": 0.1,
@@ -81,115 +106,240 @@
   },
   "robustness": [
     {
+      "perturbation": "leave out study JGI-RIB40-substrates",
+      "n_samples_used": 344,
+      "class_agreement": 0.9412982281834741
+    },
+    {
       "perturbation": "leave out study PRJDB17490",
-      "n_samples_used": 203,
-      "class_agreement": 0.9466799138930286
+      "n_samples_used": 355,
+      "class_agreement": 0.973919523099851
+    },
+    {
+      "perturbation": "leave out study PRJDB19992",
+      "n_samples_used": 361,
+      "class_agreement": 0.978970028150356
     },
     {
       "perturbation": "leave out study PRJDB35534",
-      "n_samples_used": 216,
-      "class_agreement": 0.9902301705580394
+      "n_samples_used": 368,
+      "class_agreement": 0.9955290611028316
     },
     {
       "perturbation": "leave out study PRJDB37930",
-      "n_samples_used": 133,
-      "class_agreement": 0.8189269746646796
+      "n_samples_used": 285,
+      "class_agreement": 0.8878953469117403
     },
     {
       "perturbation": "leave out study PRJDB42398",
-      "n_samples_used": 213,
-      "class_agreement": 0.9696969696969697
+      "n_samples_used": 365,
+      "class_agreement": 0.98642159297897
     },
     {
       "perturbation": "leave out study PRJDB42568",
-      "n_samples_used": 215,
-      "class_agreement": 0.9756582215598609
+      "n_samples_used": 367,
+      "class_agreement": 0.9919688690180494
     },
     {
       "perturbation": "leave out study PRJDB4747",
-      "n_samples_used": 215,
-      "class_agreement": 0.9663023679417122
+      "n_samples_used": 367,
+      "class_agreement": 0.984020533200861
     },
     {
       "perturbation": "leave out study PRJDB8293",
-      "n_samples_used": 182,
-      "class_agreement": 0.9021361152508693
+      "n_samples_used": 334,
+      "class_agreement": 0.946762709057791
+    },
+    {
+      "perturbation": "leave out study PRJDB9259",
+      "n_samples_used": 367,
+      "class_agreement": 0.9880774962742176
     },
     {
       "perturbation": "leave out study PRJNA121091",
-      "n_samples_used": 210,
-      "class_agreement": 0.9465143235635038
+      "n_samples_used": 362,
+      "class_agreement": 0.9731743666169895
     },
     {
       "perturbation": "leave out study PRJNA1261861",
-      "n_samples_used": 183,
-      "class_agreement": 0.9255671468786223
+      "n_samples_used": 287,
+      "class_agreement": 0.912568306010929
+    },
+    {
+      "perturbation": "leave out study PRJNA164609",
+      "n_samples_used": 367,
+      "class_agreement": 0.9905613512170889
+    },
+    {
+      "perturbation": "leave out study PRJNA178638",
+      "n_samples_used": 363,
+      "class_agreement": 0.9805431362808412
+    },
+    {
+      "perturbation": "leave out study PRJNA305561",
+      "n_samples_used": 367,
+      "class_agreement": 0.9923828448418612
+    },
+    {
+      "perturbation": "leave out study PRJNA325270",
+      "n_samples_used": 350,
+      "class_agreement": 0.9470938897168405
+    },
+    {
+      "perturbation": "leave out study PRJNA433750",
+      "n_samples_used": 368,
+      "class_agreement": 0.9912237125351879
+    },
+    {
+      "perturbation": "leave out study PRJNA484246",
+      "n_samples_used": 364,
+      "class_agreement": 0.9851796655075343
+    },
+    {
+      "perturbation": "leave out study PRJNA534476",
+      "n_samples_used": 364,
+      "class_agreement": 0.9862560026494452
+    },
+    {
+      "perturbation": "leave out study PRJNA588127",
+      "n_samples_used": 364,
+      "class_agreement": 0.9856764364961086
     },
     {
       "perturbation": "leave out study PRJNA801076",
-      "n_samples_used": 201,
-      "class_agreement": 0.9131478721642656
+      "n_samples_used": 352,
+      "class_agreement": 0.9648948501407518
     },
     {
       "perturbation": "leave out study PRJNA845824",
-      "n_samples_used": 209,
-      "class_agreement": 0.9726775956284153
+      "n_samples_used": 361,
+      "class_agreement": 0.9860904123199206
+    },
+    {
+      "perturbation": "leave out study PRJNA909033",
+      "n_samples_used": 358,
+      "class_agreement": 0.9691174035436331
     },
     {
       "perturbation": "leave out strain 3.042",
-      "n_samples_used": 213,
-      "class_agreement": 0.9694485842026825
+      "n_samples_used": 352,
+      "class_agreement": 0.9641496936578904
     },
     {
       "perturbation": "leave out strain AG-GAG",
-      "n_samples_used": 178,
-      "class_agreement": 0.9006458022851466
+      "n_samples_used": 330,
+      "class_agreement": 0.9413810233482365
     },
     {
       "perturbation": "leave out strain AG-GAG-AOXA",
-      "n_samples_used": 203,
-      "class_agreement": 0.9654744162940885
+      "n_samples_used": 355,
+      "class_agreement": 0.9782248716674946
+    },
+    {
+      "perturbation": "leave out strain Aspergillus oryzae 112822",
+      "n_samples_used": 364,
+      "class_agreement": 0.9851796655075343
+    },
+    {
+      "perturbation": "leave out strain Aspergillus_oryzae_OElaeA1",
+      "n_samples_used": 369,
+      "class_agreement": 0.9970193740685543
+    },
+    {
+      "perturbation": "leave out strain Aspergillus_oryzae_OElaeA2",
+      "n_samples_used": 369,
+      "class_agreement": 0.9969365789037921
+    },
+    {
+      "perturbation": "leave out strain Aspergillus_oryzae_WT1",
+      "n_samples_used": 369,
+      "class_agreement": 0.9971021692333167
+    },
+    {
+      "perturbation": "leave out strain Aspergillus_oryzae_WT2",
+      "n_samples_used": 369,
+      "class_agreement": 0.9975161450571287
+    },
+    {
+      "perturbation": "leave out strain Aspergillus_oryzae_dellaeA1",
+      "n_samples_used": 369,
+      "class_agreement": 0.9972677595628415
+    },
+    {
+      "perturbation": "leave out strain Aspergillus_oryzae_dellaeA2",
+      "n_samples_used": 369,
+      "class_agreement": 0.9978473257161782
     },
     {
       "perturbation": "leave out strain DSM 1863",
-      "n_samples_used": 209,
-      "class_agreement": 0.9726775956284153
+      "n_samples_used": 361,
+      "class_agreement": 0.9860904123199206
     },
     {
       "perturbation": "leave out strain LBM 30007",
-      "n_samples_used": 212,
-      "class_agreement": 0.9720980294750786
+      "n_samples_used": 364,
+      "class_agreement": 0.9855108461665839
     },
     {
       "perturbation": "leave out strain LBM 30008",
-      "n_samples_used": 212,
-      "class_agreement": 0.9714356681569797
+      "n_samples_used": 364,
+      "class_agreement": 0.9861732074846828
     },
     {
       "perturbation": "leave out strain NS4",
-      "n_samples_used": 188,
-      "class_agreement": 0.9279682066567313
+      "n_samples_used": 340,
+      "class_agreement": 0.9573604901473753
+    },
+    {
+      "perturbation": "leave out strain RD2",
+      "n_samples_used": 369,
+      "class_agreement": 0.9969365789037921
     },
     {
       "perturbation": "leave out strain RIB40",
-      "n_samples_used": 115,
-      "class_agreement": 0.7396092068223216
+      "n_samples_used": 180,
+      "class_agreement": 0.803030303030303
+    },
+    {
+      "perturbation": "leave out strain RIB915",
+      "n_samples_used": 368,
+      "class_agreement": 0.98989898989899
     },
     {
       "perturbation": "leave out strain TK-35",
-      "n_samples_used": 217,
-      "class_agreement": 0.9923000496770988
+      "n_samples_used": 369,
+      "class_agreement": 0.9980957112104654
     },
     {
       "perturbation": "leave out strain TK-41",
-      "n_samples_used": 217,
-      "class_agreement": 0.9915548931942375
+      "n_samples_used": 369,
+      "class_agreement": 0.9964398079152178
+    },
+    {
+      "perturbation": "leave out strain TS2",
+      "n_samples_used": 369,
+      "class_agreement": 0.9966053982447425
+    },
+    {
+      "perturbation": "leave out strain The A. oryzae strain HacA-CA, a hacA in constitutively active expression derived from the A. oryzae HacA-DE strain",
+      "n_samples_used": 369,
+      "class_agreement": 0.9971849643980791
+    },
+    {
+      "perturbation": "leave out strain The A. oryzae strain HacA-DE, a hacA disruption derived from the A. oryzae niaD300 strain",
+      "n_samples_used": 369,
+      "class_agreement": 0.9970193740685543
+    },
+    {
+      "perturbation": "leave out strain The A. oryzae strain niaD300, a niaD mutant derived from the A. oryzae RIB40 wild-type strain was obtained from the NITE Biological Resource Center (NBRC) in Japan",
+      "n_samples_used": 369,
+      "class_agreement": 0.9968537837390297
     },
     {
       "perturbation": "leave out strain unknown",
-      "n_samples_used": 216,
-      "class_agreement": 0.9902301705580394
+      "n_samples_used": 335,
+      "class_agreement": 0.9234972677595629
     }
   ],
-  "median_robustness_agreement": 0.9678754760721974
+  "median_robustness_agreement": 0.9860904123199206
 }
