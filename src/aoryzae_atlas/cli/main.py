@@ -83,6 +83,12 @@ from ..paths import (
     CLASSIFICATION_FILE,
     CLASSIFICATION_SUMMARY_FILE,
     CLASSIFICATION_TSV_FILE,
+    COEXPRESSION_BENCHMARK_FILE,
+    COEXPRESSION_ENRICHMENT_FILE,
+    COEXPRESSION_NEIGHBOURS_FILE,
+    COEXPRESSION_PROFILES_DIR,
+    COEXPRESSION_SET_ENRICHMENT_FILE,
+    COEXPRESSION_SUMMARY_FILE,
     CONDITIONS_FILE,
     DATABASE_FILE,
     DISCOVERY_DIR,
@@ -96,6 +102,7 @@ from ..paths import (
     FUNGIDB_GENE_PRODUCT_UPDATES_FILE,
     FUNGIDB_GENOME_FASTA_FILE,
     FUNGIDB_GFF_FILE,
+    FUNGIDB_GO_GAF_FILE,
     FUNGIDB_PROTEIN_FASTA_FILE,
     FUNGIDB_TRANSCRIPT_FASTA_FILE,
     GENE_BY_BIOSAMPLE_TPM_FILE,
@@ -106,6 +113,8 @@ from ..paths import (
     GENE_ID_MAPPING_FILE,
     GENE_ID_MAPPING_REPORT_FILE,
     GENE_MASTER_FILE,
+    GENE_SETS_DIR,
+    GO_OBO_FILE,
     PROJECT_ROOT,
     REFERENCE_VALIDATION_REPORT_FILE,
     REQUIRED_CONFIG_FILES,
@@ -126,6 +135,14 @@ from ..reference.transcript_to_gene import load_transcript_to_gene, write_t2g_ts
 from ..reference.validate import render_validation_report, validate_reference
 from ..runtime_status import init_runtime_status, load_runtime_status
 from ..rank.pipeline import NoQuantifiedSamplesError, build_expression_rank, write_rank_outputs
+from ..rank.validation import load_go_annotations
+from ..genesets.curated import (
+    ACCEPTED_RESOLUTIONS, alias_candidates_from_table, load_gene_sets, parse_gene_list, resolve_gene_list, write_gene_set,
+)
+from ..identifiers.fungidb import build_ao09_redirect_map
+from ..coexpr.enrichment import build_custom_term_sets, build_term_sets, enrich_gene_set, load_go_obo
+from ..coexpr.network import METHODS as COEXPR_METHODS, MODES as COEXPR_MODES, CoexprParams, coexpressed_with_set
+from ..coexpr.pipeline import CoexpressionNotPossibleError, build_coexpression, write_coexpression_outputs
 from ..webexport.build import write_all as export_web_data
 
 logger = get_logger("cli")
@@ -689,7 +706,7 @@ def refresh(ctx: click.Context) -> None:
         database migrate -> database load-genes -> database load-discovery
         -> database load-conditions -> process ingest --all -> matrix build
         -> stats genes -> entropy genes -> cluster genes -> rank genes
-        -> app export-web
+        -> coexpr build -> app export-web
 
     Every step is idempotent and safe to re-run. A step whose required
     input doesn't exist yet (e.g. no reports/discovery/*.tsv before the
@@ -711,6 +728,7 @@ def refresh(ctx: click.Context) -> None:
         ("entropy genes", entropy_genes, {}),
         ("cluster genes", cluster_genes, {}),
         ("rank genes", rank_genes, {"no_robustness": False}),
+        ("coexpr build", coexpr_build, {"min_reads_millions": 10.0, "top_n": 50, "method": "spearman", "no_enrichment": False}),
         ("app export-web", app_export_web, {}),
     ]
     n_ok, n_skipped = 0, 0
@@ -1170,6 +1188,10 @@ def app_export_web() -> None:
         click.echo(f"Expression rank: {summary['n_expression_rank_rows']:,} genes ({summary['expression_rank_bytes'] / 1024:.0f} KB)")
     else:
         click.echo("Expression rank: not exported (run 'atlas rank genes' first)")
+    click.echo(
+        f"Gene sets: {summary['n_gene_sets']} ({summary['gene_sets_bytes'] / 1024:.0f} KB)"
+        if summary.get("n_gene_sets") else "Gene sets: none imported (see 'atlas geneset import')"
+    )
     if summary["n_chromosome_bins"]:
         click.echo(f"Chromosome map: {summary['n_chromosome_bins']:,} bins ({summary['chromosome_expression_bytes'] / 1024:.0f} KB)")
     else:
@@ -1337,6 +1359,198 @@ def rank_genes(no_robustness: bool) -> None:
     if scope["median_robustness_agreement"] is not None:
         click.echo(f"median class agreement under leave-one-study/strain-out: {scope['median_robustness_agreement']:.0%}")
     click.echo(f"Wrote {EXPRESSION_RANK_FILE}")
+
+
+@cli.group()
+def coexpr() -> None:
+    """Gene co-expression network (AFED-style, adapted to a multi-study atlas)."""
+
+
+@coexpr.command("build")
+@click.option("--min-reads-millions", type=float, default=10.0, show_default=True,
+              help="Biosamples need at least this many million gene-assigned reads (AFED: 10). 0 keeps every biosample.")
+@click.option("--top-n", type=int, default=50, show_default=True, help="Neighbours kept per gene (ranked by r).")
+@click.option("--method", type=click.Choice(COEXPR_METHODS), default="spearman", show_default=True)
+@click.option("--no-enrichment", is_flag=True, help="Skip the GO enrichment of each gene's neighbourhood.")
+def coexpr_build(min_reads_millions: float, top_n: int, method: str, no_enrichment: bool) -> None:
+    """Build the co-expression network: top-N neighbours per gene in two modes, GO enrichment, benchmark.
+
+    Modes (same genes, same biosamples): all_samples = AFED-style, no correction; within_study = every gene
+    centered per study first, so a correlation cannot come from between-study offsets. Each edge also carries
+    its mutual rank, its tail against random gene pairs and its median correlation INSIDE single studies.
+    Re-run (or just run 'atlas refresh') whenever samples are added.
+
+    The logic lives in aoryzae_atlas/coexpr/pipeline.py -- notebooks/coexpression_network.ipynb checks
+    itself against that same function.
+    """
+    if not DATABASE_FILE.is_file():
+        raise click.ClickException("No database found. Run 'atlas database migrate' first.")
+    params = CoexprParams(min_assigned_reads=min_reads_millions * 1e6, top_n=top_n, method=method)
+    conn = duckdb.connect(str(DATABASE_FILE), read_only=True)
+    try:
+        result = build_coexpression(
+            conn, params, gaf_path=FUNGIDB_GO_GAF_FILE, obo_path=GO_OBO_FILE, with_enrichment=not no_enrichment,
+            curated_sets={name: info["genes"] for name, info in load_gene_sets(GENE_SETS_DIR).items()},
+        )
+    except CoexpressionNotPossibleError as exc:
+        raise click.ClickException(str(exc)) from exc
+    finally:
+        conn.close()
+    write_coexpression_outputs(
+        result,
+        neighbours_path=COEXPRESSION_NEIGHBOURS_FILE,
+        enrichment_path=COEXPRESSION_ENRICHMENT_FILE,
+        benchmark_path=COEXPRESSION_BENCHMARK_FILE,
+        summary_path=COEXPRESSION_SUMMARY_FILE,
+        profiles_dir=COEXPRESSION_PROFILES_DIR,
+        set_enrichment_path=COEXPRESSION_SET_ENRICHMENT_FILE,
+    )
+    scope = result.scope
+    logger.info(
+        "coexpr build: %d genes, %d/%d biosamples, modes %s",
+        scope["n_genes"], scope["n_biosamples_selected"], scope["n_biosamples_total"], list(result.modes),
+    )
+    click.echo(
+        f"{scope['n_genes']:,} genes; {scope['n_biosamples_selected']} of {scope['n_biosamples_total']} biosamples reach "
+        f"{min_reads_millions:g}M assigned reads ({scope['n_studies_selected']} studies, {scope['n_strains_selected']} strains)"
+    )
+    for mode, info in scope["modes"].items():
+        aucs = ", ".join(f"{b['group'].split('_')[0]} {b['auc']:.2f}" for b in info["benchmark"])
+        click.echo(
+            f"  {mode:<13} {info['n_biosamples']} biosamples / {info['n_studies']} studies; random pairs with |r|>=0.5: "
+            f"{info['null']['fraction_abs_r_ge_0.5']:.1%}; median best-neighbour r {info['median_top1_r']:.2f}"
+        )
+        click.echo(f"                benchmark AUC (0.5 = none): {aucs}")
+    for mode, why in scope["skipped_modes"].items():
+        click.echo(f"  {mode}: SKIPPED ({why})")
+    if scope["go"]:
+        click.echo(
+            f"GO enrichment: {scope['go']['n_terms']} terms over {scope['go']['n_annotated_genes']:,} annotated genes "
+            f"({scope['go']['source']})"
+        )
+    elif not no_enrichment:
+        click.echo("GO enrichment: skipped (no GAF annotations found)")
+    if scope["gene_sets"]:
+        click.echo("Curated gene sets in the network: " + ", ".join(f"{k} ({v['n_in_network']:,} genes)" for k, v in scope["gene_sets"].items()))
+    click.echo(f"Wrote {COEXPRESSION_NEIGHBOURS_FILE}")
+
+
+@coexpr.command("query")
+@click.argument("genes", nargs=-1, required=True)
+@click.option("--mode", type=click.Choice([*COEXPR_MODES, "both"]), default="both", show_default=True)
+@click.option("--top", type=int, default=30, show_default=True, help="Co-expressed genes to list.")
+@click.option("--enrich/--no-enrich", default=True, show_default=True, help="GO enrichment among the listed genes.")
+def coexpr_query(genes: tuple[str, ...], mode: str, top: int, enrich: bool) -> None:
+    """Genes co-expressed with one gene or a SET of genes (ids or symbols), from the last 'coexpr build'.
+
+    Several genes are ranked by their mean correlation to the set; 'min_r' is the weakest member link.
+    """
+    if not DATABASE_FILE.is_file():
+        raise click.ClickException("No database found. Run 'atlas database migrate' first.")
+    conn = duckdb.connect(str(DATABASE_FILE), read_only=True)
+    try:
+        catalog = conn.execute("SELECT canonical_gene_id, gene_symbol, description FROM genes").fetchdf().set_index("canonical_gene_id")
+    finally:
+        conn.close()
+    by_symbol = {str(sym).lower(): gid for gid, sym in catalog["gene_symbol"].items() if sym}
+    members = []
+    for token in genes:
+        gene_id = token if token in catalog.index else by_symbol.get(token.lower())
+        if gene_id is None:
+            raise click.ClickException(f"Unknown gene '{token}' (use a canonical gene id or a gene symbol).")
+        members.append(gene_id)
+
+    curated = {name: info["genes"] for name, info in load_gene_sets(GENE_SETS_DIR).items()} if enrich else {}
+    use_go = enrich and FUNGIDB_GO_GAF_FILE.is_file()
+    go = load_go_annotations(FUNGIDB_GO_GAF_FILE) if use_go else None
+    onto = load_go_obo(GO_OBO_FILE) if use_go and GO_OBO_FILE.is_file() else None
+    for current in (COEXPR_MODES if mode == "both" else (mode,)):
+        profile_file = COEXPRESSION_PROFILES_DIR / f"zscores_{current}.parquet"
+        if not profile_file.is_file():
+            raise click.ClickException("No co-expression profiles found. Run 'atlas coexpr build' first.")
+        profiles = pd.read_parquet(profile_file)
+        try:
+            hits = coexpressed_with_set(profiles.to_numpy(), profiles.index, members, top_n=top)
+        except KeyError as exc:
+            raise click.ClickException(f"{exc.args[0]} (not in the network: mean TPM < 1 in the selected biosamples)") from exc
+        hits["symbol"] = catalog["gene_symbol"].reindex(hits["gene_id"]).fillna("").to_numpy()
+        hits["description"] = catalog["description"].reindex(hits["gene_id"]).fillna("").str.slice(0, 60).to_numpy()
+        click.echo(f"\n=== {current}: genes co-expressed with {', '.join(members)} ({profiles.shape[1]} biosamples) ===")
+        click.echo(hits[["rank", "gene_id", "symbol", "mean_r", "min_r", "description"]].round(3).to_string(index=False))
+        if use_go:
+            table = enrich_gene_set(list(hits["gene_id"]), build_term_sets(go, profiles.index, onto))
+            if table.empty:
+                click.echo("GO enrichment among these genes: nothing at q <= 0.05")
+            else:
+                click.echo("GO enrichment among these genes (q <= 0.05):")
+                click.echo(table[["term", "name", "overlap", "term_size", "fold_enrichment", "q_value"]].head(10).round(4).to_string(index=False))
+        if curated:
+            set_table = enrich_gene_set(list(hits["gene_id"]), build_custom_term_sets(curated, profiles.index), min_overlap=2)
+            if set_table.empty:
+                click.echo("Curated gene sets over-represented among these genes: none at q <= 0.05")
+            else:
+                click.echo("Curated gene sets over-represented among these genes (q <= 0.05):")
+                click.echo(set_table[["name", "overlap", "term_size", "fold_enrichment", "q_value"]].round(4).to_string(index=False))
+
+
+@cli.group()
+def geneset() -> None:
+    """Curated gene sets (e.g. the secretome): user-supplied named lists kept under metadata/gene_sets/."""
+
+
+@geneset.command("import")
+@click.argument("name")
+@click.argument("gene_list", type=click.Path(exists=True, dir_okay=False, path_type=Path))
+@click.option("--description", required=True, help="One line saying what the set is.")
+@click.option("--source", required=True, help="How the list was obtained (tools, databases, who), recorded verbatim.")
+@click.option("--map", "manual", multiple=True, metavar="TOKEN=GENE", help="Explicit mapping of an unresolved token to a canonical gene id.")
+def geneset_import(name: str, gene_list: Path, description: str, source: str, manual: tuple[str, ...]) -> None:
+    """Resolve GENE_LIST (one id per line, commas/# comments allowed) against the gene catalog and store it as set NAME.
+
+    Ids are accepted only when they are current canonical ids, retired AO09 ids that FungiDB redirects to exactly
+    one current gene, or tokens you map explicitly with --map. Aliases are listed as candidates, never accepted.
+    """
+    for path in (GENE_MASTER_FILE, GENE_EXTERNAL_IDENTIFIERS_FILE, FUNGIDB_GENE_ALIASES_FILE):
+        if not path.is_file():
+            raise click.ClickException(f"Missing {path}; run 'atlas reference' / 'atlas identifiers' steps first.")
+    manual_map = {}
+    for item in manual:
+        token, sep, gene = item.partition("=")
+        if not sep or not token or not gene:
+            raise click.ClickException(f"--map expects TOKEN=GENE, got '{item}'")
+        manual_map[token.strip()] = gene.strip()
+    raw_text = gene_list.read_text(encoding="utf-8")
+    tokens = parse_gene_list(raw_text)
+    catalog = set(pd.read_csv(GENE_MASTER_FILE, sep="\t", dtype=str)["canonical_gene_id"])
+    redirects = build_ao09_redirect_map(FUNGIDB_GENE_ALIASES_FILE, catalog)
+    aliases = alias_candidates_from_table(pd.read_csv(GENE_EXTERNAL_IDENTIFIERS_FILE, sep="\t", dtype=str, keep_default_na=False))
+    try:
+        resolution = resolve_gene_list(tokens, catalog, redirects, aliases, manual_map)
+        meta = write_gene_set(name, resolution, GENE_SETS_DIR, description, source, raw_text, len(tokens))
+    except ValueError as exc:
+        raise click.ClickException(str(exc)) from exc
+    click.echo(f"{len(tokens)} lines -> {meta['n_distinct_tokens']} distinct ids ({meta['n_duplicate_lines']} duplicate line(s)) -> {meta['n_members']} genes in '{name}'")
+    for resolution_name, count in meta["n_by_resolution"].items():
+        click.echo(f"  {resolution_name:<16} {count:>5}")
+    pending = resolution[~resolution["resolution"].isin(ACCEPTED_RESOLUTIONS)]
+    for row in pending.itertuples():
+        click.echo(f"  NOT IN SET: {row.input_id}  [{row.resolution}] {row.note}")
+    click.echo(f"Wrote {GENE_SETS_DIR / (name + '.tsv')} (+ .resolution.tsv, .json, .input.txt)")
+
+
+@geneset.command("list")
+def geneset_list() -> None:
+    """Stored gene sets with their size and provenance."""
+    sets = load_gene_sets(GENE_SETS_DIR)
+    if not sets:
+        click.echo("No gene sets yet. Use 'atlas geneset import NAME FILE --description ... --source ...'.")
+    for name, info in sets.items():
+        meta = info["meta"]
+        click.echo(f"{name}: {meta['n_members']} genes (imported {meta['imported_on']}) - {meta['description']}")
+        click.echo(f"    source: {meta['source']}")
+        unresolved = {k: v for k, v in meta["n_by_resolution"].items() if k not in ACCEPTED_RESOLUTIONS}
+        if unresolved:
+            click.echo(f"    not in the set: {unresolved} (see {name}.resolution.tsv)")
 
 
 @cli.group()

@@ -63,6 +63,10 @@ GENE_ID_MAPPING_REPORT_FILE = REPORTS_DIR / "gene_id_mapping_summary.txt"
 GENE_EXTERNAL_IDENTIFIERS_FILE = METADATA_DIR / "gene_external_identifiers.tsv"
 GENE_MASTER_FILE = METADATA_DIR / "gene_master.tsv"
 
+# Curated gene sets (`atlas geneset import`): user-supplied named lists such as the secretome. Small, tracked,
+# human-readable; every consumer (co-expression enrichment, web export, notebooks) reads them from here.
+GENE_SETS_DIR = METADATA_DIR / "gene_sets"
+
 CONDITIONS_FILE = METADATA_DIR / "conditions.tsv"
 SAMPLES_CURATION_FILE = METADATA_DIR / "samples.tsv"
 # BioProjects that are one study (see aoryzae_atlas.database.study_groups).
@@ -99,6 +103,19 @@ EXPRESSION_RANK_TSV_FILE = ANALYSIS_DIR / "classification" / "gene_expression_ra
 EXPRESSION_RANK_THRESHOLDS_FILE = ANALYSIS_DIR / "classification" / "gene_expression_rank_thresholds.tsv"
 EXPRESSION_RANK_SUMMARY_FILE = ANALYSIS_DIR / "classification" / "gene_expression_rank_summary.json"
 EXPRESSION_RANK_REPORT_FILE = REPORTS_DIR / "gene_expression_classification.md"
+
+# Gene co-expression network (`atlas coexpr build`): neighbour lists per gene and mode, GO enrichment of
+# each neighbourhood, a functional benchmark and the run summary. The standardized profiles each mode
+# correlated are kept under matrices/ so a gene-SET query does not need the database.
+GENE_ONTOLOGY_DIR = DATABASE_DIR / "GeneOntology"
+GO_OBO_FILE = GENE_ONTOLOGY_DIR / "go-basic.obo"
+COEXPRESSION_DIR = ANALYSIS_DIR / "coexpression"
+COEXPRESSION_NEIGHBOURS_FILE = COEXPRESSION_DIR / "coexpression_neighbours.parquet"
+COEXPRESSION_ENRICHMENT_FILE = COEXPRESSION_DIR / "coexpression_enrichment.parquet"
+COEXPRESSION_SET_ENRICHMENT_FILE = COEXPRESSION_DIR / "coexpression_gene_set_enrichment.parquet"
+COEXPRESSION_BENCHMARK_FILE = COEXPRESSION_DIR / "coexpression_benchmark.tsv"
+COEXPRESSION_SUMMARY_FILE = COEXPRESSION_DIR / "coexpression_summary.json"
+COEXPRESSION_PROFILES_DIR = MATRICES_DIR / "coexpression"   # zscores_<mode>.parquet
 
 # Milestone 7 web bridge (`atlas app export-web`): JSON snapshots fetched at
 # runtime by the React app (app/web/src/data/*). Gitignored -- regenerated,

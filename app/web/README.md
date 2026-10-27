@@ -43,6 +43,10 @@ not a data-loading module directly):
   the file is absent the homepage falls back to the older condition-level
   donut. Classes are re-derived from the whole atlas on every
   `atlas refresh`, so nothing here is hard-coded to a sample count.
+- `public/data/gene_sets.json` (`src/data/realAtlas.ts`) — curated gene sets such as the secretome
+  (`atlas geneset import`). When present, the "Global expression behavior" section shows a "Show: All genes / <Set> only"
+  toggle that restricts every view to the set, and the gene panel lists the sets a gene belongs to. The classes
+  stay derived from all genes; the set is an overlay, never an input to them.
 
 Both are gitignored and regenerated, never hand-edited — see "Running"
 below. There is no synthetic/fixture data path anymore; a gene or sample

@@ -26,6 +26,11 @@
 !/database/FungiDB_v71/CHECKSUMS.sha256
 !/database/FungiDB_v71/PROVENANCE.md
 
+# Gene Ontology file for the co-expression enrichment (`atlas coexpr build`): a downloaded reference,
+# not source -- keep provenance notes in git, not the payload (same policy as FungiDB_v71).
+/database/GeneOntology/*
+!/database/GeneOntology/PROVENANCE.md
+
 # Local database and generated matrices/results are regenerable from raw data
 # + pipeline; keep out of git, but keep the directory structure.
 /database/*.duckdb

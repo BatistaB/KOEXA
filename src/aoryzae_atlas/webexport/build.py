@@ -28,8 +28,10 @@ from ..paths import (
     EXPRESSION_RANK_SUMMARY_FILE,
     FUNGIDB_GENOME_FASTA_FILE,
     GENE_FEATURE_TABLE_FILE,
+    GENE_SETS_DIR,
     WEB_DATA_DIR,
 )
+from ..genesets.curated import load_gene_sets
 from ..reference.genome_fasta import load_genome_sequence_lengths
 
 __all__ = [
@@ -41,6 +43,7 @@ __all__ = [
     "export_expression",
     "export_classification",
     "export_expression_rank",
+    "export_gene_sets",
     "export_chromosome_expression",
     "export_study_annotations",
     "write_all",
@@ -324,6 +327,28 @@ def export_expression_rank() -> dict[str, Any] | None:
     return {"columns": _EXPRESSION_RANK_COLUMNS, "rows": rows, "summary": summary}
 
 
+def export_gene_sets() -> dict[str, Any] | None:
+    """Curated gene sets (e.g. the secretome) for the homepage filter; None when none has been imported.
+
+    Members are canonical gene ids. The set is an annotation overlaid on the expression classes, never an
+    input to them, so it is exported separately from expression_rank.json.
+    """
+    sets = load_gene_sets(GENE_SETS_DIR)
+    if not sets:
+        return None
+    return {
+        "sets": {
+            name: {
+                "description": info["meta"]["description"],
+                "source": info["meta"]["source"],
+                "imported_on": info["meta"]["imported_on"],
+                "genes": info["genes"],
+            }
+            for name, info in sets.items()
+        }
+    }
+
+
 _CHROMOSOME_BIN_COLUMNS = ["start", "end", "n_genes", "n_detected_genes", "mean_TPM", "log10_mean_TPM"]
 
 
@@ -478,6 +503,14 @@ def write_all(conn: duckdb.DuckDBPyConnection, out_dir: Path = WEB_DATA_DIR) -> 
     else:
         summary["expression_rank_bytes"] = 0
         summary["n_expression_rank_rows"] = 0
+
+    gene_sets = export_gene_sets()
+    if gene_sets is not None:
+        summary["gene_sets_bytes"] = _write_json(out_dir / "gene_sets.json", gene_sets)
+        summary["n_gene_sets"] = len(gene_sets["sets"])
+    else:
+        summary["gene_sets_bytes"] = 0
+        summary["n_gene_sets"] = 0
 
     chromosome_expression = export_chromosome_expression(conn)
     if chromosome_expression is not None:

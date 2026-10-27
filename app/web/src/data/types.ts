@@ -238,6 +238,20 @@ export interface ExpressionRankSummary {
   median_robustness_agreement: number | null;
 }
 
+/**
+ * A curated gene set imported with `atlas geneset import` (for instance the secretome) and exported to
+ * public/data/gene_sets.json. It is an annotation overlaid on the expression classes, never an input to them.
+ */
+export interface GeneSetInfo {
+  description: string;
+  source: string;
+  importedOn: string;
+  genes: Set<string>;
+}
+
+/** name -> set; null in RealAtlasData until a set has been imported and the web export refreshed. */
+export type GeneSets = Map<string, GeneSetInfo>;
+
 export interface ExpressionRank {
   summary: ExpressionRankSummary | null;
   rows: ExpressionRankRow[];

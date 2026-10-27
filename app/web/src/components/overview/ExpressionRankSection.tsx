@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { ExpressionClass, ExpressionRank, Gene } from "../../data/types";
+import type { ExpressionClass, ExpressionRank, ExpressionRankRow, Gene, GeneSets } from "../../data/types";
 import { CLASS_ORDER } from "../../lib/expressionRank";
 import { ChromosomeClassBars } from "./rank/ChromosomeClassBars";
 import { ClassComposition } from "./rank/ClassComposition";
@@ -10,6 +10,8 @@ import "./ExpressionRankSection.css";
 interface ExpressionRankSectionProps {
   expressionRank: ExpressionRank;
   genes: Gene[];
+  /** Curated gene sets (e.g. the secretome); null when none has been imported. */
+  geneSets: GeneSets | null;
   chromosomeOrder: string[];
   onSelectGene: (gene: Gene) => void;
 }
@@ -19,17 +21,27 @@ interface ExpressionRankSectionProps {
  * shared state, so one click on a class highlights it everywhere. The rank
  * is global (all samples), so the top-bar strain/condition filters do not
  * apply here -- stated in the header rather than silently ignored. */
-export function ExpressionRankSection({ expressionRank, genes, chromosomeOrder, onSelectGene }: ExpressionRankSectionProps) {
+export function ExpressionRankSection({ expressionRank, genes, geneSets, chromosomeOrder, onSelectGene }: ExpressionRankSectionProps) {
   const [selectedClass, setSelectedClass] = useState<ExpressionClass | null>(null);
-  const { summary, rows, byGene } = expressionRank;
+  // Optional overlay: restrict every view to the members of one curated gene set. The classes themselves
+  // are always derived from ALL genes; the set only chooses which genes are shown.
+  const [activeSet, setActiveSet] = useState<string | null>(null);
+  const { summary } = expressionRank;
+  const members = activeSet ? (geneSets?.get(activeSet)?.genes ?? null) : null;
+  const rows: ExpressionRankRow[] = useMemo(
+    () => (members ? expressionRank.rows.filter((r) => members.has(r.canonical_gene_id)) : expressionRank.rows),
+    [expressionRank.rows, members],
+  );
+  const byGene = useMemo(() => (members ? new Map(rows.map((r) => [r.canonical_gene_id, r])) : expressionRank.byGene), [rows, members, expressionRank.byGene]);
+  const shownGenes = useMemo(() => (members ? genes.filter((g) => members.has(g.canonical_gene_id)) : genes), [genes, members]);
   const genesById = useMemo(() => new Map(genes.map((g) => [g.canonical_gene_id, g])), [genes]);
 
   const counts = useMemo(() => {
-    if (summary?.class_counts) return summary.class_counts;
+    if (!members && summary?.class_counts) return summary.class_counts;
     const fallback: Record<string, number> = Object.fromEntries(CLASS_ORDER.map((c) => [c, 0]));
     for (const row of rows) fallback[row.expression_class] += 1;
     return fallback;
-  }, [summary, rows]);
+  }, [summary, rows, members]);
 
   const updated = summary?.generated_at ? summary.generated_at.slice(0, 10) : null;
 
@@ -57,12 +69,39 @@ export function ExpressionRankSection({ expressionRank, genes, chromosomeOrder, 
         </ul>
       )}
 
+      {geneSets && geneSets.size > 0 && (
+        <div className="rank-section__filters" role="group" aria-label="Restrict the views to a curated gene set">
+          <span className="rank-section__filters-label">Show</span>
+          <button type="button" className={`rank-filter${activeSet === null ? " rank-filter--active" : ""}`} aria-pressed={activeSet === null} onClick={() => setActiveSet(null)}>
+            All genes
+          </button>
+          {[...geneSets].map(([name, set]) => (
+            <button
+              key={name}
+              type="button"
+              className={`rank-filter${activeSet === name ? " rank-filter--active" : ""}`}
+              aria-pressed={activeSet === name}
+              title={`${set.description}. Source: ${set.source}`}
+              onClick={() => setActiveSet(activeSet === name ? null : name)}
+            >
+              {name.charAt(0).toUpperCase() + name.slice(1).replace(/_/g, " ")} only
+              <span className="rank-filter__count">{set.genes.size.toLocaleString("en-US")}</span>
+            </button>
+          ))}
+          {activeSet && (
+            <span className="rank-section__filters-note">
+              {rows.length.toLocaleString("en-US")} genes shown. Classes were derived from all genes, not from this set.
+            </span>
+          )}
+        </div>
+      )}
+
       <div className="rank-grid">
         <ClassComposition counts={counts} selectedClass={selectedClass} onSelectClass={setSelectedClass} />
         <LevelStabilityMap rows={rows} genesById={genesById} selectedClass={selectedClass} onSelectGene={onSelectGene} />
         <TopGenesPanel rows={rows} genesById={genesById} selectedClass={selectedClass} onSelectGene={onSelectGene} />
         <ChromosomeClassBars
-          genes={genes}
+          genes={shownGenes}
           byGene={byGene}
           chromosomeOrder={chromosomeOrder}
           selectedClass={selectedClass}

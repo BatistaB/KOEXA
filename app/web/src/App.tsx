@@ -26,6 +26,7 @@ const EMPTY_ATLAS: RealAtlasData = {
   expressionRank: null,
   chromosomeExpression: null,
   studyAnnotations: null,
+  geneSets: null,
 };
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
   const [studyScope, setStudyScope] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification, expressionRank, chromosomeExpression, studyAnnotations } = atlas;
+  const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification, expressionRank, chromosomeExpression, studyAnnotations, geneSets } = atlas;
 
   useEffect(() => {
     let cancelled = false;
@@ -185,8 +186,9 @@ function App() {
       classification: classification.get(selectedGene.canonical_gene_id) ?? null,
       rank: expressionRank?.byGene.get(selectedGene.canonical_gene_id) ?? null,
       rankTotal: expressionRank?.rows.length ?? 0,
+      geneSetNames: geneSets ? [...geneSets].filter(([, set]) => set.genes.has(selectedGene.canonical_gene_id)).map(([name]) => name) : [],
     };
-  }, [selectedGene, points, scopedFilteredCount, classification, expressionRank]);
+  }, [selectedGene, points, scopedFilteredCount, classification, expressionRank, geneSets]);
 
   const atlasSummary: AtlasSummary = useMemo(
     () => ({
@@ -297,6 +299,7 @@ function App() {
                 <ExpressionRankSection
                   expressionRank={expressionRank}
                   genes={allGenes}
+                  geneSets={geneSets}
                   chromosomeOrder={
                     chromosomeExpression?.chromosomes.map((c) => c.chromosome) ??
                     [...new Set(allGenes.map((g) => g.chromosome).filter((c) => c.startsWith("Chr")))].sort()

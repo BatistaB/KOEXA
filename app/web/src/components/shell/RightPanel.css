@@ -199,3 +199,14 @@
   margin: var(--space-2) 0 0;
   line-height: var(--line-normal);
 }
+
+.right-panel__tag {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 8px;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-hairline);
+  border-radius: 999px;
+}

@@ -96,6 +96,19 @@ def fetch_biosample_units(conn: duckdb.DuckDBPyConnection) -> pd.DataFrame:
     ).fetchdf()
 
 
+def fetch_biosample_depth(conn: duckdb.DuckDBPyConnection, units: pd.DataFrame) -> pd.Series:
+    """Sequencing depth per biosample unit: `salmon_total_gene_assigned_counts` summed over the unit's runs.
+
+    This is the number of reads assigned to genes (what AFED's "mapped reads" filter is about), not raw
+    reads. NaN when no run of the unit has the metric: unknown depth is never silently treated as deep.
+    """
+    qc = conn.execute(
+        "SELECT sample_id, metric_value AS assigned FROM sample_qc WHERE metric_name = 'salmon_total_gene_assigned_counts'"
+    ).fetchdf()
+    merged = units[["sample_id", "unit_id"]].merge(qc, on="sample_id", how="left")
+    return merged.groupby("unit_id")["assigned"].sum(min_count=1).rename("assigned_reads")
+
+
 def collapse_to_biosamples(long_df: pd.DataFrame, units: pd.DataFrame) -> pd.DataFrame:
     """(genes x biosample-units) TPM matrix: mean TPM across the runs of each unit.
 

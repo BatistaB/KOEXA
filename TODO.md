@@ -1170,6 +1170,63 @@ samples" brief (no per-study DE, no condition reconstruction, Tsallis dropped fr
   is the next methodological refinement. Class retention is lowest when the RIB40/engineered-strain divide is
   split. Re-run the notebook unchanged as studies are added.
 
+## Gene co-expression network (2026-10-14) -- see docs/decisions/0008
+
+AFED-style co-expression ("which genes co-vary with this gene or gene set, and what do they have in common?"),
+adapted to the multi-study atlas. Notebook: `notebooks/coexpression_network.ipynb` (Question/Answer/Conclusion per
+section; every calculation is a call into `aoryzae_atlas.coexpr`).
+
+- [x] `src/aoryzae_atlas/coexpr/` (`network.py`, `enrichment.py`, `pipeline.py`), `matrix.build.fetch_biosample_depth`,
+  `tests/test_coexpr.py` + `tests/test_coexpr_pipeline.py` + CLI tests (all tests pass). Depth filter on
+  `salmon_total_gene_assigned_counts` summed per biosample (default 10 M = AFED, `--min-reads-millions`), genes with
+  mean TPM >= 1, two modes on the same genes (`all_samples` = AFED-style; `within_study` = per-study centering),
+  Spearman, top-50 neighbours per gene with `rank`, `r`, `reverse_rank`, `mutual_rank`, `bg_tail`,
+  `within_study_median_r`, `n_studies_tested`.
+- [x] `atlas coexpr build` (also step `coexpr build` in `atlas refresh`, ~1 min) writes
+  `analysis/coexpression/{coexpression_neighbours.parquet, coexpression_enrichment.parquet,
+  coexpression_benchmark.tsv, coexpression_summary.json}` and `matrices/coexpression/zscores_<mode>.parquet`.
+  `atlas coexpr query GENE [GENE...]` answers a gene or a gene SET (ids or symbols; note `gene_symbol` is empty for
+  every gene in the current database, so use canonical ids) with a GO enrichment of the result.
+- [x] Per-neighbourhood GO enrichment (hypergeometric, BH across terms per gene, universe = annotated network genes,
+  terms 5-500 genes) for every gene at once; calibrated against random gene lists in the notebook (section 8).
+- [x] `go-basic.obo` downloaded (2026-10-14, user-approved) to `database/GeneOntology/` (release 2026-07-26, 16,272 terms,
+  provenance + sha256 in `database/GeneOntology/PROVENANCE.md`; the payload is gitignored). `atlas coexpr build` now
+  propagates annotations over is_a/part_of and names the terms; re-run `atlas coexpr build` after updating the file.
+- [ ] **Web network view** (user wants this next): export the edge table (`network.select_edges`, mutual rank <= 2 as the
+  starting cut -- the graph percolates into one giant component by 3-5), a mode switch, mutual-rank and within-study
+  support sliders, gene-set query, enrichment panel. Add a community-detection layer on top of the same columns.
+- [ ] Possible refinements: counts-based size-factor normalisation instead of TPM (TPM is compositional), a confidence
+  interval for the functional benchmark, strain-aware centering where strains and studies are separable.
+- Findings to carry forward: the depth cut-off did not improve recovery of known functional groups (benchmark has little
+  power for lowly-expressed genes, so 10 M is kept as the conservative default); pooled correlation is dominated by
+  study/strain structure (16 % of random pairs exceed |r| 0.5 vs 7 % after per-study centering), so r alone is a weak edge
+  criterion and rank/mutual rank are used instead; the two modes favour different groups (machinery vs. secondary
+  metabolism / secreted enzymes).
+- Data note: some `samples.strain` values hold whole sentences (e.g. "The A. oryzae strain HacA-CA, a hacA in
+  constitutively active ..."), which inflates the strain count (18) and makes strain-level analyses and labels noisy --
+  worth normalising in `metadata/samples.tsv`.
+
+## Curated gene sets and the secretome (2026-10-26) -- see docs/decisions/0010
+
+User-supplied list of 1,235 secreted genes (SignalP 6.0 signal peptide + UniProt cell wall) imported as the first
+curated gene set; an annotation overlaid on the expression classes, not a class.
+
+- [x] `src/aoryzae_atlas/genesets/curated.py`, `atlas geneset import|list`, `metadata/gene_sets/secreted.*`
+  (1,223 genes; 41 retired AO09 ids redirected through the vetted FungiDB map), `tests/test_genesets.py`.
+- [x] `atlas coexpr build` enriches every neighbourhood in the curated sets (separate from GO); `atlas coexpr query` prints it.
+- [x] Web: `gene_sets.json` via `atlas app export-web`; homepage "Show: All genes / Secreted only" toggle (classes stay
+  derived from all genes) and a "Gene sets" row in the gene panel. Verified in the browser pane.
+- [x] `notebooks/secretome.ipynb`: set vs expression classes (Context-Specific x3.7, Rare/Silent x1.95, Constitutive
+  Core/High depleted), scores, top genes, flags, chromosome/adjacency, co-expression, sanity check against GO.
+- [x] `sspB` = AO090038000546 (user, 2026-10-26; already a member as a direct id, so the set stays at 1,223 genes).
+- [ ] **Needs the user:** `AO090011000795-A` (alias of a vacuolar gene, almost certainly a different locus: the UniProt entry is
+  dipeptidyl-peptidase 5). Add with `atlas geneset import secreted ... --map AO090011000795-A=<AO09 id>` once known.
+- [ ] Re-run `notebooks/secretome.ipynb` (its Section 1 text and the limitations still say two ids were pending).
+- [ ] **Would sharpen the set:** the per-gene evidence (SignalP-positive list and UniProt cell-wall list separately) to
+  split "secreted / cell wall / both"; a look at the review list in the notebook (27 members annotated only to
+  intracellular compartments) and at the 32 genes reached through retired ids (only 6% extracellular/cell-wall vs
+  21% for directly matched ids, p = 0.045).
+
 ## Study enrichment: paper, summary, sample tags (2026-10-03)
 
 See `docs/decisions/0007-study-annotations-and-sample-tags.md`.

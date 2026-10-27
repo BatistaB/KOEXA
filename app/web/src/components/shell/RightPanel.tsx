@@ -29,6 +29,8 @@ export interface GeneSummary {
   /** Pan-transcriptomic expression rank for this gene (null until `atlas rank genes` has been exported). */
   rank: ExpressionRankRow | null;
   rankTotal: number;
+  /** Names of the curated gene sets (e.g. "secreted") that contain this gene. */
+  geneSetNames: string[];
 }
 
 const BIOLOGICAL_LABEL_TEXT: Record<string, string> = {
@@ -376,6 +378,16 @@ export function RightPanel({
                 <li key={flag}>⚑ {FLAG_TEXT[flag] ?? flag}</li>
               ))}
             </ul>
+          )}
+          {geneSummary.geneSetNames.length > 0 && (
+            <div className="right-panel__row">
+              <span className="right-panel__row-label">Gene sets</span>
+              <span className="right-panel__row-value">
+                {geneSummary.geneSetNames.map((name) => (
+                  <span className="right-panel__tag" key={name}>{name}</span>
+                ))}
+              </span>
+            </div>
           )}
           <p className="right-panel__note">Scores are percentiles across all genes over all independent samples (100 = highest).</p>
         </div>

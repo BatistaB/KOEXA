@@ -7,6 +7,7 @@ import type {
   ExpressionRankSummary,
   GeneClassification,
   GeneExpressionRow,
+  GeneSets,
   Sample,
   SampleQcMetrics,
   StudyAnnotation,
@@ -40,6 +41,12 @@ export interface RealAtlasData {
   chromosomeExpression: ChromosomeExpression | null;
   /** null until `atlas database load-annotations` has run and the web export has been refreshed. */
   studyAnnotations: StudyAnnotations | null;
+  /** null until `atlas geneset import` has run and the web export has been refreshed. */
+  geneSets: GeneSets | null;
+}
+
+interface GeneSetsPayload {
+  sets: Record<string, { description: string; source: string; imported_on: string; genes: string[] }>;
 }
 
 interface StudyAnnotationsPayload {
@@ -109,6 +116,15 @@ function parseExpressionRank(payload: ExpressionRankPayload): ExpressionRank {
     quality_flags: r[16],
   }));
   return { summary: payload.summary, rows, byGene: new Map(rows.map((row) => [row.canonical_gene_id, row])) };
+}
+
+function parseGeneSets(payload: GeneSetsPayload): GeneSets {
+  return new Map(
+    Object.entries(payload.sets).map(([name, set]) => [
+      name,
+      { description: set.description, source: set.source, importedOn: set.imported_on, genes: new Set(set.genes) },
+    ]),
+  );
 }
 
 function parseChromosomeExpression(payload: ChromosomeExpressionPayload): ChromosomeExpression {
@@ -190,6 +206,7 @@ export async function loadRealAtlas(): Promise<RealAtlasData> {
     chromosomeExpressionPayload,
     expressionRankPayload,
     studyAnnotationsPayload,
+    geneSetsPayload,
   ] =
     await Promise.all([
       fetchJson<Dataset[]>("/data/datasets.json"),
@@ -201,6 +218,7 @@ export async function loadRealAtlas(): Promise<RealAtlasData> {
       fetchJson<ChromosomeExpressionPayload | null>("/data/chromosome_expression.json").catch(() => null),
       fetchJson<ExpressionRankPayload | null>("/data/expression_rank.json").catch(() => null),
       fetchJson<StudyAnnotationsPayload | null>("/data/study_annotations.json").catch(() => null),
+      fetchJson<GeneSetsPayload | null>("/data/gene_sets.json").catch(() => null),
     ]);
 
   return {
@@ -218,5 +236,6 @@ export async function loadRealAtlas(): Promise<RealAtlasData> {
           tagCategories: studyAnnotationsPayload.tag_categories,
         }
       : null,
+    geneSets: geneSetsPayload ? parseGeneSets(geneSetsPayload) : null,
   };
 }
