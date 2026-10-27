@@ -1,0 +1,102 @@
+{
+  "bioproject": "PRJNA1241512",
+  "collected_at": "2026-10-27T14:26:33+00:00",
+  "accessions_searched": [
+    "PRJNA1241512",
+    "SRP572897"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [],
+  "suggested_paper_status": "not_found",
+  "study": {
+    "dataset_id": "PRJNA1241512",
+    "bioproject": "PRJNA1241512",
+    "study_accession": "SRP572897",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "",
+    "study_description": "Aspergillus oryzae Transcriptome or Gene expression",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "12 biosample(s), 12 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN47548009",
+      "sample_title": "",
+      "strain": "WT-2",
+      "condition_clues": "isolate=WT-2; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN47548008",
+      "sample_title": "",
+      "strain": "WT-1",
+      "condition_clues": "isolate=WT-1; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN47548007",
+      "sample_title": "",
+      "strain": "Mut4-4",
+      "condition_clues": "isolate=Mut4-4; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN47548006",
+      "sample_title": "",
+      "strain": "Mut4-3",
+      "condition_clues": "isolate=Mut4-3; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN47548005",
+      "sample_title": "",
+      "strain": "Mut4-2",
+      "condition_clues": "isolate=Mut4-2; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN47548004",
+      "sample_title": "",
+      "strain": "Mut4-1",
+      "condition_clues": "isolate=Mut4-1; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN47548003",
+      "sample_title": "",
+      "strain": "DCreA-4",
+      "condition_clues": "isolate=DCreA-4; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN47548002",
+      "sample_title": "",
+      "strain": "DCreA-3",
+      "condition_clues": "isolate=DCreA-3; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN47548011",
+      "sample_title": "",
+      "strain": "WT-4",
+      "condition_clues": "isolate=WT-4; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN47548010",
+      "sample_title": "",
+      "strain": "WT-3",
+      "condition_clues": "isolate=WT-3; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN47548001",
+      "sample_title": "",
+      "strain": "DCreA-2",
+      "condition_clues": "isolate=DCreA-2; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    },
+    {
+      "biosample": "SAMN47548000",
+      "sample_title": "",
+      "strain": "DCreA-1",
+      "condition_clues": "isolate=DCreA-1; isolation_source=Laboratory strain repository; collection_date=2024; geo_loc_name=China:Jiangsu; sample_type=fungi; BioSampleModel=Microbe, viral or environmental"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

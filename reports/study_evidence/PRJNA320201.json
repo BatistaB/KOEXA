@@ -1,0 +1,36 @@
+{
+  "bioproject": "PRJNA320201",
+  "collected_at": "2026-10-27T14:27:19+00:00",
+  "accessions_searched": [
+    "PRJNA320201",
+    "SRP325817"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [],
+  "suggested_paper_status": "not_found",
+  "study": {
+    "dataset_id": "PRJNA320201",
+    "bioproject": "PRJNA320201",
+    "study_accession": "SRP325817",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "BCC7051",
+    "study_description": "Aspergillus oryzae strain:BCC7051 Genome sequencing and assembly",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "1 biosample(s), 4 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN04259795",
+      "sample_title": "",
+      "strain": "BCC7051",
+      "condition_clues": "strain=BCC7051; isolation_source=soil; collection_date=2001; geo_loc_name=Thailand; sample_type=culture; altitude=missing; biomaterial_provider=Bioprocess Technology Laboratory, BIOTEC, Thailand; collected_by=BIOTEC"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

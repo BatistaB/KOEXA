@@ -1,0 +1,102 @@
+{
+  "bioproject": "PRJNA959043",
+  "collected_at": "2026-10-27T14:25:46+00:00",
+  "accessions_searched": [
+    "PRJNA959043",
+    "SRP433898"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [],
+  "suggested_paper_status": "not_found",
+  "study": {
+    "dataset_id": "PRJNA959043",
+    "bioproject": "PRJNA959043",
+    "study_accession": "SRP433898",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "ATCC 12892",
+    "study_description": "GENERATING A SYNTHETIC BIOLOGY TOOLBOX FOR NITROORGANICS",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "12 biosample(s), 12 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN34310119",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day4; culture medium=A; replicate=2"
+    },
+    {
+      "biosample": "SAMN34310118",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day4; culture medium=A; replicate=1"
+    },
+    {
+      "biosample": "SAMN34310117",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day3; culture medium=B; replicate=2"
+    },
+    {
+      "biosample": "SAMN34310116",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day3; culture medium=B; replicate=1"
+    },
+    {
+      "biosample": "SAMN34310115",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day3; culture medium=A; replicate=2"
+    },
+    {
+      "biosample": "SAMN34310114",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day3; culture medium=A; replicate=1"
+    },
+    {
+      "biosample": "SAMN34310113",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day2; culture medium=B; replicate=2"
+    },
+    {
+      "biosample": "SAMN34310112",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day2; culture medium=B; replicate=1"
+    },
+    {
+      "biosample": "SAMN34310121",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day4; culture medium=B; replicate=2"
+    },
+    {
+      "biosample": "SAMN34310120",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day4; culture medium=B; replicate=1"
+    },
+    {
+      "biosample": "SAMN34310111",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day2; culture medium=A; replicate=2"
+    },
+    {
+      "biosample": "SAMN34310110",
+      "sample_title": "",
+      "strain": "ATCC 12892",
+      "condition_clues": "strain=ATCC 12892; isolation_source=ATCC; collection_date=2017; geo_loc_name=USA; sample_type=cell culture; culture day=Day2; culture medium=A; replicate=1"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}
