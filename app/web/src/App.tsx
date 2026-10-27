@@ -15,6 +15,7 @@ import { loadRealGenes } from "./data/realGenes";
 import { loadRealAtlas, type RealAtlasData } from "./data/realAtlas";
 import { buildChartPoints, buildGeneRankings, datasetColorAssignment, median } from "./lib/points";
 import { shortConditionLabel } from "./lib/conditionLabel";
+import { geneSetLabel } from "./lib/geneSets";
 
 const EMPTY_ATLAS: RealAtlasData = {
   datasets: [],
@@ -44,6 +45,8 @@ function App() {
   const [selectedBioproject, setSelectedBioproject] = useState<string | null>(null);
   // When set, the gene view shows only this study's samples (reached by clicking a study segment on the home ranking).
   const [studyScope, setStudyScope] = useState<string | null>(null);
+  // Curated gene set (e.g. "secreted") restricting the home ranking and the expression-behavior views; null = all genes.
+  const [activeGeneSet, setActiveGeneSet] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification, expressionRank, chromosomeExpression, studyAnnotations, geneSets } = atlas;
@@ -139,9 +142,14 @@ function App() {
     return Array.from(seen.entries());
   }, [filteredSamples, datasets]);
 
+  const rankedGenes = useMemo(() => {
+    const members = activeGeneSet ? geneSets?.get(activeGeneSet)?.genes : undefined;
+    return members ? allGenes.filter((g) => members.has(g.canonical_gene_id)) : allGenes;
+  }, [allGenes, geneSets, activeGeneSet]);
+
   const rankings = useMemo(
-    () => buildGeneRankings(allGenes, samples, datasets, geneExpression, strainFilter, conditionFilter),
-    [allGenes, samples, datasets, geneExpression, strainFilter, conditionFilter],
+    () => buildGeneRankings(rankedGenes, samples, datasets, geneExpression, strainFilter, conditionFilter),
+    [rankedGenes, samples, datasets, geneExpression, strainFilter, conditionFilter],
   );
 
   const scopedSamples = useMemo(
@@ -238,8 +246,9 @@ function App() {
     } else {
       bits.push("all conditions");
     }
+    if (activeGeneSet) bits.push(`${geneSetLabel(activeGeneSet).toLowerCase()} genes only`);
     return `Filter: ${bits.join(" · ")}.`;
-  }, [strainFilter, conditionFilter, conditions]);
+  }, [strainFilter, conditionFilter, conditions, activeGeneSet]);
 
   return (
     <div className="app-shell">
@@ -300,6 +309,8 @@ function App() {
                   expressionRank={expressionRank}
                   genes={allGenes}
                   geneSets={geneSets}
+                  activeSet={activeGeneSet}
+                  onActiveSetChange={setActiveGeneSet}
                   chromosomeOrder={
                     chromosomeExpression?.chromosomes.map((c) => c.chromosome) ??
                     [...new Set(allGenes.map((g) => g.chromosome).filter((c) => c.startsWith("Chr")))].sort()

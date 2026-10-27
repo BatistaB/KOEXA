@@ -31,10 +31,9 @@ export function GeneRankingOverview({
     return [...capped, rankings.length];
   }, [rankings.length]);
 
-  const sliderIndex = Math.max(
-    0,
-    steps.findIndex((s) => s >= selectedCount),
-  );
+  // A remembered count larger than every step (e.g. "All 12,090" before a gene-set filter shrinks the list) means "All".
+  const foundIndex = steps.findIndex((s) => s >= selectedCount);
+  const sliderIndex = foundIndex === -1 ? steps.length - 1 : foundIndex;
   const shownCount = steps[sliderIndex] ?? rankings.length;
   const isAll = shownCount >= rankings.length;
   const shown = rankings.slice(0, shownCount);

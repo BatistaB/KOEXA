@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import type { ExpressionClass, ExpressionRank, ExpressionRankRow, Gene, GeneSets } from "../../data/types";
 import { CLASS_ORDER } from "../../lib/expressionRank";
+import { geneSetLabel } from "../../lib/geneSets";
 import { ChromosomeClassBars } from "./rank/ChromosomeClassBars";
 import { ClassComposition } from "./rank/ClassComposition";
 import { LevelStabilityMap } from "./rank/LevelStabilityMap";
@@ -12,6 +13,9 @@ interface ExpressionRankSectionProps {
   genes: Gene[];
   /** Curated gene sets (e.g. the secretome); null when none has been imported. */
   geneSets: GeneSets | null;
+  /** The restricting gene set, owned by the page so the "Genes by total expression" ranking above follows it too. */
+  activeSet: string | null;
+  onActiveSetChange: (name: string | null) => void;
   chromosomeOrder: string[];
   onSelectGene: (gene: Gene) => void;
 }
@@ -21,11 +25,18 @@ interface ExpressionRankSectionProps {
  * shared state, so one click on a class highlights it everywhere. The rank
  * is global (all samples), so the top-bar strain/condition filters do not
  * apply here -- stated in the header rather than silently ignored. */
-export function ExpressionRankSection({ expressionRank, genes, geneSets, chromosomeOrder, onSelectGene }: ExpressionRankSectionProps) {
+export function ExpressionRankSection({
+  expressionRank,
+  genes,
+  geneSets,
+  activeSet,
+  onActiveSetChange,
+  chromosomeOrder,
+  onSelectGene,
+}: ExpressionRankSectionProps) {
   const [selectedClass, setSelectedClass] = useState<ExpressionClass | null>(null);
   // Optional overlay: restrict every view to the members of one curated gene set. The classes themselves
   // are always derived from ALL genes; the set only chooses which genes are shown.
-  const [activeSet, setActiveSet] = useState<string | null>(null);
   const { summary } = expressionRank;
   const members = activeSet ? (geneSets?.get(activeSet)?.genes ?? null) : null;
   const rows: ExpressionRankRow[] = useMemo(
@@ -72,7 +83,7 @@ export function ExpressionRankSection({ expressionRank, genes, geneSets, chromos
       {geneSets && geneSets.size > 0 && (
         <div className="rank-section__filters" role="group" aria-label="Restrict the views to a curated gene set">
           <span className="rank-section__filters-label">Show</span>
-          <button type="button" className={`rank-filter${activeSet === null ? " rank-filter--active" : ""}`} aria-pressed={activeSet === null} onClick={() => setActiveSet(null)}>
+          <button type="button" className={`rank-filter${activeSet === null ? " rank-filter--active" : ""}`} aria-pressed={activeSet === null} onClick={() => onActiveSetChange(null)}>
             All genes
           </button>
           {[...geneSets].map(([name, set]) => (
@@ -82,9 +93,9 @@ export function ExpressionRankSection({ expressionRank, genes, geneSets, chromos
               className={`rank-filter${activeSet === name ? " rank-filter--active" : ""}`}
               aria-pressed={activeSet === name}
               title={`${set.description}. Source: ${set.source}`}
-              onClick={() => setActiveSet(activeSet === name ? null : name)}
+              onClick={() => onActiveSetChange(activeSet === name ? null : name)}
             >
-              {name.charAt(0).toUpperCase() + name.slice(1).replace(/_/g, " ")} only
+              {geneSetLabel(name)} only
               <span className="rank-filter__count">{set.genes.size.toLocaleString("en-US")}</span>
             </button>
           ))}

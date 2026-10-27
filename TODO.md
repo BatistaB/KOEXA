@@ -1216,6 +1216,9 @@ curated gene set; an annotation overlaid on the expression classes, not a class.
 - [x] `atlas coexpr build` enriches every neighbourhood in the curated sets (separate from GO); `atlas coexpr query` prints it.
 - [x] Web: `gene_sets.json` via `atlas app export-web`; homepage "Show: All genes / Secreted only" toggle (classes stay
   derived from all genes) and a "Gene sets" row in the gene panel. Verified in the browser pane.
+  2026-10-27: the toggle's state now lives in `App.tsx` and also restricts the top "Genes by total expression" ranking
+  (subtitle says "secreted genes only"), not just the behavior section; the gene-count slider remembers "All" across the
+  filter (a remembered count above the new total means "All", it no longer snaps to 10).
 - [x] `notebooks/secretome.ipynb`: set vs expression classes (Context-Specific x3.7, Rare/Silent x1.95, Constitutive
   Core/High depleted), scores, top genes, flags, chromosome/adjacency, co-expression, sanity check against GO.
 - [x] `sspB` = AO090038000546 (user, 2026-10-26; already a member as a direct id, so the set stays at 1,223 genes).
