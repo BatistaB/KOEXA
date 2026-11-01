@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA1241512",
+  "related_identifiers": {
+    "bioproject": "PRJNA1241512",
+    "sra_study": "SRP572897",
+    "geo_series": null
+  },
+  "paper": {
+    "status": "not_found"
+  },
+  "study_summary": {
+    "objective": "Not stated: the BioProject only says 'Aspergillus oryzae Transcriptome or Gene expression'; from the sample names it compares WT with a DCreA and a Mut4 strain.",
+    "experimental_design": "WT, DCreA and Mut4 isolates with 4 replicates each (12 libraries, NovaSeq 6000); culture conditions are not recorded.",
+    "main_finding": "Not available: no accession-linked paper was found, so no result is reported here."
+  },
+  "tag_sets": {
+    "wt": [
+      {
+        "tag": "wild_type",
+        "source": "sample_metadata",
+        "confidence": "medium",
+        "note": "isolate labels WT-1..WT-4; the parental strain is not stated"
+      }
+    ],
+    "dcrea": [
+      {
+        "tag": "knockout",
+        "source": "inferred_from_design",
+        "confidence": "low",
+        "note": "isolate labels DCreA-1..4; read as a creA deletion from the name only, not stated"
+      },
+      {
+        "tag": "del_creA",
+        "source": "inferred_from_design",
+        "confidence": "low",
+        "note": "from the isolate label 'DCreA'; not confirmed by any record"
+      }
+    ],
+    "mut4": [
+      {
+        "tag": "mutant_strain",
+        "source": "sample_metadata",
+        "confidence": "medium",
+        "note": "isolate labels Mut4-1..Mut4-4; the nature of the mutation is not stated"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA1241512_WT": {
+      "sets": [
+        "wt"
+      ],
+      "tags": []
+    },
+    "PRJNA1241512_DCreA": {
+      "sets": [
+        "dcrea"
+      ],
+      "tags": []
+    },
+    "PRJNA1241512_Mut4": {
+      "sets": [
+        "mut4"
+      ],
+      "tags": []
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "No paper, no culture metadata. Conditions are the genotype labels in the isolate names only; by agreement with the user the study is labelled by its BioProject until more is known.",
+    "DCreA is read as a creA deletion from the name only (low-confidence tags); the nature of Mut4 is unknown."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from the SRA/BioSample records and the conditions the user supplied",
+    "curated_at": "2026-11-01",
+    "needs_pdf": false
+  }
+}

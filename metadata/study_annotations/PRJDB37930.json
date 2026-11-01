@@ -4,7 +4,10 @@
   "related_identifiers": {
     "bioproject": "PRJDB37930",
     "sra_study": "DRP018854",
-    "geo_series": null
+    "geo_series": null,
+    "other": [
+      "Strain lineage / cutL1 construct: Miyazawa K, Yoshimi A, Zhang S, Sano M, Nakayama M, Gomi K, Abe K (2016) Biosci Biotechnol Biochem 80(9):1853-1863, doi 10.1080/09168451.2016.1209968"
+    ]
   },
   "paper": {
     "status": "found",
@@ -22,7 +25,7 @@
   },
   "study_summary": {
     "objective": "Characterise the first hours (<= 6 h) of the A. oryzae response to hypoxia in an industrial-style stirred-tank bioreactor.",
-    "experimental_design": "Fed-batch 4 L bioreactor cultures of WT, the hyphal-dispersion mutant AGΔ-GAGΔ and its ΔaoxA derivative were held at 10% dissolved oxygen (control) or let fall to <=1% (hypoxia), sampled at baseline (B3h) and 0, 1, 3 and 6 h after hypoxia onset.",
+    "experimental_design": "Fed-batch 4 L bioreactor cultures of WT, the hyphal-dispersion mutant AGΔ-GAGΔ and its ΔaoxA derivative (all with PglaA142-cutL1), kept at 10% dissolved oxygen (control) or let fall to <=1% (hypoxia); sampled at baseline (B3h) and 0, 1, 3, 6 h after onset.",
     "main_finding": "Hypoxia transiently repressed respiratory complexes I-III and immediately induced complex IV, the alternative oxidase gene and glycolysis, keeping ATP stable; a transient ROS burst was prolonged when aoxA was deleted."
   },
   "tag_sets": {
@@ -82,13 +85,25 @@
         "tag": "wild_type",
         "source": "paper_methods",
         "confidence": "medium",
-        "note": "the paper's control strain 'WT-cutL1'"
+        "note": "the paper's control strain 'WT-cutL1': wild type for the cell-wall and aoxA genes, but it carries the cutL1 expression construct"
       },
       {
         "tag": "oe_cutL1",
-        "source": "inferred_from_design",
+        "source": "curated_condition",
+        "confidence": "high",
+        "note": "cutL1 (AO090005000029) is expressed from the glaA142 promoter in all three strains (WT-cutL1, AG-GAG-cutL1, AG-GAG-AOXA-cutL1); the lineage comes from Miyazawa K, Yoshimi A, Zhang S, Sano M, Nakayama M, Gomi K, Abe K (2016) Biosci Biotechnol Biochem 80(9):1853-1863, doi 10.1080/09168451.2016.1209968, where cutL1 was transformed into the wild type and an alpha-1,3-glucan-synthase-deficient mutant. Identified by the curator, not described in the Journal of Fungi paper's main text."
+      },
+      {
+        "tag": "overexpression",
+        "source": "curated_condition",
+        "confidence": "high",
+        "note": "cutL1 is an endogenous A. oryzae cutinase gene overexpressed from a construct"
+      },
+      {
+        "tag": "glaa142_promoter",
+        "source": "curated_condition",
         "confidence": "medium",
-        "note": "all three strains carry the '-cutL1' suffix (cutinase CutL1 expression construct); the construct is not described in the paper's main text"
+        "note": "PglaA142 as read by the curator from the lineage paper (Miyazawa et al. 2016); the promoter is not named in that paper's abstract, in the SRA/ENA metadata or in the Journal of Fungi main text, and the lineage paper's full text was not available to re-check it."
       }
     ],
     "genotype_AGGAG": [
@@ -120,9 +135,21 @@
       },
       {
         "tag": "oe_cutL1",
-        "source": "inferred_from_design",
+        "source": "curated_condition",
+        "confidence": "high",
+        "note": "cutL1 (AO090005000029) is expressed from the glaA142 promoter in all three strains (WT-cutL1, AG-GAG-cutL1, AG-GAG-AOXA-cutL1); the lineage comes from Miyazawa K, Yoshimi A, Zhang S, Sano M, Nakayama M, Gomi K, Abe K (2016) Biosci Biotechnol Biochem 80(9):1853-1863, doi 10.1080/09168451.2016.1209968, where cutL1 was transformed into the wild type and an alpha-1,3-glucan-synthase-deficient mutant. Identified by the curator, not described in the Journal of Fungi paper's main text."
+      },
+      {
+        "tag": "overexpression",
+        "source": "curated_condition",
+        "confidence": "high",
+        "note": "cutL1 is an endogenous A. oryzae cutinase gene overexpressed from a construct"
+      },
+      {
+        "tag": "glaa142_promoter",
+        "source": "curated_condition",
         "confidence": "medium",
-        "note": "all three strains carry the '-cutL1' suffix (cutinase CutL1 expression construct); the construct is not described in the paper's main text"
+        "note": "PglaA142 as read by the curator from the lineage paper (Miyazawa et al. 2016); the promoter is not named in that paper's abstract, in the SRA/ENA metadata or in the Journal of Fungi main text, and the lineage paper's full text was not available to re-check it."
       }
     ],
     "genotype_AOXA": [
@@ -160,9 +187,21 @@
       },
       {
         "tag": "oe_cutL1",
-        "source": "inferred_from_design",
+        "source": "curated_condition",
+        "confidence": "high",
+        "note": "cutL1 (AO090005000029) is expressed from the glaA142 promoter in all three strains (WT-cutL1, AG-GAG-cutL1, AG-GAG-AOXA-cutL1); the lineage comes from Miyazawa K, Yoshimi A, Zhang S, Sano M, Nakayama M, Gomi K, Abe K (2016) Biosci Biotechnol Biochem 80(9):1853-1863, doi 10.1080/09168451.2016.1209968, where cutL1 was transformed into the wild type and an alpha-1,3-glucan-synthase-deficient mutant. Identified by the curator, not described in the Journal of Fungi paper's main text."
+      },
+      {
+        "tag": "overexpression",
+        "source": "curated_condition",
+        "confidence": "high",
+        "note": "cutL1 is an endogenous A. oryzae cutinase gene overexpressed from a construct"
+      },
+      {
+        "tag": "glaa142_promoter",
+        "source": "curated_condition",
         "confidence": "medium",
-        "note": "all three strains carry the '-cutL1' suffix (cutinase CutL1 expression construct); the construct is not described in the paper's main text"
+        "note": "PglaA142 as read by the curator from the lineage paper (Miyazawa et al. 2016); the promoter is not named in that paper's abstract, in the SRA/ENA metadata or in the Journal of Fungi main text, and the lineage paper's full text was not available to re-check it."
       }
     ],
     "arm_ctrl": [
@@ -610,11 +649,12 @@
   },
   "sample_tags": {},
   "notes": [
-    "Resolves fields left unresolved in metadata/conditions.tsv: 'ctrl' = DO maintained at 10%, 'hypo' = DO allowed to fall to <=1%, B3h = baseline after 3 h at 10% DO, 'AOXA' = deletion of the alternative oxidase gene aoxA in the AGΔ-GAGΔ background; 'AG-GAG' = alpha-1,3-glucan synthase + galactosaminogalactan synthase gene knockout."
+    "Resolves fields left unresolved in metadata/conditions.tsv: 'ctrl' = DO maintained at 10%, 'hypo' = DO allowed to fall to <=1%, B3h = baseline after 3 h at 10% DO, 'AOXA' = deletion of the alternative oxidase gene aoxA in the AGΔ-GAGΔ background; 'AG-GAG' = alpha-1,3-glucan synthase + galactosaminogalactan synthase gene knockout.",
+    "All 85 runs carry a cutL1 expression construct (curator-identified 2026-10-27): cutL1 (AO090005000029), the A. oryzae cutinase CutL1, is expressed from the glaA142 promoter in WT-cutL1, AG-GAG-cutL1 and AG-GAG-AOXA-cutL1. Lineage paper: Miyazawa K, Yoshimi A, Zhang S, Sano M, Nakayama M, Gomi K, Abe K (2016) Biosci Biotechnol Biochem 80(9):1853-1863, doi 10.1080/09168451.2016.1209968. The promoter is the curator's reading of that paper (not in its abstract or the SRA metadata). Consequence: the expression of this gene here (median ~17,000 TPM, against ~9 TPM in the other studies) is construct-driven and says nothing about its native regulation."
   ],
   "curation": {
-    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text",
-    "curated_at": "2026-10-03",
+    "curated_by": "Claude Code (claude-opus-5-5), from reports/study_evidence/ + open-access full text ; cutL1 construct / lineage added from the user's manual reading of the lineage paper",
+    "curated_at": "2026-10-27",
     "needs_pdf": false
   }
 }

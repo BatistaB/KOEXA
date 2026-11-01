@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA959043",
+  "related_identifiers": {
+    "bioproject": "PRJNA959043",
+    "sra_study": "SRP433898",
+    "geo_series": null
+  },
+  "paper": {
+    "status": "not_found"
+  },
+  "study_summary": {
+    "objective": "Identify A. oryzae genes for the biosynthesis of nitroorganic compounds to populate a synthetic biology toolbox (BioProject description, Pacific Northwest National Laboratory).",
+    "experimental_design": "ATCC 12892 grown in two media (A and B, composition not described) and sampled on days 2, 3 and 4, with 2 biological replicates each (12 libraries, MiSeq).",
+    "main_finding": "Not available: no accession-linked paper was found, so no result is reported here."
+  },
+  "tag_sets": {
+    "atcc12892": [
+      {
+        "tag": "strain_atcc_12892",
+        "source": "sample_metadata",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA959043_mediumB_day3": {
+      "sets": [
+        "atcc12892"
+      ],
+      "tags": [
+        {
+          "tag": "72h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "BioSample culture day = Day3 (days x 24)"
+        }
+      ]
+    },
+    "PRJNA959043_mediumB_day4": {
+      "sets": [
+        "atcc12892"
+      ],
+      "tags": [
+        {
+          "tag": "96h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "BioSample culture day = Day4 (days x 24)"
+        }
+      ]
+    },
+    "PRJNA959043_mediumA_day4": {
+      "sets": [
+        "atcc12892"
+      ],
+      "tags": [
+        {
+          "tag": "96h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "BioSample culture day = Day4 (days x 24)"
+        }
+      ]
+    },
+    "PRJNA959043_mediumA_day2": {
+      "sets": [
+        "atcc12892"
+      ],
+      "tags": [
+        {
+          "tag": "48h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "BioSample culture day = Day2 (days x 24)"
+        }
+      ]
+    },
+    "PRJNA959043_mediumA_day3": {
+      "sets": [
+        "atcc12892"
+      ],
+      "tags": [
+        {
+          "tag": "72h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "BioSample culture day = Day3 (days x 24)"
+        }
+      ]
+    },
+    "PRJNA959043_mediumB_day2": {
+      "sets": [
+        "atcc12892"
+      ],
+      "tags": [
+        {
+          "tag": "48h",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "BioSample culture day = Day2 (days x 24)"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "No paper is linked to this accession. Medium A and medium B are only letters in the BioSample records; their composition, the temperature and the nitrogen/carbon sources are unknown.",
+    "'Day N' is converted to hours as N x 24 for the time tag; whether the day counts from inoculation is not stated."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from the SRA/BioSample records and the conditions the user supplied",
+    "curated_at": "2026-11-01",
+    "needs_pdf": false
+  }
+}

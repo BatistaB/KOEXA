@@ -74,3 +74,5 @@ xylose	carbon_source	D-xylose (pentose sugar) is the supplied carbon source.	d_x
 xylan	carbon_source	Xylan (hemicellulose polymer) is the supplied carbon source.	d_xylan
 xyloglucan	carbon_source	Xyloglucan (hemicellulose polymer) is the supplied carbon source.	d_xyloglucan
 lignocellulosic_biomass	substrate	Plant biomass (e.g. wheat bran, soybean hulls, straw) as carbon source or growth substrate.	plant_biomass;lignocellulose
+glaa142_promoter	genotype	The gene of interest is expressed from the glaA142 promoter (PglaA142, from the glucoamylase gene glaA). Pair with oe_<gene> or recombinant_expression.	PglaA142;glaA142
+mutant_strain	genotype	Carries a mutation or genetic modification whose nature is not specified in the available metadata.	unspecified_mutant

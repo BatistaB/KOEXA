@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA320201",
+  "related_identifiers": {
+    "bioproject": "PRJNA320201",
+    "sra_study": "SRP325817",
+    "geo_series": null
+  },
+  "paper": {
+    "status": "not_found"
+  },
+  "study_summary": {
+    "objective": "Compare the transcriptome of the soil isolate BCC7051 grown on xylose or glucose in active growth and stationary phases; the BioProject itself is titled a genome sequencing project.",
+    "experimental_design": "One culture per condition (no replicates): xylose at 36 h (active growth) and 96 h (stationary), glucose at 36 h (active growth) and 72 h (stationary); HiSeq X Ten.",
+    "main_finding": "Not available: no accession-linked paper was found, so no result is reported here."
+  },
+  "tag_sets": {
+    "bcc7051": [
+      {
+        "tag": "strain_bcc7051",
+        "source": "sample_metadata",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA320201_BCC7051_xylose_96h": {
+      "sets": [
+        "bcc7051"
+      ],
+      "tags": [
+        {
+          "tag": "xylose",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "SRA experiment design description, supplied by the user"
+        },
+        {
+          "tag": "96h",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "hours of culture stated in the SRA experiment design description"
+        },
+        {
+          "tag": "stationary_phase",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "described as 'stationary phase'"
+        }
+      ]
+    },
+    "PRJNA320201_BCC7051_xylose_36h": {
+      "sets": [
+        "bcc7051"
+      ],
+      "tags": [
+        {
+          "tag": "xylose",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "SRA experiment design description, supplied by the user"
+        },
+        {
+          "tag": "36h",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "hours of culture stated in the SRA experiment design description"
+        },
+        {
+          "tag": "exponential_phase",
+          "source": "curated_condition",
+          "confidence": "medium",
+          "note": "described as 'active growth phase'"
+        }
+      ]
+    },
+    "PRJNA320201_BCC7051_glucose_72h": {
+      "sets": [
+        "bcc7051"
+      ],
+      "tags": [
+        {
+          "tag": "glucose",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "SRA experiment design description, supplied by the user"
+        },
+        {
+          "tag": "72h",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "hours of culture stated in the SRA experiment design description"
+        },
+        {
+          "tag": "stationary_phase",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "described as 'stationary phase'"
+        }
+      ]
+    },
+    "PRJNA320201_BCC7051_glucose_36h": {
+      "sets": [
+        "bcc7051"
+      ],
+      "tags": [
+        {
+          "tag": "glucose",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "SRA experiment design description, supplied by the user"
+        },
+        {
+          "tag": "36h",
+          "source": "curated_condition",
+          "confidence": "high",
+          "note": "hours of culture stated in the SRA experiment design description"
+        },
+        {
+          "tag": "exponential_phase",
+          "source": "curated_condition",
+          "confidence": "medium",
+          "note": "described as 'active growth phase'"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "Conditions were supplied by the user (2026-10-27) from the SRA experiment design descriptions; the user's SRX1124197 and SRX1124198 are SRX11241967 and SRX11241968, confirmed by the library names BCC7051_C6_36 and BCC7051_C6_72.",
+    "All four runs share one BioSample (SAMN04259795) although they are different cultures; the atlas counts them as four independent samples because the curated conditions differ.",
+    "Culture medium, temperature and pH are not stated, and each condition has a single culture, so no replicate variance can be estimated."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from the SRA/BioSample records and the conditions the user supplied",
+    "curated_at": "2026-11-01",
+    "needs_pdf": false
+  }
+}

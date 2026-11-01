@@ -1249,6 +1249,22 @@ See `docs/decisions/0007-study-annotations-and-sample-tags.md`.
   Czapek-Dox + 2% fructose, 28 C) -- needs the user's OK, curated file.
 - [ ] Optional: unattended LLM curation step (Claude API) on top of the evidence files + validator.
 
+## Construct-driven expression (opened 2026-10-27) -- decision needed
+
+PRJDB37930 (85 runs) carries a cutL1 expression construct (cutinase CutL1, AO090005000029, glaA142 promoter; lineage of
+Miyazawa et al. 2016, BBB 80(9):1853, identified by hand by the user). Recorded in the study annotation (`oe_cutL1`,
+`overexpression`, `glaa142_promoter`, notes), in `conditions.recombinant_background` of its 25 conditions and in the
+note. The gene sits at a median ~17,000 TPM there against ~9 TPM in the other 299 runs, so every statistic that pools
+studies sees an artefact: the old behaviour table calls it `constitutive_high`, the rank table `Broad Variable`
+(max/median 2,432).
+
+- [ ] Decide how to treat expression driven by a construct. Options: (a) leave the numbers, show a warning on the gene page
+  (cheapest); (b) mask the (gene, study) pair from classification/rank/co-expression while keeping the raw TPM
+  (matches "raw measurements never overwritten"); (c) both. Needs a small tracked table, e.g.
+  `metadata/construct_expression.tsv` (gene id, study/condition scope, promoter, source, curator), so the mask is auditable
+  rather than inferred from `oe_*` tags (`oe_<symbol>` does not resolve to ids reliably; ambiguous symbols stay ambiguous).
+- [ ] Audit the other studies for `oe_*` / `recombinant_expression` tags and list their genes in the same table.
+
 ## Milestones 6-12
 
 - [ ] Not started (see PROJECT_MASTER_SPEC.md section 37 for full list).
