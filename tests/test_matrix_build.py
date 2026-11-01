@@ -87,6 +87,37 @@ def test_biosample_units_split_a_biosample_that_spans_several_conditions(tmp_pat
     assert units["r7"] == "PRJ1|r7" and units["r8"] == "PRJ1|r8"
 
 
+def test_biosample_units_take_the_strain_from_the_curated_condition_first(tmp_path):
+    import duckdb
+
+    from aoryzae_atlas.database.migrate import apply_migrations
+    from aoryzae_atlas.matrix.build import fetch_biosample_units
+
+    db_path = tmp_path / "strain.duckdb"
+    apply_migrations(db_path)
+    conn = duckdb.connect(str(db_path))
+    conn.execute("INSERT INTO conditions (condition_id, strain) VALUES ('PRJ1_x', 'RIB40'), ('PRJ1_blank', '')")
+    rows = [
+        # (sample_id, raw strain, condition_id)
+        ("s1", "", "PRJ1_x"),              # blank raw strain: the curated one fills it
+        ("s2", "WT-2", "PRJ1_x"),          # free-text raw label: the curated one wins
+        ("s3", "RIB915", "PRJ1_blank"),    # condition without a strain: the raw one is kept
+        ("s4", "RIB333", None),            # no curated condition: the raw one is kept
+        ("s5", "", None),                  # nothing known: stays unknown
+    ]
+    for sample_id, strain, condition_id in rows:
+        conn.execute(
+            "INSERT INTO samples (sample_id, run_accession, biosample, bioproject, strain, condition_id, pipeline_status) "
+            "VALUES (?, ?, ?, 'PRJ1', ?, ?, 'QUANTIFIED')",
+            [sample_id, sample_id, f"BS_{sample_id}", strain, condition_id],
+        )
+    strains = fetch_biosample_units(conn).set_index("sample_id")["strain"].to_dict()
+    conn.close()
+    assert strains["s1"] == "RIB40" and strains["s2"] == "RIB40"
+    assert strains["s3"] == "RIB915" and strains["s4"] == "RIB333"
+    assert strains["s5"] is None or strains["s5"] != strains["s5"]  # NULL / NaN
+
+
 def test_condition_level_stats_nan_variance_for_singleton_replicate():
     replicate_df = pd.DataFrame(
         {

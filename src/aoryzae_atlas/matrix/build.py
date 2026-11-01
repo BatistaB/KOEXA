@@ -88,23 +88,29 @@ def fetch_biosample_units(conn: duckdb.DuckDBPyConnection) -> pd.DataFrame:
     carbon sources / time points), they are not re-sequencing of one material;
     the condition id is appended so each condition is its own unit. Runs
     without a curated condition keep the plain biosample unit.
+
+    `strain` is the curated condition's strain when there is one, else the raw
+    sample strain: the SRA/BioSample field is often blank or a free-text
+    label ('WT-1', 'Aspergillus_oryzae_OElaeA2') and `database load-discovery`
+    rewrites it on every refresh (same rule as the web export).
     """
     return conn.execute(
         """
-        SELECT sample_id,
-               bioproject || '|' || COALESCE(NULLIF(biosample, ''), sample_id)
+        SELECT s.sample_id,
+               s.bioproject || '|' || COALESCE(NULLIF(s.biosample, ''), s.sample_id)
                  || CASE
-                      WHEN NULLIF(biosample, '') IS NOT NULL
-                       AND condition_id IS NOT NULL
-                       AND COUNT(DISTINCT condition_id) OVER (PARTITION BY bioproject, biosample) > 1
-                      THEN '|' || condition_id
+                      WHEN NULLIF(s.biosample, '') IS NOT NULL
+                       AND s.condition_id IS NOT NULL
+                       AND COUNT(DISTINCT s.condition_id) OVER (PARTITION BY s.bioproject, s.biosample) > 1
+                      THEN '|' || s.condition_id
                       ELSE ''
                     END AS unit_id,
-               bioproject,
-               NULLIF(strain, '') AS strain,
-               biosample
-        FROM samples
-        WHERE pipeline_status = 'QUANTIFIED'
+               s.bioproject,
+               COALESCE(NULLIF(c.strain, ''), NULLIF(s.strain, '')) AS strain,
+               s.biosample
+        FROM samples s
+        LEFT JOIN conditions c ON c.condition_id = s.condition_id
+        WHERE s.pipeline_status = 'QUANTIFIED'
         """
     ).fetchdf()
 
