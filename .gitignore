@@ -57,6 +57,15 @@
 /results/colab-drive/*
 !/results/**/.gitkeep
 
+# Ad hoc exports pulled out of the database for use elsewhere (a collaborator,
+# another project, a figure). The rest of /reports/ is tracked because those
+# files are produced by an `atlas` command and carry their own provenance;
+# these are hand-made and nothing in the repo regenerates them, so tracking one
+# would record a number no future reader could trace. An export that becomes
+# worth keeping should get a command that writes it, and then be tracked.
+/reports/exports/*
+!/reports/exports/.gitkeep
+
 # Nextflow's own runtime artifacts when run in-place from the repo root
 # (scratch/nextflow-work is the actual work dir, but Nextflow still writes
 # these to the launch directory)
