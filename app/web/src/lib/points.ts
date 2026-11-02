@@ -2,50 +2,32 @@ import type {
   Condition,
   Dataset,
   Gene,
-  GeneExpressionRow,
   Sample,
 } from "../data/types";
 import type { ChartPoint } from "../components/gene/chartTypes";
 import type { GeneRanking } from "../components/overview/rankingTypes";
-import { syntheticExpression } from "./syntheticExpression";
-
-/**
- * Curated (hero-gene) TPM lives in a small hand-authored array; every
- * other gene in the real 12k-gene catalog falls back to deterministic
- * synthetic filler (lib/syntheticExpression.ts) computed on demand rather
- * than precomputed for every gene x sample pair, which would be ~314k
- * rows for no benefit.
- */
-function makeExpressionGetter(curated: GeneExpressionRow[]) {
-  const curatedByKey = new Map(curated.map((e) => [`${e.sample_id}|${e.canonical_gene_id}`, e]));
-  return (geneId: string, sample: Sample): { tpm: number; estimatedCounts: number } => {
-    const row = curatedByKey.get(`${sample.sample_id}|${geneId}`);
-    if (row) return { tpm: row.TPM, estimatedCounts: row.estimated_counts };
-    return syntheticExpression(geneId, sample);
-  };
-}
+import type { ExpressionMatrix } from "../data/expressionMatrix";
 
 export function buildChartPoints(
   gene: Gene,
   samples: Sample[],
   conditions: Condition[],
   datasets: Dataset[],
-  expression: GeneExpressionRow[],
+  expression: ExpressionMatrix,
   strainFilter: string,
   conditionFilter: string = "all",
 ): ChartPoint[] {
   const conditionById = new Map(conditions.map((c) => [c.condition_id, c]));
   const datasetByBioproject = new Map(datasets.map((d) => [d.bioproject, d]));
-  const getExpression = makeExpressionGetter(expression);
-
   const points: ChartPoint[] = [];
   for (const sample of samples) {
     if (strainFilter !== "all" && sample.strain !== strainFilter) continue;
     if (conditionFilter !== "all" && sample.condition_id !== conditionFilter) continue;
     const condition = conditionById.get(sample.condition_id);
     if (!condition) continue;
-    const { tpm, estimatedCounts } = getExpression(gene.canonical_gene_id, sample);
+    const tpm = expression.tpmAt(gene.canonical_gene_id, sample.sample_id);
     if (tpm <= 0) continue;
+    const estimatedCounts = expression.countsAt(gene.canonical_gene_id, sample.sample_id);
     points.push({
       sample,
       condition,
@@ -68,33 +50,49 @@ export function buildGeneRankings(
   genes: Gene[],
   samples: Sample[],
   datasets: Dataset[],
-  expression: GeneExpressionRow[],
+  expression: ExpressionMatrix,
   strainFilter: string,
   conditionFilter: string = "all",
 ): GeneRanking[] {
   const datasetOrder = new Map(datasets.map((d, i) => [d.bioproject, i]));
-  const eligibleSamples = samples.filter((s) => {
+  const eligible = samples.filter((s) => {
     if (strainFilter !== "all" && s.strain !== strainFilter) return false;
     if (conditionFilter !== "all" && s.condition_id !== conditionFilter) return false;
     return true;
   });
-  const getExpression = makeExpressionGetter(expression);
+  // Resolve the eligible columns once, then each gene is a straight scan of its matrix row.
+  const cols: { col: number; bioproject: string }[] = [];
+  for (const s of eligible) {
+    const col = expression.colOf(s.sample_id);
+    if (col !== undefined) cols.push({ col, bioproject: s.bioproject });
+  }
+  const bioprojects = Array.from(new Set(cols.map((c) => c.bioproject)));
+  const slot = new Map(bioprojects.map((b, i) => [b, i]));
+  const colSlot = cols.map((c) => slot.get(c.bioproject)!);
+  const order = bioprojects
+    .map((b, i) => [b, i] as const)
+    .sort((a, b) => (datasetOrder.get(a[0]) ?? 0) - (datasetOrder.get(b[0]) ?? 0));
+  const { tpm, nSamples } = expression;
 
   const rankings: GeneRanking[] = genes.map((gene) => {
-    const byStudy = new Map<string, { tpm: number; sampleCount: number }>();
+    const row = expression.rowOf(gene.canonical_gene_id);
+    const sums = new Float64Array(bioprojects.length);
+    const counts = new Uint32Array(bioprojects.length);
     let total = 0;
-    for (const sample of eligibleSamples) {
-      const { tpm } = getExpression(gene.canonical_gene_id, sample);
-      if (tpm <= 0) continue;
-      total += tpm;
-      const acc = byStudy.get(sample.bioproject) ?? { tpm: 0, sampleCount: 0 };
-      acc.tpm += tpm;
-      acc.sampleCount += 1;
-      byStudy.set(sample.bioproject, acc);
+    if (row !== undefined) {
+      const base = row * nSamples;
+      for (let i = 0; i < cols.length; i++) {
+        const v = tpm[base + cols[i].col];
+        if (v <= 0) continue;
+        total += v;
+        sums[colSlot[i]] += v;
+        counts[colSlot[i]] += 1;
+      }
     }
-    const segments = Array.from(byStudy, ([bioproject, v]) => ({ bioproject, ...v })).sort(
-      (a, b) => (datasetOrder.get(a.bioproject) ?? 0) - (datasetOrder.get(b.bioproject) ?? 0),
-    );
+    const segments = [];
+    for (const [bioproject, i] of order) {
+      if (counts[i] > 0) segments.push({ bioproject, tpm: sums[i], sampleCount: counts[i] });
+    }
     return { gene, total, segments };
   });
 

@@ -39,7 +39,9 @@
 
 .rank-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+  /* 2x2, equal widths, each row only as tall as its content: classes | chromosomes over top genes | level x stability */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: auto;
   gap: var(--space-4);
 }
 
@@ -403,4 +405,24 @@
 .rank-section__filters-note {
   font-size: var(--text-xs);
   color: var(--text-muted);
+}
+
+.rank-map__overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 1000px) {
+  .rank-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: auto;
+  }
+}
+
+/* Keeps the four cards of the grid the same size: the top-genes list scrolls instead of stretching its row. */
+.rank-top {
+  max-height: 340px;
+  overflow-y: auto;
 }

@@ -1,3 +1,4 @@
+import { loadExpressionMatrix, type ExpressionMatrix } from "./expressionMatrix";
 import type {
   ChromosomeExpression,
   Condition,
@@ -6,7 +7,6 @@ import type {
   ExpressionRankRow,
   ExpressionRankSummary,
   GeneClassification,
-  GeneExpressionRow,
   GeneSets,
   Sample,
   SampleQcMetrics,
@@ -34,7 +34,7 @@ export interface RealAtlasData {
   conditions: Condition[];
   samples: Sample[];
   sampleQc: SampleQcMetrics[];
-  expression: GeneExpressionRow[];
+  expression: ExpressionMatrix;
   classification: Map<string, GeneClassification>;
   /** null until `atlas rank genes` has run and the web export has been refreshed. */
   expressionRank: ExpressionRank | null;
@@ -52,11 +52,6 @@ interface GeneSetsPayload {
 interface StudyAnnotationsPayload {
   studies: StudyAnnotation[];
   tag_categories: Record<string, string>;
-}
-
-interface ExpressionRow {
-  columns: string[];
-  rows: [string, string, number | null, number | null][];
 }
 
 interface ClassificationRow {
@@ -153,15 +148,6 @@ async function fetchJson<T>(path: string): Promise<T> {
   return (await res.json()) as T;
 }
 
-function parseExpression(payload: ExpressionRow): GeneExpressionRow[] {
-  return payload.rows.map(([sample_id, canonical_gene_id, TPM, estimated_counts]) => ({
-    sample_id,
-    canonical_gene_id,
-    TPM: TPM ?? 0,
-    estimated_counts: estimated_counts ?? 0,
-  }));
-}
-
 function parseClassification(payload: ClassificationRow): Map<string, GeneClassification> {
   const map = new Map<string, GeneClassification>();
   for (const row of payload.rows) {
@@ -201,7 +187,7 @@ export async function loadRealAtlas(): Promise<RealAtlasData> {
     conditions,
     samples,
     sampleQc,
-    expressionPayload,
+    expression,
     classificationPayload,
     chromosomeExpressionPayload,
     expressionRankPayload,
@@ -213,7 +199,7 @@ export async function loadRealAtlas(): Promise<RealAtlasData> {
       fetchJson<Condition[]>("/data/conditions.json"),
       fetchJson<Sample[]>("/data/samples.json"),
       fetchJson<SampleQcMetrics[]>("/data/sample_qc.json"),
-      fetchJson<ExpressionRow>("/data/expression.json"),
+      loadExpressionMatrix(),
       fetchJson<ClassificationRow | null>("/data/classification.json").catch(() => null),
       fetchJson<ChromosomeExpressionPayload | null>("/data/chromosome_expression.json").catch(() => null),
       fetchJson<ExpressionRankPayload | null>("/data/expression_rank.json").catch(() => null),
@@ -226,7 +212,7 @@ export async function loadRealAtlas(): Promise<RealAtlasData> {
     conditions,
     samples,
     sampleQc,
-    expression: parseExpression(expressionPayload),
+    expression,
     classification: classificationPayload ? parseClassification(classificationPayload) : new Map(),
     expressionRank: expressionRankPayload ? parseExpressionRank(expressionRankPayload) : null,
     chromosomeExpression: chromosomeExpressionPayload ? parseChromosomeExpression(chromosomeExpressionPayload) : null,

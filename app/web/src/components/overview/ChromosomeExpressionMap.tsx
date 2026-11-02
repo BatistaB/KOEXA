@@ -5,9 +5,9 @@ import type {
   Dataset,
   Gene,
   GeneClassification,
-  GeneExpressionRow,
   Sample,
 } from "../../data/types";
+import type { ExpressionMatrix } from "../../data/expressionMatrix";
 import { RAMP_STEPS, sequentialColor, sequentialColorIndex } from "../../lib/sequentialColor";
 import { buildGeneRankings } from "../../lib/points";
 import { GeneRankingChart } from "./GeneRankingChart";
@@ -19,7 +19,7 @@ interface ChromosomeExpressionMapProps {
   classification: Map<string, GeneClassification>;
   samples: Sample[];
   datasets: Dataset[];
-  geneExpression: GeneExpressionRow[];
+  geneExpression: ExpressionMatrix;
   strainFilter: string;
   conditionFilter: string;
   datasetColor: (bioproject: string) => string;
@@ -35,6 +35,7 @@ function shortChromosomeLabel(chromosome: string): string {
 }
 
 interface HoverState {
+  below: boolean;
   x: number;
   y: number;
   chromosome: string;
@@ -144,8 +145,10 @@ export function ChromosomeExpressionMap({
       .sort((a, b) => b.medianTpm - a.medianTpm)
       .slice(0, 5);
     setHover({
-      x: targetRect.left + targetRect.width / 2 - canvasRect.left,
-      y: targetRect.top - canvasRect.top,
+      // Keep the ~270x190px card on screen: clamp horizontally, and drop below the bin when there is no room above.
+      x: Math.min(Math.max(targetRect.left + targetRect.width / 2, 140), window.innerWidth - 140),
+      y: targetRect.top < 230 ? targetRect.bottom : targetRect.top,
+      below: targetRect.top < 230,
       chromosome,
       bin,
       topGenes: binGenes,
@@ -289,7 +292,10 @@ export function ChromosomeExpressionMap({
       </div>
 
       {hover && (
-        <div className="chromosome-map__tooltip" style={{ left: hover.x, top: hover.y }}>
+        <div
+          className={`chromosome-map__tooltip${hover.below ? " chromosome-map__tooltip--below" : ""}`}
+          style={{ left: hover.x, top: hover.y }}
+        >
           <div className="chromosome-map__tooltip-title">
             {shortChromosomeLabel(hover.chromosome)}:{hover.bin.start.toLocaleString("en-US")}-
             {hover.bin.end.toLocaleString("en-US")}

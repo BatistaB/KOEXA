@@ -27,6 +27,7 @@
 .chromosome-map__legend {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   margin-top: var(--space-4);
 }
@@ -109,6 +110,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: safe center;
   gap: 28px;
   overflow-x: auto;
   padding-bottom: var(--space-2);
@@ -197,7 +199,7 @@
 }
 
 .chromosome-map__tooltip {
-  position: absolute;
+  position: fixed;
   pointer-events: none;
   background: var(--surface-2);
   border: 1px solid var(--border-hairline);
@@ -243,4 +245,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.chromosome-map__tooltip--below {
+  transform: translate(-50%, 8px);
 }

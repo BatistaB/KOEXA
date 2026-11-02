@@ -1179,7 +1179,7 @@ def app_export_web() -> None:
     click.echo(f"Conditions:     {summary['n_conditions']} ({summary['conditions_bytes'] / 1024:.0f} KB)")
     click.echo(f"Samples:        {summary['n_samples']} ({summary['samples_bytes'] / 1024:.0f} KB)")
     click.echo(f"Sample QC:      {summary['n_sample_qc']} ({summary['sample_qc_bytes'] / 1024:.0f} KB)")
-    click.echo(f"Expression:     {summary['n_expression_rows']:,} rows ({summary['expression_bytes'] / 1024:.0f} KB)")
+    click.echo(f"Expression:     {summary['n_expression_rows']:,} gene x sample cells (binary) ({summary['expression_bytes'] / 1024:.0f} KB)")
     if summary["n_classification_rows"]:
         click.echo(f"Classification: {summary['n_classification_rows']:,} genes ({summary['classification_bytes'] / 1024:.0f} KB)")
     else:

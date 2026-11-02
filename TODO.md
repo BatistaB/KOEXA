@@ -1277,3 +1277,16 @@ studies sees an artefact: the old behaviour table calls it `constitutive_high`, 
   (broader study/condition coverage) hasn't run yet, which the notebook's
   own report flags as a precondition for trusting the classification at
   more than pilot scale.
+
+## Web performance (2026-11-02)
+
+- [x] `expression.json` (181 MB, ~5M tuple rows parsed into objects) replaced by dense float32 matrices:
+  `expression_tpm.bin` (~19 MB, loaded at start) + `expression_counts.bin` (~19 MB, fetched only when a gene is
+  opened) + `expression_index.json` (`write_expression_matrix`, `tests/test_webexport_matrix.py`; frontend
+  `data/expressionMatrix.ts`). Rankings scan matrix rows directly. The old synthetic-expression fallback is gone
+  (a missing gene/sample reads as 0, never invented data).
+- [x] Measured in the production build, 412 samples: strain filter 110 ms, Secreted-only 122 ms, slider to "All 12,090"
+  202 ms (was ~1.8 s; sub-pixel dense-mode segments are now skipped), scatter hover 5 ms (hover ring on its own canvas).
+  The dev server (React dev build) is ~10x slower; judge speed on `vite build` + `vite preview`.
+- [x] Fixed: chromosome tooltip clipped/at top of screen (fixed positioning, clamped), Y-axis label over tick numbers.
+- [ ] Next if it grows past ~2,000 samples: per-gene/Parquet loading or a DuckDB-backed API; Web Worker for rankings.

@@ -75,6 +75,7 @@ export function GeneWorkspace({
             onSelectDataset={onSelectDataset}
           />
           <SampleTable
+            datasetColor={datasetColor}
             geneSymbol={gene.gene_symbol ?? gene.canonical_gene_id}
             points={points}
             selectedSampleId={selectedSampleId}

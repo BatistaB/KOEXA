@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import type { ExpressionClass, ExpressionRank, ExpressionRankRow, Gene, GeneSets } from "../../data/types";
 import { CLASS_ORDER } from "../../lib/expressionRank";
 import { geneSetLabel } from "../../lib/geneSets";
@@ -25,7 +25,7 @@ interface ExpressionRankSectionProps {
  * shared state, so one click on a class highlights it everywhere. The rank
  * is global (all samples), so the top-bar strain/condition filters do not
  * apply here -- stated in the header rather than silently ignored. */
-export function ExpressionRankSection({
+export const ExpressionRankSection = memo(function ExpressionRankSection({
   expressionRank,
   genes,
   geneSets,
@@ -109,8 +109,6 @@ export function ExpressionRankSection({
 
       <div className="rank-grid">
         <ClassComposition counts={counts} selectedClass={selectedClass} onSelectClass={setSelectedClass} />
-        <LevelStabilityMap rows={rows} genesById={genesById} selectedClass={selectedClass} onSelectGene={onSelectGene} />
-        <TopGenesPanel rows={rows} genesById={genesById} selectedClass={selectedClass} onSelectGene={onSelectGene} />
         <ChromosomeClassBars
           genes={shownGenes}
           byGene={byGene}
@@ -118,7 +116,9 @@ export function ExpressionRankSection({
           selectedClass={selectedClass}
           onSelectClass={setSelectedClass}
         />
+        <TopGenesPanel rows={rows} genesById={genesById} selectedClass={selectedClass} onSelectGene={onSelectGene} />
+        <LevelStabilityMap rows={rows} genesById={genesById} selectedClass={selectedClass} onSelectGene={onSelectGene} />
       </div>
     </section>
   );
-}
+});

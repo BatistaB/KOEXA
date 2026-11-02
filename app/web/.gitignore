@@ -18,6 +18,7 @@ dist-ssr
 # reproducible from database/atlas.duckdb + metadata/*.tsv, not committed
 # (same policy as reference/ and the FungiDB payloads).
 public/data/*.json
+public/data/*.bin
 
 # Editor directories and files
 .vscode/*

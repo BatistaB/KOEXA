@@ -1,16 +1,11 @@
 import { useMemo, useRef, useState } from "react";
 import type { ChartPoint } from "./chartTypes";
 import { logTicks, niceLinearTicks } from "../../lib/chartScale";
-import { shortConditionLabel } from "../../lib/conditionLabel";
 import { formatTpm } from "../../lib/format";
-import { truncateLabel } from "../../lib/geneDisplay";
 import { roundedTopBarPath } from "../../lib/barPath";
 import { DatasetLink } from "../common/DatasetLink";
 import "./ExpressionChart.css";
 
-/** Max characters of a condition label drawn on the x axis; the full text
- * stays available as a hover tooltip and in the sample table. */
-const X_TICK_MAX_CHARS = 40;
 
 export type ChartScale = "linear" | "log";
 
@@ -28,7 +23,7 @@ interface ExpressionChartProps {
 
 const VB_W = 900;
 const VB_H = 320;
-const MARGIN = { top: 16, right: 20, bottom: 66, left: 50 };
+const MARGIN = { top: 16, right: 20, bottom: 20, left: 50 };
 const INNER_W = VB_W - MARGIN.left - MARGIN.right;
 const INNER_H = VB_H - MARGIN.top - MARGIN.bottom;
 
@@ -196,25 +191,6 @@ export function ExpressionChart({
                     strokeDasharray="3,2"
                   />
 
-                  {/* x tick label */}
-                  <text
-                    className="expr-chart__x-tick-label"
-                    x={centerX}
-                    y={INNER_H + 14}
-                    textAnchor="end"
-                    transform={`rotate(-28, ${centerX}, ${INNER_H + 14})`}
-                  >
-                    {(() => {
-                      const full = group.condition ? shortConditionLabel(group.condition) : group.conditionId;
-                      return (
-                        <>
-                          <title>{full}</title>
-                          {truncateLabel(full, X_TICK_MAX_CHARS)}
-                        </>
-                      );
-                    })()}
-                  </text>
-
                   {group.points.map((point, idx) => {
                     const cx = centerX + (idx - (n - 1) / 2) * spacing;
                     const barWidth = Math.min(20, spacing * 0.72);
@@ -285,6 +261,7 @@ export function ExpressionChart({
             <div className="expr-chart__tooltip-value">{formatTpm(tooltip.point.tpm)} TPM</div>
             <div className="expr-chart__tooltip-row mono">{tooltip.point.sample.sample_id}</div>
             <div className="expr-chart__tooltip-row">{tooltip.point.sample.bioproject}</div>
+            <div className="expr-chart__tooltip-row">{tooltip.point.condition.condition_label}</div>
             {tooltip.point.sample.qc_status === "warning" && (
               <div className="expr-chart__tooltip-row">⚠ QC warning</div>
             )}

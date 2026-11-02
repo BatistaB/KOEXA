@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import type { Gene } from "./data/types";
 import { TopBar } from "./components/shell/TopBar";
@@ -12,6 +12,7 @@ import { Skeleton } from "./components/common/Skeleton";
 import type { ChartScale } from "./components/gene/ExpressionChart";
 import { referenceVersion } from "./data/fixtures";
 import { loadRealGenes } from "./data/realGenes";
+import { EMPTY_EXPRESSION } from "./data/expressionMatrix";
 import { loadRealAtlas, type RealAtlasData } from "./data/realAtlas";
 import { buildChartPoints, buildGeneRankings, datasetColorAssignment, median } from "./lib/points";
 import { shortConditionLabel } from "./lib/conditionLabel";
@@ -22,7 +23,7 @@ const EMPTY_ATLAS: RealAtlasData = {
   conditions: [],
   samples: [],
   sampleQc: [],
-  expression: [],
+  expression: EMPTY_EXPRESSION,
   classification: new Map(),
   expressionRank: null,
   chromosomeExpression: null,
@@ -48,6 +49,8 @@ function App() {
   // Curated gene set (e.g. "secreted") restricting the home ranking and the expression-behavior views; null = all genes.
   const [activeGeneSet, setActiveGeneSet] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  // Estimated counts load on first gene open (home page never needs them); this re-renders once they arrive.
+  const [countsReady, setCountsReady] = useState(false);
 
   const { datasets, conditions, samples, sampleQc, expression: geneExpression, classification, expressionRank, chromosomeExpression, studyAnnotations, geneSets } = atlas;
 
@@ -83,6 +86,15 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (!selectedGeneId || geneExpression.countsLoaded) return;
+    let cancelled = false;
+    geneExpression.ensureCounts().then(() => !cancelled && setCountsReady(true));
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedGeneId, geneExpression]);
+
+  useEffect(() => {
     if (!selectedGeneId) return;
     setLoading(true);
     const timer = window.setTimeout(() => setLoading(false), 160);
@@ -92,6 +104,13 @@ function App() {
   const selectedGene = useMemo(
     () => allGenes.find((g) => g.canonical_gene_id === selectedGeneId) ?? null,
     [allGenes, selectedGeneId],
+  );
+
+  const chromosomeOrder = useMemo(
+    () =>
+      chromosomeExpression?.chromosomes.map((c) => c.chromosome) ??
+      [...new Set(allGenes.map((g) => g.chromosome).filter((c) => c.startsWith("Chr")))].sort(),
+    [chromosomeExpression, allGenes],
   );
 
   const colorFor = useMemo(() => datasetColorAssignment(datasets), [datasets]);
@@ -104,12 +123,12 @@ function App() {
     setSelectedBioproject(null);
   };
 
-  const selectGene = (gene: Gene, bioproject?: string) => {
+  const selectGene = useCallback((gene: Gene, bioproject?: string) => {
     setSelectedGeneId(gene.canonical_gene_id);
     setStudyScope(bioproject ?? null);
     setSelectedSampleId(null);
     setSelectedBioproject(null);
-  };
+  }, []);
 
   const selectSample = (id: string) => {
     setSelectedBioproject(null);
@@ -168,7 +187,7 @@ function App() {
       strainFilter,
       conditionFilter,
     );
-  }, [selectedGene, scopedSamples, conditions, datasets, geneExpression, strainFilter, conditionFilter]);
+  }, [selectedGene, scopedSamples, conditions, datasets, geneExpression, strainFilter, conditionFilter, countsReady]);
 
   useEffect(() => {
     if (selectedSampleId && !points.some((p) => p.sample.sample_id === selectedSampleId)) {
@@ -311,10 +330,7 @@ function App() {
                   geneSets={geneSets}
                   activeSet={activeGeneSet}
                   onActiveSetChange={setActiveGeneSet}
-                  chromosomeOrder={
-                    chromosomeExpression?.chromosomes.map((c) => c.chromosome) ??
-                    [...new Set(allGenes.map((g) => g.chromosome).filter((c) => c.startsWith("Chr")))].sort()
-                  }
+                  chromosomeOrder={chromosomeOrder}
                   onSelectGene={selectGene}
                 />
               ) : (

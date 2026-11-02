@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 import duckdb
+import numpy as np
 import pandas as pd
 
 from ..genome.karyotype import DEFAULT_BIN_SIZE_BP, NUCLEAR_CHROMOSOMES, bin_gene_expression, chromosome_lengths_by_name
@@ -40,7 +41,7 @@ __all__ = [
     "export_conditions",
     "export_samples",
     "export_sample_qc",
-    "export_expression",
+    "write_expression_matrix",
     "export_classification",
     "export_expression_rank",
     "export_gene_sets",
@@ -213,25 +214,45 @@ def export_sample_qc(conn: duckdb.DuckDBPyConnection) -> list[dict[str, Any]]:
     return _clean_records(df)
 
 
-def export_expression(conn: duckdb.DuckDBPyConnection) -> dict[str, Any]:
-    """Compact tuple rows (not objects) -- ~374k rows at the current pilot
-    scale, so field-name repetition would roughly double the payload."""
+def write_expression_matrix(conn: duckdb.DuckDBPyConnection, out_dir: Path) -> dict[str, Any]:
+    """Dense gene x sample matrices as little-endian float32 binaries (row-major, one row per gene).
+
+    The browser reads these straight into typed arrays: no JSON parse and ~25x smaller than one tuple
+    per (sample, gene). `expression_index.json` fixes the row (genes) and column (samples) order.
+    Counts go in a separate file so the home page can skip them (only the gene view shows counts).
+    A (gene, sample) pair with no quantification is stored as 0, same as an undetected gene.
+    """
     df = conn.execute(
         f"""
         SELECT ge.sample_id, ge.canonical_gene_id, ge.TPM, ge.estimated_counts
         FROM gene_expression ge
         JOIN samples s ON s.sample_id = ge.sample_id
         WHERE {CURATED_QUANTIFIED_FILTER}
-        ORDER BY ge.canonical_gene_id, ge.sample_id
         """
     ).fetchdf()
-    df["TPM"] = df["TPM"].round(2)
-    df["estimated_counts"] = df["estimated_counts"].round(0)
-    rows = df.values.tolist()
-    for row in rows:
-        row[2] = None if pd.isna(row[2]) else float(row[2])
-        row[3] = None if pd.isna(row[3]) else int(row[3])
-    return {"columns": ["sample_id", "canonical_gene_id", "TPM", "estimated_counts"], "rows": rows}
+    genes = sorted(df["canonical_gene_id"].unique())
+    samples = sorted(df["sample_id"].unique())
+    gi = pd.Categorical(df["canonical_gene_id"], categories=genes).codes
+    si = pd.Categorical(df["sample_id"], categories=samples).codes
+    sizes: dict[str, int] = {}
+    for name, column in (("tpm", "TPM"), ("counts", "estimated_counts")):
+        matrix = np.zeros((len(genes), len(samples)), dtype="<f4")
+        matrix[gi, si] = df[column].fillna(0.0).to_numpy(dtype="float32")
+        path = out_dir / f"expression_{name}.bin"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(matrix.tobytes())
+        sizes[name] = path.stat().st_size
+    index_bytes = _write_json(out_dir / "expression_index.json", {"genes": genes, "samples": samples})
+    stale = out_dir / "expression.json"
+    if stale.exists():
+        stale.unlink()
+    return {
+        "n_genes": len(genes),
+        "n_samples": len(samples),
+        "tpm_bytes": sizes["tpm"],
+        "counts_bytes": sizes["counts"],
+        "index_bytes": index_bytes,
+    }
 
 
 _CLASSIFICATION_COLUMNS = [
@@ -489,9 +510,9 @@ def write_all(conn: duckdb.DuckDBPyConnection, out_dir: Path = WEB_DATA_DIR) -> 
     summary["sample_qc_bytes"] = _write_json(out_dir / "sample_qc.json", sample_qc)
     summary["n_sample_qc"] = len(sample_qc)
 
-    expression = export_expression(conn)
-    summary["expression_bytes"] = _write_json(out_dir / "expression.json", expression)
-    summary["n_expression_rows"] = len(expression["rows"])
+    matrix = write_expression_matrix(conn, out_dir)
+    summary["expression_bytes"] = matrix["tpm_bytes"] + matrix["counts_bytes"] + matrix["index_bytes"]
+    summary["n_expression_rows"] = matrix["n_genes"] * matrix["n_samples"]
 
     classification = export_classification()
     if classification is not None:

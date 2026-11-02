@@ -20,7 +20,7 @@ interface GeneRankingChartProps {
 
 const VB_W = 900;
 const VB_H = 380;
-const MARGIN = { top: 24, right: 20, bottom: 70, left: 60 };
+const MARGIN = { top: 24, right: 20, bottom: 70, left: 92 };
 const INNER_W = VB_W - MARGIN.left - MARGIN.right;
 const INNER_H = VB_H - MARGIN.top - MARGIN.bottom;
 const SEGMENT_GAP = 1;
@@ -101,7 +101,8 @@ export function GeneRankingChart({
         const yTop = INNER_H - (cumulative / yMax) * INNER_H;
         const yBottom = INNER_H - (before / yMax) * INNER_H;
         const height = yBottom - yTop;
-        if (height <= 0) continue;
+        // Sub-pixel slivers (the long tail at 12k genes) are invisible but dominate path-building cost.
+        if (height < 0.15) continue;
         const list = byDataset.get(bioproject) ?? [];
         list.push(rectPath(barX, yTop, barWidth, height));
         byDataset.set(bioproject, list);
@@ -186,7 +187,7 @@ export function GeneRankingChart({
 
             <text
               className="ranking-chart__axis-label"
-              transform={`translate(${-MARGIN.left + 16}, ${INNER_H / 2}) rotate(-90)`}
+              transform={`translate(${-MARGIN.left + 14}, ${INNER_H / 2}) rotate(-90)`}
               textAnchor="middle"
             >
               TPM total (sum across samples, stacked by study)

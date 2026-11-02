@@ -26,6 +26,7 @@ function cssVar(name: string): string {
 export function LevelStabilityMap({ rows, genesById, selectedClass, onSelectGene }: LevelStabilityMapProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const overlayRef = useRef<HTMLCanvasElement>(null);
   const [width, setWidth] = useState(560);
   const [themeTick, setThemeTick] = useState(0);
   const [hover, setHover] = useState<{ row: ExpressionRankRow; x: number; y: number } | null>(null);
@@ -162,14 +163,26 @@ export function LevelStabilityMap({ rows, genesById, selectedClass, onSelectGene
       ctx.fillText(m.cls, cx, cy);
     }
 
-    if (hover) {
-      ctx.strokeStyle = cssVar("--text-primary");
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(toX(hover.row.level_score), toY(hover.row.stability_score), 5, 0, Math.PI * 2);
-      ctx.stroke();
-    }
-  }, [rows, selectedClass, width, plotW, plotH, toX, toY, medians, hover, themeTick]);
+  }, [rows, selectedClass, width, plotW, plotH, toX, toY, medians, themeTick]);
+
+  // The hover ring lives on its own canvas, so moving the mouse never redraws the ~12k points underneath.
+  useEffect(() => {
+    const canvas = overlayRef.current;
+    if (!canvas) return;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = width * dpr;
+    canvas.height = HEIGHT * dpr;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, HEIGHT);
+    if (!hover) return;
+    ctx.strokeStyle = cssVar("--text-primary");
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(toX(hover.row.level_score), toY(hover.row.stability_score), 5, 0, Math.PI * 2);
+    ctx.stroke();
+  }, [hover, width, toX, toY, themeTick]);
 
   const findNearest = (clientX: number, clientY: number) => {
     const rect = canvasRef.current?.getBoundingClientRect();
@@ -214,6 +227,7 @@ export function LevelStabilityMap({ rows, genesById, selectedClass, onSelectGene
             if (gene) onSelectGene(gene);
           }}
         />
+        <canvas ref={overlayRef} className="rank-map__overlay" style={{ width: "100%", height: HEIGHT }} aria-hidden="true" />
         {hover && (
           <div className="rank-tooltip" style={{ left: Math.min(hover.x + 12, width - 230), top: Math.max(hover.y - 8, 4) }}>
             <div className="rank-tooltip__title">

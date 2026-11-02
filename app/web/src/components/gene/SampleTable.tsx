@@ -16,6 +16,7 @@ interface SampleTableProps {
   onHoverSample: (id: string | null) => void;
   onSelectSample: (id: string) => void;
   onSelectDataset: (bioproject: string) => void;
+  datasetColor: (bioproject: string) => string;
 }
 
 const COLUMNS: { key: SortKey; label: string; numeric?: boolean }[] = [
@@ -35,6 +36,7 @@ export function SampleTable({
   onHoverSample,
   onSelectSample,
   onSelectDataset,
+  datasetColor,
 }: SampleTableProps) {
   const [sortKey, setSortKey] = useState<SortKey>("bioproject");
   const [sortDir, setSortDir] = useState<1 | -1>(1);
@@ -145,6 +147,7 @@ export function SampleTable({
                 >
                   <td className="mono">{id}</td>
                   <td>
+                    <span className="sample-table__dot" style={{ background: datasetColor(p.sample.bioproject) }} aria-hidden="true" />
                     <DatasetLink bioproject={p.sample.bioproject} onSelect={onSelectDataset} />
                   </td>
                   <td className="sample-table__condition" title={p.condition.condition_label}>
