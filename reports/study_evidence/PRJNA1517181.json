@@ -1,0 +1,126 @@
+{
+  "bioproject": "PRJNA1517181",
+  "collected_at": "2026-11-02T16:05:15+00:00",
+  "accessions_searched": [
+    "PRJNA1517181",
+    "SRP730919"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "42889696",
+      "pmcid": "PMC13669964",
+      "doi": "10.3897/imafungus.17.195218",
+      "title": "Population-specific transcriptomic shifts underlie secondary metabolic diversification in Aspergillus flavus Link and the domestication of Aspergillus oryzae (Ahlb.).",
+      "authors": "Drott MT, Wang YW, Hatmaker EA, Mercado-Soto NM, Elmore JM, Luciano-Rosaro D, Yu JH, Rokas A, Gibbons JG, Huttenlocher A, Yang K, Keller NP.",
+      "year": 2026,
+      "journal": "IMA fungus",
+      "url": "https://doi.org/10.3897/imafungus.17.195218",
+      "open_access": true,
+      "abstract": "The genomic signatures of microbial domestication remain poorly understood within the context of natural population variation. Here, we demonstrate that Aspergillus oryzae, the filamentous fungus used in soy sauce and sake production, shares more recent ancestry with a predominantly northern, largely non-aflatoxigenic population of Aspergillus flavus (population C). A. oryzae isolates also overlap with the recently described, clinically enriched A. flavus population D, suggesting multiple domestication events. All isolates tested retained pathogenicity in a zebrafish infection model. At the transcriptomic level, populations are significantly differentiated and respond differently to spore density, suggesting population-specific adaptations to ecological conditions. Although most transcriptomic variation was consistent with phylogenetic relationships, several co-expression modules exhibited significantly greater divergence than expected from phylogeny alone, suggesting that phenotypic diversification may sometimes occur through the reorganization of transcriptomic architectures. A. oryzae also displayed elevated expression of a carbohydrate-metabolism module; however, this pattern was consistent with phylogenetic differentiation, suggesting that enhanced carbohydrate metabolism may have begun evolving prior to domestication or may be most apparent under fermentation-relevant conditions. Population-specific variation is also evident among secondary metabolite (SM) gene clusters. While A. oryzae shows markedly reduced expression of aflatoxin biosynthesis genes, this trend does not extend across the entire secondary metabolome. Using machine-learning-based gene regulatory network inference, we identified population-specific transcriptomic differences linked to distinct transcription factors, with evidence for both cis- and trans-acting regulatory divergence, but no changes in global regulators such as laeA. Together, these findings provide new insights into the domestication of A. oryzae, its global significance, and the microevolution of fungal secondary metabolic pathways.",
+      "found_by": [
+        "europepmc_fulltext:PRJNA1517181"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJNA1517181",
+          "text": "282-9345 K. Yang https://orcid.org/0000-0002-9246-101X N.P. Keller https://orcid.org/0000-0002-4386-9473 Data availability All transcriptomic and genomic data generated here have been made available through NCBI project PRJNA1517181. Additionally, all sequences used in the construction of the pangenome presented here and the corresponding s",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJNA1517181",
+    "bioproject": "PRJNA1517181",
+    "study_accession": "SRP730919",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "NRRL 1911, NRRL 2217, NRRL 32657, NRRL 506, Rib40, SRRC2103",
+    "study_description": "Population-Specific Transcriptomic Shifts Underlie Secondary Metabolic Diversification in Aspergillus",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "12 biosample(s), 12 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN62639402",
+      "sample_title": "high_density",
+      "strain": "SRRC2103",
+      "condition_clues": "strain=SRRC2103; isolation_source=missing; collection_date=missing; geo_loc_name=USA: Virginia; host_description=high_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN62639401",
+      "sample_title": "low_density",
+      "strain": "SRRC2103",
+      "condition_clues": "strain=SRRC2103; isolation_source=missing; collection_date=missing; geo_loc_name=USA: Virginia; host_description=low_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN62639400",
+      "sample_title": "high_density",
+      "strain": "Rib40",
+      "condition_clues": "strain=Rib40; isolation_source=missing; collection_date=missing; geo_loc_name=Japan; host_description=high_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN62639399",
+      "sample_title": "low_density",
+      "strain": "Rib40",
+      "condition_clues": "strain=Rib40; isolation_source=missing; collection_date=missing; geo_loc_name=Japan; host_description=low_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN62639398",
+      "sample_title": "high_density",
+      "strain": "NRRL 506",
+      "condition_clues": "strain=NRRL 506; isolation_source=missing; collection_date=missing; geo_loc_name=USA: Vermont; host_description=high_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN62639397",
+      "sample_title": "low_density",
+      "strain": "NRRL 506",
+      "condition_clues": "strain=NRRL 506; isolation_source=missing; collection_date=missing; geo_loc_name=USA: Vermont; host_description=low_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN62639396",
+      "sample_title": "high_density",
+      "strain": "NRRL 32657",
+      "condition_clues": "strain=NRRL 32657; isolation_source=missing; collection_date=missing; geo_loc_name=Malaysia; host_description=high_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN62639395",
+      "sample_title": "low_density",
+      "strain": "NRRL 32657",
+      "condition_clues": "strain=NRRL 32657; isolation_source=missing; collection_date=missing; geo_loc_name=Malaysia; host_description=low_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN62639394",
+      "sample_title": "high_density",
+      "strain": "NRRL 2217",
+      "condition_clues": "strain=NRRL 2217; isolation_source=missing; collection_date=missing; geo_loc_name=China; host_description=high_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN62639393",
+      "sample_title": "low_density",
+      "strain": "NRRL 2217",
+      "condition_clues": "strain=NRRL 2217; isolation_source=missing; collection_date=missing; geo_loc_name=China; host_description=low_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN62639392",
+      "sample_title": "high_density",
+      "strain": "NRRL 1911",
+      "condition_clues": "strain=NRRL 1911; isolation_source=missing; collection_date=missing; geo_loc_name=USA: New Jersey; host_description=high_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN62639391",
+      "sample_title": "low_density",
+      "strain": "NRRL 1911",
+      "condition_clues": "strain=NRRL 1911; isolation_source=missing; collection_date=missing; geo_loc_name=USA: New Jersey; host_description=low_density; collected_by=missing; lat_lon=missing; BioSampleModel=Pathogen.env"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

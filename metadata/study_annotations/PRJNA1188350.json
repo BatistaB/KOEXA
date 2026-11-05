@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA1188350",
+  "related_identifiers": {
+    "bioproject": "PRJNA1188350",
+    "sra_study": "SRP566367",
+    "geo_series": null
+  },
+  "paper": {
+    "status": "found",
+    "title": "Expression pattern, subcellular localization of Aspergillus oryzae ergosterol synthases, and their effects on ergosterol and fatty acid metabolism.",
+    "authors": "Tian X, Qin K, Deng Y, Xue P, Huang C, Liu S, Hu Z.",
+    "year": 2025,
+    "journal": "Applied and environmental microbiology",
+    "doi": "10.1128/aem.02273-24",
+    "pmid": "40035600",
+    "pmcid": "PMC12016551",
+    "url": "https://doi.org/10.1128/aem.02273-24",
+    "access": "full_text",
+    "association_evidence": "Data availability statement: sequencing data deposited in NCBI SRA under BioProject PRJNA1188350 and BioSample SAMN44832574 (Europe PMC full-text accession search).",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Characterise A. oryzae ergosterol synthase genes and test how overexpressing them changes ergosterol and fatty acid metabolism.",
+    "experimental_design": "RNA-seq of the RIB40 control and the AoErg7B- and AoHmgB-overexpression strains, one pooled sample each (three cultures pooled), no replicates.",
+    "main_finding": "AoErg7B-OE had 5,006 and AoHmgB-OE 1,807 differentially expressed genes versus the control, 1,235 shared; AoHmgB-OE gave the highest ergosterol content."
+  },
+  "tag_sets": {},
+  "conditions": {
+    "PRJNA1188350_RIB40": {
+      "sets": [],
+      "tags": [
+        {
+          "tag": "control",
+          "source": "inferred_from_design",
+          "confidence": "medium",
+          "note": "RIB40 sample compared against the OE strains (\"the control\" in the paper)"
+        },
+        {
+          "tag": "strain_rib40",
+          "source": "sample_metadata",
+          "confidence": "high"
+        }
+      ]
+    },
+    "PRJNA1188350_RIB40_OE_Erg7B": {
+      "sets": [],
+      "tags": [
+        {
+          "tag": "overexpression",
+          "source": "paper_methods",
+          "confidence": "high"
+        },
+        {
+          "tag": "oe_Erg7B",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "OE strain named in the SRA experiment title"
+        },
+        {
+          "tag": "strain_rib40",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "OE built in A. oryzae RIB40 DeltapyrG DeltaHis"
+        },
+        {
+          "tag": "mycelium",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "RNA extracted from mycelia"
+        }
+      ]
+    },
+    "PRJNA1188350_RIB40_OE_HmgB": {
+      "sets": [],
+      "tags": [
+        {
+          "tag": "overexpression",
+          "source": "paper_methods",
+          "confidence": "high"
+        },
+        {
+          "tag": "oe_HmgB",
+          "source": "sample_metadata",
+          "confidence": "high",
+          "note": "OE strain named in the SRA experiment title"
+        },
+        {
+          "tag": "strain_rib40",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "OE built in A. oryzae RIB40 DeltapyrG DeltaHis"
+        },
+        {
+          "tag": "mycelium",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "RNA extracted from mycelia"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The overexpressed genes (AoErg7B, AoHmgB) are driven by the pEX2B construct, so their TPM in the OE runs is construct-driven; candidate for the construct-expression table (TODO, Construct-driven expression). The paper text gives gene names but not AO09 identifiers.",
+    "Curated strains: RIB40 for the control as labelled, RIB40_OE-Erg7B and RIB40_OE-HmgB for the overexpression strains (suffix convention agreed with the user, 2026-11-04); the OE background is RIB40 DeltapyrG DeltaHis.",
+    "The SRA records say NovaSeq 6000 while the paper says HiSeq 2500. Culture medium, time and temperature of the RNA-seq cultures are not stated in the retrieved text. The three runs share one BioSample but are different strains, so they count as three independent samples."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from the SRA records and the open-access paper",
+    "curated_at": "2026-11-05",
+    "needs_pdf": false
+  }
+}

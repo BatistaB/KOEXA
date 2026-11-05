@@ -1,0 +1,65 @@
+{
+  "bioproject": "PRJNA1188350",
+  "collected_at": "2026-11-04T21:02:04+00:00",
+  "accessions_searched": [
+    "PRJNA1188350",
+    "SRP566367"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [
+    {
+      "pmid": "40035600",
+      "pmcid": "PMC12016551",
+      "doi": "10.1128/aem.02273-24",
+      "title": "Expression pattern, subcellular localization of Aspergillus oryzae ergosterol synthases, and their effects on ergosterol and fatty acid metabolism.",
+      "authors": "Tian X, Qin K, Deng Y, Xue P, Huang C, Liu S, Hu Z.",
+      "year": 2025,
+      "journal": "Applied and environmental microbiology",
+      "url": "https://doi.org/10.1128/aem.02273-24",
+      "open_access": true,
+      "abstract": "Ergosterol is an important component of fungal cell membranes and participates in the regulation of its fluidity, permeability, and material transport. In our study, we found that the ergosterol biosynthesis pathway in Aspergillus oryzae is more complex than that in Saccharomyces cerevisiae, involving 49 enzymes and 25 reactions. In this study, we systematically analyzed the expression pattern and subcellular localization of A. oryzae ergosterol synthases and their effects on ergosterol and fatty acid metabolism. The results showed that ergosterol synthase genes were distributed across the eight chromosomes of the A. oryzae genome and were differentially expressed at different growth times. Subcellular localization analysis revealed that the mevalonate biosynthesis-related enzymes were localized in the cytoplasm, mitochondria, and peroxisomes; farnesyl pyrophosphate biosynthesis-related enzymes were mainly localized in the cytoplasm, peroxisomes, and mitochondria; while several ergosterol biosynthesis-related enzymes were localized in the endoplasmic reticulum and lipid droplets. Overexpression (OE) of these enzymes affected both ergosterol and fatty acid contents in A. oryzae. The ergosterol content was the highest in the AoHmgB-OE strain and the lowest in the AoHmgA-OE strain, while the fatty acid content was the highest in the AoErg26B-OE strain and the lowest in the AoErg26A-OE strain. Moreover, the ergosterol content was significantly increased in the AoHmgB/AoErg7B-, AoHmgB/AoErg9-, and AoErg1/AoErg7B-co-OE strains compared to the single gene OE strains. Our study results may offer a scientific foundation for genetic engineering research focusing on lipid metabolism in A. oryzae and related fungi, thereby facilitating the creation of fungal strains with enhanced ergosterol production.IMPORTANCEErgosterol, an important fungal cell membrane component, participates in the regulation of membrane fluidity, permeability, and material transport. Previous studies have demonstrated that the ergosterol biosynthesis pathway in Aspergillus oryzae exhibits greater complexity compared to that in Saccharomyces cerevisiae; nonetheless, research on the ergosterol biosynthesis pathway in A. oryzae remains limited. In this study, we determined the expression pattern and subcellular localization of ergosterol biosynthesis-related enzymes in A. oryzae. Additionally, we assessed the effects of the overexpression (OE) of ergosterol biosynthesis-related genes on ergosterol and fatty acid contents in A. oryzae. Therefore, our study may provide a scientific basis for genetic engineering research on lipid metabolism in A. oryzae and other fungal species.",
+      "found_by": [
+        "europepmc_fulltext:PRJNA1188350"
+      ],
+      "accession_snippets": [
+        {
+          "accession": "PRJNA1188350",
+          "text": "rmation Zhihong Hu, Email: huzhihong426@163.com. Yvonne Nygård, Chalmers tekniska hogskola AB, Gothenburg, Sweden. DATA AVAILABILITY Sequencing data were deposited in the NCBI SRA database under Bioproject accession no. PRJNA1188350 and BioSample accession no. SAMN44832574 . SUPPLEMENTAL MATERIAL The following material is available online a",
+          "deposition_statement": true
+        },
+        {
+          "accession": "PRJNA1188350",
+          "text": "plemental material aem.02273-24-s0001.docx Figures S1 to S10; Tables S1 to S8. 10.1128/aem.02273-24.SuF1 Data Availability Statement Sequencing data were deposited in the NCBI SRA database under Bioproject accession no. PRJNA1188350 and BioSample accession no. SAMN44832574 .",
+          "deposition_statement": true
+        }
+      ],
+      "deposition_statement": true
+    }
+  ],
+  "suggested_paper_status": "found",
+  "study": {
+    "dataset_id": "PRJNA1188350",
+    "bioproject": "PRJNA1188350",
+    "study_accession": "SRP566367",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "Aspergillus oryzae RIB40",
+    "study_description": "Aspergillus oryzae Transcriptome or Gene expression",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-09-20",
+    "metadata_status": "discovered",
+    "notes": "1 biosample(s), 3 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN44832574",
+      "sample_title": "Microbe sample from Aspergillus oryzae",
+      "strain": "Aspergillus oryzae RIB40",
+      "condition_clues": "strain=Aspergillus oryzae RIB40; isolation_source=Japan; collection_date=2024-11-20; geo_loc_name=China; sample_type=mixed culture; BioSampleModel=Microbe, viral or environmental"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

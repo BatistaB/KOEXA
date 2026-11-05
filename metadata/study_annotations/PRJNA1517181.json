@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA1517181",
+  "related_identifiers": {
+    "bioproject": "PRJNA1517181",
+    "sra_study": "SRP730919",
+    "geo_series": null
+  },
+  "paper": {
+    "status": "found",
+    "title": "Population-specific transcriptomic shifts underlie secondary metabolic diversification in Aspergillus flavus Link and the domestication of Aspergillus oryzae (Ahlb.).",
+    "authors": "Drott MT, Wang YW, Hatmaker EA, Mercado-Soto NM, Elmore JM, Luciano-Rosaro D, Yu JH, Rokas A, Gibbons JG, Huttenlocher A, Yang K, Keller NP.",
+    "year": 2026,
+    "journal": "IMA fungus",
+    "doi": "10.3897/imafungus.17.195218",
+    "pmid": "42889696",
+    "pmcid": "PMC13669964",
+    "url": "https://doi.org/10.3897/imafungus.17.195218",
+    "access": "full_text",
+    "association_evidence": "Data availability statement: all transcriptomic and genomic data generated in the study are deposited under NCBI project PRJNA1517181 (Europe PMC full-text accession search).",
+    "association_confidence": "high"
+  },
+  "study_summary": {
+    "objective": "Test whether A. flavus and A. oryzae populations differ in transcriptomic architecture and in their response to spore density.",
+    "experimental_design": "Six A. oryzae-labelled isolates, each grown on cellophane over PDA at 10^2 and 10^6 spores/ml for 100 h (one pooled sample per isolate and density; 12 libraries).",
+    "main_finding": "Populations are transcriptomically differentiated and respond differently to spore density; A. oryzae shows a raised carbohydrate-metabolism module, consistent with phylogeny."
+  },
+  "tag_sets": {
+    "iso_srrc2103": [
+      {
+        "tag": "wild_type",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "natural isolate, no genetic modification reported"
+      },
+      {
+        "tag": "strain_srrc2103",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      },
+      {
+        "tag": "surface_culture",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "cellophane over PDA"
+      },
+      {
+        "tag": "potato_dextrose_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "100h",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      }
+    ],
+    "iso_rib40": [
+      {
+        "tag": "wild_type",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "natural isolate, no genetic modification reported"
+      },
+      {
+        "tag": "strain_rib40",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      },
+      {
+        "tag": "surface_culture",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "cellophane over PDA"
+      },
+      {
+        "tag": "potato_dextrose_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "100h",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      }
+    ],
+    "iso_nrrl_506": [
+      {
+        "tag": "wild_type",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "natural isolate, no genetic modification reported"
+      },
+      {
+        "tag": "strain_nrrl_506",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      },
+      {
+        "tag": "surface_culture",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "cellophane over PDA"
+      },
+      {
+        "tag": "potato_dextrose_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "100h",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      }
+    ],
+    "iso_nrrl_32657": [
+      {
+        "tag": "wild_type",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "natural isolate, no genetic modification reported"
+      },
+      {
+        "tag": "strain_nrrl_32657",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      },
+      {
+        "tag": "surface_culture",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "cellophane over PDA"
+      },
+      {
+        "tag": "potato_dextrose_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "100h",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      }
+    ],
+    "iso_nrrl_2217": [
+      {
+        "tag": "wild_type",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "natural isolate, no genetic modification reported"
+      },
+      {
+        "tag": "strain_nrrl_2217",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      },
+      {
+        "tag": "surface_culture",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "cellophane over PDA"
+      },
+      {
+        "tag": "potato_dextrose_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "100h",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      }
+    ],
+    "iso_nrrl_1911": [
+      {
+        "tag": "wild_type",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "natural isolate, no genetic modification reported"
+      },
+      {
+        "tag": "strain_nrrl_1911",
+        "source": "sample_metadata",
+        "confidence": "high"
+      },
+      {
+        "tag": "mycelium",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      },
+      {
+        "tag": "surface_culture",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "cellophane over PDA"
+      },
+      {
+        "tag": "potato_dextrose_medium",
+        "source": "paper_methods",
+        "confidence": "high"
+      },
+      {
+        "tag": "100h",
+        "source": "paper_methods",
+        "confidence": "high",
+        "note": "mycelia collected after 100 h"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA1517181_srrc2103_high_density": {
+      "sets": [
+        "iso_srrc2103"
+      ],
+      "tags": [
+        {
+          "tag": "high_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^6 spores/ml; BioSample label high_density mapped to the two densities in the Methods"
+        }
+      ]
+    },
+    "PRJNA1517181_rib40_low_density": {
+      "sets": [
+        "iso_rib40"
+      ],
+      "tags": [
+        {
+          "tag": "low_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^2 spores/ml; BioSample label low_density mapped to the two densities in the Methods"
+        }
+      ]
+    },
+    "PRJNA1517181_nrrl_506_low_density": {
+      "sets": [
+        "iso_nrrl_506"
+      ],
+      "tags": [
+        {
+          "tag": "low_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^2 spores/ml; BioSample label low_density mapped to the two densities in the Methods"
+        }
+      ]
+    },
+    "PRJNA1517181_nrrl_32657_low_density": {
+      "sets": [
+        "iso_nrrl_32657"
+      ],
+      "tags": [
+        {
+          "tag": "low_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^2 spores/ml; BioSample label low_density mapped to the two densities in the Methods"
+        }
+      ]
+    },
+    "PRJNA1517181_nrrl_1911_high_density": {
+      "sets": [
+        "iso_nrrl_1911"
+      ],
+      "tags": [
+        {
+          "tag": "high_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^6 spores/ml; BioSample label high_density mapped to the two densities in the Methods"
+        }
+      ]
+    },
+    "PRJNA1517181_rib40_high_density": {
+      "sets": [
+        "iso_rib40"
+      ],
+      "tags": [
+        {
+          "tag": "high_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^6 spores/ml; BioSample label high_density mapped to the two densities in the Methods"
+        }
+      ]
+    },
+    "PRJNA1517181_nrrl_32657_high_density": {
+      "sets": [
+        "iso_nrrl_32657"
+      ],
+      "tags": [
+        {
+          "tag": "high_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^6 spores/ml; BioSample label high_density mapped to the two densities in the Methods"
+        }
+      ]
+    },
+    "PRJNA1517181_nrrl_506_high_density": {
+      "sets": [
+        "iso_nrrl_506"
+      ],
+      "tags": [
+        {
+          "tag": "high_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^6 spores/ml; BioSample label high_density mapped to the two densities in the Methods"
+        }
+      ]
+    },
+    "PRJNA1517181_nrrl_2217_low_density": {
+      "sets": [
+        "iso_nrrl_2217"
+      ],
+      "tags": [
+        {
+          "tag": "low_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^2 spores/ml; BioSample label low_density mapped to the two densities in the Methods"
+        }
+      ]
+    },
+    "PRJNA1517181_nrrl_1911_low_density": {
+      "sets": [
+        "iso_nrrl_1911"
+      ],
+      "tags": [
+        {
+          "tag": "low_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^2 spores/ml; BioSample label low_density mapped to the two densities in the Methods"
+        }
+      ]
+    },
+    "PRJNA1517181_srrc2103_low_density": {
+      "sets": [
+        "iso_srrc2103"
+      ],
+      "tags": [
+        {
+          "tag": "low_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^2 spores/ml; BioSample label low_density mapped to the two densities in the Methods"
+        }
+      ]
+    },
+    "PRJNA1517181_nrrl_2217_high_density": {
+      "sets": [
+        "iso_nrrl_2217"
+      ],
+      "tags": [
+        {
+          "tag": "high_spore_density",
+          "source": "paper_methods",
+          "confidence": "medium",
+          "note": "10^6 spores/ml; BioSample label high_density mapped to the two densities in the Methods"
+        }
+      ]
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "The BioProject also holds A. flavus isolates; the atlas imported only the 12 runs the SRA labels as A. oryzae. The paper's retrieved text does not state the species of NRRL 2217, NRRL 32657 and SRRC2103 (the isolate table is in a supplement).",
+    "In the paper the isolates act as biological replicates within a population; here each isolate x density stays its own condition (one pooled sample, no within-condition replicate).",
+    "high_density/low_density in the BioSamples is mapped to 10^6/10^2 spores/ml by inference; incubation temperature is not stated."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-sonnet-5-5), from the SRA/BioSample records and the open-access paper (Methods)",
+    "curated_at": "2026-11-02",
+    "needs_pdf": false
+  }
+}

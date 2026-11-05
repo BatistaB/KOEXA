@@ -76,3 +76,5 @@ xyloglucan	carbon_source	Xyloglucan (hemicellulose polymer) is the supplied carb
 lignocellulosic_biomass	substrate	Plant biomass (e.g. wheat bran, soybean hulls, straw) as carbon source or growth substrate.	plant_biomass;lignocellulose
 glaa142_promoter	genotype	The gene of interest is expressed from the glaA142 promoter (PglaA142, from the glucoamylase gene glaA). Pair with oe_<gene> or recombinant_expression.	PglaA142;glaA142
 mutant_strain	genotype	Carries a mutation or genetic modification whose nature is not specified in the available metadata.	unspecified_mutant
+low_spore_density	inoculum	Low spore inoculum density (10^2 spores/ml in the source study); compare with high_spore_density within the same study.	
+high_spore_density	inoculum	High spore inoculum density (10^6 spores/ml in the source study); compare with low_spore_density within the same study.	
