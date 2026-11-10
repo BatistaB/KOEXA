@@ -1,0 +1,66 @@
+{
+  "bioproject": "PRJNA1543787",
+  "collected_at": "2026-11-10T15:04:23+00:00",
+  "accessions_searched": [
+    "PRJNA1543787",
+    "SRP745366"
+  ],
+  "method": "NCBI elink bioproject->pubmed + Europe PMC full-text accession search; open-access full texts scanned for accession/deposition sentences",
+  "paper_candidates": [],
+  "suggested_paper_status": "not_found",
+  "study": {
+    "dataset_id": "PRJNA1543787",
+    "bioproject": "PRJNA1543787",
+    "study_accession": "SRP745366",
+    "geo_accession": "",
+    "publication_doi": "",
+    "publication_title": "",
+    "organism": "Aspergillus oryzae",
+    "strain": "3.9544, XJ-1",
+    "study_description": "Analysis of aflatoxin-related genes in Aspergillus",
+    "source_repository": "NCBI SRA",
+    "discovery_date": "2026-11-09",
+    "metadata_status": "discovered",
+    "notes": "6 biosample(s), 6 run(s)"
+  },
+  "sra_samples": [
+    {
+      "biosample": "SAMN64198114",
+      "sample_title": "Aspergillus oryzae XJ-1_1",
+      "strain": "XJ-1",
+      "condition_clues": "strain=XJ-1; isolate=parallel samples-1; isolation_source=Grassland; collection_date=2022-10-01; geo_loc_name=China: Jinan; collected_by=Long Zhang; lat_lon=48.05 N 87.12 E; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN64198113",
+      "sample_title": "Aspergillus oryzae 3.9544_3",
+      "strain": "3.9544",
+      "condition_clues": "strain=3.9544; isolate=parallel samples-3; isolation_source=soil; collection_date=2022-10-01; geo_loc_name=China: Jinan; collected_by=CGMCC; lat_lon=36.22 N 116.87 E; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN64198112",
+      "sample_title": "Aspergillus oryzae 3.9544_2",
+      "strain": "3.9544",
+      "condition_clues": "strain=3.9544; isolate=parallel samples-2; isolation_source=soil; collection_date=2022-10-01; geo_loc_name=China: Jinan; collected_by=CGMCC; lat_lon=36.22 N 116.87 E; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN64198111",
+      "sample_title": "Aspergillus oryzae 3.9544_1",
+      "strain": "3.9544",
+      "condition_clues": "strain=3.9544; isolate=parallel samples-1; isolation_source=soil; collection_date=2022-10-01; geo_loc_name=China: Jinan; collected_by=CGMCC; lat_lon=36.22 N 116.87 E; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN64198116",
+      "sample_title": "Aspergillus oryzae XJ-1_3",
+      "strain": "XJ-1",
+      "condition_clues": "strain=XJ-1; isolate=parallel samples-3; isolation_source=Grassland; collection_date=2022-10-01; geo_loc_name=China: Jinan; collected_by=Long Zhang; lat_lon=48.05 N 87.12 E; BioSampleModel=Pathogen.env"
+    },
+    {
+      "biosample": "SAMN64198115",
+      "sample_title": "Aspergillus oryzae XJ-1_2",
+      "strain": "XJ-1",
+      "condition_clues": "strain=XJ-1; isolate=parallel samples-2; isolation_source=Grassland; collection_date=2022-10-01; geo_loc_name=China: Jinan; collected_by=Long Zhang; lat_lon=48.05 N 87.12 E; BioSampleModel=Pathogen.env"
+    }
+  ],
+  "atlas_samples": [],
+  "curated_conditions": []
+}

@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "bioproject": "PRJNA1543787",
+  "related_identifiers": {
+    "bioproject": "PRJNA1543787",
+    "sra_study": "SRP745366",
+    "geo_series": null
+  },
+  "paper": {
+    "status": "ambiguous",
+    "title": "Transcriptional Suppression of Six Critical Biosynthetic Enzyme Genes Contributes to Disruption of Aflatoxin Production in Aspergillus oryzae XJ-1, a Locust Biological Control Agent",
+    "authors": "Hu S, Xu X, Wang F, Li J, Du J, Fu J, You Y, Zhang L.",
+    "year": 2026,
+    "journal": "Preprints.org (preprint, not peer reviewed)",
+    "doi": "10.20944/preprints202609.2516.v1",
+    "pmid": null,
+    "pmcid": null,
+    "url": "https://doi.org/10.20944/preprints202609.2516.v1",
+    "access": "abstract_only",
+    "association_evidence": "Europe PMC record PPR1329704. The abstract names the same four strains as the BioProject (A. oryzae XJ-1 and CGMCC 3.9544, A. flavus CGMCC 3.3950 and 3.4408) and a transcriptome analysis of aflatoxin genes; the last author (Long Zhang) is the BioSample collected_by. The full text (data availability statement) returned HTTP 403, so no accession-level link was seen.",
+    "association_confidence": "medium"
+  },
+  "study_summary": {
+    "objective": "Explain why the locust biocontrol strain A. oryzae XJ-1 produces no aflatoxin, by comparing aflatoxin-gene transcription with non-aflatoxigenic and aflatoxigenic strains.",
+    "experimental_design": "RNA-seq of A. oryzae XJ-1 and CGMCC 3.9544 in potato dextrose broth, three parallel samples each; the project also has A. flavus CGMCC 3.3950 and 3.4408 runs, not imported. Culture time and temperature not stated.",
+    "main_finding": "Per the preprint abstract: XJ-1 carries all 22 aflatoxin-cluster genes but transcribes six biosynthetic genes (avnA, verB, omtA, ordA, vbs, cypX) much less than aflatoxigenic A. flavus."
+  },
+  "tag_sets": {
+    "pdb_broth": [
+      {
+        "tag": "wild_type",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "natural/culture-collection isolate, no genetic modification reported"
+      },
+      {
+        "tag": "potato_dextrose_medium",
+        "source": "sample_metadata",
+        "confidence": "high",
+        "note": "SRA design description: 'potato dextrose broth'"
+      },
+      {
+        "tag": "submerged",
+        "source": "inferred_from_design",
+        "confidence": "medium",
+        "note": "broth culture; shaken or static not stated"
+      }
+    ],
+    "iso_cgmcc_3_9544": [
+      {
+        "tag": "strain_cgmcc_3_9544",
+        "source": "sample_metadata",
+        "confidence": "high"
+      }
+    ],
+    "iso_xj_1": [
+      {
+        "tag": "strain_xj_1",
+        "source": "sample_metadata",
+        "confidence": "high"
+      }
+    ]
+  },
+  "conditions": {
+    "PRJNA1543787_cgmcc_3_9544_pdb": {
+      "sets": [
+        "pdb_broth",
+        "iso_cgmcc_3_9544"
+      ],
+      "tags": [
+        {
+          "tag": "control",
+          "source": "bioproject_description",
+          "confidence": "medium",
+          "note": "non-aflatoxigenic A. oryzae reference compared with XJ-1 (preprint abstract)"
+        }
+      ]
+    },
+    "PRJNA1543787_xj_1_pdb": {
+      "sets": [
+        "pdb_broth",
+        "iso_xj_1"
+      ],
+      "tags": []
+    }
+  },
+  "sample_tags": {},
+  "notes": [
+    "Only the six A. oryzae BioSamples (taxid 5062) are in the atlas; the A. flavus BioSamples SAMN64198105-110 (runs SRR41179255-58, 61, 62) were deliberately left out (user instruction, 2026-11-09).",
+    "XJ-1 BioSample says geo_loc_name China: Jinan but lat_lon 48.05 N 87.12 E (northern Xinjiang); recorded as given.",
+    "Paper status kept ambiguous: Hu et al. 2026 preprint matches strains, topic and author, but its data statement could not be read. Upgrade to found once a deposition statement naming PRJNA1543787 is seen.",
+    "Culture time, temperature, agitation and harvested material are not in the SRA/BioSample records."
+  ],
+  "curation": {
+    "curated_by": "Claude Code (claude-opus-5-5), from the SRA/BioSample records and the preprint abstract (full text not retrievable)",
+    "curated_at": "2026-11-10",
+    "needs_pdf": true
+  }
+}
